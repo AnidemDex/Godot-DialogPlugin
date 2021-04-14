@@ -1,6 +1,7 @@
 # Dialogue Plugin for Godot Engine
 
-A tool that will help you create dialogues and timelines with characters for your games. Be creative 💬
+A tool that will help you create dialogues and timelines with characters for your games. 
+> Be creative 💬
 
 # ⚠Warning⚠
 
