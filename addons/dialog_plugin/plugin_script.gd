@@ -38,7 +38,7 @@ func has_main_screen() -> bool:
 
 
 func get_plugin_name() -> String:
-	return "Dialog"
+	return "Dialog Editor"
 
 
 # Copied
