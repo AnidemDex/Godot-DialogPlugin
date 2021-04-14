@@ -1,0 +1,20 @@
+tool
+class_name DialogEventResource
+extends Resource
+
+signal event_started(event_resource)
+signal event_finished(event_resource)
+
+var _caller:DialogNode = null
+
+#warning-ignore-all:unused_argument
+func excecute(caller:DialogNode) -> void:
+	emit_signal("event_started", self)
+
+
+func finish(skip=false) -> void:
+	emit_signal("event_finished", self, skip)
+
+
+func get_event_editor_node() -> DialogEditorEventNode:
+	return DialogEditorEventNode.new()

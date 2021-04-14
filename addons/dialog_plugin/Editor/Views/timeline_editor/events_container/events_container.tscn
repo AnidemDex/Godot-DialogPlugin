@@ -1,0 +1,115 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/dialog_plugin/Other/resource_array.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/Resources/CharacterResource.gd" type="Script" id=4]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd" type="Script" id=5]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+_resources = [  ]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+name = ""
+display_name = ""
+display_name_bool = false
+color = Color( 1, 1, 1, 1 )
+default_speaker = false
+description = ""
+portraits = SubResource( 1 )
+
+[sub_resource type="Resource" id=3]
+resource_local_to_scene = true
+script = ExtResource( 5 )
+text = ""
+character = SubResource( 2 )
+
+[node name="EventsContainer" type="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -529.0
+rect_min_size = Vector2( 0, 88 )
+tab_align = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Events" type="Tabs" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+drag_to_rearrange_enabled = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Events"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 44 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Events/ScrollContainer"]
+margin_right = 1016.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 4
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EventsCategoryGroups" type="VBoxContainer" parent="Events/ScrollContainer/MarginContainer"]
+visible = false
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 1008.0
+margin_bottom = 44.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Events/ScrollContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 1008.0
+margin_bottom = 44.0
+
+[node name="TextEventButton" parent="Events/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource( 2 )]
+margin_top = 9.0
+margin_bottom = 31.0
+event_resource = SubResource( 3 )
+
+[node name="GenericEventButton" parent="Events/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 28.0
+margin_top = 9.0
+margin_right = 52.0
+margin_bottom = 31.0
+
+[node name="JoinEventButton" parent="Events/ScrollContainer/MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 56.0
+margin_top = 9.0
+margin_right = 80.0
+margin_bottom = 31.0
+
+[node name="Custom Events" type="Tabs" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+[connection signal="pressed" from="Events/ScrollContainer/MarginContainer/HBoxContainer/TextEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/ScrollContainer/MarginContainer/HBoxContainer/GenericEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/ScrollContainer/MarginContainer/HBoxContainer/JoinEventButton" to="." method="_on_EventButton_pressed"]
