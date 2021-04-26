@@ -1,5 +1,5 @@
 tool
-class_name DialogNode
+class_name DialogBaseNode
 extends Control
 
 
@@ -12,7 +12,7 @@ export(String, FILE) var timeline_name: String
 export(NodePath) var DialogNode_path:NodePath
 export(NodePath) var PortraitsNode_path:NodePath
 
-var timeline
+var timeline: DialogTimelineResource
 var text_speed = 0.02
 var event_finished = false
 var next_input = 'ui_accept'

@@ -5,10 +5,10 @@ extends Resource
 signal event_started(event_resource)
 signal event_finished(event_resource)
 
-var _caller:DialogNode = null
+var _caller:DialogBaseNode = null
 
 #warning-ignore-all:unused_argument
-func excecute(caller:DialogNode) -> void:
+func excecute(caller:DialogBaseNode) -> void:
 	emit_signal("event_started", self)
 
 

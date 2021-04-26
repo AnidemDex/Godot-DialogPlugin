@@ -2,6 +2,7 @@ tool
 class_name DialogTimelineResource
 extends Resource
 
+signal timeline_ended
 
 var events = EventsArray.new()
 

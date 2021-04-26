@@ -22,7 +22,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 42.0
+margin_bottom = 46.0
 rect_min_size = Vector2( 0, 32 )
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
@@ -33,7 +33,7 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 1022.0
-margin_bottom = 40.0
+margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
 margin_left = 461.0
@@ -43,10 +43,10 @@ size_flags_horizontal = 4
 text = "Timeline Editor"
 
 [node name="ControlPanel" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-margin_left = 446.0
+margin_left = 438.0
 margin_top = 18.0
-margin_right = 574.0
-margin_bottom = 38.0
+margin_right = 582.0
+margin_bottom = 42.0
 size_flags_horizontal = 4
 alignment = 1
 __meta__ = {
@@ -54,26 +54,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
+[node name="PreviousButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
 margin_right = 40.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 text = "Prev"
 
-[node name="Button2" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
+[node name="PlayPauseButton" type="CheckBox" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
 margin_left = 44.0
-margin_right = 82.0
-margin_bottom = 20.0
+margin_right = 98.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Play"
 
-[node name="Button3" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
-margin_left = 86.0
-margin_right = 128.0
-margin_bottom = 20.0
+[node name="NextButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
+margin_left = 102.0
+margin_right = 144.0
+margin_bottom = 24.0
 text = "Next"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 46.0
+margin_top = 50.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
@@ -83,7 +83,7 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer"]
 margin_right = 506.0
-margin_bottom = 554.0
+margin_bottom = 550.0
 rect_min_size = Vector2( 0, 420 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -92,14 +92,14 @@ scroll_horizontal_enabled = false
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/ScrollContainer"]
 margin_right = 506.0
-margin_bottom = 554.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HSplitContainer"]
 margin_left = 518.0
 margin_right = 1024.0
-margin_bottom = 554.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

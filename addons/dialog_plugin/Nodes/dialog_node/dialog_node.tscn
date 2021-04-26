@@ -1,11 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/assets/Fonts/DefaultFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialog_node/dialog_node.gd" type="Script" id=4]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 1, 1, 1, 0 )
-expand_margin_left = 10.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Pulse"
@@ -41,12 +36,6 @@ tracks/0/keys = {
 "values": [ 12.0, 55.0 ]
 }
 
-[sub_resource type="StyleBoxFlat" id=5]
-content_margin_left = 10.0
-content_margin_right = 10.0
-bg_color = Color( 1, 1, 1, 0 )
-expand_margin_left = 10.0
-
 [node name="DialogNode" type="Control"]
 anchor_top = 0.707
 anchor_right = 1.0
@@ -72,10 +61,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-expand = true
+
+[node name="TextBackground" type="NinePatchRect" parent="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,16 +83,16 @@ margin_left = 20.0
 margin_top = 10.0
 margin_right = -20.0
 margin_bottom = -10.0
-custom_styles/normal = SubResource( 1 )
-custom_fonts/normal_font = ExtResource( 1 )
-custom_colors/default_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 1, 1, 1, 0 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 2
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_as_outline = 1
 bbcode_enabled = true
-bbcode_text = "Placeholder text for testing and formatting."
+bbcode_text = "This is a sample text.
+[center] This'll not be displayed in game.
+(At least, if you set an script to DialogBaseNode).[/center]"
 meta_underlined = false
-text = "Placeholder text for testing and formatting."
+text = "This is a sample text.
+ This'll not be displayed in game.
+(At least, if you set an script to DialogBaseNode)."
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -130,12 +126,8 @@ margin_top = -39.936
 margin_right = 207.0
 margin_bottom = 0.0639982
 size_flags_vertical = 1
-custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.619608 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 2
 text = "Example Name"
 valign = 1
 clip_text = true
@@ -167,5 +159,9 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ReferenceRect" type="ReferenceRect" parent="NameLabel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="TextTimer" type="Timer" parent="."]

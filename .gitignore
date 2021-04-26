@@ -101,3 +101,5 @@ Temporary Items
 .nfs*
 ####################
 Main.gd
+
+addons/explore-editor-theme/

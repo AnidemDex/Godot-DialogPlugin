@@ -13,7 +13,7 @@ export(bool) var skip = true
 
 var _PortraitManager: DialogPortraitManager
 
-func excecute(caller:DialogNode) -> void:
+func excecute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
 	.excecute(caller)
 

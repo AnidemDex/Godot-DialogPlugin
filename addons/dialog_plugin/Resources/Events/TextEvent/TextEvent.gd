@@ -9,9 +9,9 @@ export(String, MULTILINE) var text:String = ""
 export(Resource) var character = DialogCharacterResource.new()
 
 var _timer = null
-var _DialogNode:DialogDialogNode = null
+var _DialogNode:DialogDialogueNode = null
 
-func excecute(caller:DialogNode) -> void:
+func excecute(caller:DialogBaseNode) -> void:
 	.excecute(caller)
 	
 	_caller = caller
