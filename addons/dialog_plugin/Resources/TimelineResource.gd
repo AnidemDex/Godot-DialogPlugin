@@ -2,7 +2,8 @@ tool
 class_name DialogTimelineResource
 extends Resource
 
-export(Resource) var events = ResourceArray.new() setget _set_events
+
+var events = EventsArray.new()
 
 var current_event = 0
 
@@ -43,8 +44,16 @@ func get_good_name(with_name:String="") -> String:
 	
 	return _good_name
 
-func _set_events(value) -> void:
-	events = value
-	if not value:
-		events = ResourceArray.new()
-	emit_signal("changed")
+# Esto debe hacerse al menos hasta que https://github.com/godotengine/godot/pull/44879
+# sea añadido a Godot
+func _get_property_list() -> Array:
+	var properties:Array = []
+	properties.append(
+		{
+			"name":"events",
+			"type":TYPE_OBJECT,
+			"hint":PROPERTY_HINT_RESOURCE_TYPE,
+			"hint_string":"EventsArray",
+		}
+	)
+	return properties

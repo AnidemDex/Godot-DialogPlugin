@@ -6,6 +6,7 @@
 margin_right = 238.0
 margin_bottom = 90.0
 rect_min_size = Vector2( 170, 92 )
+popup_exclusive = true
 window_title = "Por favor, Confirma..."
 script = ExtResource( 1 )
 __meta__ = {
@@ -39,5 +40,6 @@ margin_bottom = 42.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="text_entered" from="MarginContainer/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]

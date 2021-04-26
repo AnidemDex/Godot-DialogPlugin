@@ -30,10 +30,10 @@ func _draw() -> void:
 		base_resource = null
 	if visible and not base_resource:
 		print("[Dialog] No character resource to edit")
-		visible = false
-	
+#		visible = false
 
 func _update_values() -> void:
+	visible = true
 	name_node.text = base_resource.name
 	display_name_node.text = base_resource.display_name
 	description_node.text = base_resource.description
@@ -46,7 +46,9 @@ func _set_base_resource(value:DialogCharacterResource) -> void:
 	base_resource = value
 	if not base_resource.is_connected("changed", self, "_on_BaseResource_changed"):
 		base_resource.connect("changed", self, "_on_BaseResource_changed")
-	_update_values()
+	
+	if is_inside_tree():
+		_update_values()
 
 
 func _save() -> void:

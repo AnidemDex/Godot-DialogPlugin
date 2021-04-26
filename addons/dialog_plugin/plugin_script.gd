@@ -2,7 +2,7 @@ tool
 extends EditorPlugin
 
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
-const EditorView_Scene = preload("res://addons/dialog_plugin/Editor/EditorView.tscn")
+const EditorView_Scene = preload("res://addons/dialog_plugin/Editor/EditorMainNode.tscn")
 
 var _editor_view
 var _parts_inspector

@@ -9,7 +9,7 @@ export(Color) var color:Color = Color.white
 export(bool) var default_speaker:bool = false
 export(String, MULTILINE) var description:String = ""
 # Array of DialogPortraitResource
-export(Resource) var portraits = ResourceArray.new() setget _set_portraits
+var portraits = PortraitArray.new() setget _set_portraits
 
 
 func _get_display_name() -> String:
@@ -35,8 +35,17 @@ func get_good_name(with_name:String="") -> String:
 func _set_portraits(value) -> void:
 	portraits = value
 	if not value:
-		portraits = ResourceArray.new()
-		var _p = DialogPortraitResource.new()
-		_p.name = "Default"
-		_p.image = load("res://icon.png")
-		portraits.add(_p)
+		portraits = PortraitArray.new()
+
+
+func _get_property_list() -> Array:
+	var properties:Array = []
+	properties.append(
+		{
+			"name":"portraits",
+			"type":TYPE_OBJECT,
+			"hint":PROPERTY_HINT_RESOURCE_TYPE,
+			"hint_string":"PortraitArray",
+		}
+	)
+	return properties

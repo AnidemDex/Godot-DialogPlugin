@@ -1,4 +1,4 @@
-
+tool
 class_name DialogTextEvent
 extends DialogEventResource
 

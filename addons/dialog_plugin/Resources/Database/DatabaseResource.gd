@@ -4,7 +4,8 @@ extends Resource
 
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
 
-export(Resource) var resources = null setget _set_resources
+# ResourceArray
+var resources = null setget _set_resources
 
 
 func add(item):
@@ -14,9 +15,8 @@ func remove(item):
 	assert(false)
 
 func save(path: String) -> void:
-	var _err = ResourceSaver.save(path, self, ResourceSaver.FLAG_CHANGE_PATH)
-	if _err != OK:
-		push_error("FATAL_ERROR: "+str(_err))
+	var _err = ResourceSaver.save(path, self)
+	assert(_err == OK)
 
 
 func _to_string() -> String:
@@ -28,3 +28,15 @@ func _set_resources(value):
 		return
 	resources = value
 	emit_signal("changed")
+
+func _get_property_list() -> Array:
+	var properties:Array = []
+	properties.append(
+		{
+			"name":"resources",
+			"type":TYPE_OBJECT,
+			"hint":PROPERTY_HINT_RESOURCE_TYPE,
+			"hint_string":"ResourceArray",
+		}
+	)
+	return properties

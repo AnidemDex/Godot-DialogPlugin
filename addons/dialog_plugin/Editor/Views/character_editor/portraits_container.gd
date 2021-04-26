@@ -3,6 +3,7 @@ extends PanelContainer
 
 export(NodePath) var Confirmation_path:NodePath
 export(NodePath) var AddItemBtn_path:NodePath
+export(NodePath) var RemoveItemBtn_path:NodePath
 export(NodePath) var NameContainer_path:NodePath
 export(NodePath) var PathContainer_path:NodePath
 export(NodePath) var FileDialog_path:NodePath
@@ -11,8 +12,11 @@ var base_resource:DialogCharacterResource setget _set_base_resource
 var last_pressed_button = null
 var file_dialog_node
 
+var button_script = load("res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portrait_button.gd")
+
 onready var confirmation_node := get_node(Confirmation_path)
 onready var add_item_node := get_node(AddItemBtn_path)
+onready var remove_item_node := get_node(RemoveItemBtn_path)
 onready var name_container_node := get_node(NameContainer_path)
 onready var path_container_node := get_node(PathContainer_path)
 
@@ -34,7 +38,7 @@ func _unload_values() -> void:
 
 func _update_values() -> void:
 	_unload_values()
-	for portrait in base_resource.portraits.get_resources():
+	for portrait in base_resource.portraits:
 		_add_item(portrait)
 
 
@@ -48,11 +52,10 @@ func _add_item(portrait:DialogPortraitResource) -> void:
 	_path_node.hint_tooltip = portrait.image.resource_path
 	_path_node.icon = portrait.image
 	_path_node.set_meta("portrait_resource", portrait)
-	_path_node.set_script(load("res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portrait_button.gd"))
+	_path_node.set_script(button_script)
 	var _err = _path_node.connect("pressed", self, "_on_PortraitButton_pressed")
 	name_container_node.add_child(_name_node)
 	path_container_node.add_child(_path_node)
-	pass
 
 
 func _set_base_resource(value:DialogCharacterResource):
@@ -109,4 +112,16 @@ func _on_FileDialog_file_selected(path: String) -> void:
 		_portrait_resource.image = _selected_resource
 	else:
 		print("Archivo no soportado ", _selected_resource.get_class())
+	_save()
+
+
+func _on_RemoveItmBtn_pressed() -> void:
+	if not base_resource:
+		return
+	
+	var portrait_array:Array = base_resource.portraits.get_resources()
+	if portrait_array.size() <= 1:
+		return
+	
+	portrait_array.remove(portrait_array.size()-1)
 	_save()

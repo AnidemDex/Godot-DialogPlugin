@@ -13,7 +13,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 Confirmation_path = NodePath("NewItemPopup")
-AddItemBtn_path = NodePath("VBoxContainer/AddItemBtn")
+AddItemBtn_path = NodePath("VBoxContainer/HBoxContainer2/AddItemBtn")
+RemoveItemBtn_path = NodePath("VBoxContainer/HBoxContainer2/RemoveItmBtn")
 NameContainer_path = NodePath("VBoxContainer/HBoxContainer/NameContainer")
 PathContainer_path = NodePath("VBoxContainer/HBoxContainer/PathContainer")
 FileDialog_path = NodePath("FileDialog")
@@ -34,11 +35,23 @@ margin_left = 4.0
 margin_right = 468.0
 size_flags_horizontal = 3
 
-[node name="AddItemBtn" type="Button" parent="VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_left = 234.0
 margin_top = 4.0
 margin_right = 468.0
 margin_bottom = 24.0
-text = "Add Item"
+size_flags_horizontal = 8
+
+[node name="AddItemBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 88.0
+margin_bottom = 20.0
+text = "Add Portrait"
+
+[node name="RemoveItmBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 92.0
+margin_right = 234.0
+margin_bottom = 20.0
+text = "Remove last portrait"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 7.0
@@ -54,7 +67,9 @@ filters = PoolStringArray( "*.png;PNG Images", "*.tres;Text Resource File", "*.t
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 475.0
-margin_bottom = 75.0
-[connection signal="pressed" from="VBoxContainer/AddItemBtn" to="." method="_on_AddItemBtn_pressed"]
+margin_bottom = 137.0
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/AddItemBtn" to="." method="_on_AddItemBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/RemoveItmBtn" to="." method="_on_RemoveItmBtn_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
 [connection signal="confirmed" from="NewItemPopup" to="." method="_on_NewItemPopup_confirmed"]

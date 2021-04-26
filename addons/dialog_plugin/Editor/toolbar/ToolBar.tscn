@@ -1,0 +1,127 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Editor/toolbar/ToolBar.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Editor/node_list/NodeListPopUp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/dialog_plugin/Editor/Popups/NewItemPopup.tscn" type="PackedScene" id=3]
+
+[node name="ToolBar" type="VBoxContainer"]
+anchor_right = 1.0
+margin_left = 420.0
+margin_right = -372.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ToolButtons" type="HBoxContainer" parent="."]
+margin_right = 274.0
+margin_bottom = 20.0
+custom_constants/separation = 12
+alignment = 1
+
+[node name="TimelinesButton" type="Button" parent="ToolButtons"]
+margin_right = 75.0
+margin_bottom = 20.0
+text = "Timelines"
+
+[node name="CharactersButton" type="Button" parent="ToolButtons"]
+margin_left = 87.0
+margin_right = 166.0
+margin_bottom = 20.0
+text = "Characters"
+
+[node name="ConfigurationButton" type="Button" parent="ToolButtons"]
+margin_left = 178.0
+margin_right = 274.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+text = "Configuration"
+
+[node name="InfoLabel" type="Label" parent="."]
+visible = false
+margin_right = 232.0
+margin_bottom = 14.0
+text = "Dialogue Editor"
+align = 2
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 250.0
+margin_top = 20.0
+margin_right = 274.0
+margin_bottom = 44.0
+size_flags_horizontal = 8
+pressed = true
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+visible = false
+margin_top = 44.0
+margin_right = 274.0
+margin_bottom = 44.0
+
+[node name="TimelineListPopUp" parent="." instance=ExtResource( 2 )]
+margin_top = 44.0
+margin_right = 274.0
+margin_bottom = 262.0
+
+[node name="PanelContainer2" parent="TimelineListPopUp/VBoxContainer" index="0"]
+margin_right = 266.0
+
+[node name="Title" parent="TimelineListPopUp/VBoxContainer/PanelContainer2" index="0"]
+margin_right = 259.0
+text = "Timelines"
+
+[node name="PanelContainer" parent="TimelineListPopUp/VBoxContainer" index="1"]
+margin_right = 266.0
+
+[node name="HBoxContainer" parent="TimelineListPopUp/VBoxContainer/PanelContainer" index="0"]
+margin_right = 259.0
+
+[node name="NodeList" parent="TimelineListPopUp/VBoxContainer" index="2"]
+margin_right = 266.0
+
+[node name="NewTimelinePopup" parent="." instance=ExtResource( 3 )]
+margin_top = 44.0
+margin_right = 274.0
+margin_bottom = 136.0
+
+[node name="CharacterListPopUp" parent="." instance=ExtResource( 2 )]
+margin_top = 262.0
+margin_right = 274.0
+margin_bottom = 480.0
+
+[node name="PanelContainer2" parent="CharacterListPopUp/VBoxContainer" index="0"]
+margin_right = 266.0
+
+[node name="Title" parent="CharacterListPopUp/VBoxContainer/PanelContainer2" index="0"]
+margin_right = 259.0
+text = "Characters"
+
+[node name="PanelContainer" parent="CharacterListPopUp/VBoxContainer" index="1"]
+margin_right = 266.0
+
+[node name="HBoxContainer" parent="CharacterListPopUp/VBoxContainer/PanelContainer" index="0"]
+margin_right = 259.0
+
+[node name="NodeList" parent="CharacterListPopUp/VBoxContainer" index="2"]
+margin_right = 266.0
+
+[node name="NewCharacterPopup" parent="." instance=ExtResource( 3 )]
+margin_top = 44.0
+margin_right = 274.0
+margin_bottom = 136.0
+
+[connection signal="pressed" from="ToolButtons/TimelinesButton" to="." method="_on_TimelinesButton_pressed"]
+[connection signal="pressed" from="ToolButtons/CharactersButton" to="." method="_on_CharactersButton_pressed"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="item_selected" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_item_selected"]
+[connection signal="new_item_requested" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_new_item_requested"]
+[connection signal="confirmed" from="NewTimelinePopup" to="." method="_on_NewTimelinePopup_confirmed"]
+[connection signal="item_selected" from="CharacterListPopUp" to="." method="_on_CharacterListPopUp_item_selected"]
+[connection signal="new_item_requested" from="CharacterListPopUp" to="." method="_on_CharacterListPopUp_new_item_requested"]
+[connection signal="confirmed" from="NewCharacterPopup" to="." method="_on_NewCharacterPopup_confirmed"]
+
+[editable path="TimelineListPopUp"]
+[editable path="CharacterListPopUp"]

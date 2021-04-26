@@ -5,7 +5,7 @@ var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 func add(item:DialogCharacterResource) -> void:
 	DialogUtil.Logger.print(self, ["Adding a character: ", item.resource_path])
-	if item in resources.get_resources():
+	if resources.get_resources().has(item):
 		push_warning("A resource is already there")
 		var _r_array = resources.get_resources()
 		var _idx = _r_array.find(item)
@@ -37,8 +37,7 @@ func scan_characters_folder() -> void:
 		while _file_name != "":
 			if not _d.current_is_dir():
 				var _current_resources_files = []
-				var _c_res = resources.get_resources()
-				for _r in _c_res:
+				for _r in resources:
 					if _r:
 						var _r_file = _r.resource_path.get_file()
 						_current_resources_files.append(_r_file)

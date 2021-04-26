@@ -10,6 +10,11 @@ var _resource = null
 
 onready var timeline_events_container_node = get_node_or_null(TimelineEventsContainer_path)
 
+func _ready() -> void:
+	if not base_resource:
+		return
+	_load_events()
+
 func _draw() -> void:
 	if not visible:
 		_unload_events()
@@ -21,7 +26,7 @@ func _unload_events():
 func _load_events() -> void:
 	_unload_events()
 	var _idx = 0
-	for event in (_resource as DialogTimelineResource).events.get_resources():
+	for event in (_resource as DialogTimelineResource).events:
 		DialogUtil.Logger.print(self,["Trying to load event's node in:", event.resource_path])
 		var event_node:DialogEditorEventNode = (event as DialogEventResource).get_event_editor_node()
 		var _err = event_node.connect("delelete_item_requested", self, "_on_EventNode_deletion_requested")
@@ -40,7 +45,6 @@ func _set_base_resource(_r:Resource) -> void:
 	base_resource = _r
 	_resource = _r
 	DialogUtil.Logger.print(self,["Using {res} at {path}".format({"res":_resource.get_class(), "path":_r.resource_path})])
-	_load_events()
 
 
 func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource) -> void:

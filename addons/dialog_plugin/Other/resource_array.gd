@@ -19,6 +19,11 @@ extends Resource
 
 var _resources:Array = []
 
+# Para modificar el tipo de recurso a usar en el editor
+var _hint_string = "Resource"
+
+var _current_iter = 0
+
 func _init() -> void:
 	property_list_changed_notify()
 
@@ -37,10 +42,6 @@ func get_resources() -> Array:
 	return _resources
 
 func _get(property: String):
-	match property:
-		"info":
-			return "Empty"
-	
 	if property.begins_with("values/"):
 		var _idx = int(property.replace("values/",""))
 		if _idx < _resources.size() and _idx >= 0:
@@ -70,8 +71,8 @@ func _get_property_list() -> Array:
 		properties.append(
 			{
 				"name":"info",
-				"type": TYPE_STRING,
-				"hint_string": get_class(),
+				"type": TYPE_NIL,
+				"hint": PROPERTY_HINT_NONE,
 				"usage": PROPERTY_USAGE_NO_INSTANCE_STATE | PROPERTY_USAGE_EDITOR,
 			}
 		)
@@ -82,8 +83,26 @@ func _get_property_list() -> Array:
 					"name":"values/"+str(index),
 					"type": TYPE_OBJECT,
 					"hint": PROPERTY_HINT_RESOURCE_TYPE,
-					"hint_string": "Resource",
+					"hint_string": _hint_string,
 					"usage": PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_SCRIPT_VARIABLE
 				}
 			)
 	return properties
+
+
+func _should_iter_continue() -> bool:
+	return (_current_iter < _resources.size())
+
+
+func _iter_init(arg) -> bool:
+	_current_iter = 0
+	return _should_iter_continue()
+
+
+func _iter_next(arg) -> bool:
+	_current_iter += 1
+	return _should_iter_continue()
+
+
+func _iter_get(arg):
+	return _resources[_current_iter]

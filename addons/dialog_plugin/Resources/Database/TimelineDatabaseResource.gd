@@ -3,7 +3,6 @@ extends DialogDatabaseResource
 
 var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
-
 func add(res:Resource):
 	if not(res is DialogTimelineResource):
 		push_error("resource is not a timeline")
