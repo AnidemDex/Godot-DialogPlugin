@@ -36,7 +36,7 @@ size = Vector2( 16, 16 )
 [node name="PortraitContainer" type="PanelContainer"]
 margin_top = 34.0
 margin_right = 482.0
-margin_bottom = 72.0
+margin_bottom = 74.0
 rect_min_size = Vector2( 0, 38 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -97,7 +97,7 @@ filters = PoolStringArray( "*.png;PNG Images", "*.tres;Text Resource File", "*.t
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 475.0
-margin_bottom = 137.0
+margin_bottom = 99.0
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/AddItemBtn" to="." method="_on_AddItemBtn_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/RemoveItmBtn" to="." method="_on_RemoveItmBtn_pressed"]

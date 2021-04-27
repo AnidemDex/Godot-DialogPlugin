@@ -69,7 +69,7 @@ func _set_base_resource(value:DialogCharacterResource):
 
 
 func _on_AddItemBtn_pressed() -> void:
-	confirmation_node.popup_centered()
+	confirmation_node.popup_centered_minsize()
 
 
 func _on_BaseResource_changed():

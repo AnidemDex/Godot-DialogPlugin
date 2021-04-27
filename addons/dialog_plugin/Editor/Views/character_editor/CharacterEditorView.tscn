@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=1]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/CharacterEditorView.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/Title.gd" type="Script" id=7]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portrait_container.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/panel_container.tres" type="StyleBox" id=9]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/toolbar_panel.tres" type="StyleBox" id=10]
 
 [node name="CharacterEditorView" type="VBoxContainer"]
 anchor_right = 1.0
@@ -103,13 +104,14 @@ size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties"]
 margin_right = 494.0
-margin_bottom = 54.0
+margin_bottom = 48.0
+custom_styles/panel = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 487.0
-margin_bottom = 47.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 490.0
+margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/PanelContainer/HBoxContainer"]
 margin_top = 13.0
@@ -137,21 +139,22 @@ margin_bottom = 27.0
 text = "Color Selector"
 
 [node name="DisplayName" type="PanelContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties"]
-margin_top = 58.0
+margin_top = 52.0
 margin_right = 494.0
-margin_bottom = 112.0
+margin_bottom = 100.0
+custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 3 )
 AltNameBool_path = NodePath("../../Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton")
 AltNameContainer_path = NodePath("../../Properties/DisplayName/VBoxContainer/DisplayNameContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 487.0
-margin_bottom = 47.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 490.0
+margin_bottom = 44.0
 
 [node name="AlternativeNameSelector" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer"]
-margin_right = 480.0
+margin_right = 486.0
 margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector"]
@@ -187,21 +190,22 @@ max_length = 32
 clear_button_enabled = true
 
 [node name="Description" type="PanelContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties"]
-margin_top = 116.0
+margin_top = 104.0
 margin_right = 494.0
-margin_bottom = 160.0
+margin_bottom = 142.0
+custom_styles/panel = ExtResource( 10 )
 script = ExtResource( 6 )
 HideButton_path = NodePath("VBoxContainer/HBoxContainer/CheckBox")
 PropertiesContainer_path = NodePath("VBoxContainer/MarginContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 487.0
-margin_bottom = 37.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 490.0
+margin_bottom = 34.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer"]
-margin_right = 480.0
+margin_right = 486.0
 margin_bottom = 30.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -214,8 +218,8 @@ margin_bottom = 22.0
 text = "Description"
 
 [node name="CheckBox" type="CheckBox" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer/HBoxContainer"]
-margin_left = 450.0
-margin_right = 480.0
+margin_left = 456.0
+margin_right = 486.0
 margin_bottom = 30.0
 size_flags_horizontal = 10
 custom_icons/checked = ExtResource( 4 )
@@ -287,8 +291,8 @@ margin_bottom = 564.0
 size_flags_horizontal = 3
 
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/PanelContainer/HBoxContainer/DefaultspeakerBoolButton" to="." method="_on_DefaultspeakerButton_toggled"]
-[connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="." method="_on_DisplayNameBool_toggled"]
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName" method="_on_CheckButton_toggled"]
+[connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="." method="_on_DisplayNameBool_toggled"]
 [connection signal="text_changed" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/DisplayNameContainer/LineEdit" to="." method="_on_DisplayName_text_changed"]
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer/HBoxContainer/CheckBox" to="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description" method="_on_CheckBox_toggled"]
 [connection signal="text_changed" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer/MarginContainer/TextEdit" to="." method="_on_Description_text_changed"]
