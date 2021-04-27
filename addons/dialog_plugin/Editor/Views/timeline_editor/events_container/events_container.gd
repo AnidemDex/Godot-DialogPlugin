@@ -6,6 +6,8 @@ signal event_pressed(event_resource)
 onready var event_buttons_container = $HBoxContainer/PanelContainer/EventButtons
 onready var checkbox = $HBoxContainer/CheckBox
 
+var drag_position
+
 func _ready() -> void:
 	if checkbox.pressed:
 		_show_toolbar()
@@ -32,3 +34,14 @@ func _on_CheckBox_toggled(button_pressed: bool) -> void:
 		_show_toolbar()
 	else:
 		_hide_toolbar()
+
+
+func _on_PanelContainer_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed:
+			drag_position = get_global_mouse_position() - rect_global_position
+		else:
+			drag_position = null
+	
+	if event is InputEventMouseMotion and drag_position:
+		rect_global_position = get_global_mouse_position() - drag_position

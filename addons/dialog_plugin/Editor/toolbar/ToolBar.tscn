@@ -78,7 +78,7 @@ visible = false
 margin_right = 232.0
 margin_bottom = 14.0
 custom_styles/normal = SubResource( 3 )
-text = "Dialogue Editor"
+text = "Dialog Editor"
 align = 2
 
 [node name="CheckBox" type="CheckBox" parent="."]
@@ -109,12 +109,6 @@ margin_bottom = 230.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="VBoxContainer" parent="TimelineListPopUp" index="0"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
-margin_bottom = -1.0
-
 [node name="PanelContainer2" parent="TimelineListPopUp/VBoxContainer" index="0"]
 margin_right = 198.0
 
@@ -142,12 +136,6 @@ margin_top = 230.0
 margin_right = 200.0
 margin_bottom = 411.0
 size_flags_horizontal = 0
-
-[node name="VBoxContainer" parent="CharacterListPopUp" index="0"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = -1.0
-margin_bottom = -1.0
 
 [node name="PanelContainer2" parent="CharacterListPopUp/VBoxContainer" index="0"]
 margin_right = 198.0

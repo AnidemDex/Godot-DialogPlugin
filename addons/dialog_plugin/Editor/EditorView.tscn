@@ -6,6 +6,8 @@
 [node name="EditorView" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,10 +16,10 @@ __meta__ = {
 [node name="ViewContainer" type="PanelContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 5.0
 margin_top = 22.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_right = -4.0
+size_flags_vertical = 3
 
 [node name="ToolBar" parent="." instance=ExtResource( 1 )]
 margin_left = 352.0

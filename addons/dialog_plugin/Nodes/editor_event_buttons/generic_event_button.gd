@@ -6,6 +6,7 @@ export (Resource) var event_resource:Resource
 
 onready var tween_node = $Tween
 
+
 func _pressed() -> void:
 	emit_signal("pressed", event_resource.get_script().new())
 
@@ -18,8 +19,10 @@ func expand() -> void:
 	tween_node.interpolate_property(
 		self, 
 		"rect_size", 
-		null, _text_size,
+		Vector2.ZERO, _text_size,
 		0.1, Tween.TRANS_BOUNCE, Tween.EASE_IN)
+	if tween_node.is_active():
+		yield(tween_node, "tween_all_completed")
 	tween_node.start()
 
 
@@ -29,6 +32,8 @@ func contract() -> void:
 		"rect_min_size", 
 		rect_size, Vector2.ZERO,
 		0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT, 0.2)
+	if tween_node.is_active():
+		yield(tween_node, "tween_all_completed")
 	tween_node.start()
 
 
