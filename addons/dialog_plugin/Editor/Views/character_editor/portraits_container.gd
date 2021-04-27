@@ -20,6 +20,9 @@ onready var remove_item_node := get_node(RemoveItemBtn_path)
 onready var name_container_node := get_node(NameContainer_path)
 onready var path_container_node := get_node(PathContainer_path)
 
+func _ready() -> void:
+	add_item_node.icon = get_icon("more", "GraphEdit")
+	remove_item_node.icon = get_icon("minus", "GraphEdit")
 
 func _save():
 	if not base_resource:

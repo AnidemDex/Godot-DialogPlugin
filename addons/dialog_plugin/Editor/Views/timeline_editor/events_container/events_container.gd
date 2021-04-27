@@ -3,19 +3,22 @@ extends Control
 
 signal event_pressed(event_resource)
 
+onready var event_buttons_container = $HBoxContainer/PanelContainer/EventButtons
+onready var checkbox = $HBoxContainer/CheckBox
+
 func _ready() -> void:
-	if $CheckBox.pressed:
+	if checkbox.pressed:
 		_show_toolbar()
 	else:
 		_hide_toolbar()
 
 
 func _show_toolbar() -> void:
-	$EventButtons.visible = true
+	event_buttons_container.visible = true
 
 
 func _hide_toolbar() -> void:
-	$EventButtons.visible = false
+	event_buttons_container.visible = false
 
 
 func _on_EventButton_pressed(event:DialogEventResource=null) -> void:

@@ -1,8 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/toolbar/ToolBar.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Editor/node_list/NodeListPopUp.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/dialog_plugin/Editor/Popups/NewItemPopup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/toolbar_panel.tres" type="StyleBox" id=4]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/toolbar_hide_button.tres" type="StyleBox" id=5]
+[ext_resource path="res://addons/dialog_plugin/Editor/toolbar/CheckBox.gd" type="Script" id=6]
+
+[sub_resource type="Image" id=1]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 4
+flags = 4
+image = SubResource( 1 )
+size = Vector2( 16, 16 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
 
 [node name="ToolBar" type="VBoxContainer"]
 anchor_right = 1.0
@@ -16,44 +38,63 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ToolButtons" type="HBoxContainer" parent="."]
-margin_right = 274.0
-margin_bottom = 20.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 306.0
+margin_bottom = 46.0
+custom_styles/panel = ExtResource( 4 )
+
+[node name="ToolButtons" type="HBoxContainer" parent="PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 302.0
+margin_bottom = 42.0
 custom_constants/separation = 12
 alignment = 1
 
-[node name="TimelinesButton" type="Button" parent="ToolButtons"]
-margin_right = 75.0
-margin_bottom = 20.0
+[node name="TimelinesButton" type="Button" parent="PanelContainer/ToolButtons"]
+margin_right = 99.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 99, 24 )
 text = "Timelines"
+icon = SubResource( 2 )
+expand_icon = true
 
-[node name="CharactersButton" type="Button" parent="ToolButtons"]
-margin_left = 87.0
-margin_right = 166.0
-margin_bottom = 20.0
+[node name="CharactersButton" type="Button" parent="PanelContainer/ToolButtons"]
+margin_left = 111.0
+margin_right = 190.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 38 )
 text = "Characters"
 
-[node name="ConfigurationButton" type="Button" parent="ToolButtons"]
-margin_left = 178.0
-margin_right = 274.0
-margin_bottom = 20.0
+[node name="ConfigurationButton" type="Button" parent="PanelContainer/ToolButtons"]
+margin_left = 202.0
+margin_right = 298.0
+margin_bottom = 38.0
 size_flags_horizontal = 10
 text = "Configuration"
 
-[node name="InfoLabel" type="Label" parent="."]
+[node name="InfoLabel" type="Label" parent="PanelContainer"]
 visible = false
 margin_right = 232.0
 margin_bottom = 14.0
+custom_styles/normal = SubResource( 3 )
 text = "Dialogue Editor"
 align = 2
 
 [node name="CheckBox" type="CheckBox" parent="."]
-margin_left = 250.0
-margin_top = 20.0
-margin_right = 274.0
-margin_bottom = 44.0
+margin_left = 288.0
+margin_top = 46.0
+margin_right = 306.0
+margin_bottom = 63.0
 size_flags_horizontal = 8
+custom_icons/checked = SubResource( 2 )
+custom_icons/unchecked = SubResource( 2 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = ExtResource( 5 )
 pressed = true
+script = ExtResource( 6 )
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 visible = false
@@ -62,25 +103,34 @@ margin_right = 274.0
 margin_bottom = 44.0
 
 [node name="TimelineListPopUp" parent="." instance=ExtResource( 2 )]
-margin_top = 44.0
-margin_right = 274.0
-margin_bottom = 262.0
+margin_top = 49.0
+margin_right = 200.0
+margin_bottom = 230.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="VBoxContainer" parent="TimelineListPopUp" index="0"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
 
 [node name="PanelContainer2" parent="TimelineListPopUp/VBoxContainer" index="0"]
-margin_right = 266.0
+margin_right = 198.0
 
 [node name="Title" parent="TimelineListPopUp/VBoxContainer/PanelContainer2" index="0"]
-margin_right = 259.0
+margin_right = 196.0
 text = "Timelines"
 
 [node name="PanelContainer" parent="TimelineListPopUp/VBoxContainer" index="1"]
-margin_right = 266.0
+margin_right = 198.0
 
 [node name="HBoxContainer" parent="TimelineListPopUp/VBoxContainer/PanelContainer" index="0"]
-margin_right = 259.0
+margin_right = 192.0
 
 [node name="NodeList" parent="TimelineListPopUp/VBoxContainer" index="2"]
-margin_right = 266.0
+margin_right = 198.0
+margin_bottom = 179.0
 
 [node name="NewTimelinePopup" parent="." instance=ExtResource( 3 )]
 margin_top = 44.0
@@ -88,33 +138,41 @@ margin_right = 274.0
 margin_bottom = 136.0
 
 [node name="CharacterListPopUp" parent="." instance=ExtResource( 2 )]
-margin_top = 262.0
-margin_right = 274.0
-margin_bottom = 480.0
+margin_top = 230.0
+margin_right = 200.0
+margin_bottom = 411.0
+size_flags_horizontal = 0
+
+[node name="VBoxContainer" parent="CharacterListPopUp" index="0"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = -1.0
+margin_bottom = -1.0
 
 [node name="PanelContainer2" parent="CharacterListPopUp/VBoxContainer" index="0"]
-margin_right = 266.0
+margin_right = 198.0
 
 [node name="Title" parent="CharacterListPopUp/VBoxContainer/PanelContainer2" index="0"]
-margin_right = 259.0
+margin_right = 196.0
 text = "Characters"
 
 [node name="PanelContainer" parent="CharacterListPopUp/VBoxContainer" index="1"]
-margin_right = 266.0
+margin_right = 198.0
 
 [node name="HBoxContainer" parent="CharacterListPopUp/VBoxContainer/PanelContainer" index="0"]
-margin_right = 259.0
+margin_right = 192.0
 
 [node name="NodeList" parent="CharacterListPopUp/VBoxContainer" index="2"]
-margin_right = 266.0
+margin_right = 198.0
+margin_bottom = 179.0
 
 [node name="NewCharacterPopup" parent="." instance=ExtResource( 3 )]
 margin_top = 44.0
 margin_right = 274.0
 margin_bottom = 136.0
 
-[connection signal="pressed" from="ToolButtons/TimelinesButton" to="." method="_on_TimelinesButton_pressed"]
-[connection signal="pressed" from="ToolButtons/CharactersButton" to="." method="_on_CharactersButton_pressed"]
+[connection signal="pressed" from="PanelContainer/ToolButtons/TimelinesButton" to="." method="_on_TimelinesButton_pressed"]
+[connection signal="pressed" from="PanelContainer/ToolButtons/CharactersButton" to="." method="_on_CharactersButton_pressed"]
 [connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="item_selected" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_item_selected"]
 [connection signal="new_item_requested" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_new_item_requested"]

@@ -30,6 +30,8 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	if _editor_view:
 		_editor_view.queue_free()
+	if _parts_inspector:
+		remove_inspector_plugin(_parts_inspector)
 	pass
 
 

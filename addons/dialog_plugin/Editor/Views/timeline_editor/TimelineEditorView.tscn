@@ -105,7 +105,6 @@ size_flags_vertical = 3
 
 [node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
 margin_top = 36.0
-margin_right = 104.0
-margin_bottom = 124.0
+margin_bottom = 139.0
 
 [connection signal="event_pressed" from="EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]

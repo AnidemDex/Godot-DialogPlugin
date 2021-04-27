@@ -6,7 +6,11 @@ signal character_selected(character)
 
 const DialogDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd")
 
+onready var tool_buttons = $PanelContainer/ToolButtons
+onready var info_label = $PanelContainer/InfoLabel
+
 func _ready() -> void:
+	tool_buttons.get_node("TimelinesButton").icon = get_icon("ListSelect", "EditorIcons")
 	if $CheckBox.pressed:
 		_show_toolbar()
 	else:
@@ -14,13 +18,13 @@ func _ready() -> void:
 
 
 func _show_toolbar() -> void:
-	$ToolButtons.visible = true
-	$InfoLabel.visible = false
+	tool_buttons.visible = true
+	info_label.visible = false
 
 
 func _hide_toolbar() -> void:
-	$ToolButtons.visible = false
-	$InfoLabel.visible = true
+	tool_buttons.visible = false
+	info_label.visible = true
 
 
 func _on_CheckBox_toggled(button_pressed: bool) -> void:

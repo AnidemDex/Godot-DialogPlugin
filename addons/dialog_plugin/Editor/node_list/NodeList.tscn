@@ -7,7 +7,7 @@
 anchor_bottom = 1.0
 margin_right = 261.0
 margin_bottom = -411.0
-rect_min_size = Vector2( 261, 140 )
+rect_min_size = Vector2( 0, 121 )
 size_flags_horizontal = 3
 size_flags_vertical = 11
 script = ExtResource( 1 )
@@ -16,7 +16,17 @@ __meta__ = {
 }
 ItemScene = ExtResource( 2 )
 
-[node name="NodeContainer" type="VBoxContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
+margin_right = 261.0
+margin_bottom = 189.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="NodeContainer" type="VBoxContainer" parent="Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 254.0
+margin_bottom = 182.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
