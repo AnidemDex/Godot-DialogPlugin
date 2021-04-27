@@ -9,6 +9,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 TimelineEventsContainer_path = NodePath("VBoxContainer/HSplitContainer/ScrollContainer/TimelineEventsContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -125,7 +128,9 @@ text = "Timeline Preview"
 align = 1
 
 [node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
-margin_right = 157.0
-margin_bottom = 115.0
+margin_left = 528.672
+margin_top = 56.1515
+margin_right = 685.672
+margin_bottom = 171.152
 
 [connection signal="event_pressed" from="EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
