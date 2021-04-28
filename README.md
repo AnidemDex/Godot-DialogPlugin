@@ -7,4 +7,8 @@ A tool that will help you create dialogues and timelines with characters for you
 
 > This plugin is not yet ready for use. 
 
-You can try it anyway, but be sure to make a copy of your dialog files.
+You can try it anyway, but be sure to make a copy of your dialog files. The format will not change, but, just in case.
+
+# Documentation
+
+Please refer to DOCS.md (WIP)
