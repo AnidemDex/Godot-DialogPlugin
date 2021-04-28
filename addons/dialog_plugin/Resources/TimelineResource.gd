@@ -4,7 +4,7 @@ extends Resource
 
 signal timeline_ended
 
-var events = EventsArray.new()
+var events:EventsArray = EventsArray.new()
 
 var current_event = 0
 
@@ -13,12 +13,10 @@ func start(caller):
 	var _events:Array = events.get_resources()
 	if not _events[current_event].is_connected("event_started", caller, "_on_event_start"):
 		_err = _events[current_event].connect("event_started", caller, "_on_event_start")
-		if _err != OK:
-			print_debug(_err)
+		assert(_err == OK)
 	if not _events[current_event].is_connected("event_finished", caller, "_on_event_finished"):
 		_err = _events[current_event].connect("event_finished", caller, "_on_event_finished")
-		if _err != OK:
-			print_debug(_err)
+		assert(_err == OK)
 	
 	_events[current_event].excecute(caller)
 

@@ -101,7 +101,7 @@ margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
+[node name="TimelinePreview" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
 
 [node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
 margin_left = 416.0

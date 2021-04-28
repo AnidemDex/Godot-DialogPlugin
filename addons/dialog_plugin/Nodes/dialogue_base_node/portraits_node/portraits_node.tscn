@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/portraits_node/portraits_node.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/portraits_node/tween_animations.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/portraits_node.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/tween_animations.gd" type="Script" id=2]
 
 [node name="Portraits" type="Control"]
 anchor_right = 1.0

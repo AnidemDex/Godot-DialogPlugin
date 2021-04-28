@@ -9,7 +9,7 @@
 [ext_resource path="res://addons/dialog_plugin/assets/Images/Pieces/closed-icon.svg" type="Texture" id=7]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node_template.tres" type="StyleBox" id=8]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="EventNodeTemplate" type="PanelContainer"]
 anchor_right = 1.0
@@ -38,7 +38,7 @@ custom_constants/separation = 0
 [node name="Top" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1008.0
 margin_bottom = 30.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Top"]
 margin_right = 1008.0
@@ -80,14 +80,14 @@ margin_top = 30.0
 margin_right = 1008.0
 margin_bottom = 36.0
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="Bottom" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 36.0
 margin_right = 1008.0
 margin_bottom = 50.0
 size_flags_vertical = 8
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="Index" type="Label" parent="VBoxContainer/Bottom"]
 margin_left = 951.0

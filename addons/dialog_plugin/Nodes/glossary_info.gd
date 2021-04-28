@@ -1,6 +1,8 @@
 tool
 extends PanelContainer
 
+# TODO: Replace this script and scene.
+
 onready var nodes = {
 	'title': $VBoxContainer/Title,
 	'body': $VBoxContainer/Content,

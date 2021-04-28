@@ -14,13 +14,16 @@ func _ready() -> void:
 		return
 	_load_events()
 
+
 func _draw() -> void:
 	if not visible:
 		_unload_events()
 
+
 func _unload_events():
 	for child in timeline_events_container_node.get_children():
 		child.queue_free()
+
 
 func _load_events() -> void:
 	_unload_events()

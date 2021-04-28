@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/dialog_node/dialog_node.gd" type="Script" id=4]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/dialog_node/dialog_node.gd" type="Script" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Pulse"

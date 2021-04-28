@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/dialog_node/dialog_node.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node.gd" type="Script" id=2]
-[ext_resource path="res://addons/dialog_plugin/Nodes/portraits_node/portraits_node.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/dialog_node/dialog_node.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/default_dialogue_script.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/portraits_node.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/GlossaryFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://addons/dialog_plugin/Nodes/glossary_info.gd" type="Script" id=5]
 [ext_resource path="res://addons/dialog_plugin/assets/Example Assets/backgrounds/red_and_black/red_and_black_style.tres" type="StyleBox" id=6]
@@ -16,15 +16,13 @@ bg_color = Color( 0.196078, 0.196078, 0.196078, 0 )
 bg_color = Color( 1, 1, 1, 0 )
 expand_margin_left = 10.0
 
-[node name="DialogicBaseNode" type="Control"]
+[node name="DialogueBaseNode" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-DialogNode_path = NodePath("DialogNode")
-PortraitsNode_path = NodePath("Portraits")
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
@@ -131,7 +129,5 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="DefinitionInfo"]
-
-[connection signal="timeout" from="DefinitionInfo/Timer" to="." method="_on_Definition_Timer_timeout"]
 
 [editable path="DialogNode"]

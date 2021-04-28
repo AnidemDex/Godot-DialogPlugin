@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/panel_container.tres" type="StyleBox" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_timeline_dialog_preview/timeline_preview_dialogue_node.tscn" type="PackedScene" id=3]
 
-[node name="PreviewContainer" type="PanelContainer"]
+[node name="TimelinePreview" type="PanelContainer"]
 margin_left = 518.0
 margin_right = 1024.0
 margin_bottom = 550.0
@@ -31,3 +32,11 @@ margin_right = 488.0
 margin_bottom = 16.0
 text = "Timeline Preview"
 align = 1
+
+[node name="TimelinePreviewNode" parent="VBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 22.0
+margin_right = 490.0
+margin_bottom = 538.0
+size_flags_vertical = 7

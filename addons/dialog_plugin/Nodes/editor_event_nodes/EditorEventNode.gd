@@ -36,6 +36,7 @@ func _ready() -> void:
 	var _err = menu_button_popup_node.connect("id_pressed", self, "_on_MenuButtonPopup_id_pressed")
 	assert(_err == OK)
 
+
 func _set_idx(value):
 	if index_label_node:
 		idx = value
@@ -45,6 +46,7 @@ func _set_idx(value):
 func _update_node_values() -> void:
 	# If you can see this, you didn't override this method
 	assert(false)
+
 
 func _save_resource() -> void:
 	emit_signal("save_item_requested", base_resource)
