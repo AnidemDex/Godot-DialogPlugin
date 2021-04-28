@@ -45,12 +45,16 @@ func _update_text() -> void:
 
 func _update_name() -> void:
 	if _DialogNode:
+		if not character.name:
+			_DialogNode.NameNode.visible = false
+		else:
+			_DialogNode.NameNode.visible = true
 		_DialogNode.NameNode.text = character.display_name
 		_DialogNode.NameNode.set('custom_colors/font_color', character.color)
 
 
 func _on_TextTimer_timeout():
-	(_DialogNode.TextNode as RichTextLabel).visible_characters += 1
+	_DialogNode.TextNode.visible_characters += 1
 	if _DialogNode.TextNode.visible_characters < _DialogNode.TextNode.get_total_character_count():
 		_timer.start(_DialogNode.text_speed)
 	else:

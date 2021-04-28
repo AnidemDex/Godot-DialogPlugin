@@ -1,15 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialog_node/dialog_node.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/portraits_node/portraits_node.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/GlossaryFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://addons/dialog_plugin/Nodes/glossary_info.gd" type="Script" id=5]
-[ext_resource path="res://addons/dialog_plugin/assets/Example Assets/backgrounds/white_background.png" type="Texture" id=6]
+[ext_resource path="res://addons/dialog_plugin/assets/Example Assets/backgrounds/red_and_black/red_and_black_style.tres" type="StyleBox" id=6]
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/Poppins/godot_fonts/Poppins-Normal.tres" type="DynamicFont" id=7]
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/Poppins/godot_fonts/Poppins-BoldItalic.tres" type="DynamicFont" id=8]
-[ext_resource path="res://addons/dialog_plugin/assets/Fonts/Poppins/godot_fonts/Poppins-Bold.tres" type="DynamicFont" id=9]
-[ext_resource path="res://addons/dialog_plugin/assets/Fonts/Poppins/godot_fonts/Poppins-Italic.tres" type="DynamicFont" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.196078, 0.196078, 0.196078, 0 )
@@ -41,21 +39,24 @@ __meta__ = {
 [node name="Portraits" parent="." instance=ExtResource( 3 )]
 
 [node name="DialogNode" parent="." instance=ExtResource( 1 )]
+anchor_top = 0.725
+margin_top = 0.0
+margin_right = -0.447998
 
-[node name="TextBackground" parent="DialogNode/ReferenceRect" index="0"]
-texture = ExtResource( 6 )
-
-[node name="RichTextLabel" parent="DialogNode" index="2"]
-custom_fonts/bold_italics_font = ExtResource( 8 )
-custom_fonts/italics_font = ExtResource( 10 )
-custom_fonts/bold_font = ExtResource( 9 )
+[node name="TextNode" parent="DialogNode/ReferenceRect" index="0"]
+custom_styles/normal = ExtResource( 6 )
 custom_fonts/normal_font = ExtResource( 7 )
-custom_constants/shadow_offset_x = 1
-custom_constants/shadow_offset_y = 1
 
-[node name="NameLabel" parent="DialogNode" index="4"]
-custom_fonts/font = ExtResource( 9 )
+[node name="NameLabel" parent="DialogNode/ReferenceRect2" index="0"]
+margin_top = -20.0
+margin_bottom = 1.0
+custom_styles/normal = ExtResource( 6 )
+custom_fonts/font = ExtResource( 8 )
 align = 1
+valign = 0
+
+[node name="NextIndicator" parent="DialogNode/ReferenceRect3" index="0"]
+visible = false
 
 [node name="DefinitionInfo" type="PanelContainer" parent="."]
 visible = false
@@ -131,9 +132,6 @@ __meta__ = {
 
 [node name="Timer" type="Timer" parent="DefinitionInfo"]
 
-[node name="WaitSeconds" type="Timer" parent="."]
-
 [connection signal="timeout" from="DefinitionInfo/Timer" to="." method="_on_Definition_Timer_timeout"]
-[connection signal="timeout" from="WaitSeconds" to="." method="_on_WaitSeconds_timeout"]
 
 [editable path="DialogNode"]

@@ -32,6 +32,8 @@ func _ready() -> void:
 		visible = false
 		if DialogNode:
 			DialogNode.visible = false
+			if DialogNode.NameNode:
+				DialogNode.NameNode.visible = false
 		if PortraitManager:
 			PortraitManager.visible = false
 		load_dialog()

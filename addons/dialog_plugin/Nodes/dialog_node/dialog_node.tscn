@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialog_node/dialog_node.gd" type="Script" id=4]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "Pulse"
 loop = true
 tracks/0/type = "value"
@@ -18,10 +18,10 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "Static"
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:margin_bottom")
@@ -36,55 +36,34 @@ tracks/0/keys = {
 "values": [ 12.0, 55.0 ]
 }
 
-[node name="DialogNode" type="Control"]
-anchor_top = 0.707
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -0.199982
-margin_right = -8.0
-margin_bottom = -8.0
+[node name="DialogueNode" type="Control"]
+anchor_left = 0.023
+anchor_top = 0.745
+anchor_right = 0.977
+anchor_bottom = 0.96
+margin_left = 0.447998
+margin_top = -3.05176e-05
+margin_right = -0.448059
 script = ExtResource( 4 )
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
-TextNode_path = NodePath("RichTextLabel")
-NameNode_path = NodePath("NameLabel")
-NextIndicator_path = NodePath("NextIndicator")
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+TextNode_path = NodePath("ReferenceRect/TextNode")
+NameNode_path = NodePath("ReferenceRect2/NameLabel")
+NextIndicator_path = NodePath("ReferenceRect3/NextIndicator")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="TextBackground" type="NinePatchRect" parent="ReferenceRect"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="TextNode" type="RichTextLabel" parent="ReferenceRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 10.0
-margin_right = -20.0
-margin_bottom = -10.0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_as_outline = 1
 bbcode_enabled = true
 bbcode_text = "This is a sample text.
 [center] This'll not be displayed in game.
@@ -97,37 +76,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NextIndicator" type="TextureRect" parent="."]
-visible = false
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -36.4279
-margin_top = -35.9016
-margin_right = 14.5721
-margin_bottom = 20.7038
-rect_scale = Vector2( 0.4, 0.4 )
-stretch_mode = 4
+[node name="ReferenceRect2" type="ReferenceRect" parent="."]
+margin_top = -46.0
+margin_right = 221.0
+margin_bottom = -7.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="NextIndicator"]
-autoplay = "Pulse"
-anims/Pulse = SubResource( 2 )
-anims/Static = SubResource( 3 )
-"anims/Up and down" = SubResource( 4 )
-
-[node name="NameLabel" type="Label" parent="."]
-anchor_top = -0.048
-anchor_bottom = -0.048
-margin_top = -39.936
-margin_right = 207.0
-margin_bottom = 0.0639982
+[node name="NameLabel" type="Label" parent="ReferenceRect2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 0.619608 )
 text = "Example Name"
 valign = 1
 clip_text = true
@@ -135,33 +97,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="NameLabel"]
-visible = false
-show_behind_parent = true
+[node name="ReferenceRect3" type="ReferenceRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 15
-size_flags_vertical = 15
-color = Color( 0.156863, 0.156863, 0.156863, 1 )
+margin_left = -40.0
+margin_top = -40.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="NameLabel"]
-visible = false
-show_behind_parent = true
+[node name="NextIndicator" type="TextureRect" parent="ReferenceRect3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-expand = true
-stretch_mode = 1
+rect_scale = Vector2( 0.4, 0.4 )
+stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReferenceRect" type="ReferenceRect" parent="NameLabel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="TextTimer" type="Timer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ReferenceRect3/NextIndicator"]
+autoplay = "Pulse"
+anims/Pulse = SubResource( 1 )
+anims/Static = SubResource( 2 )
+"anims/Up and down" = SubResource( 3 )
