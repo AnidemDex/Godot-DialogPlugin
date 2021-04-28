@@ -11,4 +11,4 @@ You can try it anyway, but be sure to make a copy of your dialog files. The form
 
 # Documentation
 
-Please refer to DOCS.md (WIP)
+Please refer to [DOCS.md](/DOCS.md) (WIP)
