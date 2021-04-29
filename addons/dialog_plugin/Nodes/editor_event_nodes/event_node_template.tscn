@@ -95,3 +95,5 @@ margin_right = 1008.0
 margin_bottom = 14.0
 size_flags_horizontal = 8
 text = "No index"
+
+[connection signal="gui_input" from="VBoxContainer/Top" to="." method="_on_Top_gui_input"]

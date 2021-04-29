@@ -32,7 +32,8 @@ func _exit_tree() -> void:
 		_editor_view.queue_free()
 	if _parts_inspector:
 		remove_inspector_plugin(_parts_inspector)
-	pass
+	_editor_view = null
+	_parts_inspector = null
 
 
 func has_main_screen() -> bool:

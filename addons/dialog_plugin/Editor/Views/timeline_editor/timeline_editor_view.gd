@@ -4,14 +4,17 @@ extends Control
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 export(NodePath) var TimelineEventsContainer_path:NodePath
+export(NodePath) var TimelinePreview_path:NodePath
 
 var base_resource:DialogTimelineResource setget _set_base_resource
 
 onready var timeline_events_container_node = get_node_or_null(TimelineEventsContainer_path)
+onready var timeline_preview_node := get_node(TimelinePreview_path)
 
 func _ready() -> void:
 	if not base_resource:
 		return
+	timeline_preview_node.base_resource = base_resource
 	_load_events()
 
 
@@ -34,6 +37,8 @@ func _load_events() -> void:
 		var _err = event_node.connect("delelete_item_requested", self, "_on_EventNode_deletion_requested")
 		assert(_err == OK)
 		_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_requested")
+		assert(_err == OK)
+		_err = event_node.connect("item_selected", self, "_on_EventNode_event_selected")
 		timeline_events_container_node.add_child(event_node)
 		event_node.idx = _idx
 		_idx += 1
@@ -57,13 +62,14 @@ func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource)
 	assert(_err == OK)
 	_load_events()
 
+
 func _on_EventNode_deletion_requested(event) -> void:
 	var _events:Array = (base_resource as DialogTimelineResource).events.get_resources()
 	_events.erase(event)
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource, ResourceSaver.FLAG_CHANGE_PATH)
 	assert(_err == OK)
-	_unload_events()
 	_load_events()
+
 
 func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 	var _events:ResourceArray = base_resource.events
@@ -75,3 +81,6 @@ func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 		
 #	var _err = ResourceSaver.save(_resource.resource_path, _resource)
 #	assert(_err == OK)
+
+func _on_EventNode_event_selected(event:DialogEventResource) -> void:
+	timeline_preview_node.preview_event(event)

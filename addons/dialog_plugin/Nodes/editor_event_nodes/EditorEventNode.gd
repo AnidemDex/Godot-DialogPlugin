@@ -4,6 +4,7 @@ extends Control
 
 signal delelete_item_requested(item)
 signal save_item_requested(item)
+signal item_selected(item)
 
 var DialogUtil = load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 var base_resource:Resource = null
@@ -59,3 +60,9 @@ func _on_resource_change() -> void:
 func _on_MenuButtonPopup_id_pressed(id:int) -> void:
 	if id == 0:
 		emit_signal("delelete_item_requested", base_resource)
+
+
+func _on_Top_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed:
+			emit_signal("item_selected", base_resource)
