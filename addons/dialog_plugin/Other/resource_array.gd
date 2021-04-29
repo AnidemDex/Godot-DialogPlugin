@@ -19,7 +19,7 @@ extends Resource
 
 var _resources:Array = []
 
-# Para modificar el tipo de recurso a usar en el editor
+## Para modificar el tipo de recurso a usar en el editor
 var _hint_string = "Resource"
 
 var _current_iter = 0
@@ -27,12 +27,13 @@ var _current_iter = 0
 func _init() -> void:
 	property_list_changed_notify()
 
-
+## add a resource at the end of the array
 func add(resource:Resource) -> void:
 	_resources.append(resource)
 	property_list_changed_notify()
 	emit_signal("changed")
 
+## remove a resource from the array
 func remove(resource:Resource) -> void:
 	_resources.erase(resource)
 	property_list_changed_notify()

@@ -1,0 +1,64 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/hide_category_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Editor/node_list/folder_container/folder_container.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/Pieces/open-icon.svg" type="Texture" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/Pieces/closed-icon.svg" type="Texture" id=4]
+
+[node name="FolderContainer" type="PanelContainer"]
+margin_right = 76.0
+margin_bottom = 63.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+FolderName_path = NodePath("VBoxContainer2/HBoxContainer/FolderName")
+NodeContainer_path = NodePath("VBoxContainer2/NodeContainer")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 103.0
+margin_bottom = 56.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+margin_right = 96.0
+margin_bottom = 30.0
+script = ExtResource( 1 )
+HideButton_path = NodePath("CheckBox")
+PropertiesContainer_path = NodePath("../NodeContainer")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer"]
+margin_right = 24.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 24, 24 )
+expand = true
+stretch_mode = 5
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 28.0
+margin_right = 58.0
+margin_bottom = 30.0
+custom_icons/checked = ExtResource( 3 )
+custom_icons/unchecked = ExtResource( 4 )
+
+[node name="FolderName" type="Label" parent="VBoxContainer2/HBoxContainer"]
+margin_left = 62.0
+margin_top = 8.0
+margin_right = 96.0
+margin_bottom = 22.0
+text = "None"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer2"]
+margin_top = 34.0
+margin_right = 96.0
+margin_bottom = 38.0
+
+[node name="NodeContainer" type="VBoxContainer" parent="VBoxContainer2"]
+margin_top = 42.0
+margin_right = 96.0
+margin_bottom = 49.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

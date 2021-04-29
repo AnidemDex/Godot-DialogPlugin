@@ -4,19 +4,28 @@ extends PopupPanel
 signal item_selected(item)
 signal new_item_requested()
 
-onready var node_list := $VBoxContainer/NodeList
+var items:Array = [] setget _set_items
 
+onready var node_list := $VBoxContainer/NodeList
 
 func _draw() -> void:
 	if not visible:
 		clear()
 
 
-func add_item(item_name:String, item_resource:Resource=null) -> void:
-	node_list.add_item(item_name, item_resource)
+func add_item(item_resource:Resource=null) -> void:
+	node_list.add_item(item_resource)
+
 
 func clear() -> void:
 	node_list.clear()
+
+
+func _set_items(value:Array) -> void:
+	items = value
+	if node_list:
+		node_list.items = value
+		node_list.update_view()
 
 
 func _on_NewItemButton_pressed() -> void:

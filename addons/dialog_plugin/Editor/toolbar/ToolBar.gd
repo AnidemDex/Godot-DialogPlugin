@@ -38,8 +38,11 @@ func _on_TimelinesButton_pressed() -> void:
 	var _position = $ReferenceRect.rect_global_position+Vector2(get_local_mouse_position().x,0)
 	$TimelineListPopUp.rect_position = _position
 	# Añade los items aqui
-	for timeline in DialogDB.Timelines.get_timelines():
-		$TimelineListPopUp.add_item(timeline.resource_path.get_file(), timeline)
+	var _timelines:Array = DialogDB.Timelines.get_timelines()
+	var _items = []
+	for timeline in _timelines:
+		_items.append({timeline:null})
+	$TimelineListPopUp.items = _items
 	$TimelineListPopUp.popup()
 
 
@@ -67,8 +70,11 @@ func _on_CharactersButton_pressed() -> void:
 	var _position = $ReferenceRect.rect_global_position+Vector2(get_local_mouse_position().x,0)
 	$CharacterListPopUp.rect_position = _position
 	# Añade los items aqui
-	for character in DialogDB.Characters.get_characters():
-		$CharacterListPopUp.add_item(character.name, character)
+	var _characters:Array = DialogDB.Characters.get_characters()
+	var _items = []
+	for character in _characters:
+		_items.append({character:null})
+	$CharacterListPopUp.items = _items
 	
 	$CharacterListPopUp.popup()
 
