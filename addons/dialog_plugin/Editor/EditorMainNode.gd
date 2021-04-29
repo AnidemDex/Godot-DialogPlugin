@@ -17,8 +17,8 @@ func _draw() -> void:
 		instance_editor_scene()
 
 func scan_resources() -> void:
-	DialogDB.Timelines.get_database().scan_timelines_folder()
-	DialogDB.Characters.get_database().scan_characters_folder()
+	DialogDB.Timelines.get_database().scan_resources_folder()
+	DialogDB.Characters.get_database().scan_resources_folder()
 
 func instance_editor_scene() -> void:
 	if not _editor_node:

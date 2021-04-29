@@ -28,29 +28,18 @@ func remove(item:DialogCharacterResource) -> void:
 
 
 # Copied
-func scan_characters_folder() -> void:
+func scan_resources_folder() -> void:
 	push_warning("Scanning characters folder")
-	var _d:Directory = Directory.new()
-	if _d.open(DialogResources.CHARACTERS_DIR) == OK:
-		_d.list_dir_begin(false, true)
-		var _file_name = _d.get_next()
-		while _file_name != "":
-			if not _d.current_is_dir():
-				var _current_resources_files = []
-				for _r in resources:
-					if _r:
-						var _r_file = _r.resource_path.get_file()
-						_current_resources_files.append(_r_file)
-				
-				if not(_file_name in _current_resources_files):
-					push_warning("File {} is not in the character database. Adding...".format({"":_file_name}))
-					_current_resources_files.append(_file_name)
-					add(load(DialogResources.CHARACTERS_DIR+"/"+_file_name))
-						
-					
-			_file_name = _d.get_next()
-		_d.list_dir_end()
-		push_warning("Done")
+	var _files:PoolStringArray = _get_files_in_directory(DialogResources.CHARACTERS_DIR)
+	
+	for file in _files:
+		var _resource = load(file)
+		if not _resource in resources.get_resources():
+			push_warning("{} is not in the database, adding...".format({"":file.get_file()}))
+			add(_resource)
+		_resource = null
+	
+	push_warning("Done")
 
 func _to_string() -> String:
 	return "[CharacterDatabase]"
