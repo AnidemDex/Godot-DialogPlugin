@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/dialogue_base_node.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/ingame_dialogue_node/ingame_dialogue_node.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/ingame_dialogue_box/ingame_dialogue_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/Poppins/Poppins-BoldItalic.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]

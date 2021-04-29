@@ -9,9 +9,9 @@ export(float) var text_speed:float = 0.02
 
 var event_finished = false
 
-onready var TextNode:RichTextLabel = (get_node(TextNode_path) as RichTextLabel)
-onready var NameNode:Label = (get_node(NameNode_path) as Label)
-onready var NextIndicatorNode := get_node(NextIndicator_path)
+onready var TextNode:RichTextLabel = (get_node_or_null(TextNode_path) as RichTextLabel)
+onready var NameNode:Label = (get_node_or_null(NameNode_path) as Label)
+onready var NextIndicatorNode := get_node_or_null(NextIndicator_path)
 
 func _process(delta: float) -> void:
 	if not NextIndicatorNode:
