@@ -105,9 +105,9 @@ size_flags_vertical = 3
 [node name="TimelinePreview" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
 
 [node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
-margin_left = 416.0
-margin_top = 62.0
-margin_right = 526.0
-margin_bottom = 177.0
+margin_left = 532.736
+margin_top = 58.6326
+margin_right = 642.736
+margin_bottom = 173.633
 
 [connection signal="event_pressed" from="EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]

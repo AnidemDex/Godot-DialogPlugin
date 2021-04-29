@@ -1,3 +1,4 @@
+tool
 class_name DialogPortraitManager
 extends Control
 
@@ -83,8 +84,8 @@ func add_portrait(
 	emit_signal("portrait_added")
 
 
-func remove_portrait(portrait_node) -> void:
-	pass
+func remove_portrait(portrait_node:Node) -> void:
+	portrait_node.queue_free()
 
 
 func grab_portrait_focus(char_portrait_node:TextureRect, animation):
