@@ -6,4 +6,4 @@ There's a block diagram explaining (kind of) the behaviour of this plugin. You c
 
 There's also a [Trello board](https://trello.com/b/pVz78Ct0) with the planned features to be implemented.
 
-They're probably in spanish.
+They're in spanish.
