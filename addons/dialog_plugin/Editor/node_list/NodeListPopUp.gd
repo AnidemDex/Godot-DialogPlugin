@@ -3,6 +3,7 @@ extends PopupPanel
 
 signal item_selected(item)
 signal new_item_requested()
+signal deletion_requested(item)
 
 var items:Array = [] setget _set_items
 
@@ -40,3 +41,10 @@ func _on_NodeList_item_selected(item) -> void:
 	if not item:
 		return
 	emit_signal("item_selected", item)
+
+
+func _on_NodeList_deletion_requested(item) -> void:
+	if not item:
+		return
+	emit_signal("deletion_requested", item)
+	pass # Replace with function body.

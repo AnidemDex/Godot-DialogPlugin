@@ -66,6 +66,15 @@ func _on_TimelineListPopUp_item_selected(item) -> void:
 	$TimelineListPopUp.hide()
 
 
+func _on_TimelineListPopUp_deletion_requested(item) -> void:
+	if not item:
+		return
+	$TimelineListPopUp.hide()
+	# TODO: Mejorar este mensaje
+	print("[Dialogic] Timeline resource {} will be removed from our database. If you really want to delete this item, remove it from your files".format({"":item.resource_path.get_file()}))
+	DialogDB.Timelines.get_database().remove(item)
+
+
 func _on_CharactersButton_pressed() -> void:
 	var _position = $ReferenceRect.rect_global_position+Vector2(get_local_mouse_position().x,0)
 	$CharacterListPopUp.rect_position = _position
@@ -97,3 +106,10 @@ func _on_CharacterListPopUp_item_selected(item) -> void:
 		return
 	emit_signal("character_selected", item)
 	$CharacterListPopUp.hide()
+
+
+func _on_CharacterListPopUp_deletion_requested(item) -> void:
+	$CharacterListPopUp.hide()
+	# TODO: Mejorar este mensaje
+	print("[Dialogic] Character resource {} will be removed from our database. If you really want to delete this item, remove it from your files".format({"":item.resource_path.get_file()}))
+	DialogDB.Characters.get_database().remove(item)

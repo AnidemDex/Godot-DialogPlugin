@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/node_list/NodeList.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Editor/node_list/NodeListPopUp.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=3]
 [ext_resource path="res://addons/dialog_plugin/Editor/node_list/NewItemButton.gd" type="Script" id=4]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/popup_panel.tres" type="StyleBox" id=5]
-[ext_resource path="res://addons/dialog_plugin/Editor/node_list/folder_container/folder_container.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0
@@ -83,8 +82,8 @@ anchor_bottom = 0.0
 margin_top = 58.0
 margin_right = 193.0
 margin_bottom = 210.0
-FolderScene = ExtResource( 6 )
 
 [connection signal="popup_hide" from="." to="." method="_on_NodeListPopUp_popup_hide"]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/NewItemButton" to="." method="_on_NewItemButton_pressed"]
+[connection signal="deletion_requested" from="VBoxContainer/NodeList" to="." method="_on_NodeList_deletion_requested"]
 [connection signal="item_selected" from="VBoxContainer/NodeList" to="." method="_on_NodeList_item_selected"]
