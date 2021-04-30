@@ -19,6 +19,11 @@ var next_input = 'ui_accept'
 onready var DialogNode := get_node_or_null(DialogNode_path)
 onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 
+func _ready() -> void:
+	if not Engine.editor_hint:
+		# FIXME: You should handle this warning elsewhere
+		push_warning("[Dialogic] "+DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER)
+
 
 func _input(event: InputEvent) -> void:
 	if not next_input:
@@ -30,6 +35,8 @@ func _input(event: InputEvent) -> void:
 
 
 func start_timeline() -> void:
+	if Engine.editor_hint:
+		return
 	_verify_timeline()
 	timeline.start(self)
 
@@ -50,6 +57,8 @@ func _verify_timeline() -> void:
 
 
 func _set_nodes_default_values() -> void:
+	if Engine.editor_hint:
+		return
 	visible = false
 	if DialogNode:
 		DialogNode.visible = false
@@ -58,6 +67,12 @@ func _set_nodes_default_values() -> void:
 	if PortraitManager:
 		PortraitManager.visible = false
 
+
+func _get_configuration_warning() -> String:
+	# FIXME: WHAT KIND OF ABOMINATION IS THIS IF STATEMENT?!
+	if (get_parent() is CanvasLayer) or (get_parent() is Control):
+		return ""
+	return DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER
 
 func _on_event_start(_event):
 	event_finished = false

@@ -1,3 +1,4 @@
+tool
 extends DialogBaseNode
 
 # This does nothing special. It's just a placeholder.
