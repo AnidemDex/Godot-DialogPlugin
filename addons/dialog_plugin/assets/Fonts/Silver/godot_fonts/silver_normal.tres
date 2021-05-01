@@ -3,4 +3,6 @@
 [ext_resource path="res://addons/dialog_plugin/assets/Fonts/Silver/Silver.ttf" type="DynamicFontData" id=1]
 
 [resource]
+size = 19
+extra_spacing_space = 1
 font_data = ExtResource( 1 )
