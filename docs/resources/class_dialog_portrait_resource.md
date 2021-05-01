@@ -1,8 +1,7 @@
-# <ClassName>
-#### **Inherits:** [<what>]()
-#### **Inherited by:** [<who>]()
+# DialogPortraitResource
+#### **Inherits:** [Resource]()
 
-<resume>
+Character portrait resource.
 
 ## Description
 ## Properties
