@@ -9,6 +9,8 @@ An user-friendly dialog system for Godot Engine, with timelines, characters, tex
 
 > Be creative 💬
 
+> **Note:** _If you find a bug, or want a feature to be included, feel free to [open a new issue](https://github.com/AnidemDex/Godot-DialogPlugin/issues/new). You can also send me a message on [twitter](https://twitter.com/anidemdex) or Discord (AnidemDex#6740)._
+
 ## ⚠Warning⚠
 
 > This plugin is **not** ready for use, yet. 
