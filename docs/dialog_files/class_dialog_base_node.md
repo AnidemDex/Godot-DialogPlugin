@@ -18,8 +18,8 @@ DialogTimelineResource|[timeline](#-dialogtimelineresource-timeline)
 float|[text_speed](#-float-text_speed)
 bool|[event_finished](#-bool-event_finished)
 String|[next_input](#-string-next_input)
-Node|[DialogNode](#-node-dialognode)
-Node|[PortraitManager](#-node-portraitmanager)
+DialogDialogueNode|[DialogNode](#-dialogdialoguenode-dialognode)
+DialogPortraitManager|[PortraitManager](#-dialogportraitmanager-portraitmanager)
 
 ## Methods
 Type|Name
@@ -39,8 +39,8 @@ DialogTimelineResource|[load_timeline](#-dialogtimelineresource-load_timeline--)
 ### ◽ float text_speed
 ### ◽ bool event_finished
 ### ◽ String next_input
-### ◽ Node DialogNode
-### ◽ Node PortraitManager
+### ◽ DialogDialogueNode DialogNode
+### ◽ DialogPortraitManager PortraitManager
 ## Method Descriptions
 ### ◽ void **start_timeline** ( )
 ### ◽ DialogTimelineResource **load_timeline** ( )
