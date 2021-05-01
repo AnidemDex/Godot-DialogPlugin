@@ -3,7 +3,10 @@
 [![GitHub issues](https://img.shields.io/github/issues/AnidemDex/Godot-DialogPlugin?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/issues)
 [![Godot Engine](https://img.shields.io/badge/Version-0.1.0-red?style=flat-square)]()
 
-![Banner](.images/banner_animation.gif)
+<p align="center">
+  <a href="https://twitter.com/anidemdex" target="_blank"><img src="https://raw.githubusercontent.com/AnidemDex/Godot-DialogPlugin/main/.images/banner_animation.gif"></a><br/>
+  Twitter: <a href="https://twitter.com/anidemdex" target="_blank">@AnidemDex</a>
+</p>
 
 An user-friendly dialog system for Godot Engine, with timelines, characters, text boxes, dialog bubbles and many more (planned) features for your games. 
 
