@@ -6,12 +6,6 @@ Static class to deal with Dialog plugin.
 
 You can call any of these methods from any script.
 
-## Properties
-Type|Name
------|-----
-String|DefaultDialogTextBox
-String|DefaultDialogBubble
-
 ## Methods
 Type|Name
 -----|-----
@@ -19,7 +13,11 @@ void|[start](#-void-start-timeline-string-dialog_scene_path-bool-use_bubblefalse
 DialogBaseNode|[get_default_dialog_textbox](#-dialogbasenode-get_default_dialog_textbox--) ()
 DialogBaseNode|[get_default_dialog_bubble](#-dialogbasenode-get_default_dialog_bubble--) ()
 
-## Methods description
+## Constants
+- DefaultDialogTextBox:String --- Default dialog text box scene path
+- DefaultDialogBubble:String --- Default dialog bubble scene path
+
+## Method Descriptions
 
 ### ◽ void **start(** timeline, String dialog_scene_path="", bool use_bubble=false **)**
 
