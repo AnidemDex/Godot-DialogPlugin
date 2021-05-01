@@ -6,7 +6,7 @@
 Base class of any `Dialog` node.
 
 ## Description
-`Dialog` nodes.
+`Dialog` nodes inheriths this class. This class works as a "Dialog Manager".
 
 ## Properties
 Type|Name
