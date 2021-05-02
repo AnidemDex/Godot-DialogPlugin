@@ -23,7 +23,7 @@
 #/tests
 default_env.tres
 Main.tscn
-project.godot
+#project.godot
 
 *.txt
 
