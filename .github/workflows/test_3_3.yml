@@ -8,9 +8,9 @@ on:
 
 jobs:
   Tests:
-    name: Run All Tests on 3.3
+    name: Run All Tests on 3.2.3
     runs-on:  ubuntu-latest
-    container: barichello/godot-ci:3.3
+    container: barichello/godot-ci:3.2.3
     steps:
       - uses: actions/checkout@v2
       - name: Run
