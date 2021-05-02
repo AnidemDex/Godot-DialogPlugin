@@ -1,0 +1,24 @@
+name: "Godot 3.3 test"
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Tests:
+    name: Run All Tests on 3.2.3
+    runs-on:  ubuntu-latest
+    container: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout test branch
+        uses: actions/checkout@v2
+      - name: Run all test
+        run: godot addons/WAT/cli.tscn -run_all
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test Results
+          path: tests/results.xml

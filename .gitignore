@@ -19,11 +19,11 @@
 # Extra files & folders
 ####################
 /.vscode
-/icon.png
-/tests
-default_env.tres
+#/icon.png
+#/tests
+#default_env.tres
 Main.tscn
-project.godot
+#project.godot
 
 *.txt
 

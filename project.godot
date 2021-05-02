@@ -1,0 +1,182 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "Dialog",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Core/DialogClass.gd"
+}, {
+"base": "CanvasItem",
+"class": "DialogBaseNode",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialogue_base_node.gd"
+}, {
+"base": "DialogEventResource",
+"class": "DialogCharacterJoinEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd"
+}, {
+"base": "DialogEventResource",
+"class": "DialogCharacterLeaveEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd"
+}, {
+"base": "Resource",
+"class": "DialogCharacterResource",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/CharacterResource.gd"
+}, {
+"base": "Resource",
+"class": "DialogDatabaseResource",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Database/DatabaseResource.gd"
+}, {
+"base": "Control",
+"class": "DialogDialogueNode",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialog_node/dialog_node.gd"
+}, {
+"base": "Control",
+"class": "DialogEditorEventNode",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/editor_event_nodes/EditorEventNode.gd"
+}, {
+"base": "Resource",
+"class": "DialogEventResource",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/EventResource.gd"
+}, {
+"base": "Control",
+"class": "DialogPortraitManager",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/portraits_node.gd"
+}, {
+"base": "Resource",
+"class": "DialogPortraitResource",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/PortraitResource.gd"
+}, {
+"base": "DialogEventResource",
+"class": "DialogTextEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
+}, {
+"base": "Resource",
+"class": "DialogTimelineResource",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/TimelineResource.gd"
+}, {
+"base": "DialogEventResource",
+"class": "DialogWaitTimeEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/WaitTimeEvent/WaitTimeEvent.gd"
+}, {
+"base": "Resource",
+"class": "EventsArray",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Other/events_array.gd"
+}, {
+"base": "Resource",
+"class": "PortraitArray",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Other/portraits_array.gd"
+}, {
+"base": "Resource",
+"class": "ResourceArray",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Other/resource_array.gd"
+}, {
+"base": "Reference",
+"class": "WAT",
+"language": "GDScript",
+"path": "res://addons/WAT/namespace.gd"
+}, {
+"base": "Node",
+"class": "WATTest",
+"language": "GDScript",
+"path": "res://addons/WAT/core/test/test.gd"
+} ]
+_global_script_class_icons={
+"Dialog": "",
+"DialogBaseNode": "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png",
+"DialogCharacterJoinEvent": "",
+"DialogCharacterLeaveEvent": "",
+"DialogCharacterResource": "",
+"DialogDatabaseResource": "",
+"DialogDialogueNode": "",
+"DialogEditorEventNode": "",
+"DialogEventResource": "",
+"DialogPortraitManager": "",
+"DialogPortraitResource": "",
+"DialogTextEvent": "",
+"DialogTimelineResource": "",
+"DialogWaitTimeEvent": "",
+"EventsArray": "",
+"PortraitArray": "",
+"ResourceArray": "",
+"WAT": "",
+"WATTest": ""
+}
+
+[WAT]
+
+Test_Directory="res://tests"
+Results_Directory="res://tests"
+Test_Metadata_Directory="res://tests"
+Tags=PoolStringArray(  )
+Window_Size=Vector2( 1280, 720 )
+Minimize_Window_When_Running_Tests=false
+Port=6008
+Default_Launch=0
+Run_All_Tests=Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"unicode":0,"echo":false,"script":null)
+
+Auto_Refresh_Tests=false
+Display=8
+
+[application]
+
+config/name="dialog_plugin"
+run/main_scene="res://addons/dialog_plugin/Editor/EditorMainNode.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/WAT/plugin.cfg", "res://addons/dialog_plugin/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
+
+[importer_defaults]
+
+texture={
+"compress/bptc_ldr": 0,
+"compress/hdr_mode": 0,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d": false,
+"flags/anisotropic": false,
+"flags/filter": false,
+"flags/mipmaps": false,
+"flags/repeat": 0,
+"flags/srgb": 2,
+"process/HDR_as_SRGB": false,
+"process/fix_alpha_border": true,
+"process/invert_color": false,
+"process/premult_alpha": false,
+"size_limit": 0,
+"stream": false,
+"svg/scale": 1.0
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"
