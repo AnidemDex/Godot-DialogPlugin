@@ -2,15 +2,17 @@ name: "Godot 3.3 test"
 
 on:
   push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
 
 jobs:
   Tests:
-    name: Run All Tests on 3.2.3
+    name: Run All Tests on 3.3
     runs-on:  ubuntu-latest
-    container: barichello/godot-ci:3.2.3
+    container: barichello/godot-ci:3.3
     steps:
       - name: Checkout test branch
         uses: actions/checkout@v2
