@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run
-        run: godot addons/WAT/cli.tscn -run_all
+        run: godot -v addons/WAT/cli.tscn -run_all
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v2
