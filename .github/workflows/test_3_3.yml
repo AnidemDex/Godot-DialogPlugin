@@ -1,4 +1,4 @@
-name:"Godot 3.3 test"
+name: "Godot 3.3 test"
 
 on:
   push:
