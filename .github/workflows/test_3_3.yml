@@ -2,8 +2,6 @@ name:"Godot 3.3 test"
 
 on:
   push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
