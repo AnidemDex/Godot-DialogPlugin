@@ -12,11 +12,10 @@ jobs:
     runs-on:  ubuntu-latest
     container: barichello/godot-ci:3.2.3
     steps:
-      - uses: actions/checkout@v2
-      - name: check folder
-        run: ls -R
-      - name: Run
-        run: godot -v addons/WAT/cli.tscn -run_all
+      - name: Checkout test branch
+        uses: actions/checkout@v2
+      - name: Run all test
+        run: godot addons/WAT/cli.tscn -run_all
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v2
