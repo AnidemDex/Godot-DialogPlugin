@@ -1,6 +1,20 @@
 {
-	"res://tests/resource_array.test.gd": {
-		"path": "res://tests/resource_array.test.gd",
+	"res://tests/core_files/resource_array.test.gd": {
+		"path": "res://tests/core_files/resource_array.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/plugin_files/characters_database_test.gd": {
+		"path": "res://tests/plugin_files/characters_database_test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/plugin_files/timelines_database_test.gd": {
+		"path": "res://tests/plugin_files/timelines_database_test.gd",
 		"tags": [
 
 		],
