@@ -1,5 +1,5 @@
 tool
-class_name DialogBaseNode
+class_name DialogBaseNode, "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png"
 extends CanvasItem
 
 
