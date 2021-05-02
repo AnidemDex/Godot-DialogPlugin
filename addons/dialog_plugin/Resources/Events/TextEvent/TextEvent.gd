@@ -17,9 +17,10 @@ func excecute(caller:DialogBaseNode) -> void:
 	_caller = caller
 	_DialogNode = caller.DialogNode
 	
-	_timer = EventTimer.new()
-	_timer.caller = _caller
-	_caller.add_child(_timer)
+	if not _timer or not(is_instance_valid(_timer)):
+		_timer = EventTimer.new()
+		_timer.caller = _caller
+		_caller.add_child(_timer)
 	if not _timer.is_connected("timeout", self, "_on_TextTimer_timeout"):
 		var _err = _timer.connect("timeout", self, "_on_TextTimer_timeout")
 		assert(_err == OK)
@@ -60,8 +61,9 @@ func _on_TextTimer_timeout():
 	if _DialogNode.TextNode.visible_characters < _DialogNode.TextNode.get_total_character_count():
 		_timer.start(_DialogNode.text_speed)
 	else:
-		_timer.stop()
-		_timer.queue_free()
+		if is_instance_valid(_timer):
+			_timer.stop()
+			_timer.queue_free()
 		finish()
 
 

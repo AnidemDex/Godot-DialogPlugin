@@ -64,5 +64,5 @@ func _on_MenuButtonPopup_id_pressed(id:int) -> void:
 
 func _on_Top_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if event.pressed:
+		if event.pressed and event.button_index == BUTTON_LEFT:
 			emit_signal("item_selected", base_resource)

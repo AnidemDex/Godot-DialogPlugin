@@ -1,40 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/dialog_node/dialog_node.gd" type="Script" id=4]
-
-[sub_resource type="Animation" id=1]
-resource_name = "Pulse"
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "Static"
-
-[sub_resource type="Animation" id=3]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:margin_bottom")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 12.0, 55.0 ]
-}
 
 [node name="DialogueNode" type="Control"]
 anchor_left = 0.023
@@ -117,9 +83,3 @@ stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ReferenceRect3/NextIndicator"]
-autoplay = "Pulse"
-anims/Pulse = SubResource( 1 )
-anims/Static = SubResource( 2 )
-"anims/Up and down" = SubResource( 3 )

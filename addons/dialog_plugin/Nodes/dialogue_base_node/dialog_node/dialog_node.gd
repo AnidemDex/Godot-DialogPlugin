@@ -16,4 +16,6 @@ onready var NextIndicatorNode := get_node_or_null(NextIndicator_path)
 func _process(delta: float) -> void:
 	if not NextIndicatorNode:
 		return
+	if Engine.editor_hint:
+		return
 	NextIndicatorNode.visible = event_finished
