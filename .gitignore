@@ -20,7 +20,7 @@
 ####################
 /.vscode
 /icon.png
-/tests
+#/tests
 default_env.tres
 Main.tscn
 project.godot

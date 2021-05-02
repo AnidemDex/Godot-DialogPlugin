@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<testsuites failures="0" name="TestXML" tests="1" time="0">
+	<testsuite name="Resource Array" failures="0"  tests="2" time="0">
+		<testcase name=" when is inside on another resource" time="0"></testcase>
+		<testcase name=" when you add resource to resource array" time="0"></testcase>
+	</testsuite>
+
+</testsuites>
