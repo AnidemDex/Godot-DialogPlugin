@@ -1,9 +1,43 @@
 {
-	"res://tests/resource_array.test.gd": {
-		"path": "res://tests/resource_array.test.gd",
+	"res://tests/core/resource_array.test.gd": {
+		"path": "res://tests/core/resource_array.test.gd",
 		"tags": [
 
 		],
 		"passing": true
+	},
+	"res://tests/plugin/database/characters_database.test.gd": {
+		"path": "res://tests/plugin/database/characters_database.test.gd",
+		"tags": [
+
+		],
+		"passing": false
+	},
+	"res://tests/plugin/database/timelines_database.test.gd": {
+		"path": "res://tests/plugin/database/timelines_database.test.gd",
+		"tags": [
+
+		],
+		"passing": false
+	},
+	"res://tests/plugin/resources/character_resource.test.gd": {
+		"path": "res://tests/plugin/resources/character_resource.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/plugin/resources/timeline_resource.test.gd": {
+		"path": "res://tests/plugin/resources/timeline_resource.test.gd",
+		"tags": [
+
+		],
+		"passing": true
+	},
+	"res://tests/plugin/resources/portrait_resource.test.gd": {
+		"path": "res://tests/plugin/resources/portrait_resource.test.gd",
+		"tags": [
+
+		]
 	}
 }
