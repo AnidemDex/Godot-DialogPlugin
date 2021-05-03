@@ -39,6 +39,7 @@ portraits = SubResource( 2 )
 
 [sub_resource type="Resource" id=4]
 resource_local_to_scene = true
+resource_name = "TextEvent"
 script = ExtResource( 5 )
 text = ""
 character = SubResource( 3 )

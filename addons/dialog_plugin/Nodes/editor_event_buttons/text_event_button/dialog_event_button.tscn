@@ -6,11 +6,11 @@
 [ext_resource path="res://addons/dialog_plugin/Resources/CharacterResource.gd" type="Script" id=4]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/Event Icons/Main Icons/text-event.svg" type="Texture" id=5]
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 _resources = [  ]
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=2]
 script = ExtResource( 4 )
 name = ""
 display_name = ""
@@ -18,14 +18,15 @@ display_name_bool = false
 color = Color( 1, 1, 1, 1 )
 default_speaker = false
 description = ""
-portraits = SubResource( 2 )
+portraits = SubResource( 1 )
 
-[sub_resource type="Resource" id=4]
+[sub_resource type="Resource" id=3]
+resource_name = "TextEvent"
 script = ExtResource( 3 )
 text = ""
-character = SubResource( 3 )
+character = SubResource( 2 )
 
 [node name="TextEventButton" instance=ExtResource( 1 )]
 text = "Dialog"
 icon = ExtResource( 5 )
-event_resource = SubResource( 4 )
+event_resource = SubResource( 3 )

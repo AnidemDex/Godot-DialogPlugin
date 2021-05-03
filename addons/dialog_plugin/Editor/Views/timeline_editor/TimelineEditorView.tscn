@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/timeline_editor_view.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=2]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/preview_timeline_container/preview_container.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEventsContainer.gd" type="Script" id=5]
 
 [node name="TimelineEditorView" type="Control"]
 anchor_right = 1.0
@@ -101,6 +102,7 @@ margin_right = 506.0
 margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 5 )
 
 [node name="TimelinePreview" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
 
@@ -110,4 +112,5 @@ margin_top = 58.6326
 margin_right = 642.736
 margin_bottom = 173.633
 
+[connection signal="item_added" from="VBoxContainer/HSplitContainer/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
 [connection signal="event_pressed" from="EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]

@@ -11,6 +11,10 @@ export(Resource) var character = DialogCharacterResource.new()
 var _timer = null
 var _DialogNode:DialogDialogueNode = null
 
+func _init():
+	resource_name = "TextEvent"
+
+
 func excecute(caller:DialogBaseNode) -> void:
 	.excecute(caller)
 	

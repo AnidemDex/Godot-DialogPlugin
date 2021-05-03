@@ -6,6 +6,9 @@ signal delelete_item_requested(item)
 signal save_item_requested(item)
 signal item_selected(item)
 
+const DEFAULT_COLOR = Color("#202531")
+const SELECTED_COLOR = Color("#353f57")
+
 var DialogUtil = load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 var base_resource:Resource = null
 var idx:int = 0 setget _set_idx
@@ -61,8 +64,27 @@ func _on_MenuButtonPopup_id_pressed(id:int) -> void:
 	if id == 0:
 		emit_signal("delelete_item_requested", base_resource)
 
+var drag_position
+
+
+func _notification(what):
+	match what:
+		NOTIFICATION_FOCUS_ENTER:
+			var style:StyleBoxFlat = get_stylebox("panel")
+			style.bg_color = SELECTED_COLOR
+		NOTIFICATION_FOCUS_EXIT:
+			var style:StyleBoxFlat = get_stylebox("panel")
+			style.bg_color = DEFAULT_COLOR
+			_save_resource()
+
 
 func _on_Top_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == BUTTON_LEFT:
 			emit_signal("item_selected", base_resource)
+			drag_position = get_global_mouse_position() - rect_global_position
+		else:
+			drag_position = null
+	
+	if event is InputEventMouseMotion and drag_position:
+		rect_global_position = get_global_mouse_position() - drag_position
