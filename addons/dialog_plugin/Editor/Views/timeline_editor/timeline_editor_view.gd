@@ -119,11 +119,12 @@ func _on_EventNode_event_selected(event:DialogEventResource) -> void:
 func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int, update_view=false) -> void:
 	var placeholder:Control = PanelContainer.new()
 	var event_node:Control = event_nodes[idx]
-	event_node.get_parent().move_child(event_node, idx+new_idx)
+	var _n_idx = clamp(idx+new_idx, 0, event_nodes.keys().size()-1)
+	event_node.get_parent().move_child(event_node, _n_idx)
 	
 	if update_view:
 		if new_idx != 0:
 			base_resource.events.get_resources().erase(event)
-			base_resource.events.get_resources().insert(idx+new_idx, event)
-			selected_event_idx = idx+new_idx
+			base_resource.events.get_resources().insert(_n_idx, event)
+			selected_event_idx = _n_idx
 		_load_events()
