@@ -53,6 +53,9 @@ func _load_events() -> void:
 		_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_requested")
 		assert(_err == OK)
 		_err = event_node.connect("item_selected", self, "_on_EventNode_event_selected")
+		assert(_err == OK)
+		_err = event_node.connect("item_dragged", self, "_on_EventNode_event_dragged")
+		assert(_err == OK)
 		timeline_events_container_node.add_child(event_node)
 		event_nodes[_idx] = event_node
 		event_node.idx = _idx
@@ -107,6 +110,20 @@ func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 #	var _err = ResourceSaver.save(_resource.resource_path, _resource)
 #	assert(_err == OK)
 
+
 func _on_EventNode_event_selected(event:DialogEventResource) -> void:
 	selected_event_idx = (base_resource.events.get_resources() as Array).find(event)
 	timeline_preview_node.preview_event(event)
+
+
+func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int, update_view=false) -> void:
+	var placeholder:Control = PanelContainer.new()
+	var event_node:Control = event_nodes[idx]
+	event_node.get_parent().move_child(event_node, idx+new_idx)
+	
+	if update_view:
+		if new_idx != 0:
+			base_resource.events.get_resources().erase(event)
+			base_resource.events.get_resources().insert(idx+new_idx, event)
+			selected_event_idx = idx+new_idx
+		_load_events()
