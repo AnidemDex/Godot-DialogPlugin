@@ -2,6 +2,7 @@ tool
 class_name DialogBaseNode, "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png"
 extends CanvasItem
 
+const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
 var DialogUtil = load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
@@ -22,7 +23,7 @@ onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 func _ready() -> void:
 	if not Engine.editor_hint:
 		# FIXME: You should handle this warning elsewhere
-		push_warning("[Dialogic] "+DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER)
+		push_warning("[Dialogic] "+tr(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER))
 
 
 func _input(event: InputEvent) -> void:
@@ -72,7 +73,7 @@ func _get_configuration_warning() -> String:
 	# FIXME: WHAT KIND OF ABOMINATION IS THIS IF STATEMENT?!
 	if (get_parent() is CanvasLayer) or (get_parent() is Control):
 		return ""
-	return DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER
+	return TranslationService.translate(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER, TranslationService.get_editor_locale())
 
 func _on_event_start(_event):
 	event_finished = false

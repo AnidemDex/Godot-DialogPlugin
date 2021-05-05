@@ -3,6 +3,8 @@ tool
 ## Modified to work with [Dialog Editor](https://github.com/AnidemDex/Godot-DialogPlugin)
 ## Made by: AnidemDex
 
+## Not exposed since i don't want to populate the user editor with this class
+
 
 ## Translates a message using translation catalogs configured in the Project Settings.
 static func translate(message:String, from:String="")->String:
@@ -15,6 +17,16 @@ static func translate(message:String, from:String="")->String:
 		translation = TranslationServer.translate(message)
 	
 	return translation
+
+
+static func translate_node_recursively(base_node:Control) -> void:
+	for node in base_node.get_children():
+		if node.get_child_count() > 0:
+			_translate_node(node)
+			translate_node_recursively(node)
+		else:
+			_translate_node(node)
+	_translate_node(base_node)
 
 
 ## Returns a dictionary using translation catalogs configured in the Project Settings.
@@ -32,30 +44,24 @@ static func get_translations() -> Dictionary:
 			translations[t.locale] = [t]
 	return translations
 
-
-static func translate_node_recursively(base_node:Control) -> void:
-	for node in base_node.get_children():
-		if node.get_child_count() > 0:
-			_translate_node(node)
-			translate_node_recursively(node)
-		else:
-			_translate_node(node)
-	_translate_node(base_node)
+# This is not the best way to do it, but since this is supposed to be called
+# only inside the editor AND by a plugin, it's ok, i guess.
+static func get_editor_locale() -> String:
+	var _locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+	return _locale
 
 
 static func _translate_node(node:Node) -> void:
 	var HINT_TOOLTIP_KEY = "HINT_TOOLTIP_KEY"
 	var TEXT_KEY = "TEXT_KEY"
 	
-	# This is not the best way to do it, but since this is supposed to be called
-	# only inside the editor AND by a plugin, it's ok, i guess.
-	var editor_locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+	var editor_locale = get_editor_locale()
 	
 	if node.has_meta(HINT_TOOLTIP_KEY):
-		(node as Control).hint_tooltip = translate(node.get_meta(HINT_TOOLTIP_KEY))
+		(node as Control).hint_tooltip = translate(node.get_meta(HINT_TOOLTIP_KEY), editor_locale)
 	
 	if node.has_meta(TEXT_KEY):
-		node.text = translate(node.get_meta(TEXT_KEY))
+		node.text = translate(node.get_meta(TEXT_KEY), editor_locale)
 
 
 static func _get_translation(_msg:String, _override_locale:String="")->String:
@@ -73,16 +79,20 @@ static func _get_translation(_msg:String, _override_locale:String="")->String:
 		_locale, 
 		_translations.get(_default_fallback, [PHashTranslation.new()])
 		)
+	
 	for case in cases:
 		_returned_translation = (case as PHashTranslation).get_message(_msg)
 		if _returned_translation:
 			break
 		else:
-			# If there's no translation, returns the original string
-			_returned_translation = _msg
+			# Since there's no translation, use the fallback instead
+			_returned_translation = _get_translation(_msg, _default_fallback)
+			if not _returned_translation:
+				# If there's no translation, returns the original string
+				_returned_translation = _msg
+	
 	return _returned_translation
 
-	
 # Unused, since i can't override Object methods
 #static func tr(message:String)->String:
 #    return translate(message)
