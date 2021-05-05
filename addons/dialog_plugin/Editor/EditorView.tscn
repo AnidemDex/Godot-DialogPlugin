@@ -20,6 +20,9 @@ margin_left = 5.0
 margin_top = 22.0
 margin_right = -4.0
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ToolBar" parent="." instance=ExtResource( 1 )]
 margin_left = 352.0
