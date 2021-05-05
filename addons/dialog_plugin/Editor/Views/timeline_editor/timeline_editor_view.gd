@@ -134,4 +134,6 @@ func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int
 
 func _on_LocaleList_item_selected(index: int) -> void:
 	var _locale = locale_list_node.get_item_metadata(index)
-	print(_locale)
+	if _locale == TranslationServer.get_locale():
+		_locale = ""
+	ProjectSettings.set_setting("locale/test", _locale)

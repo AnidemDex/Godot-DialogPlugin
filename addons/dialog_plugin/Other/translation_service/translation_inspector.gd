@@ -29,5 +29,5 @@ func parse_end() -> void:
 func _notification(what:int) -> void:
 	if what == NOTIFICATION_PREDELETE:
 		if modified_object:
-			_modified_object = null
+			modified_object = null
 

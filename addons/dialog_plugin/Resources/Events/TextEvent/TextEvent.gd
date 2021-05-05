@@ -2,11 +2,13 @@ tool
 class_name DialogTextEvent
 extends DialogEventResource
 
+const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
 var EventTimer = load("res://addons/dialog_plugin/Resources/Events/TextEvent/TextEventTimer.gd")
 
 export(String, MULTILINE) var text:String = ""
 export(Resource) var character = DialogCharacterResource.new()
+export(String) var translation_key = SAME_AS_TEXT
 
 var _timer = null
 var _DialogNode:DialogDialogueNode = null
@@ -44,7 +46,8 @@ func excecute(caller:DialogBaseNode) -> void:
 
 func _update_text() -> void:
 	if _DialogNode:
-		_DialogNode.TextNode.bbcode_text = TranslationServer.translate(text)
+		var _text = text if translation_key == SAME_AS_TEXT else TranslationServer.translate(translation_key)
+		_DialogNode.TextNode.bbcode_text = _text
 		_DialogNode.TextNode.visible_characters = 0
 		_timer.start(_DialogNode.text_speed)
 
