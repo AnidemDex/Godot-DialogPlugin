@@ -64,7 +64,7 @@ static func _translate_node(node:Node) -> void:
 		node.text = translate(node.get_meta(TEXT_KEY), editor_locale)
 
 
-static func _get_translation(_msg:String, _override_locale:String="")->String:
+static func _get_translation(_msg:String, _override_locale:String="", _used_already=false)->String:
 	var _returned_translation:String = _msg
 	var _translations:Dictionary = get_translations()
 	var _default_fallback:String = ProjectSettings.get_setting("locale/fallback")
@@ -84,12 +84,14 @@ static func _get_translation(_msg:String, _override_locale:String="")->String:
 		_returned_translation = (case as PHashTranslation).get_message(_msg)
 		if _returned_translation:
 			break
-		else:
-			# Since there's no translation, use the fallback instead
-			_returned_translation = _get_translation(_msg, _default_fallback)
-			if not _returned_translation:
-				# If there's no translation, returns the original string
-				_returned_translation = _msg
+	
+	if _returned_translation == _msg and not _used_already:
+		# Since there's no translation, use the fallback instead
+		_returned_translation = _get_translation(_msg, _default_fallback, true)
+	
+	if not _returned_translation:
+		# Finally, since there's no really a translation, return the original string
+		_returned_translation = _msg
 	
 	return _returned_translation
 
