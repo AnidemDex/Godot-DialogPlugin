@@ -44,11 +44,50 @@ static func get_translations() -> Dictionary:
 			translations[t.locale] = [t]
 	return translations
 
+# https://docs.godotengine.org/en/stable/tutorials/i18n/locales.html
+## Maybe this is intended, but for some reason you can't get the supported
+## locales by the engine, just locales supported in game
+static func get_locales() -> Array:
+	var locales:Array = [
+		"en",
+		"es",
+	]
+	
+	return locales
+
+
 # This is not the best way to do it, but since this is supposed to be called
 # only inside the editor AND by a plugin, it's ok, i guess.
 static func get_editor_locale() -> String:
-	var _locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+	# Default fallback
+	var _locale = "en"
+	
+	if Engine.editor_hint:
+		_locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+	else:
+		# Just if someone try to get the editor locale in game for some reason
+		_locale = TranslationServer.get_locale()
+	
 	return _locale
+
+
+static func get_project_locale(ignore_test_locale = false) -> String:
+	# Default fallback
+	var _locale = "en"
+	_locale = TranslationServer.get_locale()
+	
+	if not ignore_test_locale:
+		_locale = get_project_test_locale()
+
+	return _locale
+
+
+static func get_project_default_fallback() -> String:
+	return ProjectSettings.get_setting("locale/fallback")
+
+
+static func get_project_test_locale() -> String:
+	return ProjectSettings.get_setting("locale/test")
 
 
 static func _translate_node(node:Node) -> void:

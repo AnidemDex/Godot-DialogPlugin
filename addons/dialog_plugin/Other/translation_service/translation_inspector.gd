@@ -25,3 +25,9 @@ func parse_end() -> void:
 		_control.BaseNode = modified_object
 		add_custom_control(_control)
 
+
+func _notification(what:int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		if modified_object:
+			_modified_object = null
+

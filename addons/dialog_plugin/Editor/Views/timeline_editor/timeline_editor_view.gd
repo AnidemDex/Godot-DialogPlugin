@@ -5,6 +5,7 @@ const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 export(NodePath) var TimelineEventsContainer_path:NodePath
 export(NodePath) var TimelinePreview_path:NodePath
+export(NodePath) var LocaleList_path:NodePath
 
 var base_resource:DialogTimelineResource setget _set_base_resource
 var selected_event_idx:int = 0
@@ -12,6 +13,7 @@ var event_nodes:Dictionary = {}
 
 onready var timeline_events_container_node = get_node_or_null(TimelineEventsContainer_path)
 onready var timeline_preview_node := get_node(TimelinePreview_path)
+onready var locale_list_node:OptionButton = get_node(LocaleList_path) as OptionButton
 
 func _ready() -> void:
 	if not base_resource:
@@ -128,3 +130,8 @@ func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int
 			base_resource.events.get_resources().insert(_n_idx, event)
 			selected_event_idx = _n_idx
 		_load_events()
+
+
+func _on_LocaleList_item_selected(index: int) -> void:
+	var _locale = locale_list_node.get_item_metadata(index)
+	print(_locale)
