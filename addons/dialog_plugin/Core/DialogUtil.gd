@@ -7,7 +7,7 @@ class Error:
 	const TIMELINE_NOT_FOUND = "TIMELINE_NOT_FOUND"
 	const TIMELINE_NOT_SELECTED = "TIMELINE_NOT_SELECTED"
 	
-	const DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER = "You didn't add this node to a CanvasLayer or Control node. If this was intentional, you can ignore this warning."
+	const DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER = "DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER"
 	
 	static func not_found_timeline() -> DialogTimelineResource:
 		var _timeline = DialogTimelineResource.new()

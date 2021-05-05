@@ -44,7 +44,7 @@ func excecute(caller:DialogBaseNode) -> void:
 
 func _update_text() -> void:
 	if _DialogNode:
-		_DialogNode.TextNode.bbcode_text = text
+		_DialogNode.TextNode.bbcode_text = TranslationServer.translate(text)
 		_DialogNode.TextNode.visible_characters = 0
 		_timer.start(_DialogNode.text_speed)
 

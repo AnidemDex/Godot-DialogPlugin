@@ -33,6 +33,31 @@ static func get_translations() -> Dictionary:
 	return translations
 
 
+static func translate_node_recursively(base_node:Control) -> void:
+	for node in base_node.get_children():
+		if node.get_child_count() > 0:
+			_translate_node(node)
+			translate_node_recursively(node)
+		else:
+			_translate_node(node)
+	_translate_node(base_node)
+
+
+static func _translate_node(node:Node) -> void:
+	var HINT_TOOLTIP_KEY = "HINT_TOOLTIP_KEY"
+	var TEXT_KEY = "TEXT_KEY"
+	
+	# This is not the best way to do it, but since this is supposed to be called
+	# only inside the editor AND by a plugin, it's ok, i guess.
+	var editor_locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+	
+	if node.has_meta(HINT_TOOLTIP_KEY):
+		(node as Control).hint_tooltip = translate(node.get_meta(HINT_TOOLTIP_KEY))
+	
+	if node.has_meta(TEXT_KEY):
+		node.text = translate(node.get_meta(TEXT_KEY))
+
+
 static func _get_translation(_msg:String, _override_locale:String="")->String:
 	var _returned_translation:String = _msg
 	var _translations:Dictionary = get_translations()
