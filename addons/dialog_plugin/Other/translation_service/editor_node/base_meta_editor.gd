@@ -17,10 +17,10 @@ func _ready() -> void:
 		visible = true
 		var meta = BaseNode.get_meta_list()
 		if "HINT_TOOLTIP_KEY" in meta:
-			$BaseMetaEditor/Editors/LineEdit.text = BaseNode.get_meta("HINT_TOOLTIP_KEY")
+			$Category/Editors/HintTooltip_LineEdit.text = BaseNode.get_meta("HINT_TOOLTIP_KEY")
 
 
-func _on_LineEdit_text_changed(new_text: String) -> void:
+func _on_HintTooltip_LineEdit_text_changed(new_text: String) -> void:
 	if not new_text:
 		BaseNode.set_meta("HINT_TOOLTIP_KEY", null)
 	else:
