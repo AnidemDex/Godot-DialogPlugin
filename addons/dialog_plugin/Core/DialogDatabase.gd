@@ -7,8 +7,11 @@ class _DB:
 		var _paths = get_database().resources
 		return _paths
 	
+	
 	static func get_database() -> DialogDatabaseResource:
+		push_warning("Returning an empty database")
 		return DialogDatabaseResource.new()
+	
 	
 	static func add(name) -> void:
 		assert(false)
@@ -88,6 +91,17 @@ class Definitions extends _DB:
 
 class Themes extends _DB:
 	pass
+
+
+class EditorTranslations extends _DB:
+	static func get_database() -> DialogDatabaseResource:
+		var _db = ResourceLoader.load(DialogResources.EDITOR_i18n_PATH)
+		return _db
+
+
+class Translations extends _DB:
+	pass
+
 
 static func get_editor_configuration() -> Resource:
 	var _config = load(DialogResources.CONFIGURATION_PATH)

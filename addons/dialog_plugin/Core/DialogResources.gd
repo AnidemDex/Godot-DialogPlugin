@@ -3,12 +3,14 @@ tool
 const DB_PATH = "res://addons/dialog_plugin/Database/"
 const TIMELINEDB_PATH = DB_PATH+"SavedTimelines.tres"
 const CHARACTERDB_PATH = DB_PATH+"SavedCharacters.tres"
+const EDITOR_i18n_PATH = DB_PATH+"Editor_i18n.tres"
 
 const CONFIGURATION_PATH = DB_PATH+"EditorConfiguration.tres"
 
 const RESOURCES_DIR = "res://dialog_files/"
 const TIMELINES_DIR = RESOURCES_DIR+"timelines/"
 const CHARACTERS_DIR = RESOURCES_DIR+"characters/"
+const TRANSLATIONS_DIR = RESOURCES_DIR+"translations/"
 
 const ICON_PATH_DARK = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-editor-icon-dark-theme.svg"
 const ICON_PATH_LIGHT = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-editor-icon-light-theme.svg"
@@ -16,32 +18,26 @@ const ICON_PATH_LIGHT = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-
 # This method should call a recursive one.
 # But not for now
 static func verify_resource_directories() -> void:
-	var _info = "[Dialog Resources]"
-	var _d = Directory.new()
+	_verify_resource_directory(RESOURCES_DIR)
+	_verify_resource_directory(TIMELINES_DIR)
+	_verify_resource_directory(CHARACTERS_DIR)
+	_verify_resource_directory(TRANSLATIONS_DIR)
 	
-	if not _d.dir_exists(RESOURCES_DIR):
-		print("{i} {m}".format({"i":_info,"m":"Dialog folder doesn't exist."}))
-		var _err = _d.make_dir_recursive(RESOURCES_DIR)
-		if _err != OK:
-			print("{i} {m} -> ".format({"i":_info,"m":"Failed, skipping"}), _err)
-			return
-		print("{i} {m}".format({"i":_info,"m":"Dialog folder created."}))
-	
-	if not _d.dir_exists(TIMELINES_DIR):
-		print("{i} {m}".format({"i":_info,"m":"Timelines folder doesn't exist."}))
-		var _err = _d.make_dir_recursive(TIMELINES_DIR)
-		if _err != OK:
-			print("{i} {m} -> ".format({"i":_info,"m":"Failed, skipping"}), _err)
-			return
-		print("{i} {m}".format({"i":_info,"m":"Timelines folder created."}))
+	print("{i} {m}".format({"i":"[DialogResources]","m":"All folders verified"}))
 
-	
-	if not _d.dir_exists(CHARACTERS_DIR):
-		print("{i} {m}".format({"i":_info,"m":"Characters folder doesn't exist."}))
-		var _err = _d.make_dir_recursive(CHARACTERS_DIR)
+
+static func _verify_resource_directory(directory_path:String) -> void:
+	var _info = "[DialogResources]"
+	var _d = Directory.new()
+	if not _d.dir_exists(directory_path):
+		var _dir_name = directory_path.get_base_dir().split("/")[-1]
+		var _message = "{dir_name} folder doesn't exist".format({"dir_name":_dir_name})
+		
+		print("{i} {m}".format({"i":_info,"m":_message}))
+		var _err = _d.make_dir_recursive(directory_path)
 		if _err != OK:
 			print("{i} {m} -> ".format({"i":_info,"m":"Failed, skipping"}), _err)
 			return
-		print("{i} {m}".format({"i":_info,"m":"Characters folder created."}))
-	
-	print("{i} {m}".format({"i":_info,"m":"All folders verified. There's no problems"}))
+		_message = "{dir_name} folder created.".format({"dir_name":_dir_name})
+		print("{i} {m}".format({"i":_info,"m":_message}))
+	pass
