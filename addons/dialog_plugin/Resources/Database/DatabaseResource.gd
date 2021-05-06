@@ -5,7 +5,9 @@ extends Resource
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
 
 # ResourceArray
-var resources = null setget _set_resources
+var resources:ResourceArray = null setget _set_resources
+var resource_type = null
+var scanned_directory:String = ""
 
 
 func add(item):
@@ -15,12 +17,35 @@ func remove(item):
 	assert(false)
 
 func save(path: String) -> void:
+	# No, i can't use resource_path here
 	var _err = ResourceSaver.save(path, self)
 	assert(_err == OK)
 
 
 func scan_resources_folder() -> void:
-	push_error("You forgot to override this method. Nothing will happen until you do")
+	if not resource_type:
+		push_error("No resource type assigned to this database. ")
+		return
+	if not scanned_directory:
+		push_error("No directory pointer assigned to this database.")
+		return
+	
+	push_warning("Scanning {data_folder} folder".format({"data_folder":scanned_directory.get_base_dir().split("/")[-1]}))
+	var _files:PoolStringArray = _get_files_in_directory(scanned_directory)
+	
+	for file in _files:
+		# I should have not add this here, but since Godot treat these files
+		# as resources but it doesn't have a loader, i have to. I want to avoid 
+		# errors in the console
+		if file.ends_with(".csv") or file.ends_with(".import"):
+			continue
+		var _resource = load(file)
+		if not _resource in resources.get_resources() and _resource is resource_type:
+			push_warning("{} is not in the database, adding...".format({"":file.get_file()}))
+			add(_resource)
+		_resource = null
+	
+	push_warning("Done")
 
 
 # A (finally) recursive method to see the files inside a folder

@@ -31,13 +31,16 @@ static func translate_node_recursively(base_node:Control) -> void:
 
 ## Returns a dictionary using translation catalogs configured in the Project Settings.
 ## Each key correspond to [locale](https://docs.godotengine.org/en/stable/tutorials/i18n/locales.html).
-## Each value is an Array of [PHashTranslation].
+## Each value is an Array of [PHashTranslation] or [Translation].
 static func get_translations() -> Dictionary:
+	# Related issues:
+	# https://github.com/godotengine/godot/issues/38862 | https://github.com/godotengine/godot/issues/38935
+	
 	var translations_resources:PoolStringArray = ProjectSettings.get_setting("locale/translations")
 	var translations = {}
 	
 	for resource in translations_resources:
-		var t:PHashTranslation = load(resource)
+		var t:Translation = load(resource)
 		if translations.has(t.locale):
 			translations[t.locale].append(t)
 		else:
@@ -46,8 +49,9 @@ static func get_translations() -> Dictionary:
 
 # https://docs.godotengine.org/en/stable/tutorials/i18n/locales.html
 ## Maybe this is intended, but for some reason you can't get the supported
-## locales by the engine, just locales supported in game
+## locales by the engine, just locales supported in game.
 static func get_locales() -> Array:
+	# FIXME: Add the whole locale list
 	var locales:Array = [
 		"en",
 		"es",
@@ -88,6 +92,48 @@ static func get_project_default_fallback() -> String:
 
 static func get_project_test_locale() -> String:
 	return ProjectSettings.get_setting("locale/test")
+
+
+static func get_project_translations() -> PoolStringArray:
+	return ProjectSettings.get_setting("locale/translations")
+
+
+static func add_translation(translation_resource:Translation) -> void:
+	if not Engine.editor_hint:
+		TranslationServer.add_translation(translation_resource)
+	else:
+		var _translation_path:String = translation_resource.resource_path
+		if not _translation_path:
+			return
+		
+		var _translations:Dictionary = get_translations()
+		if translation_resource in _translations.get(translation_resource.locale, {}):
+			# Translation found
+			remove_translation(translation_resource)
+		
+		var _translations_paths:PoolStringArray = get_project_translations()
+		_translations_paths.append(_translation_path)
+		
+		ProjectSettings.set_setting("locale/translations", _translations_paths)
+		var _err = ProjectSettings.save()
+		assert(_err == OK)
+
+
+static func remove_translation(translation_resource:Translation) -> void:
+	if not Engine.editor_hint:
+		TranslationServer.remove_translation(translation_resource)
+	else:
+		var _translation_path:String = translation_resource.resource_path
+		if not _translation_path:
+			return
+		
+		var _translations_paths:Array = Array(get_project_translations())
+		if _translation_path in _translations_paths:
+			_translations_paths.erase(_translation_path)
+		
+		ProjectSettings.set_setting("locale/translations", _translations_paths)
+		var _err = ProjectSettings.save()
+		assert(_err == OK)
 
 
 static func _translate_node(node:Node) -> void:

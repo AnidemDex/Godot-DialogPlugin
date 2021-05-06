@@ -3,6 +3,11 @@ extends DialogDatabaseResource
 
 var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
+func _init() -> void:
+	resource_type = DialogTimelineResource
+	scanned_directory = DialogResources.TIMELINES_DIR
+
+
 func add(res:Resource):
 	if not(res is DialogTimelineResource):
 		push_error("resource is not a timeline")
@@ -21,6 +26,7 @@ func add(res:Resource):
 	save(DialogResources.TIMELINEDB_PATH)
 	emit_signal("changed")
 
+
 func remove(item) -> void:
 	if not(item is DialogTimelineResource):
 		push_error("item is not a timeline")
@@ -30,18 +36,6 @@ func remove(item) -> void:
 	save(DialogResources.TIMELINEDB_PATH)
 	emit_signal("changed")
 
-
-func scan_resources_folder() -> void:
-	push_warning("Scanning timelines folder")
-	var _files:PoolStringArray = _get_files_in_directory(DialogResources.TIMELINES_DIR)
-	
-	for file in _files:
-		var _resource = load(file)
-		if not _resource in resources.get_resources():
-			push_warning("{} is not in the database, adding...".format({"":file.get_file()}))
-			add(_resource)
-		_resource = null
-	push_warning("Done")
 
 func _to_string() -> String:
 	return "[TimelineDatabase]"
