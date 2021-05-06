@@ -109,8 +109,8 @@ func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 	if _idx != -1:
 		assert(_events_array[_idx] == event)
 		
-#	var _err = ResourceSaver.save(_resource.resource_path, _resource)
-#	assert(_err == OK)
+	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
+	assert(_err == OK)
 
 
 func _on_EventNode_event_selected(event:DialogEventResource) -> void:
@@ -137,3 +137,4 @@ func _on_LocaleList_item_selected(index: int) -> void:
 	if _locale == TranslationServer.get_locale():
 		_locale = ""
 	ProjectSettings.set_setting("locale/test", _locale)
+	ProjectSettings.save()

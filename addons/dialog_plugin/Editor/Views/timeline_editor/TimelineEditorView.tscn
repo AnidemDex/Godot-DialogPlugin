@@ -151,11 +151,13 @@ margin_bottom = 536.0
 
 [node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = 30.8155
-margin_top = 130.448
+margin_top = -169.552
 margin_right = 140.815
-margin_bottom = 245.448
+margin_bottom = -54.552
 
 [connection signal="item_selected" from="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/TranslationSettings/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
 [connection signal="item_added" from="VBoxContainer/HSplitContainer/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
