@@ -16,7 +16,7 @@ func add(item:DialogCharacterResource) -> void:
 		var _idx = _r_array.find(item)
 		if _idx != -1:
 			_r_array[_idx] = item
-			save(DialogResources.TIMELINEDB_PATH)
+			save(DialogResources.CHARACTERDB_PATH)
 			emit_signal("changed")
 		return
 	

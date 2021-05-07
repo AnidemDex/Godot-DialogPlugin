@@ -9,10 +9,12 @@ tool
 ## Translates a message using translation catalogs configured in the Project Settings.
 static func translate(message:String, from:String="")->String:
 	var translation
+	
+#	translation = _get_translation(message, from)
 
 	if Engine.editor_hint:
 		translation = _get_translation(message, from)
-		
+
 	else:
 		translation = TranslationServer.translate(message)
 	
@@ -78,10 +80,11 @@ static func get_editor_locale() -> String:
 static func get_project_locale(ignore_test_locale = false) -> String:
 	# Default fallback
 	var _locale = "en"
+	var _test_locale = get_project_test_locale()
 	_locale = TranslationServer.get_locale()
 	
-	if not ignore_test_locale:
-		_locale = get_project_test_locale()
+	if not ignore_test_locale and _test_locale:
+		_locale = _test_locale
 
 	return _locale
 
@@ -162,11 +165,11 @@ static func _get_translation(_msg:String, _override_locale:String="", _used_alre
 
 	var cases = _translations.get(
 		_locale, 
-		_translations.get(_default_fallback, [PHashTranslation.new()])
+		_translations.get(_default_fallback, [Translation.new()])
 		)
 	
 	for case in cases:
-		_returned_translation = (case as PHashTranslation).get_message(_msg)
+		_returned_translation = (case as Translation).get_message(_msg)
 		if _returned_translation:
 			break
 	

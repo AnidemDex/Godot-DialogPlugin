@@ -9,8 +9,9 @@ signal item_dragged(item, node_idx, to_idx)
 
 const DEFAULT_COLOR = Color("#202531")
 const SELECTED_COLOR = Color("#353f57")
+const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
-var DialogUtil = load("res://addons/dialog_plugin/Core/DialogUtil.gd")
+var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
 var base_resource:Resource = null
 var idx:int = 0 setget _set_idx
 var drag_position
@@ -80,7 +81,7 @@ func _notification(what):
 		NOTIFICATION_FOCUS_EXIT:
 			var style:StyleBoxFlat = get_stylebox("panel")
 			style.bg_color = DEFAULT_COLOR
-			_save_resource()
+
 
 var last_drag
 var start_drag

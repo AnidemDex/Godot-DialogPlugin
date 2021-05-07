@@ -2,6 +2,9 @@ tool
 extends Control
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
+const TranslationDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd").Translations
+const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
+
 
 export(NodePath) var TimelineEventsContainer_path:NodePath
 export(NodePath) var TimelinePreview_path:NodePath
@@ -111,6 +114,12 @@ func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 		
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
 	assert(_err == OK)
+	
+	if "translation_key" in event:
+		if event.translation_key != "__SAME_AS_TEXT__":
+			var _xlation:String = TranslationService.translate(event.translation_key)
+			if event.translation_key == _xlation or event.text != _xlation:
+				TranslationDB.add_message(event.translation_key, event.text, base_resource)
 
 
 func _on_EventNode_event_selected(event:DialogEventResource) -> void:
@@ -134,7 +143,7 @@ func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int
 
 func _on_LocaleList_item_selected(index: int) -> void:
 	var _locale = locale_list_node.get_item_metadata(index)
-	if _locale == TranslationServer.get_locale():
+	if _locale == TranslationService.get_project_locale(true):
 		_locale = ""
 	ProjectSettings.set_setting("locale/test", _locale)
-	ProjectSettings.save()
+	_load_events()

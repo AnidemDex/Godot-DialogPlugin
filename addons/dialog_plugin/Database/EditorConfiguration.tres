@@ -14,4 +14,4 @@ func save(path):
 [resource]
 script = SubResource( 1 )
 enabled = true
-editor_debug_mode = true
+editor_debug_mode = false

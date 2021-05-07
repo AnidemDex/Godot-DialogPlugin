@@ -23,7 +23,8 @@ onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 func _ready() -> void:
 	if not Engine.editor_hint:
 		# FIXME: You should handle this warning elsewhere
-		push_warning("[Dialogic] "+tr(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER))
+		if not((get_parent() is CanvasLayer) or (get_parent() is Control)):
+			push_warning("[Dialogic] "+tr(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER))
 
 
 func _input(event: InputEvent) -> void:

@@ -17,7 +17,12 @@ func _ready() -> void:
 		return
 
 func _update_node_values() -> void:
-	text_edit_node.text = base_resource.text
+	var _text = base_resource.text
+	if base_resource.translation_key != "__SAME_AS_TEXT__":
+		_text = TranslationService.translate(base_resource.translation_key)
+		if _text == base_resource.translation_key:
+			_text = ""
+	text_edit_node.text = _text
 	
 	if base_resource.character:
 		character_button_node.select_item_by_resource(base_resource.character)
@@ -33,7 +38,6 @@ func _update_node_values() -> void:
 
 
 func _save_resource() -> void:
-	var _res = base_resource
 	emit_signal("save_item_requested", base_resource)
 
 

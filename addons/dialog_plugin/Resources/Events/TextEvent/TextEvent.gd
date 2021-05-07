@@ -46,7 +46,9 @@ func excecute(caller:DialogBaseNode) -> void:
 
 func _update_text() -> void:
 	if _DialogNode:
-		var _text = text if translation_key == SAME_AS_TEXT else TranslationServer.translate(translation_key)
+		var _text = text
+		if translation_key != SAME_AS_TEXT:
+			_text = TranslationService.translate(translation_key)
 		_DialogNode.TextNode.bbcode_text = _text
 		_DialogNode.TextNode.visible_characters = 0
 		_timer.start(_DialogNode.text_speed)

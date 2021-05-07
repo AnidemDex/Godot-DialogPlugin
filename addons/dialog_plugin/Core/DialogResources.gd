@@ -4,6 +4,7 @@ const DB_PATH = "res://addons/dialog_plugin/Database/"
 const TIMELINEDB_PATH = DB_PATH+"SavedTimelines.tres"
 const CHARACTERDB_PATH = DB_PATH+"SavedCharacters.tres"
 const EDITOR_i18n_PATH = DB_PATH+"Editor_i18n.tres"
+const TRANSLATIONSDB_PATH = DB_PATH+"SavedTranslations.tres"
 
 const CONFIGURATION_PATH = DB_PATH+"EditorConfiguration.tres"
 

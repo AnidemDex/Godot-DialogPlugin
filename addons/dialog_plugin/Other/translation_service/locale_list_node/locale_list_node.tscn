@@ -5,6 +5,9 @@
 [node name="LocaleList" type="OptionButton"]
 margin_right = 29.0
 margin_bottom = 20.0
+text = "Spanish"
+items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
+selected = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
