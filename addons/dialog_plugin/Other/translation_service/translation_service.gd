@@ -101,7 +101,7 @@ static func get_project_test_locale() -> String:
 
 static func get_project_translations() -> PoolStringArray:
 	
-	# This must be done once, since the property doesn't exist if you never a translation before
+	# This must be done once, since the property doesn't exist if you never had a translation before
 	if not ProjectSettings.get_setting("locale/translations"):
 		var _empty_poolstringarray = PoolStringArray([])
 		ProjectSettings.set_setting("locale/translations", _empty_poolstringarray)
