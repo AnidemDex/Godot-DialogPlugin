@@ -1,6 +1,7 @@
 tool
 extends EditorPlugin
 
+const PLUGIN_NAME = "Dialog Editor"
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
 const EditorView_Scene = preload("res://addons/dialog_plugin/Editor/EditorMainNode.tscn")
 const Dialog_i18n = preload("res://addons/dialog_plugin/Core/Dialog_i18n.gd")
@@ -15,11 +16,10 @@ func _enter_tree() -> void:
 	DialogResources.verify_resource_directories()
 	_add_editor_translations()
 	
-	_editor_view = EditorView_Scene.instance()
+	var _err = connect("main_screen_changed", self, "_on_main_screen_changed")
 	
-#	_add_editor_inspector_plugins()
 	
-	get_editor_interface().get_editor_viewport().add_child(_editor_view)
+	_add_editor_inspector_plugins()
 	
 	make_visible(false)
 
@@ -31,10 +31,7 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	if _editor_view:
-		_editor_view.queue_free()
-	_editor_view = null
-	
+	_remove_main_editor()
 	_remove_editor_inspector_plugins()
 	_remove_editor_translations()
 
@@ -45,7 +42,7 @@ func has_main_screen() -> bool:
 
 
 func get_plugin_name() -> String:
-	return "Dialog Editor"
+	return PLUGIN_NAME
 
 
 # Copied
@@ -73,6 +70,8 @@ func _remove_editor_inspector_plugins() -> void:
 		remove_inspector_plugin(_parts_inspector)
 	if _translation_inspector:
 		remove_inspector_plugin(_translation_inspector)
+		# For some reason that i don't know, i have to force an unreference to this object
+		_translation_inspector.unreference() 
 	
 	_parts_inspector = null
 	_translation_inspector = null
@@ -85,5 +84,22 @@ func _add_editor_translations() -> void:
 
 func _remove_editor_translations() -> void:
 	Dialog_i18n.remove_editor_translations()
-	_editor_view = null
+
+
+func _add_main_editor() -> void:
+	_editor_view = EditorView_Scene.instance()
+	get_editor_interface().get_editor_viewport().add_child(_editor_view)
 	pass
+
+
+func _remove_main_editor() -> void:
+	if _editor_view and is_instance_valid(_editor_view):
+		_editor_view.free()
+	_editor_view = null
+
+
+func _on_main_screen_changed(screen_name:String) -> void:
+	if screen_name == PLUGIN_NAME:
+		_add_main_editor()
+	else:
+		_remove_main_editor()

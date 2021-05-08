@@ -69,7 +69,9 @@ static func get_editor_locale() -> String:
 	var _locale = "en"
 	
 	if Engine.editor_hint:
-		_locale = EditorPlugin.new().get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+		var _editor_plugin = EditorPlugin.new()
+		_locale = _editor_plugin.get_editor_interface().get_editor_settings().get_setting("interface/editor/editor_language")
+		_editor_plugin.free()
 	else:
 		# Just if someone try to get the editor locale in game for some reason
 		_locale = TranslationServer.get_locale()

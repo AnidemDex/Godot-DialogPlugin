@@ -12,10 +12,6 @@ func _ready() -> void:
 	instance_editor_scene()
 
 
-func _draw() -> void:
-	if visible:
-		instance_editor_scene()
-
 func scan_resources() -> void:
 	DialogDB.Timelines.get_database().scan_resources_folder()
 	DialogDB.Characters.get_database().scan_resources_folder()

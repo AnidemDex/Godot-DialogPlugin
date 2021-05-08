@@ -31,3 +31,7 @@ func _on_ToolBar_timeline_selected(timeline) -> void:
 	_editor_view = TimelineEditorScene.instance()
 	_editor_view.base_resource = timeline
 	$ViewContainer.add_child(_editor_view)
+
+func _exit_tree() -> void:
+	if _editor_view and is_instance_valid(_editor_view):
+		_editor_view.free()
