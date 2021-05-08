@@ -38,7 +38,7 @@ static func get_translations() -> Dictionary:
 	# Related issues:
 	# https://github.com/godotengine/godot/issues/38862 | https://github.com/godotengine/godot/issues/38935
 	
-	var translations_resources:PoolStringArray = ProjectSettings.get_setting("locale/translations")
+	var translations_resources:PoolStringArray = get_project_translations()
 	var translations = {}
 	
 	for resource in translations_resources:
@@ -100,7 +100,15 @@ static func get_project_test_locale() -> String:
 
 
 static func get_project_translations() -> PoolStringArray:
-	return ProjectSettings.get_setting("locale/translations")
+	
+	# This must be done once, since the property doesn't exist if you never a translation before
+	if not ProjectSettings.get_setting("locale/translations"):
+		var _empty_poolstringarray = PoolStringArray([])
+		ProjectSettings.set_setting("locale/translations", _empty_poolstringarray)
+		ProjectSettings.save()
+	var _translations = ProjectSettings.get_setting("locale/translations")
+	
+	return _translations
 
 
 static func add_translation(translation_resource:Translation) -> void:
@@ -136,7 +144,7 @@ static func remove_translation(translation_resource:Translation) -> void:
 		if _translation_path in _translations_paths:
 			_translations_paths.erase(_translation_path)
 		
-		ProjectSettings.set_setting("locale/translations", _translations_paths)
+		ProjectSettings.set_setting("locale/translations", PoolStringArray(_translations_paths))
 		var _err = ProjectSettings.save()
 		assert(_err == OK)
 
