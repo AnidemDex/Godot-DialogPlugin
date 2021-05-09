@@ -11,13 +11,12 @@ var _char_db = null
 func _ready() -> void:
 	_char_db = DialogDB.Characters.get_database()
 	
-	for _item_idx in range(get_item_count()):
-		var _idx = clamp(_item_idx-1, 0, get_item_count())
-		remove_item(_idx)
+	clear()
 	
 	add_item("[Empty]")
 	select(0)
-	
+
+func generate_items() -> void:
 	var _idx = 1
 	for resource in _char_db.resources.get_resources():
 		
@@ -28,6 +27,7 @@ func _ready() -> void:
 		add_icon_item(_char_icon, _char.display_name)
 		set_item_metadata(_idx, {"character":_char})
 		_idx += 1
+
 
 # This method probably will fall if there's 2 characters with the same name
 func select_item_by_name(name:String) -> void:

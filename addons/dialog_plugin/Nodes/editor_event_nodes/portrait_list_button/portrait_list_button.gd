@@ -6,23 +6,16 @@ const ICON_PATH = "res://addons/dialog_plugin/assets/Images/Event Icons/Portrait
 var character:DialogCharacterResource setget _set_character
 
 func _ready() -> void:
-	add_items()
+	clear()
+	
+	add_item("[Empty]")
+	select(0)
 	
 	if not character:
 		visible = false
 		return
 
-
-func clear_items() -> void:
-	for _item_idx in range(get_item_count()):
-		var _idx = clamp(_item_idx-1, 0, get_item_count())
-		remove_item(_idx)
-
-func add_items() -> void:
-	clear_items()
-	add_item("[Empty]")
-	select(0)
-	
+func generate_items() -> void:
 	if not character:
 		return
 	
@@ -34,6 +27,7 @@ func add_items() -> void:
 		add_icon_item(_portrait_icon, _portrait.name)
 		set_item_metadata(_idx, {"portrait":_portrait})
 		_idx += 1
+
 
 # Copied from CharactersButton
 func select_item_by_resource(resource:DialogPortraitResource) -> void:
@@ -51,4 +45,7 @@ func _set_character(value:DialogCharacterResource):
 		visible = true
 	else:
 		visible = false
-	add_items()
+	clear()
+	add_item("[Empty]")
+	select(0)
+	generate_items()

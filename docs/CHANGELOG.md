@@ -11,6 +11,7 @@ Ignore this section until someone decide to add information, please.
 ### Deprecated
 ### Removed
 ### Fixed
+- **Character, animation and portrait list giving weird errors on new projects.**
 
 
 ## [0.1.4] - 2021-05-09
