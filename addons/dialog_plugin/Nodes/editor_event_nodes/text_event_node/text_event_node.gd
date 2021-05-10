@@ -13,6 +13,7 @@ onready var translation_key_label_node = get_node_or_null(TranslationKeyLabel_pa
 func _ready() -> void:
 	if base_resource:
 		_update_node_values()
+		character_button_node.generate_items()
 	else:
 		return
 

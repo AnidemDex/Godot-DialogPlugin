@@ -23,6 +23,7 @@ func _ready() -> void:
 		for button in buttons.get_buttons():
 			button.connect("toggled", self, "_on_PositionButton_toggled")
 		
+		character_button_node.generate_items()
 		_update_node_values()
 	else:
 		return
