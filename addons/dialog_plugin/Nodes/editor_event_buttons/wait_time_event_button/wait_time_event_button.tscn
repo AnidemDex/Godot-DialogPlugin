@@ -4,11 +4,13 @@
 [ext_resource path="res://addons/dialog_plugin/Resources/Events/WaitTimeEvent/WaitTimeEvent.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/Event Icons/Main Icons/wait-seconds.svg" type="Texture" id=3]
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 wait_time = 0.0
 
-[node name="GenericEventButton" instance=ExtResource( 1 )]
+[node name="WaitTimeButton" instance=ExtResource( 1 )]
+hint_tooltip = "Wait Time Event:
+Holds the timeline X seconds before continue"
 text = "Wait Time"
 icon = ExtResource( 3 )
-event_resource = SubResource( 2 )
+event_resource = SubResource( 1 )

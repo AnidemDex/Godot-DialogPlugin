@@ -25,8 +25,11 @@ resource_name = "TextEvent"
 script = ExtResource( 3 )
 text = ""
 character = SubResource( 2 )
+translation_key = "__SAME_AS_TEXT__"
 
 [node name="TextEventButton" instance=ExtResource( 1 )]
+hint_tooltip = "Dialog Event:
+Generates a text box in scene displaying your dialog."
 text = "Dialog"
 icon = ExtResource( 5 )
 event_resource = SubResource( 3 )

@@ -8,9 +8,12 @@
 script = ExtResource( 3 )
 selected_portrait = 0
 selected_position = 0
+selected_animation = 0
 skip = true
 
 [node name="JoinEventButton" instance=ExtResource( 1 )]
+hint_tooltip = "Character Join:
+Makes a character portrait joins in the scene."
 text = "Character Join"
 icon = ExtResource( 2 )
 event_resource = SubResource( 1 )

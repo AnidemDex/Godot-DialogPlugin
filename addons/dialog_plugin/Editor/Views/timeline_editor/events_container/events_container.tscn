@@ -1,10 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/dialog_plugin/Other/resource_array.gd" type="Script" id=3]
-[ext_resource path="res://addons/dialog_plugin/Resources/CharacterResource.gd" type="Script" id=4]
-[ext_resource path="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd" type="Script" id=5]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/CheckBox.gd" type="Script" id=8]
@@ -22,27 +19,6 @@ corner_radius_bottom_right = 6
 shadow_size = 1
 shadow_offset = Vector2( 6, 5 )
 anti_aliasing = false
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 3 )
-_resources = [  ]
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 4 )
-name = ""
-display_name = ""
-display_name_bool = false
-color = Color( 1, 1, 1, 1 )
-default_speaker = false
-description = ""
-portraits = SubResource( 2 )
-
-[sub_resource type="Resource" id=4]
-resource_local_to_scene = true
-resource_name = "TextEvent"
-script = ExtResource( 5 )
-text = ""
-character = SubResource( 3 )
 
 [sub_resource type="Image" id=10]
 data = {
@@ -127,9 +103,8 @@ __meta__ = {
 }
 
 [node name="TextEventButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 2 )]
-event_resource = SubResource( 4 )
 
-[node name="GenericEventButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 6 )]
+[node name="WaitTimeButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 6 )]
 margin_left = 30.0
 margin_right = 54.0
 
@@ -156,6 +131,6 @@ script = ExtResource( 8 )
 
 [connection signal="gui_input" from="PanelContainer" to="." method="_on_PanelContainer_gui_input"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/GenericEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="toggled" from="HBoxContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
