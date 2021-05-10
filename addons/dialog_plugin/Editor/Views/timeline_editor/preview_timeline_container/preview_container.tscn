@@ -9,6 +9,7 @@
 margin_left = 518.0
 margin_right = 1024.0
 margin_bottom = 550.0
+rect_clip_content = true
 size_flags_horizontal = 3
 custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 4 )
