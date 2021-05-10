@@ -5,11 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [UNRELEASED]
-Ignore this section until someone decide to add information, please.
 ### Added
 ### Changed
 - **Clip content outside the timeline preview.**
 ### Deprecated
+- **Expand and contract animation in event buttons.** The information about the event now had to be a text hint tooltip.
 ### Removed
 ### Fixed
 - **Character, animation and portrait list giving weird errors on new projects.**
