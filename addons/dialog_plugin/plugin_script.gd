@@ -53,11 +53,6 @@ func get_plugin_icon():
 	return load(DialogResources.ICON_PATH_DARK)
 
 
-func make_visible(visible: bool) -> void:
-	if _editor_view:
-		_editor_view.visible = visible
-
-
 func _add_editor_inspector_plugins() -> void:
 	_parts_inspector = load("res://addons/dialog_plugin/Core/DialogInspector.gd").new()
 	_translation_inspector = load("res://addons/dialog_plugin/Other/translation_service/translation_inspector.gd").new()

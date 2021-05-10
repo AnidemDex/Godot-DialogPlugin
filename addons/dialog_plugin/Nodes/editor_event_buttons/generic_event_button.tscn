@@ -6,11 +6,10 @@
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.698039, 0.298039, 0.298039, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.45, 0.18, 0.18, 1 )
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.243137, 0.243137, 0.243137, 1 )
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="GenericEventButton" type="Button"]
 margin_right = 24.0
@@ -19,8 +18,8 @@ grow_horizontal = 2
 hint_tooltip = "Replace with event hint"
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/normal = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 3 )
 keep_pressed_outside = true
 text = "Generic Event"
 icon = ExtResource( 1 )
