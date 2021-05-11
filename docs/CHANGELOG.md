@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
+- **New Character event.** Leave event, to make your characters out the conversation
 ### Deprecated
 - **Expand and contract animation in event buttons.** The information about the event now had to be a text hint tooltip.
 ### Removed
