@@ -48,7 +48,7 @@ func add_portrait(
 		emit_signal("portrait_added")
 		return
 	
-	var _ptrt_node:Control = portraits.get(character_resource, null)
+	var _ptrt_node:TextureRect = portraits.get(character_resource, null)
 	
 	if _ptrt_node:
 		remove_portrait(_ptrt_node)
@@ -56,27 +56,36 @@ func add_portrait(
 	if portrait.image is Texture:
 		_ptrt_node = TextureRect.new()
 		_ptrt_node.texture = portrait.image
+		_ptrt_node.expand = true
+		_ptrt_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		portraits[character_resource] = _ptrt_node
 		add_child(_ptrt_node)
 		# Here you can expand to accept scenes
+	else:
+		push_warning("Invalid portrait resource")
+		emit_signal("portrait_added")
 	
 	animation = PAnimation.FADE_IN if animation == PAnimation.NO_ANIMATION else animation
 	
+	var position_node:ReferenceRect
 	match position:
 		Position.CENTER:
-			_ptrt_node.rect_position = _center_node.rect_position
+			position_node = _center_node
 		
 		Position.CENTER_LEFT:
-			_ptrt_node.rect_position = _center_left_node.rect_position
+			position_node = _center_left_node
 		
 		Position.CENTER_RIGHT:
-			_ptrt_node.rect_position = _center_right_node.rect_position
+			position_node = _center_right_node
 		
 		Position.LEFT:
-			_ptrt_node.rect_position = _left_node.rect_position
+			position_node = _left_node
 		
 		Position.RIGHT:
-			_ptrt_node.rect_position = _right_node.rect_position
+			position_node = _right_node
+	
+	_ptrt_node.rect_position = position_node.rect_position
+	_ptrt_node.rect_size = position_node.rect_size
 		
 	
 	grab_portrait_focus(_ptrt_node, animation)

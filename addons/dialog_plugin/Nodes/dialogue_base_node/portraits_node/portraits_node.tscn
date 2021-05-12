@@ -24,6 +24,8 @@ margin_left = 45.0
 margin_top = -20.0
 margin_right = 85.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -37,6 +39,8 @@ margin_left = -19.576
 margin_top = -20.0
 margin_right = 20.424
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,11 +50,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_pivot_offset = Vector2( 20, 20 )
+margin_left = -88.0
+margin_top = -135.0
+margin_right = 88.0
+margin_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,6 +69,8 @@ margin_left = -20.0
 margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_pivot_offset = Vector2( 20, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,6 +85,8 @@ margin_left = -80.9999
 margin_top = -20.0
 margin_right = -40.9999
 margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_pivot_offset = Vector2( 20, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
