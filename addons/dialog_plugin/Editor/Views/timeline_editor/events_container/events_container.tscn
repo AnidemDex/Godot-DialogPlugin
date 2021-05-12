@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/audio_event_button/play_audio_button/play_audio_button.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/jump_to_event_button/jump_to_event_button.tscn" type="PackedScene" id=9]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/custom_event_button/custom_event_button.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/change_timeline_button/change_timeline_button.tscn" type="PackedScene" id=11]
 
 [node name="EventsContainer" type="TabContainer"]
 margin_right = 419.0
@@ -66,27 +69,38 @@ __meta__ = {
 [node name="EventButtons" type="GridContainer" parent="Unimplemented Events"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-columns = 4
+columns = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StopAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 4 )]
-margin_right = 113.0
+margin_right = 93.0
 disabled = true
 clip_text = false
 
 [node name="ChangeExpressionButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 5 )]
-margin_left = 117.0
-margin_right = 230.0
+margin_left = 97.0
+margin_right = 304.0
 disabled = true
 clip_text = false
 
 [node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
-margin_left = 234.0
-margin_right = 347.0
+margin_left = 308.0
+margin_right = 399.0
 disabled = true
 clip_text = false
+
+[node name="JumpToEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 9 )]
+margin_left = 403.0
+margin_right = 427.0
+disabled = true
+
+[node name="CustomEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 10 )]
+disabled = true
+
+[node name="ChangeTimelineButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 11 )]
+disabled = true
 
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
