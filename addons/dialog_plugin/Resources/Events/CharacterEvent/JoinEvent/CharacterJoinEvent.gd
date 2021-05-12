@@ -13,6 +13,11 @@ export(bool) var skip = true
 
 var _PortraitManager: DialogPortraitManager
 
+func _init():
+	resource_name = "CharacterJoinEvent"
+	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/join_event_node/join_event_node.tscn"
+
+
 func excecute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
 	.excecute(caller)
@@ -45,12 +50,3 @@ func excecute(caller:DialogBaseNode) -> void:
 
 func _on_portrait_added()->void:
 	finish(skip)
-
-
-# Returns DialogEditorEventNode to be used inside the editor.
-func get_event_editor_node() -> DialogEditorEventNode:
-	var _scene_resource:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/join_event_node/join_event_node.tscn")
-	_scene_resource.resource_local_to_scene = true
-	var _instance = _scene_resource.instance(PackedScene.GEN_EDIT_STATE_INSTANCE)
-	_instance.base_resource = self
-	return _instance

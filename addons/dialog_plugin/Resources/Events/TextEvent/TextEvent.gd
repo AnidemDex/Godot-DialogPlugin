@@ -15,6 +15,7 @@ var _DialogNode:DialogDialogueNode = null
 
 func _init():
 	resource_name = "TextEvent"
+	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn"
 
 
 func excecute(caller:DialogBaseNode) -> void:
@@ -74,11 +75,3 @@ func _on_TextTimer_timeout():
 			_timer.stop()
 			_timer.queue_free()
 		finish()
-
-
-func get_event_editor_node() -> DialogEditorEventNode:
-	var _scene_resource:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn")
-	_scene_resource.resource_local_to_scene = true
-	var _instance = _scene_resource.instance(PackedScene.GEN_EDIT_STATE_INSTANCE)
-	_instance.base_resource = self
-	return _instance

@@ -7,10 +7,9 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
 
 [node name="EventsContainer" type="TabContainer"]
-margin_right = 270.0
-margin_bottom = 179.0
+margin_right = 419.0
+margin_bottom = 191.0
 rect_min_size = Vector2( 0, 88 )
-mouse_filter = 2
 tab_align = 0
 script = ExtResource( 1 )
 __meta__ = {
@@ -26,10 +25,8 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="EventButtons" type="GridContainer" parent="Events"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 115.0
-margin_bottom = 66.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
 columns = 4
@@ -50,6 +47,18 @@ margin_right = 84.0
 [node name="LeaveEventButton" parent="Events/EventButtons" instance=ExtResource( 3 )]
 margin_left = 90.0
 margin_right = 114.0
+
+[node name="Unimplemented Events" type="Tabs" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]

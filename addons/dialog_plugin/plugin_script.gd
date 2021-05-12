@@ -21,7 +21,7 @@ func _enter_tree() -> void:
 	
 	_add_editor_inspector_plugins()
 	
-	make_visible(false)
+#	make_visible(false)
 
 
 func _ready() -> void:

@@ -8,6 +8,7 @@ signal event_started(event_resource)
 signal event_finished(event_resource)
 
 var _caller:DialogBaseNode = null
+var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
 
 #warning-ignore-all:unused_argument
 func excecute(caller:DialogBaseNode) -> void:
@@ -19,4 +20,8 @@ func finish(skip=false) -> void:
 
 
 func get_event_editor_node() -> DialogEditorEventNode:
-	return DialogEditorEventNode.new()
+	var _scene_resource:PackedScene = load(event_editor_scene_path)
+	_scene_resource.resource_local_to_scene = true
+	var _instance = _scene_resource.instance() as DialogEditorEventNode
+	_instance.base_resource = self
+	return _instance
