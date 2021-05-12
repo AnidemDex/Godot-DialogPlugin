@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Character Change Expression event.**
 - **Play Audio event.**
 - **Stop Audio event.**
+- **Jump to event.**
+- **Jump to timeline.**
+- **Custom event.**
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
