@@ -18,12 +18,13 @@ CenterRightNode_path = NodePath("Center Right")
 RightNode_path = NodePath("Right")
 
 [node name="Left" type="ReferenceRect" parent="."]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = 45.0
-margin_top = -20.0
-margin_right = 85.0
-margin_bottom = 20.0
+anchor_top = 0.277
+anchor_right = 0.144
+anchor_bottom = 0.723
+margin_left = -16.0
+margin_top = -0.200012
+margin_right = -0.456009
+margin_bottom = 0.199982
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -31,14 +32,14 @@ __meta__ = {
 }
 
 [node name="Center Left" type="ReferenceRect" parent="."]
-anchor_left = 0.25
-anchor_top = 0.5
-anchor_right = 0.25
-anchor_bottom = 0.5
-margin_left = -19.576
-margin_top = -20.0
-margin_right = 20.424
-margin_bottom = 20.0
+anchor_left = 0.169
+anchor_top = 0.277
+anchor_right = 0.332
+anchor_bottom = 0.723
+margin_left = -0.056015
+margin_top = -0.200012
+margin_right = 0.0319824
+margin_bottom = 0.199982
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -46,14 +47,12 @@ __meta__ = {
 }
 
 [node name="Center" type="ReferenceRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -88.0
-margin_top = -135.0
-margin_right = 88.0
-margin_bottom = 135.0
+anchor_left = 0.414
+anchor_top = 0.275
+anchor_right = 0.586
+anchor_bottom = 0.725
+margin_left = 0.0639648
+margin_right = -0.0640259
 grow_horizontal = 2
 grow_vertical = 2
 __meta__ = {
@@ -61,33 +60,29 @@ __meta__ = {
 }
 
 [node name="Center Right" type="ReferenceRect" parent="."]
-anchor_left = 0.75
-anchor_top = 0.5
-anchor_right = 0.75
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
+anchor_left = 0.657
+anchor_top = 0.27
+anchor_right = 0.843
+anchor_bottom = 0.728
+margin_left = 0.231995
+margin_right = -0.232056
+margin_bottom = 0.199982
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 20, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Right" type="ReferenceRect" parent="."]
-anchor_left = 1.0
-anchor_top = 0.5
+anchor_left = 0.855
+anchor_top = 0.27
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -80.9999
-margin_top = -20.0
-margin_right = -40.9999
-margin_bottom = 20.0
+anchor_bottom = 0.732
+margin_left = 0.47998
+margin_right = 26.0
+margin_bottom = -0.200043
 grow_horizontal = 2
 grow_vertical = 2
-rect_pivot_offset = Vector2( 20, 20 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

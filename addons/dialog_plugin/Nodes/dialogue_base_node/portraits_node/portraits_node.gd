@@ -85,8 +85,19 @@ func add_portrait(
 			position_node = _right_node
 	
 	_ptrt_node.rect_position = position_node.rect_position
+	
 	_ptrt_node.rect_size = position_node.rect_size
-		
+	
+	_ptrt_node.anchor_left = position_node.anchor_left
+	_ptrt_node.anchor_top = position_node.anchor_top
+	_ptrt_node.anchor_right = position_node.anchor_right
+	_ptrt_node.anchor_bottom = position_node.anchor_bottom
+	
+	_ptrt_node.margin_left = position_node.margin_left
+	_ptrt_node.margin_top = position_node.margin_top
+	_ptrt_node.margin_right = position_node.margin_right
+	_ptrt_node.margin_bottom = position_node.margin_bottom
+	
 	
 	grab_portrait_focus(_ptrt_node, animation)
 	yield(_tween, "tween_all_completed")
