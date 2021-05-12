@@ -8,13 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Event container in timeline editor**
 - **Property `event_editor_scene_path`in EventResource.** Now is more easy to create custom events and point to its editor.
-- **Change expression event.**
+- **Character Leave event.** to make your characters out the conversation
+- **Character Change Expression event.**
 - **Play Audio event.**
 - **Stop Audio event.**
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
-- **New Character event.** Leave event, to make your characters out the conversation
 ### Deprecated
 - **Expand and contract animation in event buttons.** The information about the event now had to be a text hint tooltip.
 ### Removed
