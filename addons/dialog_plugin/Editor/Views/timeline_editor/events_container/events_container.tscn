@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/leave_event_button/leave_event_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/audio_event_button/stop_audio_button/stop_audio_event_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/change_expression_button/change_expression_event_button.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/audio_event_button/play_audio_button/play_audio_button.tscn" type="PackedScene" id=8]
 
 [node name="EventsContainer" type="TabContainer"]
 margin_right = 419.0
@@ -59,6 +62,31 @@ margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="EventButtons" type="GridContainer" parent="Unimplemented Events"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StopAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 4 )]
+margin_right = 113.0
+disabled = true
+clip_text = false
+
+[node name="ChangeExpressionButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 5 )]
+margin_left = 117.0
+margin_right = 230.0
+disabled = true
+clip_text = false
+
+[node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
+margin_left = 234.0
+margin_right = 347.0
+disabled = true
+clip_text = false
 
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]

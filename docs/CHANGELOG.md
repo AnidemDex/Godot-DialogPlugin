@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Event container in timeline editor**
 - **Property `event_editor_scene_path`in EventResource.** Now is more easy to create custom events and point to its editor.
+- **Change expression event.**
+- **Play Audio event.**
+- **Stop Audio event.**
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
