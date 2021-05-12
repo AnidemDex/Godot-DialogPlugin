@@ -9,7 +9,8 @@ var _editor_node:Control
 
 func _ready() -> void:
 	scan_resources()
-	instance_editor_scene()
+	if self != get_tree().edited_scene_root:
+		instance_editor_scene()
 
 
 func scan_resources() -> void:
