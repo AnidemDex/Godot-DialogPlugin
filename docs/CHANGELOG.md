@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Character, animation and portrait list giving weird errors on new projects.**
 - **Sometimes the editor closes itself with no reason**
+- **Character join event doesn't show the last saved portrait position.**
 
 
 ## [0.1.4] - 2021-05-09

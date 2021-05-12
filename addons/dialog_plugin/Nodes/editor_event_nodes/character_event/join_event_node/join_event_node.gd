@@ -40,6 +40,12 @@ func _update_node_values() -> void:
 		portrait_preview_node.texture = _selected_portrait.image
 		portrait_button_node.select_item_by_resource(_selected_portrait)
 		character_button_node.select_item_by_resource(_char)
+		for button in buttons.get_buttons():
+			var _btn = button
+			if _base.selected_position == int(button.name):
+				button.pressed = true
+			else:
+				button.pressed = false
 	else:
 		character_button_node.select(0)
 		portrait_button_node.select(0)
