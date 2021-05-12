@@ -265,9 +265,9 @@ margin_bottom = 32.0
 
 [node name="Label4" type="Label" parent="HBoxContainer/Portraits/VBoxContainer/PanelContainer/HBoxContainer"]
 margin_top = 8.0
-margin_right = 54.0
+margin_right = 76.0
 margin_bottom = 22.0
-text = "Portraits"
+text = "Expressions"
 
 [node name="CheckBox" type="CheckBox" parent="HBoxContainer/Portraits/VBoxContainer/PanelContainer/HBoxContainer"]
 margin_left = 462.0
