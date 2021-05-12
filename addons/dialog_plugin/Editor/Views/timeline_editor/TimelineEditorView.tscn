@@ -14,7 +14,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-TimelineEventsContainer_path = NodePath("VBoxContainer/HSplitContainer/ScrollContainer/TimelineEventsContainer")
+TimelineEventsContainer_path = NodePath("VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/TimelineEventsContainer")
 TimelinePreview_path = NodePath("VBoxContainer/HSplitContainer/TimelinePreview")
 LocaleList_path = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList")
 
@@ -78,6 +78,7 @@ text = "Locale Selection"
 margin_left = 108.0
 margin_right = 186.0
 margin_bottom = 24.0
+items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
 margin_left = 862.0
@@ -124,35 +125,36 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
 margin_right = 506.0
 margin_bottom = 536.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
+margin_right = 506.0
+margin_bottom = 444.0
 rect_min_size = Vector2( 0, 210 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/ScrollContainer"]
+[node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer"]
 margin_right = 506.0
-margin_bottom = 536.0
+margin_bottom = 444.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
 
+[node name="EventButtonsContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 448.0
+margin_right = 506.0
+margin_bottom = 536.0
+
 [node name="TimelinePreview" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
 margin_bottom = 536.0
 
-[node name="EventButtonsContainer" parent="." instance=ExtResource( 3 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 30.8155
-margin_top = -169.552
-margin_right = 140.815
-margin_bottom = -54.552
-
 [connection signal="item_selected" from="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
-[connection signal="item_added" from="VBoxContainer/HSplitContainer/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
-[connection signal="event_pressed" from="EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
+[connection signal="item_added" from="VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
+[connection signal="event_pressed" from="VBoxContainer/HSplitContainer/VBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]

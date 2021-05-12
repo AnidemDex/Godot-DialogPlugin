@@ -1,101 +1,35 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/leave_event_button/leave_event_button.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/CheckBox.gd" type="Script" id=8]
-[ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=9]
-[ext_resource path="res://addons/dialog_plugin/assets/Themes/events_container_hide_button.tres" type="StyleBox" id=10]
-[ext_resource path="res://addons/dialog_plugin/assets/Themes/events_container_hide_button_normal.tres" type="StyleBox" id=11]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.168627, 0.168627, 0.192157, 0.627451 )
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_bottom_right = 6
-shadow_size = 1
-shadow_offset = Vector2( 6, 5 )
-anti_aliasing = false
-
-[sub_resource type="Image" id=7]
-data = {
-"data": PoolByteArray( 45, 44, 47, 8, 72, 70, 74, 254, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 72, 70, 74, 254, 45, 44, 47, 9, 72, 70, 74, 255, 64, 62, 66, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 64, 62, 66, 255, 72, 70, 74, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 195, 195, 195, 255, 195, 195, 195, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 194, 194, 194, 255, 194, 194, 194, 255, 194, 194, 194, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 193, 193, 193, 255, 194, 194, 194, 255, 194, 194, 194, 255, 194, 194, 194, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 191, 191, 191, 255, 191, 191, 191, 255, 191, 191, 191, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 190, 190, 190, 255, 190, 190, 190, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 72, 70, 74, 255, 64, 62, 66, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 64, 62, 66, 255, 72, 70, 74, 255, 45, 44, 47, 13, 72, 70, 74, 254, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 72, 70, 74, 254, 45, 44, 47, 25 ),
-"format": "RGBA8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=3]
-flags = 4
-flags = 4
-image = SubResource( 7 )
-size = Vector2( 16, 16 )
-
-[sub_resource type="Image" id=8]
-data = {
-"data": PoolByteArray( 45, 44, 47, 8, 72, 70, 74, 254, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 72, 70, 74, 254, 45, 44, 47, 9, 72, 70, 74, 255, 64, 62, 66, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 64, 62, 66, 255, 72, 70, 74, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 195, 195, 195, 255, 195, 195, 195, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 195, 195, 195, 255, 194, 194, 194, 255, 194, 194, 194, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 193, 193, 193, 255, 194, 194, 194, 255, 194, 194, 194, 255, 194, 194, 194, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 193, 193, 193, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 192, 192, 192, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 191, 191, 191, 255, 191, 191, 191, 255, 191, 191, 191, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 190, 190, 190, 255, 190, 190, 190, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 76, 74, 78, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 76, 74, 78, 255, 72, 70, 74, 255, 64, 62, 66, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 56, 54, 58, 255, 64, 62, 66, 255, 72, 70, 74, 255, 45, 44, 47, 13, 72, 70, 74, 254, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 76, 74, 78, 255, 72, 70, 74, 254, 45, 44, 47, 25 ),
-"format": "RGBA8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=5]
-flags = 4
-flags = 4
-image = SubResource( 8 )
-size = Vector2( 16, 16 )
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[node name="EventsContainer" type="VBoxContainer"]
-margin_right = 110.0
-margin_bottom = 103.0
+[node name="EventsContainer" type="TabContainer"]
+margin_right = 270.0
+margin_bottom = 179.0
 rect_min_size = Vector2( 0, 88 )
 mouse_filter = 2
-custom_constants/separation = 0
+tab_align = 0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-margin_right = 90.0
-margin_bottom = 18.0
-mouse_default_cursor_shape = 13
-size_flags_horizontal = 0
-custom_styles/panel = ExtResource( 9 )
+[node name="Events" type="Tabs" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
-[node name="Label" type="Label" parent="PanelContainer"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 88.0
-margin_bottom = 16.0
-text = "Dialog Events"
-align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_top = 18.0
-margin_right = 140.0
-margin_bottom = 103.0
-size_flags_vertical = 3
-custom_constants/separation = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
-margin_right = 116.0
-margin_bottom = 85.0
-custom_styles/panel = SubResource( 1 )
-
-[node name="EventButtons" type="GridContainer" parent="HBoxContainer/PanelContainer"]
+[node name="EventButtons" type="GridContainer" parent="Events"]
 margin_left = 1.0
 margin_top = 1.0
 margin_right = 115.0
-margin_bottom = 84.0
+margin_bottom = 66.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
 columns = 4
@@ -103,39 +37,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextEventButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 2 )]
+[node name="TextEventButton" parent="Events/EventButtons" instance=ExtResource( 2 )]
 
-[node name="WaitTimeButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 6 )]
+[node name="WaitTimeButton" parent="Events/EventButtons" instance=ExtResource( 6 )]
 margin_left = 30.0
 margin_right = 54.0
 
-[node name="JoinEventButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 7 )]
+[node name="JoinEventButton" parent="Events/EventButtons" instance=ExtResource( 7 )]
 margin_left = 60.0
 margin_right = 84.0
 
-[node name="GenericEventButton" parent="HBoxContainer/PanelContainer/EventButtons" instance=ExtResource( 3 )]
+[node name="LeaveEventButton" parent="Events/EventButtons" instance=ExtResource( 3 )]
 margin_left = 90.0
 margin_right = 114.0
 
-[node name="CheckBox" type="CheckBox" parent="HBoxContainer"]
-margin_left = 116.0
-margin_right = 140.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 24, 64 )
-size_flags_vertical = 0
-custom_icons/checked = SubResource( 3 )
-custom_icons/unchecked = SubResource( 5 )
-custom_styles/hover = ExtResource( 11 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = SubResource( 6 )
-custom_styles/normal = ExtResource( 11 )
-custom_constants/check_vadjust = 0
-pressed = true
-align = 1
-script = ExtResource( 8 )
-
-[connection signal="gui_input" from="PanelContainer" to="." method="_on_PanelContainer_gui_input"]
-[connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="HBoxContainer/PanelContainer/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="toggled" from="HBoxContainer/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
