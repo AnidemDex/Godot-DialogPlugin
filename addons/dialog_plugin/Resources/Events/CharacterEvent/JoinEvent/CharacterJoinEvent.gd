@@ -9,13 +9,13 @@ export(int) var selected_portrait = 0
 export(DialogPortraitManager.Position) var selected_position = 0
 # Refer to DialogPortraitManager.PAnimation
 export(DialogPortraitManager.PAnimation) var selected_animation = 0
-export(bool) var skip = true
 
 var _PortraitManager: DialogPortraitManager
 
 func _init():
 	resource_name = "CharacterJoinEvent"
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/join_event_node/join_event_node.tscn"
+	skip = true
 
 
 func excecute(caller:DialogBaseNode) -> void:

@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Jump to event.**
 - **Jump to timeline.**
 - **Custom event.**
+- **New property for every EventResource:** `skip`. Now you can decide if the event will continue inmediatly to next event or will wait until the user press a key.
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
