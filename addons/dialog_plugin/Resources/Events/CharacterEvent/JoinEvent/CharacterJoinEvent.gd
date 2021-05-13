@@ -23,7 +23,7 @@ func excecute(caller:DialogBaseNode) -> void:
 	.excecute(caller)
 
 	if not character:
-		finish()
+		finish(true)
 		return
 	
 	_caller = caller
@@ -31,7 +31,7 @@ func excecute(caller:DialogBaseNode) -> void:
 	_PortraitManager = (caller.PortraitManager as DialogPortraitManager)
 	
 	if not _PortraitManager:
-		finish()
+		finish(true)
 		return
 	
 	_PortraitManager.visible = true

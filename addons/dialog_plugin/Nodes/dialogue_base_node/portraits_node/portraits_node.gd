@@ -44,7 +44,7 @@ func add_portrait(
 	get_focus=true
 	) -> void:
 	
-	if not character_resource and not portrait:
+	if not character_resource or not portrait:
 		emit_signal("portrait_added")
 		return
 	
@@ -112,8 +112,7 @@ func grab_portrait_focus(char_portrait_node:TextureRect, animation):
 	match animation:
 		PAnimation.FADE_IN:
 			_tween.node_fade_in(char_portrait_node)
-			_tween.start()
 		_:
 			pass
-	# wait
+	_tween.start()
 	pass
