@@ -14,7 +14,7 @@ func _init()%VOID_RETURN%:
     #skip = false
     pass
 
-func excecute(caller:DialogNode)%VOID_RETURN%:
+func excecute(caller:DialogBaseNode)%VOID_RETURN%:
     # Parent function must be called at the start
     .excecute(caller)
 
