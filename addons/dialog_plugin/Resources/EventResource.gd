@@ -14,6 +14,7 @@ var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nod
 
 #warning-ignore-all:unused_argument
 func excecute(caller:DialogBaseNode) -> void:
+	_caller = caller
 	emit_signal("event_started", self)
 
 
@@ -21,6 +22,7 @@ func finish(jump_to_next_event=skip) -> void:
 	emit_signal("event_finished", self, jump_to_next_event)
 
 
+# Returns DialogEditorEventNode to be used inside the editor.
 func get_event_editor_node() -> DialogEditorEventNode:
 	var _scene_resource:PackedScene = load(event_editor_scene_path)
 	_scene_resource.resource_local_to_scene = true

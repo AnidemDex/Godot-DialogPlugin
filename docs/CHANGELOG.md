@@ -16,11 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Jump to timeline.**
 - **Custom event.**
 - **New property for every EventResource:** `skip`. Now you can decide if the event will continue inmediatly to next event or will wait until the user press a key.
+- **OptionButtonGenerator class added.** Is like an OptionButton but with suggar. [Needs documentation and is not avaliable in the global scope]
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
 - **Portraits are now treated as expressions in editor.**
 - **Portrait ReferenceRect are now useful.** They represent how the portrait may be in game, including position and size.
+- **Script templates.** Now with more comments
 ### Deprecated
 - **Expand and contract animation in event buttons.** The information about the event now had to be a text hint tooltip.
 ### Removed
