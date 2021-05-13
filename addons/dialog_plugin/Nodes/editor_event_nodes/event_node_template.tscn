@@ -28,14 +28,15 @@ IconNode_path = NodePath("VBoxContainer/Top/HBoxContainer/Icon")
 TopContent_path = NodePath("VBoxContainer/Top")
 CenterContent_path = NodePath("VBoxContainer/Center")
 BottomContent_path = NodePath("VBoxContainer/Bottom")
-IndexLbl_path = NodePath("VBoxContainer/Bottom/Index")
+IndexLbl_path = NodePath("VBoxContainer/Bottom/HBoxContainer/Index")
 MenuBtn_path = NodePath("VBoxContainer/Top/HBoxContainer/MenuButton")
+SkipBtn_path = NodePath("VBoxContainer/Bottom/HBoxContainer/SkipButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 4.0
 margin_right = 1016.0
-margin_bottom = 54.0
+margin_bottom = 74.0
 custom_constants/separation = 0
 
 [node name="Top" type="PanelContainer" parent="VBoxContainer"]
@@ -98,17 +99,29 @@ custom_styles/panel = SubResource( 1 )
 [node name="Bottom" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 30.0
 margin_right = 1008.0
-margin_bottom = 44.0
+margin_bottom = 70.0
 mouse_filter = 1
 size_flags_vertical = 8
 custom_styles/panel = SubResource( 1 )
 
-[node name="Index" type="Label" parent="VBoxContainer/Bottom"]
-margin_left = 951.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Bottom"]
 margin_right = 1008.0
-margin_bottom = 14.0
+margin_bottom = 40.0
+
+[node name="SkipButton" type="CheckButton" parent="VBoxContainer/Bottom/HBoxContainer"]
+margin_right = 201.0
+margin_bottom = 40.0
+disabled = true
+text = "Jump to next event"
+
+[node name="Index" type="Label" parent="VBoxContainer/Bottom/HBoxContainer"]
+margin_left = 951.0
+margin_top = 13.0
+margin_right = 1008.0
+margin_bottom = 27.0
 mouse_filter = 1
-size_flags_horizontal = 8
+size_flags_horizontal = 10
 text = "No index"
 
 [connection signal="gui_input" from="VBoxContainer/Top" to="." method="_on_Top_gui_input"]
+[connection signal="toggled" from="VBoxContainer/Bottom/HBoxContainer/SkipButton" to="." method="_on_SkipButton_toggled"]

@@ -27,13 +27,15 @@ export(NodePath) var CenterContent_path:NodePath
 export(NodePath) var BottomContent_path:NodePath
 export(NodePath) var IndexLbl_path:NodePath
 export(NodePath) var MenuBtn_path:NodePath
+export(NodePath) var SkipBtn_path:NodePath
 
-onready var top_content_node:PanelContainer = get_node_or_null(TopContent_path)
-onready var center_content_node:PanelContainer = get_node_or_null(CenterContent_path)
-onready var bottom_content_node:PanelContainer = get_node_or_null(BottomContent_path)
-onready var icon_node:TextureRect = get_node_or_null(IconNode_path)
+onready var top_content_node:PanelContainer = get_node_or_null(TopContent_path) as PanelContainer
+onready var center_content_node:PanelContainer = get_node_or_null(CenterContent_path) as PanelContainer
+onready var bottom_content_node:PanelContainer = get_node_or_null(BottomContent_path) as PanelContainer
+onready var icon_node:TextureRect = get_node_or_null(IconNode_path) as TextureRect
 onready var index_label_node = get_node_or_null(IndexLbl_path)
-onready var menu_button_node:MenuButton = get_node(MenuBtn_path)
+onready var menu_button_node:MenuButton = get_node(MenuBtn_path) as MenuButton
+onready var skip_button_node:CheckButton = get_node(SkipBtn_path) as CheckButton
 
 func _ready() -> void:
 	
@@ -41,12 +43,14 @@ func _ready() -> void:
 		DialogUtil.Logger.print(self,["There's no resource reference for this event", name])
 		return
 	
-	if not (base_resource as Resource).is_connected("changed", self, "_on_resource_change"):
+	if not base_resource.is_connected("changed", self, "_on_resource_change"):
 		base_resource.connect("changed", self, "_on_resource_change")
 	
 	var menu_button_popup_node:PopupMenu = menu_button_node.get_popup()
 	var _err = menu_button_popup_node.connect("id_pressed", self, "_on_MenuButtonPopup_id_pressed")
 	assert(_err == OK)
+	
+	skip_button_node.pressed = base_resource.skip
 
 
 func _set_idx(value):
@@ -153,3 +157,9 @@ func _on_Top_gui_input(event: InputEvent) -> void:
 			emit_signal("item_dragged", base_resource, idx, new_idx)
 			rect_global_position.y = _drag
 			last_drag = _drag
+
+
+func _on_SkipButton_toggled(button_pressed: bool) -> void:
+	if base_resource:
+		base_resource.skip = button_pressed
+		_save_resource()
