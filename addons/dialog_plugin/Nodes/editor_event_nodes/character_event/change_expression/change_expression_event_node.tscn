@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/characters_list_button/CharactersButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/portrait_list_button/portrait_list_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/change_expression/change_expression_event_node.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.12549, 0.145098, 0.192157, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0980392, 0.113725, 0.156863, 1 )
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CharacterChangeExpressionNode" instance=ExtResource( 1 )]
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+CharacterBtn_path = NodePath("VBoxContainer/Top/HBoxContainer/CharactersButton")
+PortraitBtn_path = NodePath("VBoxContainer/Top/HBoxContainer/PortraitsButton")
+
+[node name="CharactersButton" parent="VBoxContainer/Top/HBoxContainer" index="3" instance=ExtResource( 2 )]
+margin_left = 68.0
+margin_right = 133.0
+items = [ "[Empty]", null, false, 0, null ]
+
+[node name="PortraitsButton" parent="VBoxContainer/Top/HBoxContainer" index="4" instance=ExtResource( 3 )]
+visible = false
+margin_right = 168.0
+items = [ "[Empty]", null, false, 0, null ]
+
+[connection signal="item_selected" from="VBoxContainer/Top/HBoxContainer/CharactersButton" to="." method="_on_CharactersButton_item_selected"]
+[connection signal="item_selected" from="VBoxContainer/Top/HBoxContainer/PortraitsButton" to="." method="_on_PortraitsButton_item_selected"]

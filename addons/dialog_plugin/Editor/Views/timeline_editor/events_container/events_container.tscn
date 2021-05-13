@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/vseparation = 6
 custom_constants/hseparation = 6
-columns = 4
+columns = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -53,6 +53,10 @@ margin_right = 84.0
 [node name="LeaveEventButton" parent="Events/EventButtons" instance=ExtResource( 3 )]
 margin_left = 90.0
 margin_right = 114.0
+
+[node name="ChangeExpressionButton" parent="Events/EventButtons" instance=ExtResource( 5 )]
+margin_left = 120.0
+margin_right = 144.0
 
 [node name="Unimplemented Events" type="Tabs" parent="."]
 visible = false
@@ -79,12 +83,6 @@ margin_right = 93.0
 disabled = true
 clip_text = false
 
-[node name="ChangeExpressionButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 5 )]
-margin_left = 97.0
-margin_right = 304.0
-disabled = true
-clip_text = false
-
 [node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
 margin_left = 308.0
 margin_right = 399.0
@@ -105,3 +103,5 @@ disabled = true
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/LeaveEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]
