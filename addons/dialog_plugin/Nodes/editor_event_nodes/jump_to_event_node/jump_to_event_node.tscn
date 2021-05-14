@@ -27,6 +27,7 @@ corner_radius_bottom_left = 8
 margin_bottom = -548.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
+EventList_path = NodePath("VBoxContainer/Top/HBoxContainer/EventList")
 
 [node name="VBoxContainer" parent="." index="0"]
 margin_bottom = 48.0

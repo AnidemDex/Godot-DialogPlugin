@@ -59,13 +59,13 @@ __meta__ = {
 }
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
-margin_right = 200.0
+margin_right = 196.0
 margin_bottom = 38.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 193.0
+margin_right = 189.0
 margin_bottom = 31.0
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
@@ -76,9 +76,11 @@ text = "Locale Selection"
 
 [node name="LocaleList" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 108.0
-margin_right = 186.0
+margin_right = 182.0
 margin_bottom = 24.0
+text = "English"
 items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
+selected = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
 margin_left = 862.0

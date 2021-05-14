@@ -61,6 +61,8 @@ func _load_events() -> void:
 		assert(_err == OK)
 		_err = event_node.connect("item_dragged", self, "_on_EventNode_event_dragged")
 		assert(_err == OK)
+		_err = event_node.connect("timeline_requested",self,"_on_EventNode_timeline_requested")
+		assert(_err == OK)
 		timeline_events_container_node.add_child(event_node)
 		event_nodes[_idx] = event_node
 		event_node.idx = _idx
@@ -139,6 +141,10 @@ func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int
 			base_resource.events.get_resources().insert(_n_idx, event)
 			selected_event_idx = _n_idx
 		_load_events()
+
+
+func _on_EventNode_timeline_requested(node:DialogEditorEventNode) -> void:
+	node.timeline_resource = base_resource
 
 
 func _on_LocaleList_item_selected(index: int) -> void:

@@ -6,6 +6,7 @@ signal delelete_item_requested(item)
 signal save_item_requested(item)
 signal item_selected(item)
 signal item_dragged(item, node_idx, to_idx)
+signal timeline_requested(emitter_node)
 
 const DEFAULT_COLOR = Color("#202531")
 const SELECTED_COLOR = Color("#353f57")

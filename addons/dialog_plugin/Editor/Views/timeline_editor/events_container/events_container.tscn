@@ -58,6 +58,10 @@ margin_right = 114.0
 margin_left = 120.0
 margin_right = 144.0
 
+[node name="JumpToEventButton" parent="Events/EventButtons" instance=ExtResource( 9 )]
+margin_left = 150.0
+margin_right = 174.0
+
 [node name="Unimplemented Events" type="Tabs" parent="."]
 visible = false
 anchor_right = 1.0
@@ -82,23 +86,22 @@ __meta__ = {
 margin_right = 93.0
 disabled = true
 clip_text = false
+event_resource = null
 
 [node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
 margin_left = 308.0
 margin_right = 399.0
 disabled = true
 clip_text = false
-
-[node name="JumpToEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 9 )]
-margin_left = 403.0
-margin_right = 427.0
-disabled = true
+event_resource = null
 
 [node name="CustomEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 10 )]
 disabled = true
+event_resource = null
 
 [node name="ChangeTimelineButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 11 )]
 disabled = true
+event_resource = null
 
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]

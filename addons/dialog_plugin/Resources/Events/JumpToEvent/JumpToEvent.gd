@@ -16,7 +16,7 @@ func excecute(caller:DialogBaseNode) -> void:
 	
 	if event_index >= 0:
 		var _timeline:DialogTimelineResource = caller.timeline
-		_timeline.current_event = event_index
+		_timeline.current_event = max(-1, event_index-1)
 
 	# Notify that you end this event
 	finish()
