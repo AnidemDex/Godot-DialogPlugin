@@ -2,7 +2,7 @@ tool
 extends Button
 
 # must be a DialogEventResource
-export (Resource) var event_resource:Resource
+var event_resource:Resource
 
 onready var tween_node = $Tween
 
@@ -59,3 +59,18 @@ func _on_mouse_exited() -> void:
 
 func _on_Tween_completed(object: Object, key: NodePath) -> void:
 	rect_min_size = rect_size
+
+
+# Esto debe hacerse al menos hasta que https://github.com/godotengine/godot/pull/44879
+# sea añadido a Godot
+func _get_property_list() -> Array:
+	var properties:Array = []
+	properties.append(
+		{
+			"name":"event_resource",
+			"type":TYPE_OBJECT,
+			"hint":PROPERTY_HINT_RESOURCE_TYPE,
+			"hint_string":"DialogEventResource",
+		}
+	)
+	return properties

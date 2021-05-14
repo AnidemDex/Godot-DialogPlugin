@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Portraits are now treated as expressions in editor.**
 - **Portrait ReferenceRect are now useful.** They represent how the portrait may be in game, including position and size.
 - **Script templates.** Now with more comments
+- **DialogEvent in button events nodes.**Now is more easy to display custom resources. Errors may appear in console due a godot related bug.
 ### Deprecated
 - **Expand and contract animation in event buttons.** The information about the event now had to be a text hint tooltip.
 ### Removed
