@@ -12,6 +12,10 @@ const SELECTED_COLOR = Color("#353f57")
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
 var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
+# Te voy a comentar esto por si se te llega a olvidar:
+# base_resource es un DialogEventResource relacionado al evento
+# que va a modificar. Por ejemplo, en el nodo de TextEvent
+# tendrás un base_resource de DialogTextEvent
 var base_resource:Resource = null
 var idx:int = 0 setget _set_idx
 var drag_position
