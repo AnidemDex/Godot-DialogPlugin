@@ -8,15 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Event container in timeline editor**
 - **Property `event_editor_scene_path`in EventResource.** Now is more easy to create custom events and point to its editor.
-- **Character Leave event.** to make your characters out the conversation
-- **Character Change Expression event.**
+- **Character Leave event.** to make your characters out the conversation, know as `DialogCharacterLeaveEvent`
+- **Character Change Expression event.** Know as `DialogCharacterChangeExpressionEvent`
 - **Play Audio event.**
 - **Stop Audio event.**
-- **Jump to event.**
-- **Jump to timeline.**
-- **Custom event.**
+- **Jump to event.** Know as `DialogJumpToEvent`
+- **Jump to timeline.** Know as `DialogChangeTimelineEvent`
+- **Custom event.** Know as `DialogCustomEvent`
 - **New property for every EventResource:** `skip`. Now you can decide if the event will continue inmediatly to next event or will wait until the user press a key.
 - **OptionButtonGenerator class added.** Is like an OptionButton but with suggar. [Needs documentation and is not avaliable in the global scope]
+- **New signal to DialogEditorEventNode.** `timeline_requested`
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**

@@ -2,7 +2,7 @@ tool
 class_name DialogCustomEvent
 extends DialogEventResource
 
-var event_resource = null
+var event_resource:DialogEventResource = null
 
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
