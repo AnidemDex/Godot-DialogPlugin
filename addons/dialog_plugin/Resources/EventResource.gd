@@ -5,7 +5,7 @@ extends Resource
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
 signal event_started(event_resource)
-signal event_finished(event_resource)
+signal event_finished(event_resource, jump_to_next_event)
 
 export(bool) var skip:bool = false
 
