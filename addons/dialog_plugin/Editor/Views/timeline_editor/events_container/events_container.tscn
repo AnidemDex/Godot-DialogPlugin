@@ -62,6 +62,10 @@ margin_right = 144.0
 margin_left = 150.0
 margin_right = 174.0
 
+[node name="ChangeTimelineButton" parent="Events/EventButtons" instance=ExtResource( 11 )]
+margin_left = 180.0
+margin_right = 204.0
+
 [node name="Unimplemented Events" type="Tabs" parent="."]
 visible = false
 anchor_right = 1.0
@@ -99,12 +103,10 @@ event_resource = null
 disabled = true
 event_resource = null
 
-[node name="ChangeTimelineButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 11 )]
-disabled = true
-event_resource = null
-
 [connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/LeaveEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Events/EventButtons/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/JumpToEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Events/EventButtons/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
