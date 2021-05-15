@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **New property for every EventResource:** `skip`. Now you can decide if the event will continue inmediatly to next event or will wait until the user press a key.
 - **OptionButtonGenerator class added.** Is like an OptionButton but with suggar. [Needs documentation and is not avaliable in the global scope]
 - **New signal to DialogEditorEventNode.** `timeline_requested`
+- **Variables.** 
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**

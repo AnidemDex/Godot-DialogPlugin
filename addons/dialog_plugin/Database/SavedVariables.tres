@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "tool
+extends Resource
+
+var variables:Dictionary = {} setget _set_variables_dict, _get_variables_dict
+
+
+func get_original_variables() -> Dictionary:
+	return variables
+
+
+func _is_valid_dictionary(dict:Dictionary) -> bool:
+	for key in dict.keys():
+		if typeof(key) != TYPE_STRING:
+			return false
+	return true
+
+
+func _set_variables_dict(value:Dictionary) -> void:
+	if _is_valid_dictionary(value):
+		variables = value.duplicate(true)
+
+
+func _get_variables_dict() -> Dictionary:
+	return variables.duplicate(true)
+"
+
+[resource]
+script = SubResource( 1 )
