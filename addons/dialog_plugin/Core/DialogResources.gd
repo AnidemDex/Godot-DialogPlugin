@@ -7,6 +7,9 @@ const EDITOR_i18n_PATH = DB_PATH+"Editor_i18n.tres"
 const TRANSLATIONSDB_PATH = DB_PATH+"SavedTranslations.tres"
 
 const CONFIGURATION_PATH = DB_PATH+"EditorConfiguration.tres"
+const DEFAULT_VARIABLES_PATH = DB_PATH+"SavedVariables.tres"
+const DEFAULT_VARIABLES = preload(DEFAULT_VARIABLES_PATH)
+#const USER_SAVED_VARIABLES_PATH = "user://SavedDialogData.res"
 
 const RESOURCES_DIR = "res://dialog_files/"
 const TIMELINES_DIR = RESOURCES_DIR+"timelines/"

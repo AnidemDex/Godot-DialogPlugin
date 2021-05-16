@@ -43,3 +43,19 @@ static func get_default_dialog_bubble() -> DialogBaseNode:
 	var _dialog_bubble_scene:PackedScene = load(DefaultDialogBubble) as PackedScene
 	var _dialog_bubble_node:DialogBaseNode = _dialog_bubble_scene.instance() as DialogBaseNode
 	return _dialog_bubble_node
+
+
+static func get_variables() -> Dictionary:
+	var DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
+	return DialogResources.DEFAULT_VARIABLES.variables
+
+
+static func get_variable(key:String):
+	var _variables = get_variables()
+	var _value = _variables.get(key, null)
+	return _value
+
+
+static func set_variable(key:String, value):
+	var DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
+	DialogResources.DEFAULT_VARIABLES.set_value(key,value)
