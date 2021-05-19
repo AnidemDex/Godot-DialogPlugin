@@ -39,14 +39,14 @@ __meta__ = {
 }
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_right = 306.0
+margin_right = 388.0
 margin_bottom = 46.0
 custom_styles/panel = ExtResource( 4 )
 
 [node name="ToolButtons" type="HBoxContainer" parent="PanelContainer"]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 302.0
+margin_right = 384.0
 margin_bottom = 42.0
 custom_constants/separation = 12
 alignment = 1
@@ -72,9 +72,15 @@ __meta__ = {
 "TEXT_KEY": "Characters"
 }
 
-[node name="ConfigurationButton" type="Button" parent="PanelContainer/ToolButtons"]
+[node name="VariablesButton" type="Button" parent="PanelContainer/ToolButtons"]
 margin_left = 202.0
-margin_right = 298.0
+margin_right = 272.0
+margin_bottom = 38.0
+text = "Variables"
+
+[node name="ConfigurationButton" type="Button" parent="PanelContainer/ToolButtons"]
+margin_left = 284.0
+margin_right = 380.0
 margin_bottom = 38.0
 size_flags_horizontal = 10
 disabled = true
@@ -92,9 +98,9 @@ text = "Dialog Editor"
 align = 2
 
 [node name="CheckBox" type="CheckBox" parent="."]
-margin_left = 288.0
+margin_left = 370.0
 margin_top = 46.0
-margin_right = 306.0
+margin_right = 388.0
 margin_bottom = 63.0
 size_flags_horizontal = 8
 custom_icons/checked = SubResource( 2 )
@@ -171,6 +177,7 @@ margin_bottom = 136.0
 
 [connection signal="pressed" from="PanelContainer/ToolButtons/TimelinesButton" to="." method="_on_TimelinesButton_pressed"]
 [connection signal="pressed" from="PanelContainer/ToolButtons/CharactersButton" to="." method="_on_CharactersButton_pressed"]
+[connection signal="pressed" from="PanelContainer/ToolButtons/VariablesButton" to="." method="_on_VariablesButton_pressed"]
 [connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
 [connection signal="deletion_requested" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_deletion_requested"]
 [connection signal="item_selected" from="TimelineListPopUp" to="." method="_on_TimelineListPopUp_item_selected"]

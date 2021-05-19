@@ -291,8 +291,8 @@ margin_bottom = 564.0
 size_flags_horizontal = 3
 
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/PanelContainer/HBoxContainer/DefaultspeakerBoolButton" to="." method="_on_DefaultspeakerButton_toggled"]
-[connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName" method="_on_CheckButton_toggled"]
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="." method="_on_DisplayNameBool_toggled"]
+[connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/AlternativeNameSelector/CheckButton" to="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName" method="_on_CheckButton_toggled"]
 [connection signal="text_changed" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/DisplayName/VBoxContainer/DisplayNameContainer/LineEdit" to="." method="_on_DisplayName_text_changed"]
 [connection signal="toggled" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer/HBoxContainer/CheckBox" to="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description" method="_on_CheckBox_toggled"]
 [connection signal="text_changed" from="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties/Properties/Description/VBoxContainer/MarginContainer/TextEdit" to="." method="_on_Description_text_changed"]

@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/variable_editor/variable_node/variable_node.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node_template.tres" type="StyleBox" id=2]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/variable_editor/variable_node/VarDisplayer.gd" type="Script" id=3]
+
+[node name="VariableContainer" type="PanelContainer"]
+anchor_right = 1.0
+margin_bottom = 38.0
+custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+VarNameLabel_path = NodePath("HBoxContainer/Label")
+VarDisplayer_path = NodePath("HBoxContainer/VarDisplayer")
+VarIcon_path = NodePath("HBoxContainer/TypeIcon")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 1016.0
+margin_bottom = 34.0
+
+[node name="TypeIcon" type="TextureRect" parent="HBoxContainer"]
+margin_right = 24.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 24, 24 )
+stretch_mode = 6
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+margin_left = 28.0
+margin_right = 32.0
+margin_bottom = 30.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_left = 36.0
+margin_top = 8.0
+margin_right = 148.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 112, 0 )
+text = "VARIABLE_NAME"
+align = 1
+valign = 1
+
+[node name="VarDisplayer" type="PanelContainer" parent="HBoxContainer"]
+margin_left = 152.0
+margin_right = 544.0
+margin_bottom = 30.0
+size_flags_horizontal = 3
+script = ExtResource( 3 )
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 936.0
+margin_right = 940.0
+margin_bottom = 30.0
+size_flags_horizontal = 10
+
+[node name="RemoveButton" type="ToolButton" parent="HBoxContainer"]
+margin_left = 944.0
+margin_right = 1008.0
+margin_bottom = 30.0
+text = "Remove"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="variable_value_modified" from="HBoxContainer/VarDisplayer" to="." method="_on_var_value_modified"]
+[connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_RemoveButton_pressed"]

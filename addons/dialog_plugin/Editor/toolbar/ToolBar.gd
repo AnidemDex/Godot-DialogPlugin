@@ -3,6 +3,7 @@ extends VBoxContainer
 
 signal timeline_selected(timeline)
 signal character_selected(character)
+signal variable_selected
 
 const DialogDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd")
 
@@ -113,3 +114,7 @@ func _on_CharacterListPopUp_deletion_requested(item) -> void:
 	# TODO: Mejorar este mensaje
 	print("[Dialogic] Character resource {} will be removed from our database. If you really want to delete this item, remove it from your files".format({"":item.resource_path.get_file()}))
 	DialogDB.Characters.get_database().remove(item)
+
+
+func _on_VariablesButton_pressed() -> void:
+	emit_signal("variable_selected")

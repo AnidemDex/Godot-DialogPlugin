@@ -7,6 +7,7 @@ const TranslationService = preload("res://addons/dialog_plugin/Other/translation
 
 const CharacterEditorScene = preload("res://addons/dialog_plugin/Editor/Views/character_editor/CharacterEditorView.tscn")
 const TimelineEditorScene = preload("res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEditorView.tscn")
+const VariableEditorScene = preload("res://addons/dialog_plugin/Editor/Views/variable_editor/DefinitionEditorView.tscn")
 
 var _editor_view:Control
 
@@ -35,3 +36,12 @@ func _on_ToolBar_timeline_selected(timeline) -> void:
 func _exit_tree() -> void:
 	if _editor_view and is_instance_valid(_editor_view):
 		_editor_view.free()
+
+
+func _on_ToolBar_variable_selected() -> void:
+	if _editor_view:
+		_editor_view.queue_free()
+	_editor_view = VariableEditorScene.instance()
+	$ViewContainer.add_child(_editor_view)
+	yield(_editor_view, "ready")
+	_editor_view._load_events()

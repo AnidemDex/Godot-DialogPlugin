@@ -32,3 +32,4 @@ rect_pivot_offset = Vector2( 153, 0 )
 
 [connection signal="character_selected" from="ToolBar" to="." method="_on_ToolBar_character_selected"]
 [connection signal="timeline_selected" from="ToolBar" to="." method="_on_ToolBar_timeline_selected"]
+[connection signal="variable_selected" from="ToolBar" to="." method="_on_ToolBar_variable_selected"]

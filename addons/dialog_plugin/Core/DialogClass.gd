@@ -3,6 +3,10 @@ class_name Dialog
 ##
 ##
 
+const _DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
+const _VarResourcePath = _DialogResources.DEFAULT_VARIABLES_PATH
+const _VarResource = preload(_VarResourcePath)
+
 ## Default TextBox Scene path
 const DefaultDialogTextBox:String = "res://addons/dialog_plugin/Nodes/ingame_dialogue_box/ingame_dialogue_node.tscn"
 
@@ -46,8 +50,7 @@ static func get_default_dialog_bubble() -> DialogBaseNode:
 
 
 static func get_variables() -> Dictionary:
-	var DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
-	return DialogResources.DEFAULT_VARIABLES.variables
+	return _VarResource.variables
 
 
 static func get_variable(key:String):
@@ -57,5 +60,4 @@ static func get_variable(key:String):
 
 
 static func set_variable(key:String, value):
-	var DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
-	DialogResources.DEFAULT_VARIABLES.set_value(key,value)
+	_VarResource.set_value(key,value)

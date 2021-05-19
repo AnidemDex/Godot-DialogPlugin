@@ -25,3 +25,14 @@ func _set_variables_dict(value:Dictionary) -> void:
 
 func _get_variables_dict() -> Dictionary:
 	return variables.duplicate(true)
+
+
+func _get_property_list() -> Array:
+	var _prop:Array = [
+		{
+			"name":"variables",
+			"type":TYPE_DICTIONARY,
+			"usage":PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_SCRIPT_VARIABLE
+		}
+	]
+	return _prop
