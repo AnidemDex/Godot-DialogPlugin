@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit.gd" type="Script" id=1]
+
+[node name="CustomTextEdit" type="TextEdit"]
+margin_right = 1008.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 0, 42 )
+size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+wrap_enabled = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[connection signal="text_changed" from="." to="." method="_on_TextEdit_text_changed"]

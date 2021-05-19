@@ -57,12 +57,12 @@ margin_top = 7.0
 margin_right = 1017.0
 margin_bottom = 29.0
 
-[node name="Add" type="ToolButton" parent="PanelContainer/HBoxContainer"]
+[node name="Add" type="Button" parent="PanelContainer/HBoxContainer"]
 margin_right = 92.0
 margin_bottom = 22.0
 text = "Add Variable"
 
-[node name="Save" type="ToolButton" parent="PanelContainer/HBoxContainer"]
+[node name="Save" type="Button" parent="PanelContainer/HBoxContainer"]
 margin_left = 96.0
 margin_right = 156.0
 margin_bottom = 22.0
