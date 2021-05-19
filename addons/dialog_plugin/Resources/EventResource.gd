@@ -3,6 +3,7 @@ class_name DialogEventResource
 extends Resource
 
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
+const VARIABLES_PATH = preload("res://addons/dialog_plugin/Core/DialogResources.gd").DEFAULT_VARIABLES_PATH
 
 signal event_started(event_resource)
 signal event_finished(event_resource, jump_to_next_event)

@@ -13,6 +13,7 @@ export(String) var translation_key = SAME_AS_TEXT
 var _timer = null
 var _DialogNode:DialogDialogueNode = null
 
+
 func _init():
 	resource_name = "TextEvent"
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn"
@@ -50,7 +51,8 @@ func _update_text() -> void:
 		var _text = text
 		if translation_key != SAME_AS_TEXT:
 			_text = TranslationService.translate(translation_key)
-		_DialogNode.TextNode.bbcode_text = _text
+		var _variables = load(VARIABLES_PATH).variables
+		_DialogNode.TextNode.bbcode_text = _text.format(_variables)
 		_DialogNode.TextNode.visible_characters = 0
 		_timer.start(_DialogNode.text_speed)
 
