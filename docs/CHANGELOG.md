@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Variables.**
 	- Custom editor for variables (you can still using Godot editor if you want)
 	- Sintax highlighting for variables in the editor.
+- **Toolbar editor on resource selection**.
+- **Variables editor on `Tools` menu.**
 ### Changed
 - **Clip content outside the timeline preview.**
 - **Event buttons background**
@@ -33,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - **Floating event container in timeline editor**
 - **Override `get_event_editor_node` from EventResource.** Now is more easy to create custom events
+- **Dialog editor**. Now every dialog resource can be edited on selection.
 ### Fixed
 - **Character, animation and portrait list giving weird errors on new projects.**
 - **Sometimes the editor closes itself with no reason**

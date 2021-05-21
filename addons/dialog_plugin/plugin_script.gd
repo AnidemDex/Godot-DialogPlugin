@@ -8,6 +8,7 @@ const Dialog_i18n = preload("res://addons/dialog_plugin/Core/Dialog_i18n.gd")
 var interface = get_editor_interface()
 
 var _editor_view
+var _variable_editor_view
 var _parts_inspector
 var _translation_inspector
 
@@ -23,9 +24,14 @@ func _enter_tree() -> void:
 	if not load(DialogResources.CONFIGURATION_PATH).enabled:
 		return
 	DialogResources.verify_resource_directories()
-	_add_editor_translations()	
+	_add_editor_translations()
+	
+	_timeline_editor_scene = load(DialogResources.TIMELINE_EDITOR_PATH)
+	_character_editor_scene = load(DialogResources.CHARACTER_EDITOR_PATH)
+	_variable_editor_scene = load(DialogResources.VARIABLE_EDITOR_PATH)
 	
 	_add_editor_inspector_plugins()
+	_add_variable_editor()
 	_add_main_editor()
 	
 #	make_visible(false)
@@ -35,10 +41,6 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		# Force Godot to show the Dialog folder
 		get_editor_interface().get_resource_filesystem().scan()
-	
-	_timeline_editor_scene = load(DialogResources.TIMELINE_EDITOR_PATH)
-	_character_editor_scene = load(DialogResources.CHARACTER_EDITOR_PATH)
-	_variable_editor_scene = load(DialogResources.VARIABLE_EDITOR_PATH)
 
 
 func _process(delta):
@@ -46,12 +48,12 @@ func _process(delta):
 	if _file_selected != _last_file_selected:
 		_last_file_selected = _file_selected
 		_remove_main_editor()
-		print("New file selected: ", _last_file_selected)
 		_add_main_editor()
 
 
 func _exit_tree() -> void:
 	_remove_main_editor()
+	_remove_variable_editor()
 	_remove_editor_inspector_plugins()
 	_remove_editor_translations()
 
@@ -114,3 +116,22 @@ func _remove_main_editor() -> void:
 		remove_control_from_bottom_panel(_editor_view)
 		_editor_view.free()
 	_editor_view = null
+
+
+func _add_variable_editor() -> void:
+	_variable_editor_view = WindowDialog.new()
+	_variable_editor_view.rect_min_size = Vector2(640,480)
+	var _var_editor = _variable_editor_scene.instance()
+	_variable_editor_view.add_child(_var_editor)
+	interface.get_base_control().add_child(_variable_editor_view)
+	
+	add_tool_menu_item("Variable editor", self, "_show_variable_editor")
+
+
+func _show_variable_editor(_param) -> void:
+	_variable_editor_view.popup_centered()
+
+
+func _remove_variable_editor() -> void:
+	remove_tool_menu_item("Variable editor")
+	_variable_editor_view.free()
