@@ -3,23 +3,30 @@ extends EditorPlugin
 
 const PLUGIN_NAME = "Dialog Editor"
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
-const EditorView_Scene = preload("res://addons/dialog_plugin/Editor/EditorMainNode.tscn")
 const Dialog_i18n = preload("res://addons/dialog_plugin/Core/Dialog_i18n.gd")
+
+var interface = get_editor_interface()
 
 var _editor_view
 var _parts_inspector
 var _translation_inspector
 
+var _timeline_editor_scene:PackedScene
+var _character_editor_scene:PackedScene
+var _variable_editor_scene:PackedScene
+
+
+var _last_file_selected:String = ""
+var _file_selected:String = ""
+
 func _enter_tree() -> void:
 	if not load(DialogResources.CONFIGURATION_PATH).enabled:
 		return
 	DialogResources.verify_resource_directories()
-	_add_editor_translations()
-	
-	var _err = connect("main_screen_changed", self, "_on_main_screen_changed")
-	
+	_add_editor_translations()	
 	
 	_add_editor_inspector_plugins()
+	_add_main_editor()
 	
 #	make_visible(false)
 
@@ -28,6 +35,19 @@ func _ready() -> void:
 	if Engine.editor_hint:
 		# Force Godot to show the Dialog folder
 		get_editor_interface().get_resource_filesystem().scan()
+	
+	_timeline_editor_scene = load(DialogResources.TIMELINE_EDITOR_PATH)
+	_character_editor_scene = load(DialogResources.CHARACTER_EDITOR_PATH)
+	_variable_editor_scene = load(DialogResources.VARIABLE_EDITOR_PATH)
+
+
+func _process(delta):
+	_file_selected = interface.get_current_path()
+	if _file_selected != _last_file_selected:
+		_last_file_selected = _file_selected
+		_remove_main_editor()
+		print("New file selected: ", _last_file_selected)
+		_add_main_editor()
 
 
 func _exit_tree() -> void:
@@ -36,21 +56,8 @@ func _exit_tree() -> void:
 	_remove_editor_translations()
 
 
-
-func has_main_screen() -> bool:
-	return true
-
-
 func get_plugin_name() -> String:
 	return PLUGIN_NAME
-
-
-# Copied
-func get_plugin_icon():
-	# https://github.com/godotengine/godot-proposals/issues/572
-	if get_editor_interface().get_editor_settings().get_setting("interface/theme/base_color").v > 0.5:
-		return load(DialogResources.ICON_PATH_LIGHT)
-	return load(DialogResources.ICON_PATH_DARK)
 
 
 func _add_editor_inspector_plugins() -> void:
@@ -82,19 +89,28 @@ func _remove_editor_translations() -> void:
 
 
 func _add_main_editor() -> void:
-	_editor_view = EditorView_Scene.instance()
-	get_editor_interface().get_editor_viewport().add_child(_editor_view)
-	pass
+	var _editor_scene:PackedScene = null
+	var _res_selected = null
+	var _title = ""
+	
+	if ResourceLoader.exists(_file_selected):
+		_res_selected = ResourceLoader.load(_file_selected)
+	
+	if _res_selected is DialogTimelineResource:
+		_editor_scene = _timeline_editor_scene
+		_title = "Timeline Editor"
+	elif _res_selected is DialogCharacterResource:
+		_editor_scene = _character_editor_scene
+		_title = "Character Editor"
+	
+	if _editor_scene:
+		_editor_view = _editor_scene.instance()
+		_editor_view.base_resource = _res_selected
+		add_control_to_bottom_panel(_editor_view, _title)
 
 
 func _remove_main_editor() -> void:
 	if _editor_view and is_instance_valid(_editor_view):
+		remove_control_from_bottom_panel(_editor_view)
 		_editor_view.free()
 	_editor_view = null
-
-
-func _on_main_screen_changed(screen_name:String) -> void:
-	if screen_name == PLUGIN_NAME:
-		_add_main_editor()
-	else:
-		_remove_main_editor()

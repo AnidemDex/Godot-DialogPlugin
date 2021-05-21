@@ -19,6 +19,9 @@ const TRANSLATIONS_DIR = RESOURCES_DIR+"translations/"
 const ICON_PATH_DARK = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-editor-icon-dark-theme.svg"
 const ICON_PATH_LIGHT = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-editor-icon-light-theme.svg"
 
+const TIMELINE_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEditorView.tscn"
+const CHARACTER_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/character_editor/CharacterEditorView.tscn"
+const VARIABLE_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/variable_editor/DefinitionEditorView.tscn"
 # This method should call a recursive one.
 # But not for now
 static func verify_resource_directories() -> void:

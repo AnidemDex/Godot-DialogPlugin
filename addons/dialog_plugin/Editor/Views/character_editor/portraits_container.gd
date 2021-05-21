@@ -54,6 +54,8 @@ func _add_item(portrait:DialogPortraitResource) -> void:
 	_path_node.text = (portrait.image.resource_path as String).get_file()
 	_path_node.hint_tooltip = portrait.image.resource_path
 	_path_node.icon = portrait.image
+	_path_node.expand_icon = true
+	_path_node.rect_min_size = Vector2(0, 32)
 	_path_node.set_meta("portrait_resource", portrait)
 	_path_node.set_script(button_script)
 	var _err = _path_node.connect("pressed", self, "_on_PortraitButton_pressed")

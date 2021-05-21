@@ -12,59 +12,13 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/custom_event_button/custom_event_button.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/change_timeline_button/change_timeline_button.tscn" type="PackedScene" id=11]
 
-[node name="EventsContainer" type="TabContainer"]
+[node name="EventsContainer" type="HBoxContainer"]
 margin_right = 419.0
-margin_bottom = 191.0
-rect_min_size = Vector2( 0, 88 )
-tab_align = 0
+margin_bottom = 24.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Events" type="Tabs" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-
-[node name="EventButtons" type="GridContainer" parent="Events"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/vseparation = 6
-custom_constants/hseparation = 6
-columns = 8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextEventButton" parent="Events/EventButtons" instance=ExtResource( 2 )]
-
-[node name="WaitTimeButton" parent="Events/EventButtons" instance=ExtResource( 6 )]
-margin_left = 30.0
-margin_right = 54.0
-
-[node name="JoinEventButton" parent="Events/EventButtons" instance=ExtResource( 7 )]
-margin_left = 60.0
-margin_right = 84.0
-
-[node name="LeaveEventButton" parent="Events/EventButtons" instance=ExtResource( 3 )]
-margin_left = 90.0
-margin_right = 114.0
-
-[node name="ChangeExpressionButton" parent="Events/EventButtons" instance=ExtResource( 5 )]
-margin_left = 120.0
-margin_right = 144.0
-
-[node name="JumpToEventButton" parent="Events/EventButtons" instance=ExtResource( 9 )]
-margin_left = 150.0
-margin_right = 174.0
-
-[node name="ChangeTimelineButton" parent="Events/EventButtons" instance=ExtResource( 11 )]
-margin_left = 180.0
-margin_right = 204.0
 
 [node name="Unimplemented Events" type="Tabs" parent="."]
 visible = false
@@ -103,10 +57,122 @@ event_resource = null
 disabled = true
 event_resource = null
 
-[connection signal="pressed" from="Events/EventButtons/TextEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/WaitTimeButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/JoinEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/LeaveEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/JumpToEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Events/EventButtons/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
+[node name="Category1" type="VBoxContainer" parent="."]
+margin_right = 73.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="CategoryName" type="Label" parent="Category1"]
+margin_right = 73.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Text Events"
+align = 1
+
+[node name="Events" type="HBoxContainer" parent="Category1"]
+margin_left = 24.0
+margin_top = 18.0
+margin_right = 48.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+
+[node name="TextEventButton" parent="Category1/Events" instance=ExtResource( 2 )]
+
+[node name="VSeparator" type="VSeparator" parent="."]
+margin_left = 77.0
+margin_right = 81.0
+margin_bottom = 40.0
+
+[node name="Category2" type="VBoxContainer" parent="."]
+margin_left = 85.0
+margin_right = 165.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="CategoryName" type="Label" parent="Category2"]
+margin_right = 80.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Logic Events"
+align = 1
+
+[node name="Events" type="HBoxContainer" parent="Category2"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+
+[node name="ChangeTimelineButton" parent="Category2/Events" instance=ExtResource( 11 )]
+
+[node name="WaitTimeButton" parent="Category2/Events" instance=ExtResource( 6 )]
+margin_left = 28.0
+margin_right = 52.0
+
+[node name="JumpToEventButton" parent="Category2/Events" instance=ExtResource( 9 )]
+margin_left = 56.0
+margin_right = 80.0
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+margin_left = 169.0
+margin_right = 173.0
+margin_bottom = 40.0
+
+[node name="Category3" type="VBoxContainer" parent="."]
+margin_left = 177.0
+margin_right = 283.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="CategoryName" type="Label" parent="Category3"]
+margin_right = 106.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Character Events"
+align = 1
+
+[node name="Events" type="HBoxContainer" parent="Category3"]
+margin_left = 13.0
+margin_top = 18.0
+margin_right = 93.0
+margin_bottom = 40.0
+size_flags_horizontal = 4
+
+[node name="JoinEventButton" parent="Category3/Events" instance=ExtResource( 7 )]
+
+[node name="LeaveEventButton" parent="Category3/Events" instance=ExtResource( 3 )]
+margin_left = 28.0
+margin_right = 52.0
+
+[node name="ChangeExpressionButton" parent="Category3/Events" instance=ExtResource( 5 )]
+margin_left = 56.0
+margin_right = 80.0
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+margin_left = 287.0
+margin_right = 291.0
+margin_bottom = 40.0
+
+[node name="Template" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 48.0
+margin_right = 48.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="CategoryName" type="Label" parent="Template"]
+margin_bottom = 14.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="Events" type="HBoxContainer" parent="Template"]
+margin_top = 18.0
+margin_bottom = 18.0
+size_flags_horizontal = 4
+
+[connection signal="pressed" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category2/Events/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category2/Events/WaitTimeButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category2/Events/JumpToEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category3/Events/JoinEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category3/Events/LeaveEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category3/Events/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/timeline_editor_view.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=2]
@@ -7,7 +7,9 @@
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEventsContainer.gd" type="Script" id=5]
 [ext_resource path="res://addons/dialog_plugin/Other/translation_service/locale_list_node/locale_list_node.tscn" type="PackedScene" id=6]
 
-[node name="TimelineEditorView" type="Control"]
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="TimelineEditorView" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -19,8 +21,8 @@ TimelinePreview_path = NodePath("VBoxContainer/HSplitContainer/TimelinePreview")
 LocaleList_path = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 1024.0
+margin_bottom = 600.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
@@ -28,8 +30,7 @@ __meta__ = {
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 32 )
+margin_bottom = 44.0
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -39,87 +40,57 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 1022.0
-margin_bottom = 58.0
-
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-margin_left = 461.0
-margin_right = 558.0
-margin_bottom = 14.0
-size_flags_horizontal = 4
-text = "Timeline Editor"
+margin_bottom = 42.0
 
 [node name="ControlPanel" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
-margin_top = 18.0
 margin_right = 1020.0
-margin_bottom = 56.0
+margin_bottom = 40.0
 size_flags_horizontal = 7
+size_flags_vertical = 6
 __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
-margin_right = 196.0
-margin_bottom = 38.0
+margin_right = 1020.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 189.0
-margin_bottom = 31.0
+margin_right = 1020.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
-margin_top = 5.0
+margin_top = 13.0
 margin_right = 104.0
-margin_bottom = 19.0
+margin_bottom = 27.0
 text = "Locale Selection"
 
 [node name="LocaleList" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 108.0
-margin_right = 182.0
-margin_bottom = 24.0
-text = "English"
+margin_top = 10.0
+margin_right = 186.0
+margin_bottom = 30.0
+size_flags_vertical = 4
 items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
-selected = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel"]
-margin_left = 862.0
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
+margin_left = 190.0
+margin_right = 194.0
+margin_bottom = 40.0
+
+[node name="EventButtonsContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 198.0
 margin_right = 1020.0
-margin_bottom = 38.0
-size_flags_horizontal = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 151.0
-margin_bottom = 31.0
-size_flags_horizontal = 8
-
-[node name="PreviousButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer/HBoxContainer"]
-margin_right = 40.0
-margin_bottom = 24.0
-size_flags_horizontal = 0
-disabled = true
-text = "Prev"
-
-[node name="PlayPauseButton" type="CheckBox" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer/HBoxContainer"]
-margin_left = 44.0
-margin_right = 98.0
-margin_bottom = 24.0
-size_flags_horizontal = 0
-disabled = true
-text = "Play"
-
-[node name="NextButton" type="Button" parent="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer/HBoxContainer"]
-margin_left = 102.0
-margin_right = 144.0
-margin_bottom = 24.0
-size_flags_horizontal = 0
-disabled = true
-text = "Next"
+margin_bottom = 40.0
+size_flags_horizontal = 3
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 64.0
+margin_top = 48.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 3
@@ -128,35 +99,31 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer"]
-margin_right = 506.0
-margin_bottom = 536.0
+margin_right = 1024.0
+margin_bottom = 552.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer"]
-margin_right = 506.0
-margin_bottom = 444.0
-rect_min_size = Vector2( 0, 210 )
+margin_right = 1024.0
+margin_bottom = 552.0
+rect_min_size = Vector2( 0, 78 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer"]
-margin_right = 506.0
-margin_bottom = 444.0
+margin_right = 1024.0
+margin_bottom = 552.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
 
-[node name="EventButtonsContainer" parent="VBoxContainer/HSplitContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 448.0
-margin_right = 506.0
-margin_bottom = 536.0
-
 [node name="TimelinePreview" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
+visible = false
 margin_bottom = 536.0
 
 [connection signal="item_selected" from="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
+[connection signal="event_pressed" from="VBoxContainer/PanelContainer/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
 [connection signal="item_added" from="VBoxContainer/HSplitContainer/VBoxContainer/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
-[connection signal="event_pressed" from="VBoxContainer/HSplitContainer/VBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]

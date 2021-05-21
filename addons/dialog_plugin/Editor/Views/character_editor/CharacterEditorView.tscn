@@ -93,12 +93,13 @@ size_flags_vertical = 4
 [node name="Properties" type="ScrollContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor"]
 margin_top = 36.0
 margin_right = 494.0
-margin_bottom = 276.0
-rect_min_size = Vector2( 0, 240 )
+margin_bottom = 552.0
+rect_min_size = Vector2( 0, 142 )
+size_flags_vertical = 3
 
 [node name="Properties" type="VBoxContainer" parent="HBoxContainer/PanelContainer/MarginContainer/Editor/Properties"]
 margin_right = 494.0
-margin_bottom = 240.0
+margin_bottom = 516.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 

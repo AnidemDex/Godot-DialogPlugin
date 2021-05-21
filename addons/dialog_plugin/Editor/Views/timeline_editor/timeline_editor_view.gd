@@ -57,8 +57,6 @@ func _load_events() -> void:
 		assert(_err == OK)
 		_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_requested")
 		assert(_err == OK)
-		_err = event_node.connect("item_selected", self, "_on_EventNode_event_selected")
-		assert(_err == OK)
 		_err = event_node.connect("item_dragged", self, "_on_EventNode_event_dragged")
 		assert(_err == OK)
 		_err = event_node.connect("timeline_requested",self,"_on_EventNode_timeline_requested")
@@ -124,9 +122,11 @@ func _on_EventNode_save_requested(event:DialogEventResource) -> void:
 				TranslationDB.add_message(event.translation_key, event.text, base_resource)
 
 
+# Deprecated
 func _on_EventNode_event_selected(event:DialogEventResource) -> void:
-	selected_event_idx = (base_resource.events.get_resources() as Array).find(event)
-	timeline_preview_node.preview_event(event)
+	return
+#	selected_event_idx = (base_resource.events.get_resources() as Array).find(event)
+#	timeline_preview_node.preview_event(event)
 
 
 func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int, update_view=false) -> void:
