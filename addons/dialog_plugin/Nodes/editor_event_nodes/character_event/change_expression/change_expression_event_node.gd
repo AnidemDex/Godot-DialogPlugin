@@ -4,10 +4,12 @@ extends DialogEditorEventNode
 export(NodePath) var CharacterBtn_path:NodePath
 export(NodePath) var PortraitBtn_path:NodePath
 
-onready var character_button_node:OptionButton = get_node(CharacterBtn_path) as OptionButton
-onready var portrait_button_node:OptionButton = get_node(PortraitBtn_path) as OptionButton
+onready var character_button_node:OptionButton = get_node_or_null(CharacterBtn_path) as OptionButton
+onready var portrait_button_node:OptionButton = get_node_or_null(PortraitBtn_path) as OptionButton
 
 func _ready() -> void:
+	push_warning("Rehaz el nodo")
+	return
 	if base_resource:
 		character_button_node.generate_items()
 		_update_node_values()

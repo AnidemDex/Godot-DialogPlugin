@@ -5,17 +5,15 @@ export(NodePath) var TextEdit_path:NodePath
 export(NodePath) var CharacterBtn_path:NodePath
 export(NodePath) var TranslationKeyLabel_path:NodePath
 
+var timeline_resource = null setget _set_timeline
+
 onready var text_edit_node = get_node_or_null(TextEdit_path)
 onready var character_button_node = get_node_or_null(CharacterBtn_path)
 onready var translation_key_label_node = get_node_or_null(TranslationKeyLabel_path)
 
-
 func _ready() -> void:
-	if base_resource:
-		_update_node_values()
-		character_button_node.generate_items()
-	else:
-		return
+	emit_signal("timeline_requested", self)
+
 
 func _update_node_values() -> void:
 	var _text = base_resource.text
@@ -42,6 +40,12 @@ func _save_resource() -> void:
 	emit_signal("save_item_requested", base_resource)
 
 
+func _set_timeline(value:DialogTimelineResource) -> void:
+	timeline_resource = value
+	character_button_node.characters = timeline_resource._related_characters
+	_update_node_values()
+
+
 func _on_resource_change() -> void:
 	_update_node_values()
 
@@ -56,7 +60,7 @@ func _on_TextEdit_focus_exited() -> void:
 	_save_resource()
 
 
-func _on_CharactersButton_item_selected(index: int) -> void:
+func _on_CharacterList_item_selected(index: int) -> void:
 	var _char_metadata = character_button_node.get_selected_metadata()
 	if _char_metadata is Dictionary:
 		base_resource.character = (_char_metadata as Dictionary).get("character", null)
@@ -76,3 +80,8 @@ func _on_TranslationKey_text_changed(new_text: String) -> void:
 
 func _on_TranslationKey_focus_exited() -> void:
 	_save_resource()
+
+
+func _on_CharacterList_character_added() -> void:
+	_save_resource()
+	_update_node_values()

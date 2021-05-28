@@ -1,0 +1,127 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/editor_portrait/editor_portrait.gd" type="Script" id=1]
+
+[node name="EditorPortrait" type="PanelContainer"]
+margin_right = 192.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 192, 0 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+PortraitIcon_path = NodePath("Body/Header/PortraitIcon")
+PortraitName_path = NodePath("Body/Header/PotraitName")
+PortraitNameEdit_path = NodePath("Body/Header/PortraitNameEdit")
+RemovePortrait_path = NodePath("Body/Header/RemoveButton")
+PortraitContent_path = NodePath("Body/PortraitContent")
+PortraitImage_path = NodePath("Body/PortraitContent/VBoxContainer/PortraitImage")
+FileDialog_path = NodePath("FileDialog")
+
+[node name="Body" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 185.0
+margin_bottom = 55.0
+
+[node name="Header" type="HBoxContainer" parent="Body"]
+margin_right = 178.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitIcon" type="Button" parent="Body/Header"]
+margin_right = 24.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+text = "icon"
+clip_text = true
+expand_icon = true
+
+[node name="PotraitName" type="Button" parent="Body/Header"]
+margin_left = 28.0
+margin_right = 150.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "PORTRAIT NAME"
+
+[node name="PortraitNameEdit" type="LineEdit" parent="Body/Header"]
+visible = false
+margin_left = 28.0
+margin_right = 207.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemoveButton" type="Button" parent="Body/Header"]
+margin_left = 154.0
+margin_right = 178.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+text = "remove"
+clip_text = true
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitContent" type="PanelContainer" parent="Body"]
+visible = false
+margin_top = 28.0
+margin_right = 178.0
+margin_bottom = 212.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Body/PortraitContent"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 171.0
+margin_bottom = 177.0
+
+[node name="Label" type="Label" parent="Body/PortraitContent/VBoxContainer"]
+margin_right = 164.0
+margin_bottom = 14.0
+text = "Portrait:"
+
+[node name="PortraitImage" type="Button" parent="Body/PortraitContent/VBoxContainer"]
+margin_top = 18.0
+margin_right = 164.0
+margin_bottom = 146.0
+rect_min_size = Vector2( 0, 128 )
+size_flags_horizontal = 5
+clip_text = true
+expand_icon = true
+
+[node name="RemoveImage" type="Button" parent="Body/PortraitContent/VBoxContainer"]
+margin_top = 150.0
+margin_right = 164.0
+margin_bottom = 170.0
+text = "Remove Image"
+
+[node name="ExpandButton" type="Button" parent="Body"]
+margin_top = 28.0
+margin_right = 178.0
+margin_bottom = 48.0
+text = "V"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 315.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Open a File"
+mode = 0
+filters = PoolStringArray( "*.png;PNG" )
+
+[connection signal="pressed" from="Body/Header/PortraitIcon" to="." method="_on_PortraitIcon_pressed"]
+[connection signal="pressed" from="Body/Header/PotraitName" to="." method="_on_PotraitName_pressed"]
+[connection signal="focus_exited" from="Body/Header/PortraitNameEdit" to="." method="_on_PortraitNameEdit_focus_exited"]
+[connection signal="text_entered" from="Body/Header/PortraitNameEdit" to="." method="_on_PortraitNameEdit_text_entered"]
+[connection signal="pressed" from="Body/Header/RemoveButton" to="." method="_on_RemoveButton_pressed"]
+[connection signal="pressed" from="Body/PortraitContent/VBoxContainer/PortraitImage" to="." method="_on_PortraitImage_pressed"]
+[connection signal="pressed" from="Body/PortraitContent/VBoxContainer/RemoveImage" to="." method="_on_RemoveImage_pressed"]
+[connection signal="pressed" from="Body/ExpandButton" to="." method="_on_ExpandButton_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -8,8 +8,7 @@ signal item_selected(item)
 signal item_dragged(item, node_idx, to_idx)
 signal timeline_requested(emitter_node)
 
-const DEFAULT_COLOR = Color("#202531")
-const SELECTED_COLOR = Color("#353f57")
+const DEFAULT_COLOR = Color("#999999")
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
 var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
@@ -26,21 +25,23 @@ var _n_idx
 var _prev_node
 var _next_node
 
+var _stylebox:StyleBoxFlat
+
+export(Color) var event_color = Color("3c3d5e") setget _set_event_color
+
 export(NodePath) var IconNode_path:NodePath
 export(NodePath) var TopContent_path:NodePath
-export(NodePath) var CenterContent_path:NodePath
-export(NodePath) var BottomContent_path:NodePath
+export(NodePath) var PropertiesContainer_path:NodePath
 export(NodePath) var IndexLbl_path:NodePath
-export(NodePath) var MenuBtn_path:NodePath
 export(NodePath) var SkipBtn_path:NodePath
 
-onready var top_content_node:PanelContainer = get_node_or_null(TopContent_path) as PanelContainer
-onready var center_content_node:PanelContainer = get_node_or_null(CenterContent_path) as PanelContainer
-onready var bottom_content_node:PanelContainer = get_node_or_null(BottomContent_path) as PanelContainer
-onready var icon_node:TextureRect = get_node_or_null(IconNode_path) as TextureRect
-onready var index_label_node = get_node_or_null(IndexLbl_path)
-onready var menu_button_node:MenuButton = get_node(MenuBtn_path) as MenuButton
-onready var skip_button_node:CheckButton = get_node(SkipBtn_path) as CheckButton
+
+
+onready var top_content_node:PanelContainer = get_node(TopContent_path) as PanelContainer
+onready var properties_content_node:PanelContainer = get_node(PropertiesContainer_path) as PanelContainer
+onready var icon_node:TextureRect = get_node(IconNode_path) as TextureRect
+onready var index_label_node = get_node(IndexLbl_path)
+onready var skip_button_node:CheckBox = get_node(SkipBtn_path) as CheckBox
 
 func _ready() -> void:
 	
@@ -51,11 +52,47 @@ func _ready() -> void:
 	if not base_resource.is_connected("changed", self, "_on_resource_change"):
 		base_resource.connect("changed", self, "_on_resource_change")
 	
-	var menu_button_popup_node:PopupMenu = menu_button_node.get_popup()
-	var _err = menu_button_popup_node.connect("id_pressed", self, "_on_MenuButtonPopup_id_pressed")
-	assert(_err == OK)
-	
 	skip_button_node.pressed = base_resource.skip
+	
+
+var _is_focused = false
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_FOCUS_ENTER:
+			_focused()
+		NOTIFICATION_FOCUS_EXIT:
+			_unfocused()
+
+
+func _focused() -> void:
+	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = event_color
+	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = event_color
+	
+	top_content_node.get_node("HContainer").toggle(true)
+	_is_focused = true
+
+
+func _unfocused() -> void:
+	yield(get_tree(),"idle_frame")
+	var _focused_node = get_focus_owner()
+	if _focused_node and is_a_parent_of(_focused_node):
+		return
+	top_content_node.get_node("HContainer").toggle(false)
+	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = DEFAULT_COLOR
+	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = DEFAULT_COLOR
+	
+	_is_focused = false
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.scancode == KEY_DELETE and event.pressed and _is_focused:
+			accept_event()
+			emit_signal("delelete_item_requested", base_resource)
 
 
 func _set_idx(value):
@@ -72,24 +109,16 @@ func _update_node_values() -> void:
 func _save_resource() -> void:
 	emit_signal("save_item_requested", base_resource)
 
+func _set_event_color(value:Color) -> void:
+	event_color = value
+	# FIXME: Why are you using absolute node path here?
+	if $HContainer/HContainer/NameMargin/EventName:
+		$HContainer/HContainer/NameMargin/EventName.get_stylebox("panel").bg_color = event_color
+	property_list_changed_notify()
+
 
 func _on_resource_change() -> void:
 	_update_node_values()
-
-
-func _on_MenuButtonPopup_id_pressed(id:int) -> void:
-	if id == 0:
-		emit_signal("delelete_item_requested", base_resource)
-
-
-func _notification(what):
-	match what:
-		NOTIFICATION_FOCUS_ENTER:
-			var style:StyleBoxFlat = get_stylebox("panel")
-			style.bg_color = SELECTED_COLOR
-		NOTIFICATION_FOCUS_EXIT:
-			var style:StyleBoxFlat = get_stylebox("panel")
-			style.bg_color = DEFAULT_COLOR
 
 
 var last_drag
@@ -116,7 +145,7 @@ func _on_Top_gui_input(event: InputEvent) -> void:
 		# Stay fresh!
 		
 		# Drag behaviour
-		index_label_node.text = "no_index"
+		index_label_node.text = "???"
 		var _drag = get_global_mouse_position().y - drag_position.y
 		if not start_drag:
 			start_drag = _drag

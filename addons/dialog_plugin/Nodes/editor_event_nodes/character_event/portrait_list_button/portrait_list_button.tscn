@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/portrait_list_button/portrait_list_button.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/portrait_list_button/portrait_list_button.gd" type="Script" id=1]
 
 [sub_resource type="ImageTexture" id=1]
 
 [node name="PortraitsButton" type="OptionButton"]
+visible = false
 margin_left = 103.0
 margin_right = 120.0
 margin_bottom = 30.0

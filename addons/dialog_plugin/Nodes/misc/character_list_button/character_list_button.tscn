@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/character_list_button/character_list_button.gd" type="Script" id=1]
+
+[node name="CharacterList" type="OptionButton"]
+margin_right = 29.0
+margin_bottom = 20.0
+text = "Empty"
+items = [ "Empty", null, false, 0, null ]
+selected = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 315.0
+margin_bottom = 130.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Open a File"
+mode = 0
+filters = PoolStringArray( "*.tres;", "*.res;" )
+
+[connection signal="item_selected" from="." to="." method="_on_CharacterList_item_selected"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

@@ -6,54 +6,67 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
+content_margin_left = 24.0
+bg_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-bg_color = Color( 0.12549, 0.145098, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.0980392, 0.113725, 0.156863, 1 )
-corner_radius_top_left = 8
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="ImageTexture" id=2]
+anti_aliasing = false
 
 [node name="JumpToEvent" instance=ExtResource( 1 )]
 margin_bottom = -548.0
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
-EventList_path = NodePath("VBoxContainer/Top/HBoxContainer/EventList")
+event_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+EventList_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/EventList")
 
-[node name="VBoxContainer" parent="." index="0"]
-margin_bottom = 48.0
+[node name="HContainer" parent="." index="0"]
+margin_bottom = 52.0
 
-[node name="EventList" type="OptionButton" parent="VBoxContainer/Top/HBoxContainer" index="3"]
-margin_left = 68.0
-margin_right = 125.0
-margin_bottom = 30.0
-custom_icons/arrow = SubResource( 2 )
+[node name="Branch" parent="HContainer" index="0"]
+margin_bottom = 52.0
+
+[node name="VContainer" parent="HContainer/Branch" index="0"]
+margin_bottom = 52.0
+
+[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
+visible = false
+margin_bottom = 52.0
+
+[node name="HContainer" parent="HContainer" index="1"]
+margin_bottom = 52.0
+
+[node name="NameMargin" parent="HContainer/HContainer" index="0"]
+margin_bottom = 52.0
+
+[node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="EventNameLabel" parent="HContainer/HContainer/NameMargin/EventName/HBoxContainer" index="0"]
+margin_right = 94.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Jump to Event"
+
+[node name="InfoMargin" parent="HContainer/HContainer" index="1"]
+margin_bottom = 52.0
+
+[node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="EventList" type="OptionButton" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="0"]
+margin_right = 61.0
+margin_bottom = 28.0
 text = "Empty"
-flat = true
 items = [ "Empty", null, false, 0, null ]
 selected = 0
 script = ExtResource( 4 )
 
-[node name="Bottom" parent="VBoxContainer" index="2"]
-margin_bottom = 44.0
-
-[node name="HBoxContainer" parent="VBoxContainer/Bottom" index="0"]
-margin_bottom = 14.0
-
-[node name="SkipButton" parent="VBoxContainer/Bottom/HBoxContainer" index="0"]
-visible = false
-
-[node name="Index" parent="VBoxContainer/Bottom/HBoxContainer" index="1"]
-margin_top = 0.0
-margin_bottom = 14.0
-
-[connection signal="item_selected" from="VBoxContainer/Top/HBoxContainer/EventList" to="." method="_on_EventList_item_selected"]
+[connection signal="item_selected" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/EventList" to="." method="_on_EventList_item_selected"]

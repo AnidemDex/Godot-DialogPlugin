@@ -8,11 +8,11 @@ export(PackedScene) var editor_view_scene
 var _editor_node:Control
 
 func _ready() -> void:
-	scan_resources()
+#	scan_resources()
 	if self != get_tree().edited_scene_root:
 		instance_editor_scene()
 
-
+# Deprecated
 func scan_resources() -> void:
 	DialogDB.Timelines.get_database().scan_resources_folder()
 	DialogDB.Characters.get_database().scan_resources_folder()

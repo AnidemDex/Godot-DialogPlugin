@@ -17,6 +17,8 @@ onready var portrait_preview_node:TextureRect = get_node(Preview_path)
 onready var anim_selector_node:OptionButton = get_node(AnimationSelector_path)
 
 func _ready() -> void:
+	push_warning("Redo")
+	return
 	if base_resource:
 		var _btn = get_node(ReferenceButton_path)
 		buttons = _btn.group

@@ -6,6 +6,7 @@ export(NodePath) var CharacterBtn_path:NodePath
 onready var character_button_node:OptionButton = get_node(CharacterBtn_path)
 
 func _ready() -> void:
+	return
 	if base_resource:
 		character_button_node.generate_items()
 		_update_node_values()

@@ -22,7 +22,7 @@ func select_item_by_name(name:String) -> void:
 
 
 func select_item_by_resource(resource) -> void:
-	for _item_idx in range(get_item_count()):
+	for _item_idx in range(0, max(0,get_item_count()-1)):
 		var _idx = clamp(_item_idx, 0, get_item_count())
 		var _item_resource = get_item_metadata(_idx)
 		if _item_resource and _item_resource is Dictionary:

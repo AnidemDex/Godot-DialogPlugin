@@ -32,9 +32,6 @@ func _enter_tree() -> void:
 	
 	_add_editor_inspector_plugins()
 	_add_variable_editor()
-	_add_main_editor()
-	
-#	make_visible(false)
 
 
 func _ready() -> void:
@@ -48,7 +45,8 @@ func _process(delta):
 	if _file_selected != _last_file_selected:
 		_last_file_selected = _file_selected
 		_remove_main_editor()
-		_add_main_editor()
+		if _last_file_selected.get_extension() == "tres":
+			_add_main_editor()
 
 
 func _exit_tree() -> void:
@@ -96,7 +94,7 @@ func _add_main_editor() -> void:
 	var _title = ""
 	
 	if ResourceLoader.exists(_file_selected):
-		_res_selected = ResourceLoader.load(_file_selected)
+		_res_selected = ResourceLoader.load(_file_selected, "", true)
 	
 	if _res_selected is DialogTimelineResource:
 		_editor_scene = _timeline_editor_scene
@@ -108,7 +106,8 @@ func _add_main_editor() -> void:
 	if _editor_scene:
 		_editor_view = _editor_scene.instance()
 		_editor_view.base_resource = _res_selected
-		add_control_to_bottom_panel(_editor_view, _title)
+		var _dock_button = add_control_to_bottom_panel(_editor_view, _title)
+		_dock_button.pressed = true
 
 
 func _remove_main_editor() -> void:

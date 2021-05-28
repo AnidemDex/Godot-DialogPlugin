@@ -1,6 +1,8 @@
 tool
 extends TextEdit
 
+# A TextEdit node flavored with variables sintax higlighting
+
 var _DialogResources := load("res://addons/dialog_plugin/Core/DialogResources.gd")
 var _variables:Dictionary = load(_DialogResources.DEFAULT_VARIABLES_PATH).get_original_variables()
 

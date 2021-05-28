@@ -1,28 +1,18 @@
 tool
 extends PanelContainer
 
-export(NodePath) var Confirmation_path:NodePath
+export(PackedScene) var EditorPortrait_scene:PackedScene = null
 export(NodePath) var AddItemBtn_path:NodePath
-export(NodePath) var RemoveItemBtn_path:NodePath
-export(NodePath) var NameContainer_path:NodePath
-export(NodePath) var PathContainer_path:NodePath
 export(NodePath) var FileDialog_path:NodePath
+export(NodePath) var Portraits:NodePath
 
 var base_resource:DialogCharacterResource setget _set_base_resource
 var last_pressed_button = null
-var file_dialog_node
 
-var button_script = load("res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portrait_button.gd")
-
-onready var confirmation_node := get_node(Confirmation_path)
 onready var add_item_node := get_node(AddItemBtn_path)
-onready var remove_item_node := get_node(RemoveItemBtn_path)
-onready var name_container_node := get_node(NameContainer_path)
-onready var path_container_node := get_node(PathContainer_path)
+onready var portraits_node:Container = get_node(Portraits) as Container
+onready var file_dialog_node:FileDialog = get_node(FileDialog_path) as FileDialog
 
-func _ready() -> void:
-	add_item_node.icon = get_icon("more", "GraphEdit")
-	remove_item_node.icon = get_icon("minus", "GraphEdit")
 
 func _save():
 	if not base_resource:
@@ -33,9 +23,7 @@ func _save():
 
 
 func _unload_values() -> void:
-	for _child in name_container_node.get_children():
-		_child.queue_free()
-	for _child in path_container_node.get_children():
+	for _child in portraits_node.get_children():
 		_child.queue_free()
 
 
@@ -46,21 +34,15 @@ func _update_values() -> void:
 
 
 func _add_item(portrait:DialogPortraitResource) -> void:
-	var _name_node = Label.new()
-	var _path_node = Button.new()
+	var _editor_portrait_node = EditorPortrait_scene.instance()
+	_editor_portrait_node.base_resource = portrait
 	
-	_name_node.size_flags_vertical = SIZE_SHRINK_CENTER | SIZE_EXPAND
-	_name_node.text = portrait.name
-	_path_node.text = (portrait.image.resource_path as String).get_file()
-	_path_node.hint_tooltip = portrait.image.resource_path
-	_path_node.icon = portrait.image
-	_path_node.expand_icon = true
-	_path_node.rect_min_size = Vector2(0, 32)
-	_path_node.set_meta("portrait_resource", portrait)
-	_path_node.set_script(button_script)
-	var _err = _path_node.connect("pressed", self, "_on_PortraitButton_pressed")
-	name_container_node.add_child(_name_node)
-	path_container_node.add_child(_path_node)
+	if not _editor_portrait_node.is_connected("save_requested", self, "_save"):
+		_editor_portrait_node.connect("save_requested", self, "_save")
+	if not _editor_portrait_node.is_connected("remove_requested", self, "_on_PortraitNode_remove_requested"):
+		_editor_portrait_node.connect("remove_requested", self, "_on_PortraitNode_remove_requested")
+	
+	portraits_node.add_child(_editor_portrait_node)
 
 
 func _set_base_resource(value:DialogCharacterResource):
@@ -71,22 +53,14 @@ func _set_base_resource(value:DialogCharacterResource):
 
 
 func _on_AddItemBtn_pressed() -> void:
-	confirmation_node.popup_centered_minsize()
+	var _new_portrait = DialogPortraitResource.new()
+	_new_portrait.name = "New Portrait"
+	base_resource.portraits.add(_new_portrait)
+	_save()
 
 
 func _on_BaseResource_changed():
 	_update_values()
-
-
-func _on_NewItemPopup_confirmed() -> void:
-	if not base_resource:
-		return
-	var _name = confirmation_node.text_node.text
-	var _portrait:DialogPortraitResource = DialogPortraitResource.new()
-	_portrait.name = _name
-	_portrait.image = load("res://icon.png")
-	(base_resource.portraits as ResourceArray).add(_portrait)
-	_save()
 
 
 func _on_PortraitButton_pressed(button:Button=null) -> void:
@@ -107,26 +81,29 @@ func _on_PortraitButton_pressed(button:Button=null) -> void:
 	file_dialog_node.popup_centered_ratio()
 
 
-func _on_FileDialog_file_selected(path: String) -> void:
-	var _portrait_resource:DialogPortraitResource = (last_pressed_button as Button).get_meta("portrait_resource")
-	if not _portrait_resource:
-		return
-	var _selected_resource = load(path)
-	
-	if _selected_resource is Texture:
-		_portrait_resource.image = _selected_resource
-	else:
-		print("Archivo no soportado ", _selected_resource.get_class())
+func _on_PortraitNode_remove_requested(portrait:DialogPortraitResource) -> void:
+	base_resource.portraits.remove(portrait)
 	_save()
 
 
-func _on_RemoveItmBtn_pressed() -> void:
-	if not base_resource:
-		return
+func _on_FileDialog_files_selected(paths: PoolStringArray) -> void:
+	for image_path in paths:
+		image_path = image_path as String
+
+		var _image = load(image_path)
+		
+		if not(_image is Texture):
+			push_warning("Unknow file, skipping")
+			continue
+		
+		var _new_portrait = DialogPortraitResource.new()
+		_new_portrait.name = image_path.get_file().replace("."+image_path.get_extension(), "")
+		_new_portrait.image = _image
+		
+		base_resource.portraits.add(_new_portrait)
 	
-	var portrait_array:Array = base_resource.portraits.get_resources()
-	if portrait_array.size() <= 1:
-		return
-	
-	portrait_array.remove(portrait_array.size()-1)
 	_save()
+
+
+func _on_AddManyItemsBtn_pressed() -> void:
+	file_dialog_node.popup_centered_ratio()

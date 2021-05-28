@@ -1,54 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portraits_container.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialog_plugin/Editor/Popups/NewItemPopup.tscn" type="PackedScene" id=2]
-
-[sub_resource type="Image" id=5]
-data = {
-"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 0, 0, 0, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"format": "LumAlpha8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=2]
-flags = 4
-flags = 4
-image = SubResource( 5 )
-size = Vector2( 16, 16 )
-
-[sub_resource type="Image" id=6]
-data = {
-"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 0, 0, 0, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 255, 224, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"format": "LumAlpha8",
-"height": 16,
-"mipmaps": false,
-"width": 16
-}
-
-[sub_resource type="ImageTexture" id=4]
-flags = 4
-flags = 4
-image = SubResource( 6 )
-size = Vector2( 16, 16 )
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/editor_portrait/editor_portrait.tscn" type="PackedScene" id=3]
 
 [node name="PortraitContainer" type="PanelContainer"]
 margin_top = 34.0
 margin_right = 482.0
 margin_bottom = 225.0
 rect_min_size = Vector2( 0, 38 )
+focus_mode = 2
 size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-Confirmation_path = NodePath("NewItemPopup")
+EditorPortrait_scene = ExtResource( 3 )
 AddItemBtn_path = NodePath("VBoxContainer/HBoxContainer2/AddItemBtn")
-RemoveItemBtn_path = NodePath("VBoxContainer/HBoxContainer2/RemoveItmBtn")
-NameContainer_path = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/NameContainer")
-PathContainer_path = NodePath("VBoxContainer/ScrollContainer/HBoxContainer/PathContainer")
 FileDialog_path = NodePath("FileDialog")
+Portraits = NodePath("VBoxContainer/ScrollContainer/Portraits")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
@@ -58,37 +27,34 @@ margin_bottom = 184.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 468.0
-margin_bottom = 151.0
+margin_bottom = 153.0
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 468.0
-size_flags_horizontal = 3
-
-[node name="NameContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
-
-[node name="PathContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
-margin_left = 4.0
-margin_right = 468.0
-size_flags_horizontal = 3
+[node name="Portraits" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
+margin_left = 234.0
+margin_right = 234.0
+margin_bottom = 153.0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+columns = 4
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_left = 408.0
-margin_top = 155.0
+margin_left = 147.0
+margin_top = 157.0
 margin_right = 468.0
 margin_bottom = 177.0
 size_flags_horizontal = 8
 
 [node name="AddItemBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
-margin_right = 28.0
-margin_bottom = 22.0
-icon = SubResource( 2 )
+margin_right = 135.0
+margin_bottom = 20.0
+text = "New Empty Portrait"
 
-[node name="RemoveItmBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 32.0
-margin_right = 60.0
-margin_bottom = 22.0
-icon = SubResource( 4 )
+[node name="AddManyItemsBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 139.0
+margin_right = 321.0
+margin_bottom = 20.0
+text = "Create Portraits From Files"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 margin_left = 7.0
@@ -96,17 +62,10 @@ margin_top = 7.0
 margin_right = 475.0
 margin_bottom = 137.0
 rect_min_size = Vector2( 170, 59.5 )
-window_title = "Open a File"
-mode = 0
-filters = PoolStringArray( "*.png;PNG Images", "*.tres;Text Resource File", "*.tscn;Text Scene File", "*.svg;SVG" )
-
-[node name="NewItemPopup" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 475.0
-margin_bottom = 99.0
+window_title = "Open File(s)"
+mode = 1
+filters = PoolStringArray( "*.png;PNG Image" )
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer2/AddItemBtn" to="." method="_on_AddItemBtn_pressed"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer2/RemoveItmBtn" to="." method="_on_RemoveItmBtn_pressed"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
-[connection signal="confirmed" from="NewItemPopup" to="." method="_on_NewItemPopup_confirmed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/AddManyItemsBtn" to="." method="_on_AddManyItemsBtn_pressed"]
+[connection signal="files_selected" from="FileDialog" to="." method="_on_FileDialog_files_selected"]

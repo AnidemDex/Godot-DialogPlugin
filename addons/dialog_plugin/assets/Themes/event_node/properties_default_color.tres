@@ -1,0 +1,7 @@
+[gd_resource type="StyleBoxFlat" format=2]
+
+[resource]
+resource_local_to_scene = true
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false

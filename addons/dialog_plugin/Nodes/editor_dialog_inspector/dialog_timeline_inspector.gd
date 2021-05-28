@@ -5,7 +5,7 @@ const TimelinePicker = preload("res://addons/dialog_plugin/Nodes/editor_dialog_i
 var timeline_picker:OptionButton
 
 func _init() -> void:
-	self.label = "Timeline"
+	label = "Timeline"
 	timeline_picker = TimelinePicker.instance()
 	timeline_picker.connect("item_selected", self, "_on_TimelinePicker_item_selected")
 	add_child(timeline_picker)

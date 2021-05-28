@@ -1,75 +1,138 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/dialog_plugin/assets/Images/Event Icons/Main Icons/text-event.svg" type="Texture" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/character_list_button/character_list_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.gd" type="Script" id=3]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/characters_list_button/CharactersButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
+content_margin_left = 24.0
+bg_color = Color( 0.156863, 0.572549, 0.843137, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
 content_margin_left = 8.0
 content_margin_right = 8.0
-content_margin_top = 4.0
-content_margin_bottom = 4.0
-bg_color = Color( 0.12549, 0.145098, 0.192157, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.0980392, 0.113725, 0.156863, 1 )
-corner_radius_top_left = 8
+content_margin_top = 2.0
+content_margin_bottom = 2.0
 corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+anti_aliasing = false
 
 [node name="TextEventNode" instance=ExtResource( 1 )]
-margin_bottom = -522.0
-custom_styles/panel = SubResource( 1 )
+margin_bottom = -554.0
 script = ExtResource( 3 )
-TextEdit_path = NodePath("VBoxContainer/Center/VBoxContainer/CustomTextEdit")
-CharacterBtn_path = NodePath("VBoxContainer/Top/HBoxContainer/CharactersButton")
-TranslationKeyLabel_path = NodePath("VBoxContainer/Center/VBoxContainer/HBoxContainer/TranslationKey")
+event_color = Color( 0.156863, 0.572549, 0.843137, 1 )
+TextEdit_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/CustomTextEdit")
+CharacterBtn_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/CharacterList")
+TranslationKeyLabel_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer/TranslationKey")
 
-[node name="Icon" parent="VBoxContainer/Top/HBoxContainer" index="0"]
-texture = ExtResource( 2 )
+[node name="HContainer" parent="." index="0"]
+margin_bottom = 46.0
 
-[node name="CharactersButton" parent="VBoxContainer/Top/HBoxContainer" index="3" instance=ExtResource( 4 )]
-margin_left = 68.0
-margin_right = 133.0
-items = [ "[Empty]", null, false, 0, null ]
+[node name="Branch" parent="HContainer" index="0"]
+margin_bottom = 46.0
 
-[node name="Center" parent="VBoxContainer" index="1"]
-margin_bottom = 114.0
+[node name="VContainer" parent="HContainer/Branch" index="0"]
+margin_bottom = 46.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Center" index="0"]
-margin_right = 1008.0
-margin_bottom = 84.0
+[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
+margin_bottom = 46.0
 
-[node name="CustomTextEdit" parent="VBoxContainer/Center/VBoxContainer" index="0" instance=ExtResource( 5 )]
+[node name="HContainer" parent="HContainer" index="1"]
+margin_bottom = 46.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Center/VBoxContainer" index="1"]
-margin_top = 60.0
-margin_right = 1008.0
-margin_bottom = 84.0
-alignment = 2
+[node name="NameMargin" parent="HContainer/HContainer" index="0"]
+margin_bottom = 46.0
 
-[node name="Label" type="Label" parent="VBoxContainer/Center/VBoxContainer/HBoxContainer" index="0"]
-margin_left = 787.0
+[node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="EventNameLabel" parent="HContainer/HContainer/NameMargin/EventName/HBoxContainer" index="0"]
+margin_right = 72.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Text Event"
+
+[node name="InfoMargin" parent="HContainer/HContainer" index="1"]
+margin_bottom = 46.0
+
+[node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="0"]
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 24.0
+text = "Character"
+
+[node name="CharacterList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="1" instance=ExtResource( 2 )]
+margin_left = 69.0
+margin_right = 130.0
+margin_bottom = 28.0
+items = [ "Empty", null, false, 0, null ]
+
+[node name="VSeparator2" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="2"]
+margin_left = 133.0
+margin_right = 137.0
+margin_bottom = 28.0
+
+[node name="PreviewText" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="3"]
+margin_left = 140.0
+margin_top = 4.0
+margin_right = 147.0
+margin_bottom = 24.0
+clip_text = true
+
+[node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+margin_bottom = 130.0
+
+[node name="Margin" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties" index="0"]
+margin_bottom = 98.0
+
+[node name="VBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="0"]
+margin_bottom = 98.0
+
+[node name="CustomProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="0"]
+margin_bottom = 70.0
+
+[node name="CustomTextEdit" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="0" instance=ExtResource( 4 )]
+margin_right = 776.0
+margin_bottom = 42.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="1"]
+margin_top = 46.0
+margin_right = 776.0
+margin_bottom = 70.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer" index="0"]
+margin_left = 289.0
 margin_top = 5.0
-margin_right = 884.0
+margin_right = 386.0
 margin_bottom = 19.0
+size_flags_horizontal = 10
 text = "Translation Key"
 
-[node name="TranslationKey" type="LineEdit" parent="VBoxContainer/Center/VBoxContainer/HBoxContainer" index="1"]
-margin_left = 888.0
-margin_right = 1008.0
+[node name="TranslationKey" type="LineEdit" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer" index="1"]
+margin_left = 390.0
+margin_right = 776.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 120, 0 )
-align = 1
+size_flags_horizontal = 3
 placeholder_text = "Same as text"
 
-[connection signal="item_selected" from="VBoxContainer/Top/HBoxContainer/CharactersButton" to="." method="_on_CharactersButton_item_selected"]
-[connection signal="text_changed" from="VBoxContainer/Center/VBoxContainer/CustomTextEdit" to="." method="_on_TextEdit_text_changed"]
-[connection signal="focus_exited" from="VBoxContainer/Center/VBoxContainer/HBoxContainer/TranslationKey" to="." method="_on_TranslationKey_focus_exited"]
-[connection signal="text_changed" from="VBoxContainer/Center/VBoxContainer/HBoxContainer/TranslationKey" to="." method="_on_TranslationKey_text_changed"]
+[node name="BaseProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="1"]
+margin_top = 74.0
+margin_bottom = 98.0
+
+[node name="ReferenceRect" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="1"]
+margin_bottom = 98.0
+
+[connection signal="character_added" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/CharacterList" to="." method="_on_CharacterList_character_added"]
+[connection signal="item_selected" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/CharacterList" to="." method="_on_CharacterList_item_selected"]
+[connection signal="focus_exited" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/CustomTextEdit" to="." method="_on_TextEdit_focus_exited"]
+[connection signal="text_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/CustomTextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="focus_exited" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer/TranslationKey" to="." method="_on_TranslationKey_focus_exited"]
+[connection signal="text_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer/TranslationKey" to="." method="_on_TranslationKey_text_changed"]

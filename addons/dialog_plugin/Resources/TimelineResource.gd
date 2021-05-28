@@ -5,8 +5,9 @@ extends Resource
 signal timeline_ended
 
 var events:EventsArray = EventsArray.new()
-
 var current_event = 0
+
+var _related_characters:Array = []
 
 func start(caller):
 	var _err
@@ -53,6 +54,13 @@ func _get_property_list() -> Array:
 			"type":TYPE_OBJECT,
 			"hint":PROPERTY_HINT_RESOURCE_TYPE,
 			"hint_string":"EventsArray",
+		}
+	)
+	properties.append(
+		{
+			"name":"_related_characters",
+			"type":TYPE_ARRAY,
+			"usage":PROPERTY_USAGE_NOEDITOR | PROPERTY_USAGE_SCRIPT_VARIABLE
 		}
 	)
 	return properties

@@ -2,18 +2,23 @@ tool
 extends Resource
 class_name DialogCharacterResource
 
-export(String) var name:String = ""
+export(String) var name:String = "" setget ,_get_name
 export(String) var display_name:String setget ,_get_display_name
-export(bool) var display_name_bool:bool = false
 export(Color) var color:Color = Color.white
-export(bool) var default_speaker:bool = false # should be removed
-export(String, MULTILINE) var description:String = ""
+export(Texture) var icon:Texture = null
+export(AudioStream) var blip_sound:AudioStream = null
 # Array of DialogPortraitResource
 var portraits = PortraitArray.new() setget _set_portraits
 
+func _get_name() -> String:
+	if name == "":
+		name = resource_path.get_file().replace("."+resource_path.get_extension(),"")
+		resource_name = name
+		
+	return name
 
 func _get_display_name() -> String:
-	if display_name_bool and display_name:
+	if display_name:
 		return display_name
 	else:
 		return name
@@ -42,10 +47,22 @@ func _get_property_list() -> Array:
 	var properties:Array = []
 	properties.append(
 		{
+			"name":"portraits_number",
+			"type":TYPE_INT,
+			"hint":PROPERTY_HINT_NONE,
+			"usage":PROPERTY_USAGE_NO_INSTANCE_STATE | PROPERTY_USAGE_EDITOR,
+		}
+	)
+	properties.append(
+		{
 			"name":"portraits",
 			"type":TYPE_OBJECT,
 			"hint":PROPERTY_HINT_RESOURCE_TYPE,
-			"hint_string":"PortraitArray",
+			"usage":PROPERTY_USAGE_SCRIPT_VARIABLE | PROPERTY_USAGE_NOEDITOR
 		}
 	)
 	return properties
+
+func _get(property: String):
+	if property == "portraits_number":
+		return portraits.get_resources().size()
