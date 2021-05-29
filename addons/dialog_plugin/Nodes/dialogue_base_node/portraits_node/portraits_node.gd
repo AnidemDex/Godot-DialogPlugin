@@ -2,117 +2,73 @@ tool
 class_name DialogPortraitManager
 extends Control
 
-signal portrait_added(character)
+signal portrait_added(character, new_portrait)
+signal portrait_changed(character, new_portrait)
+signal portrait_removed(character, portrait)
 
-enum PAnimation {
-	NO_ANIMATION,
-	FADE_IN,
-	APPEAR,
-	DISAPPEAR, 
-	FADE_OUT,
-	}
+export(NodePath) var ReferenceSize:NodePath
 
-enum Position {
-	CENTER,
-	CENTER_LEFT,
-	CENTER_RIGHT,
-	LEFT,
-	RIGHT,
-	}
-
-export(NodePath) var LeftNode_path:NodePath
-export(NodePath) var CenterLeftNode_path:NodePath
-export(NodePath) var CenterNode_path:NodePath
-export(NodePath) var CenterRightNode_path:NodePath
-export(NodePath) var RightNode_path:NodePath
+onready var size_reference_node:Control = get_node(ReferenceSize) as Control
 
 # {CharacterResource: PortraitNode(TextureRect)}
 var portraits:Dictionary = {}
 
-onready var _tween = get_node("Tween")
-onready var _left_node = get_node_or_null(LeftNode_path)
-onready var _right_node = get_node_or_null(RightNode_path)
-onready var _center_node = get_node(CenterNode_path)
-onready var _center_left_node = get_node_or_null(CenterLeftNode_path)
-onready var _center_right_node = get_node_or_null(CenterRightNode_path)
-
 func add_portrait(
-	character_resource:DialogCharacterResource, 
-	portrait:DialogPortraitResource, 
-	position=Position.CENTER,
-	animation=PAnimation.NO_ANIMATION,
-	get_focus=true
+	character:DialogCharacterResource,
+	portrait:DialogPortraitResource,
+	relative_position:Vector2=Vector2(0.414,0.275)
 	) -> void:
 	
-	if not character_resource or not portrait:
-		emit_signal("portrait_added")
+	if not character or portrait:
+		emit_signal("portrait_added", character, portrait)
 		return
 	
-	var _ptrt_node:TextureRect = portraits.get(character_resource, null)
+	# Remove previous node
+	if character in portraits:
+		portraits[character].queue_free()
+		portraits[character] = null
 	
-	if _ptrt_node:
-		remove_portrait(_ptrt_node)
+	var _texture_rect:TextureRect = TextureRect.new()
+	_texture_rect.texture = portrait.image
+	_texture_rect.name = character.display_name
 	
-	if portrait.image is Texture:
-		_ptrt_node = TextureRect.new()
-		_ptrt_node.texture = portrait.image
-		_ptrt_node.expand = true
-		_ptrt_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		portraits[character_resource] = _ptrt_node
-		add_child(_ptrt_node)
-		# Here you can expand to accept scenes
-	else:
-		push_warning("Invalid portrait resource")
-		emit_signal("portrait_added")
+	# Size behaviour
+	_texture_rect.expand = true
+	_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_texture_rect.rect_size = size_reference_node.rect_size
 	
-	animation = PAnimation.FADE_IN if animation == PAnimation.NO_ANIMATION else animation
+	# Focus and _input
+	_texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
+	_texture_rect.focus_mode = Control.FOCUS_NONE
 	
-	var position_node:ReferenceRect
-	match position:
-		Position.CENTER:
-			position_node = _center_node
-		
-		Position.CENTER_LEFT:
-			position_node = _center_left_node
-		
-		Position.CENTER_RIGHT:
-			position_node = _center_right_node
-		
-		Position.LEFT:
-			position_node = _left_node
-		
-		Position.RIGHT:
-			position_node = _right_node
+	add_child(_texture_rect)
 	
-	_ptrt_node.rect_position = position_node.rect_position
+	# I know that I can iterate over property list to copy property values
+	# but i want to keep the control over this section here
 	
-	_ptrt_node.rect_size = position_node.rect_size
+	# Node configuration to resize according the screen
+	_texture_rect.anchor_left = size_reference_node.anchor_left
+	_texture_rect.anchor_top = size_reference_node.anchor_top
+	_texture_rect.anchor_right = size_reference_node.anchor_right
+	_texture_rect.anchor_bottom = size_reference_node.anchor_bottom
 	
-	_ptrt_node.anchor_left = position_node.anchor_left
-	_ptrt_node.anchor_top = position_node.anchor_top
-	_ptrt_node.anchor_right = position_node.anchor_right
-	_ptrt_node.anchor_bottom = position_node.anchor_bottom
+	var _position:Vector2 = Vector2()
+	_position.x = float(lerp(0, rect_size.x, relative_position.x))
+	_position.y = float(lerp(0, rect_size.y, relative_position.y))
 	
-	_ptrt_node.margin_left = position_node.margin_left
-	_ptrt_node.margin_top = position_node.margin_top
-	_ptrt_node.margin_right = position_node.margin_right
-	_ptrt_node.margin_bottom = position_node.margin_bottom
+	_texture_rect.rect_position = _position
+	_texture_rect.rect_pivot_offset = _position/2
 	
+	# Rotation
+	_texture_rect.rect_rotation = 0
 	
-	grab_portrait_focus(_ptrt_node, animation)
-	yield(_tween, "tween_all_completed")
-	emit_signal("portrait_added")
+	grab_portrait_focus(_texture_rect)
+	
 
 
 func remove_portrait(portrait_node:Node) -> void:
 	portrait_node.queue_free()
 
 
-func grab_portrait_focus(char_portrait_node:TextureRect, animation):
-	match animation:
-		PAnimation.FADE_IN:
-			_tween.node_fade_in(char_portrait_node)
-		_:
-			pass
-	_tween.start()
-	pass
+func grab_portrait_focus(char_portrait_node:TextureRect) -> void:
+	char_portrait_node.raise()

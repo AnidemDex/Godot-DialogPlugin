@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/portraits_node.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/tween_animations.gd" type="Script" id=2]
 
 [node name="Portraits" type="Control"]
 anchor_right = 1.0
@@ -11,42 +10,8 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-LeftNode_path = NodePath("Left")
-CenterLeftNode_path = NodePath("Center Left")
-CenterNode_path = NodePath("Center")
-CenterRightNode_path = NodePath("Center Right")
-RightNode_path = NodePath("Right")
 
-[node name="Left" type="ReferenceRect" parent="."]
-anchor_top = 0.277
-anchor_right = 0.144
-anchor_bottom = 0.723
-margin_left = -16.0
-margin_top = -0.200012
-margin_right = -0.456009
-margin_bottom = 0.199982
-grow_horizontal = 2
-grow_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Center Left" type="ReferenceRect" parent="."]
-anchor_left = 0.169
-anchor_top = 0.277
-anchor_right = 0.332
-anchor_bottom = 0.723
-margin_left = -0.056015
-margin_top = -0.200012
-margin_right = 0.0319824
-margin_bottom = 0.199982
-grow_horizontal = 2
-grow_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Center" type="ReferenceRect" parent="."]
+[node name="ReferenceSize" type="ReferenceRect" parent="."]
 anchor_left = 0.414
 anchor_top = 0.275
 anchor_right = 0.586
@@ -58,34 +23,3 @@ grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Center Right" type="ReferenceRect" parent="."]
-anchor_left = 0.657
-anchor_top = 0.27
-anchor_right = 0.843
-anchor_bottom = 0.728
-margin_left = 0.231995
-margin_right = -0.232056
-margin_bottom = 0.199982
-grow_horizontal = 2
-grow_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="ReferenceRect" parent="."]
-anchor_left = 0.855
-anchor_top = 0.27
-anchor_right = 1.0
-anchor_bottom = 0.732
-margin_left = 0.47998
-margin_right = 26.0
-margin_bottom = -0.200043
-grow_horizontal = 2
-grow_vertical = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tween" type="Tween" parent="."]
-script = ExtResource( 2 )

@@ -1,14 +1,9 @@
 tool
 class_name DialogCharacterJoinEvent
-extends DialogEventResource
+extends DialogCharacterEvent
 
-# DialogCharacterResource
-export(Resource) var character = null
-export(int) var selected_portrait = 0
-# Refer to DialogPortraitManager.Position
-export(DialogPortraitManager.Position) var selected_position = 0
-# Refer to DialogPortraitManager.PAnimation
-export(DialogPortraitManager.PAnimation) var selected_animation = 0
+export(float, 0, 1, 0.01) var percent_position_x = 0.414
+export(float, 0, 1, 0.01) var percent_position_y = 0.275
 
 var _PortraitManager: DialogPortraitManager
 
@@ -21,10 +16,6 @@ func _init():
 func excecute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
 	.excecute(caller)
-
-	if not character:
-		finish(true)
-		return
 	
 	_caller = caller
 	_caller.visible = true
@@ -37,16 +28,8 @@ func excecute(caller:DialogBaseNode) -> void:
 	_PortraitManager.visible = true
 	_PortraitManager.connect("portrait_added", self, "_on_portrait_added", [], CONNECT_ONESHOT)
 	
-	var _character_portraits:Array = character.portraits.get_resources()
-	var _portrait = _character_portraits[selected_portrait]
-	
-	_PortraitManager.add_portrait(
-		character, 
-		_portrait,
-		selected_position,
-		selected_animation
-		)
+	_PortraitManager.add_portrait(character, selected_portrait, Vector2(percent_position_x, percent_position_y))
 
 
-func _on_portrait_added()->void:
+func _on_portrait_added(_c, _p)->void:
 	finish(skip)
