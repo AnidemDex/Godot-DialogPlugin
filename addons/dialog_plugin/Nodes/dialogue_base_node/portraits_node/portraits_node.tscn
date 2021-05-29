@@ -10,6 +10,7 @@ __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+ReferenceSize = NodePath("ReferenceSize")
 
 [node name="ReferenceSize" type="ReferenceRect" parent="."]
 anchor_left = 0.414

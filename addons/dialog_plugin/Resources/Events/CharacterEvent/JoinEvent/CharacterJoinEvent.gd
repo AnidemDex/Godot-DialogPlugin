@@ -4,6 +4,9 @@ extends DialogCharacterEvent
 
 export(float, 0, 1, 0.01) var percent_position_x = 0.414
 export(float, 0, 1, 0.01) var percent_position_y = 0.275
+export(float, -360, 360, 0.1) var rotation = 0
+export(bool) var flip_h:bool = false
+export(bool) var flip_v:bool = false
 
 var _PortraitManager: DialogPortraitManager
 
@@ -28,7 +31,7 @@ func excecute(caller:DialogBaseNode) -> void:
 	_PortraitManager.visible = true
 	_PortraitManager.connect("portrait_added", self, "_on_portrait_added", [], CONNECT_ONESHOT)
 	
-	_PortraitManager.add_portrait(character, selected_portrait, Vector2(percent_position_x, percent_position_y))
+	_PortraitManager.add_portrait(character, selected_portrait, Vector2(percent_position_x, percent_position_y), rotation, flip_h, flip_v)
 
 
 func _on_portrait_added(_c, _p)->void:
