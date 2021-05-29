@@ -82,7 +82,20 @@ func remove_portrait(character:DialogCharacterResource) -> void:
 		portraits.erase(character)
 	
 	emit_signal("portrait_removed", character)
+
+
+func change_portrait(character:DialogCharacterResource, portrait:DialogPortraitResource) -> void:
+	if not character or not portrait:
+		emit_signal("portrait_changed", character, portrait)
+		return
 	
+	if not character in portraits:
+		add_portrait(character, portrait)
+		return
+	
+	portraits[character].texture = portrait.image
+	grab_portrait_focus(portraits[character])
+	emit_signal("portrait_changed", character, portrait)
 
 
 func grab_portrait_focus(char_portrait_node:TextureRect) -> void:

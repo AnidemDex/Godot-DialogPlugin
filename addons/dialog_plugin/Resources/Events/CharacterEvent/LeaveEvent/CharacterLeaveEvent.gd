@@ -1,8 +1,6 @@
 tool
 class_name DialogCharacterLeaveEvent
-extends DialogEventResource
-
-export(Resource) var character = null
+extends DialogCharacterEvent
 
 func _init():
 	resource_name = "CharacterLeaveEvent"
@@ -19,12 +17,11 @@ func excecute(caller:DialogBaseNode) -> void:
 		return
 	
 	if not character:
-		for portrait_node in PortraitManager.portraits.values():
-			portrait_node.queue_free()
+		var _characters = PortraitManager.portraits.keys()
+		for _chara in _characters:
+			PortraitManager.remove_portrait(_chara)
 		PortraitManager.portraits.clear()
 	else:
-		if character in PortraitManager.portraits:
-			PortraitManager.portraits.get(character).queue_free()
-			PortraitManager.portraits.erase(character)
+		PortraitManager.remove_portrait(character)
 	
 	finish(skip)

@@ -1,10 +1,7 @@
 tool
 class_name DialogCharacterChangeExpressionEvent
-extends DialogEventResource
+extends DialogCharacterEvent
 
-# DialogCharacterResource
-export(Resource) var character = null
-export(int) var selected_portrait = 0
 
 func _init() -> void:
 	resource_name = "CharacterChangeExpression"
@@ -20,7 +17,7 @@ func excecute(caller:DialogBaseNode) -> void:
 		return
 	
 	var _PortraitManager:DialogPortraitManager = caller.PortraitManager
-	if character in _PortraitManager.portraits:
-		# FIXME: I don't like in-line code
-		_PortraitManager.portraits[character].texture = (character as DialogCharacterResource).portraits.get_resources()[selected_portrait].image
+	
+	_PortraitManager.change_portrait(character, selected_portrait)
+	
 	finish()
