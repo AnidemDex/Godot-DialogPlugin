@@ -78,7 +78,7 @@ func _load_events() -> void:
 func _focus_selected_item() -> void:
 	if selected_event_idx != -1:
 		yield(get_tree(), "idle_frame")
-		print_debug("Selected event is {0} {1}".format([selected_event_idx, event_nodes[selected_event_idx]]))
+#		print_debug("Selected event is {0} {1}".format([selected_event_idx, event_nodes[selected_event_idx]]))
 		event_nodes[selected_event_idx].grab_focus()
 
 
