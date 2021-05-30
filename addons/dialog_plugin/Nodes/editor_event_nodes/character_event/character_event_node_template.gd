@@ -1,0 +1,49 @@
+tool
+extends DialogEditorEventNode
+
+## Use _save_resource() method everywhere you update the base_resource
+## properties. Then, call again _update_node_values if you want
+export(NodePath) var CharacterBtn_path:NodePath
+export(NodePath) var PortraitBtn_path:NodePath
+
+var timeline_resource:DialogTimelineResource = null setget _set_timeline
+
+onready var character_button_node:OptionButton = get_node_or_null(CharacterBtn_path) as OptionButton
+onready var portrait_button_node:OptionButton = get_node_or_null(PortraitBtn_path) as OptionButton
+
+#base_resource:DialogCharacterEvent
+
+func _ready() -> void:
+	# ALWAYS verify if you had a base_resource
+	if base_resource:
+		emit_signal("timeline_requested", self)
+
+func _update_node_values() -> void:
+	
+	if base_resource.character:
+		character_button_node.select_item_by_resource(base_resource.character)
+		portrait_button_node.character = base_resource.character
+		portrait_button_node.select_item_by_resource(base_resource.selected_portrait)
+	else:
+		character_button_node.select(0)
+		portrait_button_node.select(0)
+
+
+func _set_timeline(value:DialogTimelineResource) -> void:
+	timeline_resource = value
+	character_button_node.characters = value._related_characters
+	_update_node_values()
+
+
+func _on_CharacterList_character_added() -> void:
+	_save_resource()
+	_update_node_values()
+
+
+func _on_CharacterList_item_selected(index: int) -> void:
+	var _char_metadata = character_button_node.get_selected_metadata()
+	if _char_metadata is Dictionary:
+		base_resource.character = (_char_metadata as Dictionary).get("character", null)
+	else:
+		base_resource.character = null
+	_save_resource()

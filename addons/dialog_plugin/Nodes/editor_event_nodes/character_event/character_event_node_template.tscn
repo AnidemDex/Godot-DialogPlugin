@@ -1,0 +1,94 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/character_event_node_template.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/character_list_button/character_list_button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/portrait_list_button/portrait_list_button.tscn" type="PackedScene" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 24.0
+bg_color = Color( 0.298039, 0.72549, 0.388235, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[node name="EventNodeTemplate" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+event_color = Color( 0.298039, 0.72549, 0.388235, 1 )
+CharacterBtn_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList")
+PortraitBtn_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait/PortraitsList")
+
+[node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="EventNameLabel" parent="HContainer/HContainer/NameMargin/EventName/HBoxContainer" index="0"]
+margin_right = 125.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "CHARACTER_EVENT"
+
+[node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="Character" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="0"]
+margin_right = 130.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character" index="0"]
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 24.0
+text = "Character"
+
+[node name="CharacterList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character" index="1" instance=ExtResource( 3 )]
+margin_left = 69.0
+margin_right = 130.0
+margin_bottom = 28.0
+items = [ "Empty", null, false, 0, null ]
+
+[node name="VSeparator2" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="1"]
+margin_left = 133.0
+margin_right = 137.0
+margin_bottom = 28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Portrait" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="2"]
+margin_left = 140.0
+margin_right = 257.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait" index="0"]
+margin_top = 4.0
+margin_right = 53.0
+margin_bottom = 24.0
+text = "Portrait"
+
+[node name="PortraitsList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait" index="1" instance=ExtResource( 4 )]
+margin_left = 56.0
+margin_right = 117.0
+margin_bottom = 28.0
+flat = false
+
+[node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+custom_styles/panel = SubResource( 3 )
+
+[connection signal="character_added" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList" to="." method="_on_CharacterList_character_added"]
+[connection signal="item_selected" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList" to="." method="_on_CharacterList_item_selected"]

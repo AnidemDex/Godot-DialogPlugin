@@ -28,3 +28,5 @@ func select_item_by_resource(resource) -> void:
 		if _item_resource and _item_resource is Dictionary:
 			if resource in _item_resource.values():
 				select(_idx)
+			else:
+				select(0)

@@ -6,6 +6,8 @@ signal delelete_item_requested(item)
 signal save_item_requested(item)
 signal item_selected(item)
 signal item_dragged(item, node_idx, to_idx)
+# Your script needs an timeline_resource property in order to get this signal
+# working properly
 signal timeline_requested(emitter_node)
 
 const DEFAULT_COLOR = Color("#999999")
