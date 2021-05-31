@@ -1,5 +1,7 @@
 tool
 
+# DEPRECATED
+# I'll probably remove these ASAP
 const DB_PATH = "res://addons/dialog_plugin/Database/"
 const TIMELINEDB_PATH = DB_PATH+"SavedTimelines.tres"
 const CHARACTERDB_PATH = DB_PATH+"SavedCharacters.tres"
@@ -22,13 +24,25 @@ const ICON_PATH_LIGHT = "res://addons/dialog_plugin/assets/Images/Plugin/plugin-
 const TIMELINE_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEditorView.tscn"
 const CHARACTER_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/character_editor/CharacterEditorView.tscn"
 const VARIABLE_EDITOR_PATH = "res://addons/dialog_plugin/Editor/Views/variable_editor/DefinitionEditorView.tscn"
+
+
+const TIMELINE_PLUGIN_MANAGER = "dialog_plugin/plugin_editor_manager/timeline_editor"
+const CHARACTER_PLUGIN_MANAGER = "dialog_plugin/plugin_editor_manager/character_editor"
+const VARIABLE_PLUGIN_MANAGER = "dialog_plugin/plugin_editor_manager/variable_editor"
+
+
+# DEPRECATED
 # This method should call a recursive one.
 # But not for now
 static func verify_resource_directories() -> void:
-	_verify_resource_directory(RESOURCES_DIR)
-	_verify_resource_directory(TIMELINES_DIR)
-	_verify_resource_directory(CHARACTERS_DIR)
-	_verify_resource_directory(TRANSLATIONS_DIR)
+	var _directories = [
+		RESOURCES_DIR, 
+		TIMELINES_DIR, 
+		CHARACTERS_DIR, 
+		TRANSLATIONS_DIR,
+	]
+	for _dir in _directories:
+		_verify_resource_directory(_dir)
 	
 	print("{i} {m}".format({"i":"[DialogResources]","m":"All folders verified"}))
 
