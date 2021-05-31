@@ -1,6 +1,8 @@
 tool
 extends PanelContainer
 
+signal save_requested
+
 export(PackedScene) var EditorPortrait_scene:PackedScene = null
 export(NodePath) var AddItemBtn_path:NodePath
 export(NodePath) var FileDialog_path:NodePath
@@ -17,8 +19,7 @@ onready var file_dialog_node:FileDialog = get_node(FileDialog_path) as FileDialo
 func _save():
 	if not base_resource:
 		return
-	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
-	assert(_err == OK)
+	emit_signal("save_requested")
 	_update_values()
 
 
@@ -29,7 +30,7 @@ func _unload_values() -> void:
 
 func _update_values() -> void:
 	_unload_values()
-	for portrait in base_resource.portraits:
+	for portrait in base_resource.portraits.get_resources():
 		_add_item(portrait)
 
 

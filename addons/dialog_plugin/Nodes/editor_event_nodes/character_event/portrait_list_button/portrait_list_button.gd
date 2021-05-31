@@ -3,13 +3,7 @@ extends "res://addons/dialog_plugin/Nodes/misc/OptionButtonGenerator.gd"
 
 var character:DialogCharacterResource setget _set_character
 
-func _ready() -> void:
-	generate_items()
-
 func generate_items() -> void:
-	clear()
-	add_item("None")
-	select(0)
 	if not character:
 		return
 	

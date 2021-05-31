@@ -24,6 +24,7 @@ Name_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/PanelContainer
 DisplayName_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/DisplayName")
 Icon_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/Icon")
 PortraitContainer_path = NodePath("PortraitContainer")
+debug_base_resource = "res://GodotCharacter.tres"
 
 [node name="Title" type="PanelContainer" parent="."]
 margin_right = 1024.0
@@ -139,4 +140,5 @@ filters = PoolStringArray( "*.png;PNG" )
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/Icon" to="." method="_on_Icon_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/RemoveIconBtn" to="." method="_on_RemoveIconBtn_pressed"]
+[connection signal="save_requested" from="PortraitContainer" to="." method="_save"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

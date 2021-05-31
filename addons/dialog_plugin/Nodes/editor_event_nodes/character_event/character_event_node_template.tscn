@@ -34,6 +34,7 @@ script = ExtResource( 2 )
 event_color = Color( 0.298039, 0.72549, 0.388235, 1 )
 CharacterBtn_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList")
 PortraitBtn_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait/PortraitsList")
+PortraitContainer_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait")
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -86,9 +87,11 @@ margin_left = 56.0
 margin_right = 117.0
 margin_bottom = 28.0
 flat = false
+items = [ "Empty", null, false, 0, null ]
 
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
 custom_styles/panel = SubResource( 3 )
 
 [connection signal="character_added" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList" to="." method="_on_CharacterList_character_added"]
 [connection signal="item_selected" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character/CharacterList" to="." method="_on_CharacterList_item_selected"]
+[connection signal="item_selected" from="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait/PortraitsList" to="." method="_on_PortraitsList_item_selected"]

@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portraits_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portraits_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/editor_portrait/editor_portrait.tscn" type="PackedScene" id=3]
 
 [node name="PortraitContainer" type="PanelContainer"]
 margin_top = 34.0
 margin_right = 482.0
-margin_bottom = 225.0
-rect_min_size = Vector2( 0, 38 )
+margin_bottom = 142.0
+rect_min_size = Vector2( 0, 64 )
 focus_mode = 2
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -23,26 +23,26 @@ Portraits = NodePath("VBoxContainer/ScrollContainer/Portraits")
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 475.0
-margin_bottom = 184.0
+margin_bottom = 101.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 468.0
-margin_bottom = 153.0
+margin_bottom = 70.0
 size_flags_vertical = 3
 
 [node name="Portraits" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 margin_left = 234.0
 margin_right = 234.0
-margin_bottom = 153.0
+margin_bottom = 70.0
 size_flags_horizontal = 6
 size_flags_vertical = 3
 columns = 4
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_left = 147.0
-margin_top = 157.0
+margin_top = 74.0
 margin_right = 468.0
-margin_bottom = 177.0
+margin_bottom = 94.0
 size_flags_horizontal = 8
 
 [node name="AddItemBtn" type="Button" parent="VBoxContainer/HBoxContainer2"]

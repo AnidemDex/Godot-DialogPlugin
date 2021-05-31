@@ -8,12 +8,16 @@ export(NodePath) var DisplayName_path:NodePath
 export(NodePath) var Icon_path:NodePath
 export(NodePath) var PortraitContainer_path:NodePath
 
+export(String, FILE) var debug_base_resource:String = ""
+
 onready var name_node:Label = get_node(Name_path) as Label
 onready var display_name_node:LineEdit = get_node(DisplayName_path) as LineEdit
 onready var icon_node:Button = get_node(Icon_path) as Button
 onready var portrait_container_node := get_node(PortraitContainer_path)
 
 func _ready() -> void:
+	if (not Engine.editor_hint) and (debug_base_resource != ""):
+		base_resource = load(debug_base_resource) as DialogCharacterResource
 	if not base_resource:
 		return
 	if not base_resource.is_connected("changed", self, "_on_BaseResource_changed"):
@@ -41,7 +45,7 @@ func _set_base_resource(value:DialogCharacterResource) -> void:
 func _save() -> void:
 	if not base_resource:
 		return
-	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
+	var _err = ResourceSaver.save(base_resource.resource_path, base_resource as Resource)
 	assert(_err == OK)
 
 
