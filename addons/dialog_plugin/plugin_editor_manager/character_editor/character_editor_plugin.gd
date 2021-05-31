@@ -28,8 +28,9 @@ func edit(object: Object) -> void:
 
 
 func make_visible(visible: bool) -> void:
-	_dock_button.visible = visible
-	_dock_button.pressed = visible
+	if _dock_button and is_instance_valid(_dock_button):
+		_dock_button.visible = visible
+		_dock_button.pressed = visible
 
 
 func _exit_tree() -> void:
