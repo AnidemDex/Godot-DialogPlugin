@@ -55,7 +55,18 @@ func _ready() -> void:
 		base_resource.connect("changed", self, "_on_resource_change")
 	
 	skip_button_node.pressed = base_resource.skip
-	
+
+
+func _process(delta: float) -> void:
+	var _f = get_focus_owner()
+	if _f and (is_a_parent_of(_f) or _f == self):
+		_focused()
+	else:
+		_unfocused()
+
+
+func _clips_input() -> bool:
+	return true
 
 var _is_focused = false
 func _notification(what: int) -> void:
