@@ -18,6 +18,6 @@ func excecute(caller:DialogBaseNode) -> void:
 	
 	var _PortraitManager:DialogPortraitManager = caller.PortraitManager
 	
-	_PortraitManager.change_portrait(character, selected_portrait)
+	_PortraitManager.change_portrait(character, get_selected_portrait())
 	
 	finish()

@@ -20,17 +20,14 @@ func _ready() -> void:
 	if base_resource:
 		emit_signal("timeline_requested", self)
 
+
 func _update_node_values() -> void:
 	portrait_button_node.character = base_resource.character
-	
 	if base_resource.character:
 		character_button_node.select_item_by_resource(base_resource.character)
-		portrait_button_node.select_item_by_resource(base_resource.selected_portrait)
 		portrait_container_node.visible = true
+		portrait_button_node.select_item_by_resource(base_resource.selected_portrait)
 	else:
-		print("Unselecting thigs")
-		character_button_node.select(0)
-		portrait_button_node.select(0)
 		portrait_container_node.visible = false
 
 
@@ -51,7 +48,8 @@ func _on_CharacterList_item_selected(index: int) -> void:
 		base_resource.character = (_char_metadata as Dictionary).get("character", null)
 	else:
 		base_resource.character = null
-		base_resource.selected_portrait = null
+		base_resource.selected_portrait = -1
+	
 	_save_resource()
 	_update_node_values()
 
@@ -59,8 +57,8 @@ func _on_CharacterList_item_selected(index: int) -> void:
 func _on_PortraitsList_item_selected(index: int) -> void:
 	var _portrait_metadata = portrait_button_node.get_selected_metadata()
 	if _portrait_metadata is Dictionary:
-		base_resource.selected_portrait = (_portrait_metadata as Dictionary).get("portrait", null)
+		base_resource.selected_portrait = _portrait_metadata.get("portrait", -1)
 	else:
-		base_resource.selected_portrait = null
+		base_resource.selected_portrait = -1
 	_save_resource()
 	_update_node_values()

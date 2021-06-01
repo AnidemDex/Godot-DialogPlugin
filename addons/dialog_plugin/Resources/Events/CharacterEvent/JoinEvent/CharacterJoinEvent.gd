@@ -31,7 +31,7 @@ func excecute(caller:DialogBaseNode) -> void:
 	_PortraitManager.visible = true
 	_PortraitManager.connect("portrait_added", self, "_on_portrait_added", [], CONNECT_ONESHOT)
 	
-	_PortraitManager.add_portrait(character, selected_portrait, Vector2(percent_position_x, percent_position_y), rotation, flip_h, flip_v)
+	_PortraitManager.add_portrait(character, get_selected_portrait(), Vector2(percent_position_x, percent_position_y), rotation, flip_h, flip_v)
 
 
 func _on_portrait_added(_c, _p)->void:
