@@ -88,6 +88,8 @@ func _focused() -> void:
 
 
 func _unfocused() -> void:
+	if get_tree().edited_scene_root == self:
+		return
 	yield(get_tree(),"idle_frame")
 	var _focused_node = get_focus_owner()
 	if _focused_node and is_a_parent_of(_focused_node):

@@ -38,6 +38,33 @@ border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
 
 [node name="JoinEventNode" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
+event_color = Color( 0.298039, 0.72549, 0.388235, 1 )
+PreviewNode_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/Preview/Portraits")
+XLabel_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position/X")
+YLabel_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position/Y")
+XSlider_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/End/XSlider")
+YSlider_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/YSlider")
+FlipH_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/FlipHorizontal")
+FlipV_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/FlipVertical")
+Rotation_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/Rotation")
+
+[node name="HContainer" parent="." index="0"]
+margin_bottom = 304.0
+
+[node name="Branch" parent="HContainer" index="0"]
+margin_bottom = 304.0
+
+[node name="VContainer" parent="HContainer/Branch" index="0"]
+margin_bottom = 304.0
+
+[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
+margin_bottom = 304.0
+
+[node name="HContainer" parent="HContainer" index="1"]
+margin_bottom = 304.0
+
+[node name="NameMargin" parent="HContainer/HContainer" index="0"]
+margin_bottom = 304.0
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -46,10 +73,26 @@ custom_styles/panel = SubResource( 1 )
 margin_right = 93.0
 text = "Character Join"
 
+[node name="InfoMargin" parent="HContainer/HContainer" index="1"]
+margin_bottom = 304.0
+
+[node name="InfoContainer" parent="HContainer/HContainer/InfoMargin" index="0"]
+margin_bottom = 304.0
+
 [node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
 custom_styles/panel = SubResource( 2 )
 
+[node name="CharacterList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Character" index="1"]
+items = [ "Empty", null, false, 0, null ]
+
+[node name="PortraitsList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait" index="1"]
+items = [ "Empty", null, false, 0, null ]
+
+[node name="FoldButton" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="4"]
+pressed = true
+
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+visible = true
 margin_bottom = 300.0
 custom_styles/panel = SubResource( 3 )
 
@@ -81,38 +124,40 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Position" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide" index="0"]
-margin_left = 144.0
-margin_right = 238.0
+margin_left = 140.0
+margin_right = 243.0
 margin_bottom = 20.0
 size_flags_horizontal = 4
 custom_constants/separation = 0
 
 [node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="0"]
-margin_right = 13.0
+margin_right = 18.0
 margin_bottom = 20.0
-text = "x"
+text = "x:"
+uppercase = true
 
-[node name="Label2" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="1"]
-margin_left = 13.0
-margin_right = 39.0
+[node name="X" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="1"]
+margin_left = 18.0
+margin_right = 44.0
 margin_bottom = 20.0
 text = "0%"
 
 [node name="VSeparator" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="2"]
-margin_left = 39.0
-margin_right = 55.0
+margin_left = 44.0
+margin_right = 60.0
 margin_bottom = 20.0
 custom_constants/separation = 16
 
 [node name="Label3" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="3"]
-margin_left = 55.0
-margin_right = 68.0
+margin_left = 60.0
+margin_right = 77.0
 margin_bottom = 20.0
-text = "y"
+text = "y:"
+uppercase = true
 
-[node name="Label4" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="4"]
-margin_left = 68.0
-margin_right = 94.0
+[node name="Y" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position" index="4"]
+margin_left = 77.0
+margin_right = 103.0
 margin_bottom = 20.0
 text = "0%"
 
@@ -125,6 +170,7 @@ margin_bottom = 232.0
 margin_right = 370.0
 margin_bottom = 209.0
 rect_min_size = Vector2( 370, 209 )
+rect_clip_content = true
 size_flags_horizontal = 3
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
@@ -139,7 +185,10 @@ margin_top = 2.0
 margin_right = 368.0
 margin_bottom = 207.0
 
-[node name="VSlider" type="VScrollBar" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body" index="1"]
+[node name="ReferenceSize" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/Preview/Portraits" index="0"]
+editor_only = false
+
+[node name="YSlider" type="VScrollBar" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body" index="1"]
 margin_left = 373.0
 margin_right = 383.0
 margin_bottom = 209.0
@@ -153,7 +202,7 @@ margin_right = 383.0
 margin_bottom = 245.0
 custom_constants/margin_right = 12
 
-[node name="HSlider" type="HScrollBar" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/End" index="0"]
+[node name="XSlider" type="HScrollBar" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/End" index="0"]
 margin_right = 371.0
 margin_bottom = 10.0
 max_value = 1.0
@@ -223,8 +272,8 @@ margin_bottom = 66.0
 size_flags_vertical = 6
 min_value = -360.0
 max_value = 360.0
-step = 0.0
 align = 1
+suffix = "°"
 
 [node name="Reset" type="Button" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide" index="1"]
 margin_top = 225.0
@@ -261,3 +310,12 @@ margin_bottom = 20.0
 
 [node name="ReferenceRect" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="1"]
 margin_bottom = 268.0
+
+[connection signal="value_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/YSlider" to="." method="_on_YSlider_value_changed"]
+[connection signal="value_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/End/XSlider" to="." method="_on_XSlider_value_changed"]
+[connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/FlipHorizontal" to="." method="_on_FlipHorizontal_toggled"]
+[connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/FlipVertical" to="." method="_on_FlipVertical_toggled"]
+[connection signal="value_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/Rotation" to="." method="_on_Rotation_value_changed"]
+[connection signal="pressed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/Reset" to="." method="_on_Reset_pressed"]
+
+[editable path="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/Preview/Portraits"]

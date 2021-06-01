@@ -32,13 +32,8 @@ func add_portrait(
 		emit_signal("portrait_changed", character, portrait)
 	
 	var _texture_rect:TextureRect = TextureRect.new()
-	_texture_rect.texture = portrait.image
 	_texture_rect.name = character.display_name
-	
-	# Size behaviour
-	_texture_rect.expand = true
-	_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_texture_rect.rect_size = size_reference_node.rect_size
+	portraits[character] = _texture_rect
 	
 	# Focus and _input
 	_texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
@@ -55,9 +50,14 @@ func add_portrait(
 	_texture_rect.anchor_right = size_reference_node.anchor_right
 	_texture_rect.anchor_bottom = size_reference_node.anchor_bottom
 	
-	var _position:Vector2 = Vector2()
-	_position.x = float(lerp(0, rect_size.x, relative_position.x))
-	_position.y = float(lerp(0, rect_size.y, relative_position.y))
+	# Size behaviour
+	_texture_rect.expand = true
+	_texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_texture_rect.rect_size = size_reference_node.rect_size
+	
+	_texture_rect.texture = portrait.image
+	
+	var _position = _get_relative_position(relative_position)
 	
 	_texture_rect.rect_position = _position
 	_texture_rect.rect_pivot_offset = _position/2
@@ -71,7 +71,13 @@ func add_portrait(
 	grab_portrait_focus(_texture_rect)
 	
 	emit_signal("portrait_added", character, portrait)
-	
+
+
+func _get_relative_position(from:Vector2) -> Vector2:
+	var _position:Vector2 = Vector2()
+	_position.x = float(lerp(0, rect_size.x, from.x))
+	_position.y = float(lerp(0, rect_size.y, from.y))
+	return _position
 
 
 func remove_portrait(character:DialogCharacterResource) -> void:
@@ -82,6 +88,11 @@ func remove_portrait(character:DialogCharacterResource) -> void:
 		portraits.erase(character)
 	
 	emit_signal("portrait_removed", character)
+
+
+func remove_all_portraits() -> void:
+	for character in portraits.keys():
+		remove_portrait(character)
 
 
 func change_portrait(character:DialogCharacterResource, portrait:DialogPortraitResource) -> void:

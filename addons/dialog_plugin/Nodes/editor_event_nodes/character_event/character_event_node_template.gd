@@ -16,9 +16,8 @@ onready var portrait_container_node:Container = get_node_or_null(PortraitContain
 #base_resource:DialogCharacterEvent
 
 func _ready() -> void:
-	# ALWAYS verify if you had a base_resource
-	if base_resource:
-		emit_signal("timeline_requested", self)
+	if get_tree().edited_scene_root == self:
+		return
 
 
 func _update_node_values() -> void:
