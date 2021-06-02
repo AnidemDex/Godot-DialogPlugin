@@ -14,9 +14,9 @@ func _init()%VOID_RETURN%:
     #skip = false
     pass
 
-func excecute(caller:DialogBaseNode)%VOID_RETURN%:
+func execute(caller:DialogBaseNode)%VOID_RETURN%:
     # Parent function must be called at the start
-    .excecute(caller)
+    .execute(caller)
 
     # There goes your event code.
 
