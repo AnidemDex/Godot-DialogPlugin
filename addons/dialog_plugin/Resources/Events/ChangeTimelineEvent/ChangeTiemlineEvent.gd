@@ -15,9 +15,9 @@ func _init() -> void:
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/change_timeline_event_node/change_timeline_event_node.tscn"
 
 
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
-	.excecute(caller)
+	.execute(caller)
 	if not timeline and timeline_path:
 		timeline = load(timeline_path) as DialogTimelineResource
 	if not timeline or not(timeline is DialogTimelineResource):

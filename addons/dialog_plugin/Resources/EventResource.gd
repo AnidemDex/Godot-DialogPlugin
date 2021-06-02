@@ -14,7 +14,7 @@ var _caller:DialogBaseNode = null
 var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
 
 #warning-ignore-all:unused_argument
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	_caller = caller
 	emit_signal("event_started", self)
 

@@ -8,8 +8,8 @@ func _init():
 	skip = true
 
 
-func excecute(caller:DialogBaseNode) -> void:
-	.excecute(caller)
+func execute(caller:DialogBaseNode) -> void:
+	.execute(caller)
 	
 	var PortraitManager:DialogPortraitManager = caller.PortraitManager
 	if not PortraitManager:

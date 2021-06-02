@@ -12,9 +12,9 @@ func _init() -> void:
 	#event_editor_scene_path = "res://path/to/your/editor/node/scene.tscn"
 
 
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
-	.excecute(caller)
+	.execute(caller)
 	
 	if not event_resource:
 		finish(true)
@@ -28,7 +28,7 @@ func excecute(caller:DialogBaseNode) -> void:
 
 	var _err = (event_resource as DialogEventResource).connect("event_finished", self, "_on_CustomEvent_end")
 	assert(_err == OK)
-	event_resource.excecute(caller)
+	event_resource.execute(caller)
 
 	# Notify that you end this event
 

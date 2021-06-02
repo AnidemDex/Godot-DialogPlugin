@@ -9,7 +9,7 @@ func _init():
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/wait_time_event_node/wait_time_event_node.tscn"
 
 
-func excecute(caller:DialogBaseNode) -> void:
-	.excecute(caller)
+func execute(caller:DialogBaseNode) -> void:
+	.execute(caller)
 	yield(caller.get_tree().create_timer(wait_time), "timeout")
 	finish()

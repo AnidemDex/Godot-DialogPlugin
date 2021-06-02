@@ -19,8 +19,8 @@ func _init():
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn"
 
 
-func excecute(caller:DialogBaseNode) -> void:
-	.excecute(caller)
+func execute(caller:DialogBaseNode) -> void:
+	.execute(caller)
 	
 	_caller = caller
 	_DialogNode = caller.DialogNode

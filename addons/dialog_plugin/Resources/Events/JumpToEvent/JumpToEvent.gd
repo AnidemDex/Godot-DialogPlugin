@@ -10,9 +10,9 @@ func _init() -> void:
 	skip = true
 
 
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
-	.excecute(caller)
+	.execute(caller)
 	
 	if event_index >= 0:
 		var _timeline:DialogTimelineResource = caller.timeline

@@ -19,13 +19,13 @@ func start(caller):
 		_err = _events[current_event].connect("event_finished", caller, "_on_event_finished")
 		assert(_err == OK)
 	
-	_events[current_event].excecute(caller)
+	_events[current_event].execute(caller)
 
 func go_to_next_event(caller):
 	current_event += 1
 	current_event = clamp(current_event, 0, events.get_resources().size())
 	if current_event == events.get_resources().size():
-		caller.queue_free()
+		emit_signal("timeline_ended")
 	else:
 		start(caller)
 

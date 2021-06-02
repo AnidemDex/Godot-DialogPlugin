@@ -16,9 +16,9 @@ func _init():
 	skip = true
 
 
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
-	.excecute(caller)
+	.execute(caller)
 	
 	_caller = caller
 	_caller.visible = true

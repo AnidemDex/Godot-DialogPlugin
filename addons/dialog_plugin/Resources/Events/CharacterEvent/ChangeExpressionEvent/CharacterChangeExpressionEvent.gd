@@ -9,9 +9,9 @@ func _init() -> void:
 	skip = true
 
 
-func excecute(caller:DialogBaseNode) -> void:
+func execute(caller:DialogBaseNode) -> void:
 	# Parent function must be called at the start
-	.excecute(caller)
+	.execute(caller)
 	if not caller.PortraitManager or not character:
 		finish(true)
 		return
