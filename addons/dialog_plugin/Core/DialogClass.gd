@@ -24,6 +24,8 @@ static func start(timeline, dialog_scene_path:String="", use_bubble:bool=false) 
 		_dialog_node = _dialog_scene.instance()
 		
 		if not(_dialog_node is DialogBaseNode):
+			if _dialog_node is Node:
+				_dialog_node.free()
 			_dialog_node = null
 	
 	if not _dialog_node:
@@ -59,5 +61,5 @@ static func get_variable(key:String):
 	return _value
 
 
-static func set_variable(key:String, value):
+static func set_variable(key:String, value) -> void:
 	_VarResource.set_value(key,value)

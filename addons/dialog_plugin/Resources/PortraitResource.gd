@@ -9,4 +9,3 @@ export(Texture) var icon:Texture = null
 func _set_name(value:String) -> void:
 	name = value
 	resource_name = value
-	
