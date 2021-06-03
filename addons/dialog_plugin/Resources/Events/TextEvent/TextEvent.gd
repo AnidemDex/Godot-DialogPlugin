@@ -39,7 +39,7 @@ func execute(caller:DialogBaseNode) -> void:
 	
 	_update_text()
 	
-	if not character.name:
+	if not character:
 		# Default speaker should be displayed here
 		character = DialogCharacterResource.new()
 
