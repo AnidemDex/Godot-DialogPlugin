@@ -6,6 +6,9 @@ signal character_added
 var characters = [] setget _set_characters
 
 func generate_items() -> void:
+	clear()
+	add_item("None")
+
 	var _idx = 1
 	for character in characters:
 		character = character as DialogCharacterResource
