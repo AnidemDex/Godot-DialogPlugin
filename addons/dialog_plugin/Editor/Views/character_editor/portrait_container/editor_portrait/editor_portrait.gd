@@ -13,6 +13,7 @@ export(NodePath) var PortraitImage_path:NodePath
 export(NodePath) var FileDialog_path:NodePath
 
 var base_resource:DialogPortraitResource = null
+var expanded:bool = false
 
 onready var portrait_icon_node:Button = get_node(PortraitIcon_path) as Button
 onready var portrait_name_node:Button = get_node(PortraitName_path) as Button
@@ -29,11 +30,8 @@ func _ready() -> void:
 	
 
 func _update_values() -> void:
-	if base_resource.name == "Default":
-		portrait_name_node.disabled = true
-		portrait_icon_node.disabled = true
-		portrait_remove_node.disabled = true
-	
+	if expanded:
+		portrait_content_node.visible = true
 	portrait_name_node.text = base_resource.name
 	portrait_name_edit_node.text = base_resource.name
 	portrait_name_edit_node.placeholder_text = base_resource.name

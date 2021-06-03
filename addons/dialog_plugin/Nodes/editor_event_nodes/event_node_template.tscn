@@ -4,7 +4,7 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/EditorEventNode.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/left_side_default_color.tres" type="StyleBox" id=3]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/right_side_default_color.tres" type="StyleBox" id=4]
-[ext_resource path="res://event_theme.tres" type="Theme" id=5]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/event_theme.tres" type="Theme" id=5]
 [ext_resource path="res://addons/dialog_plugin/Nodes/misc/hide_category_container.gd" type="Script" id=6]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/properties_default_color.tres" type="StyleBox" id=7]
 

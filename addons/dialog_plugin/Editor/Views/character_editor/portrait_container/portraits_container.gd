@@ -30,11 +30,14 @@ func _unload_values() -> void:
 
 func _update_values() -> void:
 	_unload_values()
+	var _e = false
+	if base_resource.portraits.get_resources().size() < 10:
+		_e = true
 	for portrait in base_resource.portraits.get_resources():
-		_add_item(portrait)
+		_add_item(portrait, _e)
 
 
-func _add_item(portrait:DialogPortraitResource) -> void:
+func _add_item(portrait:DialogPortraitResource, expanded=false) -> void:
 	var _editor_portrait_node = EditorPortrait_scene.instance()
 	_editor_portrait_node.base_resource = portrait
 	
@@ -42,6 +45,8 @@ func _add_item(portrait:DialogPortraitResource) -> void:
 		_editor_portrait_node.connect("save_requested", self, "_save")
 	if not _editor_portrait_node.is_connected("remove_requested", self, "_on_PortraitNode_remove_requested"):
 		_editor_portrait_node.connect("remove_requested", self, "_on_PortraitNode_remove_requested")
+	
+	_editor_portrait_node.expanded = expanded
 	
 	portraits_node.add_child(_editor_portrait_node)
 
