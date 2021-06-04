@@ -6,7 +6,7 @@
 margin_right = 77.0
 margin_bottom = 20.0
 text = "[Empty]"
-items = [ "[Empty]", null, false, 0, null ]
+items = [ "[Empty]", null, false, 0, "" ]
 selected = 0
 script = ExtResource( 1 )
 __meta__ = {

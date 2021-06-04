@@ -1,7 +1,7 @@
 tool
 extends OptionButton
 
-const DialogDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd")
+const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
 
 func _ready() -> void:
 	for _item_idx in range(get_item_count()):
@@ -12,10 +12,10 @@ func _ready() -> void:
 	set_item_metadata(0, "")
 	
 	var _idx = 1
-	for timeline in DialogDB.Timelines.get_timelines():
-		timeline = timeline as DialogTimelineResource
-		add_item(timeline.resource_path.get_file().replace(".tres", ""))
-		set_item_metadata(_idx, timeline.resource_path)
+	var _db = load(DialogResources.TIMELINEDB_PATH)
+	for timeline_path in _db.resources_path:
+		add_item(timeline_path.get_file().replace(".tres", ""))
+		set_item_metadata(_idx, timeline_path)
 		_idx += 1
 
 func select_item_by_resource_path(path:String) -> void:
@@ -24,4 +24,4 @@ func select_item_by_resource_path(path:String) -> void:
 		var _item_resource = get_item_metadata(_idx)
 		if _item_resource == path:
 			select(_idx)
-		
+			break
