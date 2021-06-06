@@ -57,9 +57,11 @@ func _ready() -> void:
 	skip_button_node.pressed = base_resource.skip
 
 
-func _process(delta: float) -> void:
-	var _f = get_focus_owner()
-	if _f and (is_a_parent_of(_f) or _f == self):
+func _draw() -> void:
+	var _focus_owner = get_focus_owner()
+	if has_focus():
+		_focused()
+	elif _focus_owner and is_a_parent_of(_focus_owner):
 		_focused()
 	else:
 		_unfocused()
@@ -68,15 +70,12 @@ func _process(delta: float) -> void:
 func _clips_input() -> bool:
 	return true
 
+
+func _get_minimum_size() -> Vector2:
+	return Vector2(0,32)
+
+
 var _is_focused = false
-func _notification(what: int) -> void:
-	match what:
-		NOTIFICATION_FOCUS_ENTER:
-			_focused()
-		NOTIFICATION_FOCUS_EXIT:
-			_unfocused()
-
-
 func _focused() -> void:
 	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
 	_stylebox.bg_color = event_color
@@ -88,12 +87,6 @@ func _focused() -> void:
 
 
 func _unfocused() -> void:
-	if get_tree().edited_scene_root == self:
-		return
-	yield(get_tree(),"idle_frame")
-	var _focused_node = get_focus_owner()
-	if _focused_node and is_a_parent_of(_focused_node):
-		return
 	top_content_node.get_node("HContainer").toggle(false)
 	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
 	_stylebox.bg_color = DEFAULT_COLOR
@@ -104,6 +97,12 @@ func _unfocused() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			update()
+
+
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		if event.scancode == KEY_DELETE and event.pressed and _is_focused:
 			accept_event()
@@ -123,6 +122,7 @@ func _update_node_values() -> void:
 
 func _save_resource() -> void:
 	emit_signal("save_item_requested", base_resource)
+
 
 func _set_event_color(value:Color) -> void:
 	event_color = value

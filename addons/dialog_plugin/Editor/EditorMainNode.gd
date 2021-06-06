@@ -22,6 +22,7 @@ func instance_editor_scene() -> void:
 	if not _editor_node:
 		_editor_node = editor_view_scene.instance()
 		call_deferred("add_child", _editor_node)
+		
 	
 func _exit_tree() -> void:
 	if is_instance_valid(_editor_node):
