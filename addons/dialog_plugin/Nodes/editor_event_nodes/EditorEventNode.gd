@@ -77,17 +77,25 @@ func _get_minimum_size() -> Vector2:
 
 var _is_focused = false
 func _focused() -> void:
+	var _top_container_node = top_content_node.get_node("HContainer")
+	if not _top_container_node:
+		return
+	
 	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
 	_stylebox.bg_color = event_color
 	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
 	_stylebox.bg_color = event_color
 	
-	top_content_node.get_node("HContainer").toggle(true)
+	_top_container_node.toggle(true)
 	_is_focused = true
 
 
 func _unfocused() -> void:
-	top_content_node.get_node("HContainer").toggle(false)
+	var _top_container_node = top_content_node.get_node("HContainer")
+	if not _top_container_node:
+		return
+	
+	_top_container_node.toggle(false)
 	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
 	_stylebox.bg_color = DEFAULT_COLOR
 	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
