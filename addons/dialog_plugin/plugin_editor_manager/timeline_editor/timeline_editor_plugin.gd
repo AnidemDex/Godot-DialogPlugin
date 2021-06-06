@@ -47,7 +47,7 @@ func _exit_tree() -> void:
 		_timeline_editor_view.queue_free()
 
 func _on_File_removed(file_path:String) -> void:
-	var _db = load(DialogResources.TIMELINEDB_PATH).remove(file_path)
+	var _db = load(DialogResources.TIMELINEDB_PATH)
 	_db.remove(file_path)
 	var _err = ResourceSaver.save(DialogResources.TIMELINEDB_PATH, _db)
 	assert(_err == OK, "There was an error saving the timeline database: {0}".format([_err]))
