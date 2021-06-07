@@ -61,6 +61,9 @@ static func evaluate(input:String, global:Object=null, locals:Dictionary={}, _sh
 	else:
 		_evaluated_value = _expression.execute(locals.values(), global, _show_error)
 		
+		if _expression.has_execute_failed():
+			return input
+		
 	return _evaluated_value
 
 static func can_evaluate(input:String, global:Object=null, locals:Dictionary={}) -> bool:
