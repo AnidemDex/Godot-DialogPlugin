@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/jump_to_event_button/jump_to_event_button.tscn" type="PackedScene" id=9]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/custom_event_button/custom_event_button.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/change_timeline_button/change_timeline_button.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/set_event_button/set_event_button.tscn" type="PackedScene" id=12]
 
 [node name="EventsContainer" type="HBoxContainer"]
 margin_right = 419.0
@@ -85,12 +86,12 @@ margin_bottom = 40.0
 
 [node name="Category2" type="VBoxContainer" parent="."]
 margin_left = 85.0
-margin_right = 165.0
+margin_right = 193.0
 margin_bottom = 40.0
 alignment = 1
 
 [node name="CategoryName" type="Label" parent="Category2"]
-margin_right = 80.0
+margin_right = 108.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 text = "Logic Events"
@@ -98,7 +99,7 @@ align = 1
 
 [node name="Events" type="HBoxContainer" parent="Category2"]
 margin_top = 18.0
-margin_right = 80.0
+margin_right = 108.0
 margin_bottom = 40.0
 size_flags_horizontal = 4
 
@@ -112,14 +113,18 @@ margin_right = 52.0
 margin_left = 56.0
 margin_right = 80.0
 
+[node name="SetEventButton" parent="Category2/Events" instance=ExtResource( 12 )]
+margin_left = 84.0
+margin_right = 108.0
+
 [node name="VSeparator2" type="VSeparator" parent="."]
-margin_left = 169.0
-margin_right = 173.0
+margin_left = 197.0
+margin_right = 201.0
 margin_bottom = 40.0
 
 [node name="Category3" type="VBoxContainer" parent="."]
-margin_left = 177.0
-margin_right = 283.0
+margin_left = 205.0
+margin_right = 311.0
 margin_bottom = 40.0
 alignment = 1
 
@@ -148,8 +153,8 @@ margin_left = 56.0
 margin_right = 80.0
 
 [node name="VSeparator3" type="VSeparator" parent="."]
-margin_left = 287.0
-margin_right = 291.0
+margin_left = 315.0
+margin_right = 319.0
 margin_bottom = 40.0
 
 [node name="Template" type="VBoxContainer" parent="."]
@@ -173,6 +178,7 @@ size_flags_horizontal = 4
 [connection signal="pressed" from="Category2/Events/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/WaitTimeButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/JumpToEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category2/Events/SetEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category3/Events/JoinEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category3/Events/LeaveEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category3/Events/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]

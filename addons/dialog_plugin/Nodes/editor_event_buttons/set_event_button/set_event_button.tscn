@@ -4,4 +4,7 @@
 [ext_resource path="res://addons/dialog_plugin/Resources/Events/SetEvent/SetEvent.gd" type="Script" id=2]
 
 [node name="SetEventButton" instance=ExtResource( 1 )]
+hint_tooltip = "Set Event:
+
+Sets a variable."
 event_resource = ExtResource( 2 )
