@@ -2,17 +2,17 @@ tool
 extends Button
 
 # must be a DialogEventResource
-var event_resource:Resource
+var event_resource:Script
 
 onready var tween_node = $Tween
 
 
 func _pressed() -> void:
-	emit_signal("pressed", event_resource.get_script().new())
+	emit_signal("pressed", event_resource.new())
 
 
 func get_drag_data(position):
-	var data = event_resource.get_script().new()
+	var data = event_resource.new()
 	var drag_preview_node:Control = data.get_event_editor_node()
 	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
 	drag_preview_node.size_flags_vertical = Control.SIZE_FILL
@@ -70,7 +70,7 @@ func _get_property_list() -> Array:
 			"name":"event_resource",
 			"type":TYPE_OBJECT,
 			"hint":PROPERTY_HINT_RESOURCE_TYPE,
-			"hint_string":"DialogEventResource",
+			"hint_string":"Script",
 		}
 	)
 	return properties
