@@ -35,4 +35,3 @@ func _on_VariableName_text_changed(new_text: String) -> void:
 func _on_VariableValue_text_changed(new_text: String) -> void:
 	base_resource.variable_value = new_text
 	_save_resource()
-	_update_node_values()
