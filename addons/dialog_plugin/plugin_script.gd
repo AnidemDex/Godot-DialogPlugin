@@ -31,13 +31,20 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	get_editor_interface().get_resource_filesystem().scan()
+
+
+func enable_plugin() -> void:
 	for module in modules:
 		interface.set_plugin_enabled(module, true)
-	
+
+
+func disable_plugin() -> void:
+	for module in modules:
+		if interface.is_plugin_enabled(module):
+			interface.set_plugin_enabled(module, false)
+
 
 func _exit_tree() -> void:
-	for module in modules:
-		interface.set_plugin_enabled(module, false)
 	_remove_editor_inspector_plugins()
 	_remove_editor_translations()
 

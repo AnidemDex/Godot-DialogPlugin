@@ -36,4 +36,4 @@ func make_visible(visible: bool) -> void:
 func _exit_tree() -> void:
 	if _character_editor_view:
 		remove_control_from_bottom_panel(_character_editor_view)
-		_character_editor_view.queue_free()
+		_character_editor_view.free()

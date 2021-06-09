@@ -44,7 +44,8 @@ func make_visible(visible: bool) -> void:
 func _exit_tree() -> void:
 	if _timeline_editor_view:
 		remove_control_from_bottom_panel(_timeline_editor_view)
-		_timeline_editor_view.queue_free()
+		_timeline_editor_view.free()
+
 
 func _on_File_removed(file_path:String) -> void:
 	var _db = load(DialogResources.TIMELINEDB_PATH)

@@ -36,17 +36,17 @@ align = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 margin_top = 36.0
 margin_right = 1024.0
-margin_bottom = 560.0
+margin_bottom = 562.0
 size_flags_vertical = 3
 
 [node name="VariableListContainer" type="VBoxContainer" parent="ScrollContainer"]
 margin_right = 1024.0
-margin_bottom = 524.0
+margin_bottom = 526.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-margin_top = 564.0
+margin_top = 566.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_vertical = 0
@@ -55,17 +55,17 @@ size_flags_vertical = 0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1017.0
-margin_bottom = 29.0
+margin_bottom = 27.0
 
 [node name="Add" type="Button" parent="PanelContainer/HBoxContainer"]
 margin_right = 92.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Add Variable"
 
 [node name="Save" type="Button" parent="PanelContainer/HBoxContainer"]
 margin_left = 96.0
 margin_right = 156.0
-margin_bottom = 22.0
+margin_bottom = 20.0
 text = "Save all"
 
 [node name="NewItemPopup" type="ConfirmationDialog" parent="."]
