@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/change_timeline_event_node/change_timeline_event_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/change_timeline_event_node/timeline_event_list.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/change_timeline.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
@@ -34,6 +35,10 @@ event_color = Color( 0.984314, 0.694118, 0.235294, 1 )
 Timeline_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/TimelineButton")
 EventOption_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/EventOption")
 EventList_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/EventOption/EventList")
+
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+material = null
+texture = ExtResource( 4 )
 
 [node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
 visible = false
@@ -102,7 +107,7 @@ disabled = true
 margin_right = 315.0
 margin_bottom = 130.0
 rect_min_size = Vector2( 150, 52.5 )
-window_title = "Open a File"
+window_title = "Abrir un Archivo"
 mode = 0
 filters = PoolStringArray( "*.tres;", "*.res;" )
 

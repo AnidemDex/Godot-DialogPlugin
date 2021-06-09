@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/assets/Images/Event Icons/warning.svg" type="Texture" id=1]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/warning.png" type="Texture" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/EditorEventNode.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/left_side_default_color.tres" type="StyleBox" id=3]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/right_side_default_color.tres" type="StyleBox" id=4]
@@ -43,7 +43,7 @@ shader = SubResource( 4 )
 shader_param/outline_color = Color( 0, 0, 0, 1 )
 shader_param/inner_circle = 0.4
 shader_param/outer_circle = 0.5
-shader_param/smoothness = 0.0
+shader_param/smoothness = 0.01
 
 [sub_resource type="StyleBoxLine" id=6]
 grow_end = 2.0

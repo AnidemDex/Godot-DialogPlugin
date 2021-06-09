@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/set_event_node/set_event_node.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/set_variable.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
@@ -32,6 +33,9 @@ script = ExtResource( 2 )
 event_color = Color( 0.984314, 0.694118, 0.235294, 1 )
 VariableName_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/VariableName")
 VariableValue_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/VariableValue")
+
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+texture = ExtResource( 3 )
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )

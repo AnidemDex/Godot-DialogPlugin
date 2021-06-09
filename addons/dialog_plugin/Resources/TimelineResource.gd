@@ -1,5 +1,5 @@
 tool
-class_name DialogTimelineResource
+class_name DialogTimelineResource, "res://addons/dialog_plugin/assets/Images/icons/timeline_icon.png"
 extends Resource
 
 signal timeline_ended

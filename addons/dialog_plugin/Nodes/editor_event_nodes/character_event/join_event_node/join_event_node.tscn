@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/character_event_node_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/dialogue_base_node/portraits_node/portraits_node.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/join_event_node/join_event_node.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/character/character_join.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
@@ -38,7 +39,6 @@ border_color = Color( 0.270588, 0.270588, 0.270588, 1 )
 
 [node name="JoinEventNode" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
-event_color = Color( 0.298039, 0.72549, 0.388235, 1 )
 PreviewNode_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Body/Preview/Portraits")
 XLabel_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position/X")
 YLabel_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PreviewSide/Position/Y")
@@ -48,23 +48,8 @@ FlipH_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties
 FlipV_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/FlipVertical")
 Rotation_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/MarginContainer/HBoxContainer/PropertySide/VBoxContainer2/VBoxContainer4/Rotation")
 
-[node name="HContainer" parent="." index="0"]
-margin_bottom = 304.0
-
-[node name="Branch" parent="HContainer" index="0"]
-margin_bottom = 304.0
-
-[node name="VContainer" parent="HContainer/Branch" index="0"]
-margin_bottom = 304.0
-
-[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
-margin_bottom = 304.0
-
-[node name="HContainer" parent="HContainer" index="1"]
-margin_bottom = 304.0
-
-[node name="NameMargin" parent="HContainer/HContainer" index="0"]
-margin_bottom = 304.0
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+texture = ExtResource( 4 )
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -72,12 +57,6 @@ custom_styles/panel = SubResource( 1 )
 [node name="EventNameLabel" parent="HContainer/HContainer/NameMargin/EventName/HBoxContainer" index="0"]
 margin_right = 93.0
 text = "Character Join"
-
-[node name="InfoMargin" parent="HContainer/HContainer" index="1"]
-margin_bottom = 304.0
-
-[node name="InfoContainer" parent="HContainer/HContainer/InfoMargin" index="0"]
-margin_bottom = 304.0
 
 [node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
 custom_styles/panel = SubResource( 2 )
@@ -88,11 +67,7 @@ items = [ "Empty", null, false, 0, null ]
 [node name="PortraitsList" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/Portrait" index="1"]
 items = [ "Empty", null, false, 0, null ]
 
-[node name="FoldButton" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="4"]
-pressed = true
-
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
-visible = true
 margin_bottom = 300.0
 custom_styles/panel = SubResource( 3 )
 
