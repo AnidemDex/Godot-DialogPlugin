@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/timeline_editor_view.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=2]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_container/events_container.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/TimelineEventsContainer.gd" type="Script" id=5]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/DropData.gd" type="Script" id=4]
 [ext_resource path="res://addons/dialog_plugin/Other/translation_service/locale_list_node/locale_list_node.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -14,6 +14,22 @@ content_margin_right = 2.0
 content_margin_top = 2.0
 content_margin_bottom = 2.0
 bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.352941, 0.517647, 0.764706, 0.470588 )
+border_width_left = 6
+border_width_top = 8
+border_width_right = 6
+border_width_bottom = 8
+border_color = Color( 0.109804, 0.364706, 0.752941, 1 )
+border_blend = true
+shadow_color = Color( 0, 0, 0, 0.360784 )
+shadow_size = 1
+anti_aliasing = false
 
 [node name="TimelineEditorView" type="MarginContainer"]
 anchor_right = 1.0
@@ -103,7 +119,6 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body"]
-visible = false
 margin_right = 1024.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
@@ -124,6 +139,7 @@ size_flags_horizontal = 4
 text = "TEST"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Body"]
+margin_top = 24.0
 margin_right = 1024.0
 margin_bottom = 550.0
 rect_min_size = Vector2( 0, 78 )
@@ -134,12 +150,38 @@ scroll_horizontal_enabled = false
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/Body/ScrollContainer"]
 margin_right = 1024.0
-margin_bottom = 550.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 custom_constants/separation = 0
-script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DropData" type="Control" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+
+[node name="DropDataArea" type="PanelContainer" parent="DropData"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 489.0
+mouse_filter = 1
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="DropData/DropDataArea"]
+margin_left = 8.0
+margin_top = 48.0
+margin_right = 1016.0
+margin_bottom = 62.0
+text = "Drop the event here"
+align = 1
 
 [connection signal="item_selected" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
+[connection signal="event_being_dragged" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="DropData/DropDataArea" method="show"]
 [connection signal="event_pressed" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
-[connection signal="item_added" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_item_added"]
+[connection signal="item_added" from="DropData/DropDataArea" to="." method="add_event"]

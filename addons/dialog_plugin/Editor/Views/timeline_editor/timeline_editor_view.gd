@@ -39,6 +39,8 @@ func _notification(what: int) -> void:
 
 
 func add_event(event_resource:DialogEventResource) -> void:
+	if not event_resource:
+		return
 	var events:Array = base_resource.events.get_resources()
 	selected_event_idx += 1
 	selected_event_idx = clamp(selected_event_idx, 0, max(events.size(), 0))
@@ -92,12 +94,6 @@ func _set_base_resource(_r:DialogTimelineResource) -> void:
 
 
 func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource) -> void:
-	if not base_resource:
-		return
-	add_event(event_resource)
-
-
-func _on_TimelineEventsContainer_item_added(event_resource:DialogEventResource):
 	if not base_resource:
 		return
 	add_event(event_resource)

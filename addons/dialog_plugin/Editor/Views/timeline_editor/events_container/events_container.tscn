@@ -45,14 +45,12 @@ __meta__ = {
 margin_right = 93.0
 disabled = true
 clip_text = false
-event_resource = null
 
 [node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
 margin_left = 308.0
 margin_right = 399.0
 disabled = true
 clip_text = false
-event_resource = null
 
 [node name="CustomEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 10 )]
 disabled = true
@@ -60,7 +58,7 @@ event_resource = null
 
 [node name="Category1" type="VBoxContainer" parent="."]
 margin_right = 73.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 alignment = 1
 
 [node name="CategoryName" type="Label" parent="Category1"]
@@ -74,7 +72,7 @@ align = 1
 margin_left = 24.0
 margin_top = 18.0
 margin_right = 48.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 size_flags_horizontal = 4
 
 [node name="TextEventButton" parent="Category1/Events" instance=ExtResource( 2 )]
@@ -82,12 +80,12 @@ size_flags_horizontal = 4
 [node name="VSeparator" type="VSeparator" parent="."]
 margin_left = 77.0
 margin_right = 81.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 
 [node name="Category2" type="VBoxContainer" parent="."]
 margin_left = 85.0
 margin_right = 193.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 alignment = 1
 
 [node name="CategoryName" type="Label" parent="Category2"]
@@ -100,7 +98,7 @@ align = 1
 [node name="Events" type="HBoxContainer" parent="Category2"]
 margin_top = 18.0
 margin_right = 108.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 size_flags_horizontal = 4
 
 [node name="ChangeTimelineButton" parent="Category2/Events" instance=ExtResource( 11 )]
@@ -120,12 +118,12 @@ margin_right = 108.0
 [node name="VSeparator2" type="VSeparator" parent="."]
 margin_left = 197.0
 margin_right = 201.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 
 [node name="Category3" type="VBoxContainer" parent="."]
 margin_left = 205.0
 margin_right = 311.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 alignment = 1
 
 [node name="CategoryName" type="Label" parent="Category3"]
@@ -139,7 +137,7 @@ align = 1
 margin_left = 13.0
 margin_top = 18.0
 margin_right = 93.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 size_flags_horizontal = 4
 
 [node name="JoinEventButton" parent="Category3/Events" instance=ExtResource( 7 )]
@@ -155,7 +153,7 @@ margin_right = 80.0
 [node name="VSeparator3" type="VSeparator" parent="."]
 margin_left = 315.0
 margin_right = 319.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 
 [node name="Template" type="VBoxContainer" parent="."]
 visible = false
@@ -174,6 +172,7 @@ margin_top = 18.0
 margin_bottom = 18.0
 size_flags_horizontal = 4
 
+[connection signal="being_dragged" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_being_dragged"]
 [connection signal="pressed" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/WaitTimeButton" to="." method="_on_EventButton_pressed"]

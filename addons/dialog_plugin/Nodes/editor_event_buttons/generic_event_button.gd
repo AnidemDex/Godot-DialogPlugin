@@ -1,6 +1,8 @@
 tool
 extends Button
 
+signal being_dragged
+
 # must be a DialogEventResource
 var event_resource:Script
 
@@ -12,6 +14,7 @@ func _pressed() -> void:
 
 
 func get_drag_data(position):
+	emit_signal("being_dragged")
 	var data = event_resource.new()
 	var drag_preview_node:Control = data.get_event_editor_node()
 	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
@@ -21,7 +24,7 @@ func get_drag_data(position):
 	drag_preview_node.rect_size = Vector2(50,50)
 	drag_preview_node.rect_min_size = Vector2(50,50)
 	set_drag_preview(drag_preview_node)
-	return data
+	return [data, drag_preview_node]
 
 func expand() -> void:
 	var _font = get_font("font")
