@@ -12,6 +12,11 @@ var _related_characters:Array = []
 func start(caller):
 	var _err
 	var _events:Array = events.get_resources()
+	
+	if _events.empty():
+		emit_signal("timeline_ended")
+		return
+	
 	if not _events[current_event].is_connected("event_started", caller, "_on_event_start"):
 		_err = _events[current_event].connect("event_started", caller, "_on_event_start")
 		assert(_err == OK)

@@ -66,6 +66,7 @@ static func evaluate(input:String, global:Object=null, locals:Dictionary={}, _sh
 		
 	return _evaluated_value
 
+
 static func can_evaluate(input:String, global:Object=null, locals:Dictionary={}) -> bool:
 	var _evaluated_value = null
 	var _expression = Expression.new()
