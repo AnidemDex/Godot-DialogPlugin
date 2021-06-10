@@ -31,7 +31,7 @@ func execute(caller:DialogBaseNode) -> void:
 	var DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 	
 	var evaluated_condition = DialogUtil.evaluate(condition, caller, variables)
-	print(condition,": ",evaluated_condition)
+#	print(condition,": ",evaluated_condition)
 	
 	var timeline:DialogTimelineResource = DialogTimelineResource.new()
 	timeline.connect("timeline_ended", self, "_on_Timeline_ended", [], CONNECT_ONESHOT)
@@ -46,7 +46,6 @@ func execute(caller:DialogBaseNode) -> void:
 
 
 func _on_Timeline_ended() -> void:
-	print("timeline ended")
 	_caller.timeline = old_timeline
 	old_timeline = null
 	finish(true)
