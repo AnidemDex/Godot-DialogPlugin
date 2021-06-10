@@ -29,7 +29,7 @@ func execute(caller:DialogBaseNode) -> void:
 	var _variable_name:String = _variable_properties_to_modify[0]
 	
 	var _variable = _variables.get(_variable_name, NAN)
-	printt(variable_name, _variables, _variable_name, _variable)
+	
 	match typeof(_variable):
 		TYPE_OBJECT:
 			var property_path = NodePath(variable_name)
