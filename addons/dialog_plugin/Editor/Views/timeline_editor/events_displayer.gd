@@ -16,10 +16,24 @@ var separator_node:Control = HSeparator.new()
 
 var loading_events:bool = false
 
+onready var viewport:Viewport = get_viewport()
+
 func _ready() -> void:
+	configure_separator_node()
+
+func _process(delta: float) -> void:
+	if viewport.gui_is_dragging() and viewport.gui_get_drag_data() is DialogEventResource:
+		_event_being_dragged()
+	else:
+		_event_ended_dragged()
+
+
+
+func configure_separator_node() -> void:
 	separator_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	separator_node.rect_min_size = Vector2(0, 8)
-	add_child(separator_node)
+	if not is_a_parent_of(separator_node):
+		add_child(separator_node)
 	separator_node.hide()
 
 
@@ -36,11 +50,6 @@ func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 	force_reload()
 
 
-func _exit_tree() -> void:
-	if (is_instance_valid(separator_node)) and (not separator_node.is_inside_tree()):
-		separator_node.free()
-	
-
 func unload_events():
 	for child in get_children():
 		if child == separator_node:
@@ -50,28 +59,32 @@ func unload_events():
 
 func load_events():
 	loading_events = true
-	var event_node:DialogEditorEventNode = null
+	
 	var _events:Array = timeline_resource.events.get_resources()
-	var _err:int
+	
 	for event_idx in _events.size():
 		var event:DialogEventResource = _events[event_idx] as DialogEventResource
-		event_node = event.get_event_editor_node()
-		_err = event_node.connect("focus_entered", self, "_on_EventNode_selected")
-		assert(_err == OK)
-		_err = event_node.connect("focus_exited", self, "_on_EventNode_deselected")
-		assert(_err == OK)
-		_err = event_node.connect("deletion_requested", self, "_on_EventNode_deletion_requested")
-		assert(_err == OK)
-		_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_item_requested")
-		assert(_err == OK)
-		_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
-		assert(_err == OK)
-		_err = event_node.connect("event_being_dragged", self, "_on_event_being_dragged")
-		assert(_err == OK)
-		add_child(event_node)
-		event_node.idx = event_idx
+		add_event_node_as_child(event, event_idx)
 	
 	loading_events = false
+
+
+func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
+	var _err:int
+	var event_node:DialogEditorEventNode = event.get_event_editor_node()
+
+	_err = event_node.connect("focus_entered", self, "_on_EventNode_selected")
+	assert(_err == OK)
+	_err = event_node.connect("focus_exited", self, "_on_EventNode_deselected")
+	assert(_err == OK)
+	_err = event_node.connect("deletion_requested", self, "_on_EventNode_deletion_requested")
+	assert(_err == OK)
+	_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_item_requested")
+	assert(_err == OK)
+	_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
+	assert(_err == OK)
+	add_child(event_node)
+	event_node.idx = index_hint
 
 
 func force_reload() -> void:
@@ -89,6 +102,7 @@ func _on_EventNode_selected(event_node:DialogEditorEventNode=null) -> void:
 func _on_EventNode_deselected(event_node:DialogEditorEventNode=null) -> void:
 	if not event_node:
 		return
+	
 	var _focus_owner = get_focus_owner()
 	if _focus_owner and _focus_owner is DialogEditorEventNode:
 		if event_node == last_selected_node:
@@ -156,10 +170,8 @@ func get_near_node_to_position(position:Vector2, offset:Vector2=_detection_offse
 	return _near_node
 
 
-func _on_event_being_dragged() -> void:
+func _event_being_dragged() -> void:
 	set("custom_constants/separation", _detection_offset.y*2)
-	
-	for child in get_children():
-		child = child as Node
-		if child.has_method("_on_event_being_dragged"):
-			child._on_event_being_dragged()
+
+func _event_ended_dragged() -> void:
+	set("custom_constants/separation", 0)

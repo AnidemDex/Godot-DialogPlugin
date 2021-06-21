@@ -14,7 +14,6 @@ export(NodePath) var LISelected_path:NodePath
 export(String, FILE) var debug_base_resource:String = ""
 
 var base_resource:DialogTimelineResource setget _set_base_resource
-var event_nodes:Dictionary = {}
 
 onready var timeline_events_container_node:EventsDisplayer = get_node_or_null(TimelineEventsContainer_path) as EventsDisplayer
 onready var locale_list_node:OptionButton = get_node(LocaleList_path) as OptionButton
@@ -72,27 +71,11 @@ func _set_base_resource(_r:DialogTimelineResource) -> void:
 	DialogUtil.Logger.print(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_r.resource_path})])
 
 
-func _on_EventNode_event_dragged(event:DialogEventResource, idx:int, new_idx:int, update_view=false) -> void:
-	var placeholder:Control = PanelContainer.new()
-	var event_node:Control = event_nodes[idx]
-	var _n_idx = clamp(idx+new_idx, 0, event_nodes.keys().size()-1)
-	event_node.get_parent().move_child(event_node, _n_idx)
-	
-	if update_view:
-		if new_idx != 0:
-			base_resource.events.get_resources().erase(event)
-			base_resource.events.get_resources().insert(_n_idx, event)
-
-
 func _on_LocaleList_item_selected(index: int) -> void:
 	var _locale = locale_list_node.get_item_metadata(index)
 	if _locale == TranslationService.get_project_locale(true):
 		_locale = ""
 	ProjectSettings.set_setting("locale/test", _locale)
-
-
-func _on_hide() -> void:
-	pass
 
 
 func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource) -> void:
