@@ -1,0 +1,271 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_displayer.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/if_else_event/if_else_event_node.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/condition_event.png" type="Texture" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 24.0
+bg_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0.368627, 0.368627, 0.368627, 1 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxLine" id=6]
+grow_begin = -14.0
+grow_end = 0.0
+thickness = 5
+
+[node name="If_ElseEvent" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+event_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+ConditionPreview_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/ConditionPreview")
+Condition_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/IF_CONDITION/Condition")
+IfEvents_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/IF_Events")
+ElseEvents_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/Else_Events")
+
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+texture = ExtResource( 4 )
+
+[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
+visible = false
+margin_bottom = 296.0
+
+[node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
+custom_styles/panel = SubResource( 1 )
+
+[node name="EventNameLabel" parent="HContainer/HContainer/NameMargin/EventName/HBoxContainer" index="0"]
+margin_right = 67.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Condition"
+align = 1
+
+[node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
+custom_styles/panel = SubResource( 2 )
+
+[node name="ConditionPreview" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="0"]
+margin_top = 4.0
+margin_right = 127.0
+margin_bottom = 24.0
+text = "if  ( {SOMETHING} )"
+
+[node name="VSeparator2" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer" index="1"]
+margin_left = 130.0
+margin_right = 134.0
+margin_bottom = 28.0
+
+[node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+margin_bottom = 292.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Margin" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties" index="0"]
+margin_bottom = 260.0
+
+[node name="VBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="0"]
+margin_bottom = 260.0
+
+[node name="CustomProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="0"]
+margin_bottom = 237.0
+
+[node name="IF" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="0"]
+margin_right = 776.0
+margin_bottom = 117.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF" index="0"]
+margin_left = 4.5
+margin_top = 3.0
+margin_right = 771.5
+margin_bottom = 114.0
+
+[node name="IF_CONDITION" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer" index="0"]
+margin_right = 767.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/IF_CONDITION" index="0"]
+margin_right = 18.0
+margin_bottom = 20.0
+text = "IF"
+
+[node name="Condition" type="LineEdit" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/IF_CONDITION" index="1"]
+margin_left = 21.0
+margin_right = 767.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+expand_to_text_length = true
+clear_button_enabled = true
+placeholder_text = "(Write your condition here like if it was a piece of code)"
+
+[node name="MarginContainer" type="MarginContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer" index="1"]
+margin_top = 23.0
+margin_right = 767.0
+margin_bottom = 111.0
+custom_constants/margin_left = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 767.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 0, 24 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 745.0
+margin_bottom = 86.0
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer" index="0"]
+margin_right = 743.0
+margin_bottom = 20.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/PanelContainer" index="0"]
+margin_right = 743.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" index="0"]
+margin_right = 48.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Events"
+
+[node name="IF_Events" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer" index="1"]
+margin_top = 20.0
+margin_right = 743.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 64 )
+script = ExtResource( 2 )
+
+[node name="ELSE" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="1"]
+margin_top = 120.0
+margin_right = 776.0
+margin_bottom = 237.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE" index="0"]
+margin_left = 4.5
+margin_top = 3.0
+margin_right = 771.5
+margin_bottom = 114.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer" index="0"]
+margin_right = 767.0
+margin_bottom = 20.0
+text = "ELSE"
+
+[node name="MarginContainer" type="MarginContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer" index="1"]
+margin_top = 23.0
+margin_right = 767.0
+margin_bottom = 111.0
+custom_constants/margin_left = 20
+
+[node name="PanelContainer" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer" index="0"]
+margin_left = 20.0
+margin_right = 767.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 0, 24 )
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer" index="0"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 745.0
+margin_bottom = 86.0
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer" index="0"]
+margin_right = 743.0
+margin_bottom = 20.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/PanelContainer" index="0"]
+margin_right = 743.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/PanelContainer/HBoxContainer" index="0"]
+margin_right = 48.0
+margin_bottom = 20.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Events"
+
+[node name="Else_Events" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer" index="1"]
+margin_top = 20.0
+margin_right = 743.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 64 )
+script = ExtResource( 2 )
+
+[node name="BaseProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="1"]
+margin_left = 582.0
+margin_top = 240.0
+margin_bottom = 260.0
+
+[node name="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/BaseProperties" index="0"]
+margin_top = 0.0
+margin_right = 117.0
+margin_bottom = 20.0
+
+[node name="Skip" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/BaseProperties" index="1"]
+margin_left = 120.0
+margin_right = 138.0
+margin_bottom = 20.0
+
+[node name="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/BaseProperties" index="2"]
+margin_left = 141.0
+margin_right = 145.0
+margin_bottom = 20.0
+
+[node name="IndexLabel" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/BaseProperties" index="3"]
+margin_left = 148.0
+margin_top = 0.0
+margin_right = 194.0
+margin_bottom = 20.0
+
+[node name="ReferenceRect" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="1"]
+margin_bottom = 260.0
+
+[node name="HSeparator" type="HSeparator" parent="." index="1"]
+margin_top = 36.0
+margin_right = 1024.0
+margin_bottom = 40.0
+size_flags_vertical = 8
+custom_styles/separator = SubResource( 6 )
+
+[connection signal="text_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/IF_CONDITION/Condition" to="." method="_on_Condition_text_changed"]
+[connection signal="text_entered" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/IF_CONDITION/Condition" to="." method="_on_Condition_text_entered"]
+[connection signal="save" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/IF/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/IF_Events" to="." method="_on_IF_Event_save"]
+[connection signal="save" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/ELSE/VBoxContainer/MarginContainer/PanelContainer/VBoxContainer/Else_Events" to="." method="_on_Else_Events_save"]

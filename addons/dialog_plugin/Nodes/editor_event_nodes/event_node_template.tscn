@@ -13,6 +13,8 @@
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxLine" id=3]
+grow_begin = 2.0
+grow_end = 2.0
 thickness = 3
 vertical = true
 
@@ -46,6 +48,7 @@ shader_param/outer_circle = 0.5
 shader_param/smoothness = 0.01
 
 [sub_resource type="StyleBoxLine" id=6]
+grow_begin = 2.0
 grow_end = 2.0
 thickness = 3
 vertical = true
@@ -266,5 +269,4 @@ margin_left = 8.0
 margin_right = 784.0
 margin_bottom = 28.0
 
-[connection signal="gui_input" from="HContainer/HContainer/NameMargin/EventName" to="." method="_on_Top_gui_input"]
 [connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/BaseProperties/Skip" to="." method="_on_SkipButton_toggled"]

@@ -26,7 +26,7 @@ func _enter_tree() -> void:
 	DialogResources.verify_resource_directories()
 	_add_editor_translations()
 	
-	_add_editor_inspector_plugins()
+#	_add_editor_inspector_plugins()
 
 
 func _ready() -> void:
