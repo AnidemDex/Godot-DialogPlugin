@@ -31,6 +31,7 @@ func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 		_events.append(event)
 	
 	emit_signal("save")
+	force_reload()
 
 
 func _exit_tree() -> void:
@@ -99,6 +100,7 @@ func _on_EventNode_deletion_requested(event_resource:DialogEventResource=null) -
 	var _events:Array = timeline_resource.events.get_resources()
 	_events.erase(event_resource)
 	emit_signal("save")
+	force_reload()
 
 
 func _on_EventNode_save_item_requested(event_resource:DialogEventResource) -> void:
