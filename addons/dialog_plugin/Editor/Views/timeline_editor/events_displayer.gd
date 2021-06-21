@@ -19,6 +19,8 @@ var loading_events:bool = false
 func _ready() -> void:
 	separator_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	separator_node.rect_min_size = Vector2(0, 8)
+	add_child(separator_node)
+	separator_node.hide()
 
 
 func add_event(event:DialogEventResource, in_place:int=-1) -> void:
@@ -128,37 +130,14 @@ var _detection_offset:Vector2 = Vector2(0, 8)
 #		draw_rect(_last_valid_node.get_rect(), Color.green, false, 2)
 
 func can_drop_data(position, data):
-	if not (data is Dictionary):
-		return false
-	
-	if "preview_node" in data:
-		if not data.preview_node.is_connected("tree_exited", self, "set"):
-			data.preview_node.connect("tree_exited", self, "set", ["custom_constants/separation", 0], CONNECT_ONESHOT)
-			data.preview_node.connect("tree_exited", self, "remove_child", [separator_node], CONNECT_ONESHOT)
-	
-	if not separator_node.is_inside_tree():
-		add_child(separator_node)
-	
-	var _near_node:Node = get_near_node_to_position(position)
-	if _near_node:
-		if _near_node != separator_node:
-			_last_valid_node = _near_node
-			move_child(separator_node, _near_node.idx)
-		_null_counter = -1
-	elif _null_counter > _detection_offset.y*2:
-		_last_valid_node = null
-		separator_node.raise()
-	else:
-		_null_counter += 1
-	
-	return data.get("event", null) is DialogEventResource
+	return data is DialogEventResource
 
 
 func drop_data(position, data):
 	if is_instance_valid(_last_valid_node):
-		add_event(data["event"], _last_valid_node.idx)
+		add_event(data, _last_valid_node.idx)
 	else:
-		add_event(data["event"])
+		add_event(data)
 	
 	emit_signal("save")
 

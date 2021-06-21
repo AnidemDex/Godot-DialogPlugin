@@ -24,7 +24,7 @@ func get_drag_data(position):
 	drag_preview_node.rect_size = Vector2(50,50)
 	drag_preview_node.rect_min_size = Vector2(50,50)
 	set_drag_preview(drag_preview_node)
-	return {"event":data, "preview_node":drag_preview_node}
+	return data
 
 func expand() -> void:
 	var _font = get_font("font")

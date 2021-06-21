@@ -70,7 +70,7 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	set_drag_preview(drag_preview_node)
 	emit_signal("deletion_requested", base_resource)
 	emit_signal("event_being_dragged")
-	return {"event":data, "preview_node":drag_preview_node}
+	return data
 
 
 func _draw() -> void:

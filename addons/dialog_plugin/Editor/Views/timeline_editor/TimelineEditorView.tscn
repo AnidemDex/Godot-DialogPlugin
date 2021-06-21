@@ -212,6 +212,5 @@ text = "Drop the event here"
 align = 1
 
 [connection signal="item_selected" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
-[connection signal="event_being_dragged" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" method="_on_event_being_dragged"]
 [connection signal="event_pressed" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
 [connection signal="save" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="save_resource"]

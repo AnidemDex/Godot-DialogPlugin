@@ -20,6 +20,7 @@ onready var else_events_node:EventDisplayer = get_node(ElseEvents_Path) as Event
 
 func _ready() -> void:
 	# ALWAYS verify if you had a base_resource
+	
 	if base_resource:
 		# You can prepare your nodes here before updating its values
 		emit_signal("timeline_requested", self)
@@ -49,6 +50,15 @@ func _unfocused():
 	if get_focus_owner() is DialogEditorEventNode:
 		._unfocused()
 		condition_preview_node.visible = !_is_focused
+
+
+func can_drop_data(position: Vector2, data) -> bool:
+	if data is DialogEventResource:
+		var _top_container_node = top_content_node.get_node("HContainer")
+		if not _top_container_node:
+			return false
+		_top_container_node.toggle(true)
+	return false
 
 
 func _on_event_being_dragged() -> void:
