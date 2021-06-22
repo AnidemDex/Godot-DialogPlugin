@@ -130,17 +130,19 @@ size_flags_horizontal = 3
 custom_constants/separation = 0
 
 [node name="NameMargin" type="MarginContainer" parent="HContainer/HContainer"]
-margin_right = 192.0
+margin_right = 164.0
 margin_bottom = 40.0
 mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.8
 custom_constants/margin_top = 4
 custom_constants/margin_bottom = 4
 
 [node name="EventName" type="PanelContainer" parent="HContainer/HContainer/NameMargin"]
 margin_top = 4.0
-margin_right = 192.0
+margin_right = 164.0
 margin_bottom = 36.0
-rect_min_size = Vector2( 192, 32 )
+rect_min_size = Vector2( 0, 32 )
 mouse_filter = 2
 size_flags_vertical = 0
 custom_styles/panel = ExtResource( 3 )
@@ -148,7 +150,7 @@ custom_styles/panel = ExtResource( 3 )
 [node name="HBoxContainer" type="HBoxContainer" parent="HContainer/HContainer/NameMargin/EventName"]
 margin_left = 24.0
 margin_top = 6.0
-margin_right = 192.0
+margin_right = 164.0
 margin_bottom = 26.0
 size_flags_vertical = 4
 custom_constants/separation = 1
@@ -160,23 +162,24 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "EVENT_NAME"
 
 [node name="InfoMargin" type="MarginContainer" parent="HContainer/HContainer"]
-margin_left = 192.0
+margin_left = 164.0
 margin_right = 984.0
 margin_bottom = 40.0
 mouse_filter = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
 custom_constants/margin_top = 4
 
 [node name="InfoContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin"]
 margin_top = 4.0
-margin_right = 792.0
+margin_right = 820.0
 margin_bottom = 36.0
 mouse_filter = 2
 size_flags_vertical = 0
 custom_constants/separation = 0
 
 [node name="TopContainer" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer"]
-margin_right = 792.0
+margin_right = 820.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
@@ -186,7 +189,7 @@ custom_styles/panel = ExtResource( 4 )
 [node name="HContainer" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer"]
 margin_left = 8.0
 margin_top = 2.0
-margin_right = 784.0
+margin_right = 812.0
 margin_bottom = 30.0
 mouse_filter = 2
 script = ExtResource( 6 )
@@ -194,8 +197,8 @@ HideButton_path = NodePath("FoldButton")
 PropertiesContainer_path = NodePath("../../Properties")
 
 [node name="VSeparator" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer"]
-margin_left = 772.0
-margin_right = 776.0
+margin_left = 800.0
+margin_right = 804.0
 margin_bottom = 28.0
 mouse_filter = 2
 size_flags_horizontal = 10
