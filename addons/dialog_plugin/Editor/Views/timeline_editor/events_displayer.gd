@@ -140,9 +140,10 @@ var _detection_offset:Vector2 = Vector2(0, 8)
 var _drop_index_hint:int = -1
 
 func can_drop_data_fw(position: Vector2, data, node:Control) -> bool:
-	var node_rect:Rect2 = node.get_rect()
+	if node.has_method("can_drop_data"):
+		node.can_drop_data(position, data)
 	
-	separator_node.show()
+	var node_rect:Rect2 = node.get_rect()
 	
 	if position.y > node_rect.size.y/2:
 		_drop_index_hint = node.idx+1
@@ -180,6 +181,7 @@ func get_near_node_to_position(position:Vector2, offset:Vector2=_detection_offse
 
 func _event_being_dragged() -> void:
 	set("custom_constants/separation", _detection_offset.y*2)
+	separator_node.show()
 
 func _event_ended_dragged() -> void:
 	set("custom_constants/separation", 0)
