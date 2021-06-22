@@ -12,7 +12,7 @@ var timeline_resource:DialogTimelineResource
 
 var last_selected_node:DialogEditorEventNode
 
-var separator_node:Control = HSeparator.new()
+var separator_node:Control = PanelContainer.new()
 
 var loading_events:bool = false
 
@@ -30,8 +30,11 @@ func _process(delta: float) -> void:
 
 
 func configure_separator_node() -> void:
+	var stylebox:StyleBoxFlat = load("res://addons/dialog_plugin/assets/Themes/event_preview_separator.tres")
+	separator_node.add_stylebox_override("panel", stylebox)
 	separator_node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	separator_node.rect_min_size = Vector2(0, 8)
+	separator_node.rect_min_size = Vector2(0, 32)
+	
 	if not is_a_parent_of(separator_node):
 		add_child(separator_node)
 	separator_node.hide()
@@ -166,7 +169,7 @@ func drop_data(position, data):
 
 
 func _event_being_dragged() -> void:
-	set("custom_constants/separation", 8)
+	set("custom_constants/separation", 4)
 	separator_node.show()
 
 func _event_ended_dragged() -> void:
