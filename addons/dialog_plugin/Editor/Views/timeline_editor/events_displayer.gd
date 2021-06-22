@@ -21,12 +21,12 @@ onready var viewport:Viewport = get_viewport()
 func _ready() -> void:
 	configure_separator_node()
 
+
 func _process(delta: float) -> void:
 	if viewport.gui_is_dragging() and viewport.gui_get_drag_data() is DialogEventResource:
 		_event_being_dragged()
 	else:
 		_event_ended_dragged()
-
 
 
 func configure_separator_node() -> void:
@@ -83,6 +83,8 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	assert(_err == OK)
 	_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
 	assert(_err == OK)
+	
+	event_node.set_drag_forwarding(self)
 	add_child(event_node)
 	event_node.idx = index_hint
 
@@ -135,23 +137,29 @@ func _on_EventNode_timeline_requested(node:DialogEditorEventNode) -> void:
 var _null_counter:int = -1
 var _last_valid_node:Node = null
 var _detection_offset:Vector2 = Vector2(0, 8)
+var _drop_index_hint:int = -1
 
-# Used for debug purposes
-#func _draw() -> void:
-#	draw_line(get_local_mouse_position(), get_local_mouse_position()+_detection_offset*2, Color.red, 2)
-#	draw_line(get_local_mouse_position(), get_local_mouse_position()+_detection_offset*-2, Color.blue, 2)
-#	if is_instance_valid(_last_valid_node):
-#		draw_rect(_last_valid_node.get_rect(), Color.green, false, 2)
+func can_drop_data_fw(position: Vector2, data, node:Control) -> bool:
+	var node_rect:Rect2 = node.get_rect()
+	
+	separator_node.show()
+	
+	if position.y > node_rect.size.y/2:
+		_drop_index_hint = node.idx+1
+	else:
+		_drop_index_hint = node.idx
+	
+	move_child(separator_node, _drop_index_hint)
+	
+	return false
 
 func can_drop_data(position, data):
 	return data is DialogEventResource
 
 
 func drop_data(position, data):
-	if is_instance_valid(_last_valid_node):
-		add_event(data, _last_valid_node.idx)
-	else:
-		add_event(data)
+	add_event(data, _drop_index_hint)
+	_drop_index_hint = -1
 	
 	emit_signal("save")
 
@@ -175,3 +183,4 @@ func _event_being_dragged() -> void:
 
 func _event_ended_dragged() -> void:
 	set("custom_constants/separation", 0)
+	separator_node.hide()
