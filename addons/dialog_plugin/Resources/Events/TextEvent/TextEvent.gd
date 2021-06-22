@@ -4,7 +4,8 @@ extends DialogEventResource
 
 const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
-var EventTimer = load("res://addons/dialog_plugin/Resources/Events/TextEvent/TextEventTimer.gd")
+# https://github.com/godotengine/godot/pull/37324
+var EventTimer = preload("TextEventTimer.gd")
 
 export(String, MULTILINE) var text:String = ""
 export(Resource) var character = null
