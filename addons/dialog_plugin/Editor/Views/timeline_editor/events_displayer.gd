@@ -134,10 +134,9 @@ func _on_EventNode_timeline_requested(node:DialogEditorEventNode) -> void:
 #    DRAG AND DROP   #
 ######################
 
-var _null_counter:int = -1
-var _last_valid_node:Node = null
-var _detection_offset:Vector2 = Vector2(0, 8)
+
 var _drop_index_hint:int = -1
+
 
 func can_drop_data_fw(position: Vector2, data, node:Control) -> bool:
 	if node.has_method("can_drop_data"):
@@ -154,6 +153,7 @@ func can_drop_data_fw(position: Vector2, data, node:Control) -> bool:
 	
 	return false
 
+
 func can_drop_data(position, data):
 	return data is DialogEventResource
 
@@ -165,22 +165,8 @@ func drop_data(position, data):
 	emit_signal("save")
 
 
-func get_near_node_to_position(position:Vector2, offset:Vector2=_detection_offset) -> Node:
-	var _near_node:Node = null
-	for node in get_children():
-		
-		if node.get_rect().has_point(position+offset):
-			_near_node = node
-			break
-		elif node.get_rect().has_point(position-offset):
-			_near_node = node
-			break
-	
-	return _near_node
-
-
 func _event_being_dragged() -> void:
-	set("custom_constants/separation", _detection_offset.y*2)
+	set("custom_constants/separation", 8)
 	separator_node.show()
 
 func _event_ended_dragged() -> void:
