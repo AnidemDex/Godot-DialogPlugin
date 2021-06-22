@@ -22,10 +22,7 @@ var idx:int = 0 setget _set_idx
 
 var _is_focused = false
 
-# Considera remover esta variable
-var _stylebox:StyleBoxFlat
-
-export(Color) var event_color = Color("3c3d5e") setget _set_event_color
+export(Color) var event_color:Color = Color("3c3d5e") setget _set_event_color
 
 export(NodePath) var IconNode_path:NodePath
 export(NodePath) var TopContent_path:NodePath
@@ -56,23 +53,6 @@ func _ready() -> void:
 	skip_button_node.pressed = base_resource.skip
 
 
-func get_drag_data_fw(position: Vector2, from_control:Control):
-	if not base_resource:
-		return
-	var data = base_resource
-	var drag_preview_node:Control = data.get_event_editor_node()
-	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
-	drag_preview_node.size_flags_vertical = Control.SIZE_FILL
-	drag_preview_node.anchor_right = 0
-	drag_preview_node.anchor_bottom = 0
-	drag_preview_node.rect_size = Vector2(50,50)
-	drag_preview_node.rect_min_size = Vector2(50,50)
-	set_drag_preview(drag_preview_node)
-	emit_signal("deletion_requested", base_resource)
-	emit_signal("event_being_dragged")
-	return data
-
-
 func _draw() -> void:
 	var _focus_owner = get_focus_owner()
 	if has_focus():
@@ -91,35 +71,65 @@ func _get_minimum_size() -> Vector2:
 	return Vector2(0,32)
 
 
-func _focused() -> void:
-	_is_focused = true
-	emit_signal("focus_entered", self)
+func get_drag_data_fw(position: Vector2, from_control:Control):
+	if not base_resource:
+		return
+	var data = base_resource
+	var drag_preview_node:Control = data.get_event_editor_node()
+	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
+	drag_preview_node.size_flags_vertical = Control.SIZE_FILL
+	drag_preview_node.anchor_right = 0
+	drag_preview_node.anchor_bottom = 0
+	drag_preview_node.rect_size = Vector2(50,50)
+	drag_preview_node.rect_min_size = Vector2(50,50)
+	set_drag_preview(drag_preview_node)
+	emit_signal("deletion_requested", base_resource)
+	emit_signal("event_being_dragged")
+	return data
+
+
+func set_property_container_color(new_color:Color) -> void:
 	
+	var _stylebox:StyleBoxFlat
+	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = new_color
+	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
+	_stylebox.bg_color = new_color
+
+
+func expand_properties() -> void:
 	var _top_container_node = top_content_node.get_node("HContainer")
 	if not _top_container_node:
 		return
 	
-	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = event_color
-	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = event_color
-	
 	_top_container_node.toggle(true)
+
+
+func collapse_properties() -> void:
+	var _top_container_node = top_content_node.get_node("HContainer")
+	if not _top_container_node:
+		return
+	
+	_top_container_node.toggle(false)
+	
+
+
+func _focused() -> void:
+	_is_focused = true
+	emit_signal("focus_entered", self)
+	
+	set_property_container_color(event_color)
+	expand_properties()
 
 
 func _unfocused() -> void:
 	_is_focused = false
 	emit_signal("focus_exited", self)
 	
-	var _top_container_node = top_content_node.get_node("HContainer")
-	if not _top_container_node:
-		return
+	collapse_properties()
+	set_property_container_color(DEFAULT_COLOR)
 	
-	_top_container_node.toggle(false)
-	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = DEFAULT_COLOR
-	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = DEFAULT_COLOR
+	
 
 
 func _input(event: InputEvent) -> void:
