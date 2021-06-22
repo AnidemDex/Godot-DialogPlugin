@@ -20,7 +20,6 @@ onready var else_events_node:EventDisplayer = get_node(ElseEvents_Path) as Event
 
 func _ready() -> void:
 	# ALWAYS verify if you had a base_resource
-	
 	if base_resource:
 		# You can prepare your nodes here before updating its values
 		emit_signal("timeline_requested", self)
@@ -61,13 +60,16 @@ func can_drop_data(position: Vector2, data) -> bool:
 	return false
 
 
-func _on_event_being_dragged() -> void:
-	if_events_node._on_event_being_dragged()
-
-
 func _set_timeline(value:DialogTimelineResource) -> void:
 	timeline_resource = value
 	_update_node_values()
+
+
+#func _notification(what: int) -> void:
+#	match what:
+#		NOTIFICATION_MOUSE_EXIT:
+#			if get_viewport().gui_is_dragging() and not get_rect().has_point(get_local_mouse_position()):
+#				collapse_properties()
 
 
 func _on_IF_Event_save() -> void:
