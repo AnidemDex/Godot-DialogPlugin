@@ -166,6 +166,7 @@ margin_top = 20.0
 margin_right = 743.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 0, 64 )
+custom_constants/separation = 0
 script = ExtResource( 2 )
 
 [node name="ELSE" type="PanelContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="1"]
@@ -227,6 +228,7 @@ margin_top = 20.0
 margin_right = 743.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 0, 64 )
+custom_constants/separation = 0
 script = ExtResource( 2 )
 
 [node name="BaseProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="1"]

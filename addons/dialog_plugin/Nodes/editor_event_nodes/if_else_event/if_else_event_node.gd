@@ -65,11 +65,12 @@ func _set_timeline(value:DialogTimelineResource) -> void:
 	_update_node_values()
 
 
-#func _notification(what: int) -> void:
-#	match what:
-#		NOTIFICATION_MOUSE_EXIT:
-#			if get_viewport().gui_is_dragging() and not get_rect().has_point(get_local_mouse_position()):
-#				collapse_properties()
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_MOUSE_EXIT:
+			var _mouse_still_inside_node:bool = get_global_rect().has_point(get_global_mouse_position())
+			if get_viewport().gui_is_dragging() and not _mouse_still_inside_node:
+				collapse_properties()
 
 
 func _on_IF_Event_save() -> void:
