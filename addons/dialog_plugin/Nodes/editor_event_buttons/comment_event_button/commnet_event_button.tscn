@@ -4,4 +4,6 @@
 [ext_resource path="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd" type="Script" id=2]
 
 [node name="CommentButton" instance=ExtResource( 1 )]
+hint_tooltip = "A simple hint"
+text = "Comment"
 event_resource = ExtResource( 2 )
