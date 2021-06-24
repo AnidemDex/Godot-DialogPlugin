@@ -15,7 +15,9 @@ func _ready() -> void:
 		# You can prepare your nodes here before updating its values
 		_update_node_values()
 
+
 func _update_node_values() -> void:
+	comment_preview_node.text = "# {0}".format([base_resource.text])
 	comment_node.text = base_resource.text
 
 
@@ -28,6 +30,7 @@ func _unfocused() -> void:
 	._unfocused()
 	comment_preview_node.visible = true
 	_save_resource()
+	_update_node_values()
 
 
 func _on_Comment_text_changed() -> void:
