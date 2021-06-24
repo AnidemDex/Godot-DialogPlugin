@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
@@ -13,10 +13,11 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/change_timeline_button/change_timeline_button.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/set_event_button/set_event_button.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/if_else_event_button/if_else_event_button.tscn" type="PackedScene" id=13]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/comment_event_button/commnet_event_button.tscn" type="PackedScene" id=14]
 
 [node name="EventsContainer" type="HBoxContainer"]
-margin_right = 419.0
-margin_bottom = 24.0
+anchor_right = 1.0
+margin_bottom = 42.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -160,6 +161,28 @@ margin_left = 343.0
 margin_right = 347.0
 margin_bottom = 42.0
 
+[node name="Category4" type="VBoxContainer" parent="."]
+margin_left = 351.0
+margin_right = 381.0
+margin_bottom = 42.0
+alignment = 1
+
+[node name="CategoryName" type="Label" parent="Category4"]
+margin_right = 30.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Misc"
+align = 1
+
+[node name="Events" type="HBoxContainer" parent="Category4"]
+margin_left = 3.0
+margin_top = 18.0
+margin_right = 27.0
+margin_bottom = 42.0
+size_flags_horizontal = 4
+
+[node name="CommentButton" parent="Category4/Events" instance=ExtResource( 14 )]
+
 [node name="Template" type="VBoxContainer" parent="."]
 visible = false
 margin_left = 48.0
@@ -187,3 +210,4 @@ size_flags_horizontal = 4
 [connection signal="pressed" from="Category3/Events/JoinEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category3/Events/LeaveEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category3/Events/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]
+[connection signal="pressed" from="Category4/Events/CommentButton" to="." method="_on_EventButton_pressed"]
