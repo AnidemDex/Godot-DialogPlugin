@@ -68,9 +68,13 @@ func remove_timer() -> void:
 func prepare_text() -> void:
 	var _variables:Dictionary = load(VARIABLES_PATH).variables
 	var text_node:RichTextLabel = _DialogNode.TextNode
+	var final_text = text.format(_variables)
 	
-	text_node.bbcode_text = text.format(_variables)
-	text_node.visible_characters = 0
+	if continue_previous_text:
+		text_node.append_bbcode(text)
+	else:
+		text_node.bbcode_text = text.format(_variables)
+		text_node.visible_characters = 0
 
 
 func prepare_character_name() -> void:
