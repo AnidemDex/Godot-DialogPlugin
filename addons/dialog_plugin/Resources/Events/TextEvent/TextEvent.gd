@@ -44,9 +44,7 @@ func execute(caller:DialogBaseNode) -> void:
 		
 	
 	_timer.start(text_speed)
-	
-	
-	
+
 
 func configure_timer() -> void:
 	if not is_instance_valid(_timer):
@@ -66,8 +64,14 @@ func remove_timer() -> void:
 
 
 func prepare_text() -> void:
-	var _variables:Dictionary = load(VARIABLES_PATH).variables
 	var text_node:RichTextLabel = _DialogNode.TextNode
+	if not text_node:
+		finish(true)
+		return
+	
+	configure_text_node_fonts(text_node)
+	
+	var _variables:Dictionary = load(VARIABLES_PATH).variables
 	var final_text = text.format(_variables)
 	
 	if continue_previous_text:
@@ -75,6 +79,17 @@ func prepare_text() -> void:
 	else:
 		text_node.bbcode_text = text.format(_variables)
 		text_node.visible_characters = 0
+
+
+func configure_text_node_fonts(text_node:RichTextLabel) -> void:
+	if font_normal:
+		text_node.add_font_override("normal_font", font_normal)
+	if font_bold:
+		text_node.add_font_override("bold_font", font_bold)
+	if font_italics:
+		text_node.add_font_override("italics_font", font_italics)
+	if font_bold_italics:
+		text_node.add_font_override("bold_italics_font", font_bold_italics)
 
 
 func prepare_character_name() -> void:
