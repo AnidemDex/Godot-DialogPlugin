@@ -1,6 +1,8 @@
 tool
 extends PanelContainer
 
+signal text_changed(new_text)
+
 export(NodePath) var TextEdit_path:NodePath
 
 onready var text_edit_node:TextEdit = get_node(TextEdit_path) as TextEdit
@@ -37,3 +39,19 @@ func get_formatted_text_with_bbcode(text:String, bbcode:String) -> String:
 	var bbcode_format:String = "[{bbcode}]{text}[/{bbcode_end}]"
 	var meta:Dictionary = {"bbcode":bbcode, "text":text, "bbcode_end":bbcode_tag}
 	return bbcode_format.format(meta)
+
+
+func set_text(text:String) -> void:
+	text_edit_node.text = text
+
+
+func get_text() -> String:
+	return text_edit_node.text
+
+
+func _on_LinkButton_pressed() -> void:
+	OS.shell_open("https://docs.godotengine.org/en/stable/tutorials/gui/bbcode_in_richtextlabel.html")
+
+
+func _on_TextEdit_text_changed() -> void:
+	emit_signal("text_changed", get_text())
