@@ -16,6 +16,7 @@ func _ready() -> void:
 
 
 func _update_node_values() -> void:
+	return
 	var _text = base_resource.text
 	if base_resource.translation_key != "__SAME_AS_TEXT__":
 		_text = TranslationService.translate(base_resource.translation_key)

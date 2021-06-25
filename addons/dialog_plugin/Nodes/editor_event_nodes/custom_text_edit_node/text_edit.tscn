@@ -1,11 +1,218 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit_container.gd" type="Script" id=2]
 
-[node name="CustomTextEdit" type="TextEdit"]
-margin_right = 1008.0
-margin_bottom = 56.0
-rect_min_size = Vector2( 0, 42 )
+[node name="CustomTextEdit" type="PanelContainer"]
+anchor_right = 1.0
+margin_right = -195.0
+margin_bottom = 136.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+TextEdit_path = NodePath("VBoxContainer/TextEdit")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 822.0
+margin_bottom = 147.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 815.0
+margin_bottom = 52.0
+
+[node name="ToolBar" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 808.0
+margin_bottom = 45.0
+custom_constants/separation = 12
+
+[node name="FormattingCategory" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_right = 150.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory"]
+margin_right = 150.0
+margin_bottom = 14.0
+text = "Formatting"
+align = 1
+
+[node name="Tools" type="HBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory"]
+margin_top = 18.0
+margin_right = 150.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Bold" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools"]
+margin_right = 28.0
+margin_bottom = 20.0
+text = "[b]"
+__meta__ = {
+"_editor_description_": "bold"
+}
+
+[node name="Italic" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools"]
+margin_left = 32.0
+margin_right = 56.0
+margin_bottom = 20.0
+text = "[i]"
+__meta__ = {
+"_editor_description_": "italic"
+}
+
+[node name="Underline" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools"]
+margin_left = 60.0
+margin_right = 88.0
+margin_bottom = 20.0
+text = "[u]"
+__meta__ = {
+"_editor_description_": "underline"
+}
+
+[node name="Striketrough" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools"]
+margin_left = 92.0
+margin_right = 119.0
+margin_bottom = 20.0
+text = "[s]"
+__meta__ = {
+"_editor_description_": "striketrough"
+}
+
+[node name="Color" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools"]
+margin_left = 123.0
+margin_right = 150.0
+margin_bottom = 20.0
+disabled = true
+text = "[c]"
+__meta__ = {
+"_editor_description_": "color"
+}
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 162.0
+margin_right = 166.0
+margin_bottom = 38.0
+
+[node name="AlignmentCategory" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 178.0
+margin_right = 244.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory"]
+margin_right = 66.0
+margin_bottom = 14.0
+text = "Alignment"
+align = 1
+
+[node name="Tools" type="HBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory"]
+margin_top = 18.0
+margin_right = 66.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Center" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools"]
+margin_left = 11.0
+margin_right = 31.0
+margin_bottom = 20.0
+text = "C"
+
+[node name="Right" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools"]
+margin_left = 35.0
+margin_right = 55.0
+margin_bottom = 20.0
+text = "R"
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 256.0
+margin_right = 260.0
+margin_bottom = 38.0
+
+[node name="EffectsCategory" type="VBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 272.0
+margin_right = 378.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory"]
+margin_right = 106.0
+margin_bottom = 14.0
+text = "Effects"
+align = 1
+
+[node name="Tools" type="HBoxContainer" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory"]
+margin_top = 18.0
+margin_right = 106.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="Wave" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory/Tools"]
+margin_right = 18.0
+margin_bottom = 20.0
+text = "?"
+__meta__ = {
+"_editor_description_": "wave"
+}
+
+[node name="Tornado" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory/Tools"]
+margin_left = 22.0
+margin_right = 40.0
+margin_bottom = 20.0
+text = "?"
+__meta__ = {
+"_editor_description_": "tornado"
+}
+
+[node name="Shake" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory/Tools"]
+margin_left = 44.0
+margin_right = 62.0
+margin_bottom = 20.0
+text = "?"
+__meta__ = {
+"_editor_description_": "shake"
+}
+
+[node name="Fade" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory/Tools"]
+margin_left = 66.0
+margin_right = 84.0
+margin_bottom = 20.0
+text = "?"
+__meta__ = {
+"_editor_description_": "fade"
+}
+
+[node name="Rainbow" type="Button" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory/Tools"]
+margin_left = 88.0
+margin_right = 106.0
+margin_bottom = 20.0
+text = "?"
+__meta__ = {
+"_editor_description_": "rainbow"
+}
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 390.0
+margin_right = 394.0
+margin_bottom = 38.0
+
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/PanelContainer/ToolBar"]
+margin_left = 406.0
+margin_right = 517.0
+margin_bottom = 38.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0.235294, 0.239216, 0.368627, 1 )
+text = "More information"
+underline = 1
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 815.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 0, 66 )
 size_flags_vertical = 3
 highlight_current_line = true
 syntax_highlighting = true
@@ -17,4 +224,10 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[connection signal="text_changed" from="." to="." method="_on_TextEdit_text_changed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools/Bold" to="." method="insert_bbcode" binds= [ "b" ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools/Italic" to="." method="insert_bbcode" binds= [ "i" ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools/Underline" to="." method="insert_bbcode" binds= [ "u" ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/FormattingCategory/Tools/Striketrough" to="." method="insert_bbcode" binds= [ "s" ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Center" to="." method="insert_bbcode" binds= [ "center" ]]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Right" to="." method="insert_bbcode" binds= [ "right" ]]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="VBoxContainer/TextEdit" method="_on_TextEdit_text_changed"]
