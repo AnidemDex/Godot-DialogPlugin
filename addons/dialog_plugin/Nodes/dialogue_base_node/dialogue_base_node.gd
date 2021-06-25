@@ -17,7 +17,7 @@ var text_speed = 0.02
 var event_finished = false
 var next_input = 'ui_accept'
 
-onready var DialogNode := get_node_or_null(DialogNode_path)
+onready var DialogNode:DialogDialogueNode = get_node_or_null(DialogNode_path) as DialogDialogueNode
 onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 
 func _ready() -> void:

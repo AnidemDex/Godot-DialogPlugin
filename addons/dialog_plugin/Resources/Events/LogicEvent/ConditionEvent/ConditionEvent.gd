@@ -28,7 +28,6 @@ func execute(caller:DialogBaseNode) -> void:
 	old_timeline = caller.timeline
 	
 	var variables:Dictionary = load(VARIABLES_PATH).variables
-	var DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 	
 	var evaluated_condition = DialogUtil.evaluate(condition, caller, variables)
 #	print(condition,": ",evaluated_condition)
