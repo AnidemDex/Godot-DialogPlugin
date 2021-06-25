@@ -128,6 +128,7 @@ func _unfocused() -> void:
 	
 	collapse_properties()
 	set_property_container_color(DEFAULT_COLOR)
+	_save_resource()
 	
 	
 
