@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=9 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Resources/TimelineResource.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Other/events_array.gd" type="Script" id=2]
+[ext_resource path="res://GodotCharacter.tres" type="Resource" id=3]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd" type="Script" id=4]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=1]
+resource_name = "TextEvent"
+script = ExtResource( 4 )
+skip = false
+text = ""
+translation_key = "__SAME_AS_TEXT__"
+
+[sub_resource type="Resource" id=2]
+resource_name = "Comment"
+script = ExtResource( 5 )
+skip = true
+text = "Wow, totally useless event xD"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+_resources = [ SubResource( 1 ), SubResource( 2 ) ]
+values/0 = SubResource( 1 )
+values/1 = SubResource( 2 )
+
+[resource]
+script = ExtResource( 1 )
+events = SubResource( 3 )
+_related_characters = [ ExtResource( 3 ) ]

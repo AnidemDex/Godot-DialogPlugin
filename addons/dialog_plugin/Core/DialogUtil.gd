@@ -10,23 +10,18 @@ class Error:
 	const DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER = "DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER"
 	
 	static func not_found_timeline() -> DialogTimelineResource:
-		var _timeline = DialogTimelineResource.new()
-		var _text_event = DialogTextEvent.new()
-		var _char_join_event = DialogCharacterJoinEvent.new()
-		var _character = DialogCharacterResource.new()
-		var _portrait = DialogPortraitResource.new()
-		
-		_portrait.image = load("res://icon.png")
+		var tml_res = load("res://addons/dialog_plugin/Resources/TimelineResource.gd")
+		var txt_evnt = load("res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd")
+		var chara = load("res://addons/dialog_plugin/Resources/CharacterResource.gd")
+		var _timeline = tml_res.new()
+		var _text_event = txt_evnt.new()
+		var _character = chara.new()
 		
 		_character.name = Dialog_ERROR
 		_character.color = Color.red
-		_character.portraits.add(_portrait)
-		
-		_char_join_event.character = _character
 		
 		_text_event.character = _character
 		_text_event.translation_key = TIMELINE_NOT_SELECTED
-		_timeline.events.add(_char_join_event)
 		_timeline.events.add(_text_event)
 		
 		return _timeline
@@ -82,3 +77,7 @@ static func can_evaluate(input:String, global:Object=null, locals:Dictionary={})
 			return true
 		
 	return false
+
+# Util function to generate property dictionary
+static func get_property_dict(property_name:String,property_type:int,property_hint:int=PROPERTY_HINT_NONE,property_hint_string:String="",property_usage:int=PROPERTY_USAGE_STORAGE) -> Dictionary:
+	return {"name":property_name, "type":property_type, "hint":property_hint, "hint_string":property_hint_string, "usage":property_usage}

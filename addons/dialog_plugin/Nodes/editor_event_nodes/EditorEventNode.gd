@@ -103,6 +103,7 @@ func expand_properties() -> void:
 		return
 	
 	_top_container_node.toggle(true)
+	after_expand_properties()
 
 
 func collapse_properties() -> void:
@@ -111,6 +112,15 @@ func collapse_properties() -> void:
 		return
 	
 	_top_container_node.toggle(false)
+	after_collapse_properties()
+
+
+func after_expand_properties() -> void:
+	pass
+
+
+func after_collapse_properties() -> void:
+	pass
 	
 
 

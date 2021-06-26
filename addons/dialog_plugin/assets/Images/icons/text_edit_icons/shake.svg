@@ -1,0 +1,9 @@
+<svg class="feather feather-bold" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <path d="m3.8582 1.5696-2.722 3.5262 2.8031 3.8105-2.8031 5.1755 2.722 3.4693-2.722 4.7205"/>
+ <path d="m22.884 1.5696-2.722 3.5262 2.8031 3.8105-2.8031 5.1755 2.722 3.4693-2.722 4.7205"/>
+ <g transform="matrix(.94948 0 0 .94948 .51097 .94803)">
+  <rect x="5.7007" y="5.694" width="12.796" height="8.9573" rx="1.2796" ry="1.2796" style="stroke-width:1.2796"/>
+  <line x1="9.5395" x2="14.658" y1="17.211" y2="17.211" style="stroke-width:1.2796"/>
+  <line x1="12.099" x2="12.099" y1="14.651" y2="17.211" style="stroke-width:1.2796"/>
+ </g>
+</svg>

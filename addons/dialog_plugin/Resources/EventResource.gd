@@ -2,6 +2,7 @@ tool
 class_name DialogEventResource
 extends Resource
 
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 const VARIABLES_PATH = preload("res://addons/dialog_plugin/Core/DialogResources.gd").DEFAULT_VARIABLES_PATH
 

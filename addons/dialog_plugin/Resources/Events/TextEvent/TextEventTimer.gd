@@ -1,7 +1,6 @@
-tool
 extends Timer
 
-var caller = null
+var caller:DialogBaseNode = null
 
 func _input(event: InputEvent) -> void:
 	if not caller.next_input:
