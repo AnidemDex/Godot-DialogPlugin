@@ -18,6 +18,7 @@ content_margin_left = 4.0
 content_margin_right = 4.0
 content_margin_top = 4.0
 content_margin_bottom = 4.0
+bg_color = Color( 0.2, 0.231373, 0.309804, 1 )
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -64,6 +65,7 @@ alignment = 1
 [node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/FormattingCategory"]
 margin_right = 195.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Formatting"
 align = 1
 
@@ -145,6 +147,7 @@ alignment = 1
 [node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory"]
 margin_right = 80.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Alignment"
 align = 1
 
@@ -185,6 +188,7 @@ alignment = 1
 [node name="Name" type="Label" parent="VBoxContainer/PanelContainer/ToolBar/EffectsCategory"]
 margin_right = 122.0
 margin_bottom = 14.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Effects"
 align = 1
 
@@ -265,8 +269,8 @@ margin_bottom = 48.0
 margin_left = 481.0
 margin_right = 592.0
 margin_bottom = 48.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.235294, 0.239216, 0.368627, 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_hover = Color( 0.156863, 0.572549, 0.843137, 1 )
 text = "More information"
 underline = 1
 
@@ -293,5 +297,5 @@ __meta__ = {
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Center" to="." method="insert_bbcode" binds= [ "center" ]]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Right" to="." method="insert_bbcode" binds= [ "right" ]]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/LinkButton" to="." method="_on_LinkButton_pressed"]
-[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_text_changed"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="VBoxContainer/TextEdit" method="_on_TextEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_text_changed"]

@@ -8,6 +8,8 @@ export(NodePath) var PreviewText_path:NodePath
 export(NodePath) var TextEdit_path:NodePath
 export(NodePath) var CharacterBtn_path:NodePath
 export(NodePath) var TranslationKeyLabel_path:NodePath
+export(NodePath) var TextSpeed_path:NodePath
+export(NodePath) var Continue_path:NodePath
 
 var timeline_resource = null setget _set_timeline
 
@@ -15,7 +17,8 @@ onready var preview_text_node:Label = get_node(PreviewText_path) as Label
 onready var text_edit_node:CustomTextEdit = get_node_or_null(TextEdit_path) as CustomTextEdit
 onready var character_button_node:CharacterListButton = get_node_or_null(CharacterBtn_path) as CharacterListButton
 onready var translation_key_label_node:LineEdit = get_node_or_null(TranslationKeyLabel_path) as LineEdit
-
+onready var text_speed_node:SpinBox = get_node(TextSpeed_path) as SpinBox
+onready var continue_node:CheckBox = get_node(Continue_path) as CheckBox
 
 func _ready() -> void:
 	if base_resource:
@@ -26,9 +29,13 @@ func _update_node_values() -> void:
 	update_node_translation_key()
 	update_node_character()
 	update_node_text()
+	update_node_text_speed()
+	update_node_continue_previous_text()
 
 
 func update_node_text() -> void:
+	if not base_resource:
+		return
 	base_resource = base_resource as DialogTextEvent
 	
 	var _text:String = base_resource.text
@@ -57,6 +64,14 @@ func update_node_translation_key() -> void:
 	translation_key_label_node.text = translation_key
 
 
+func update_node_text_speed() -> void:
+	text_speed_node.value = base_resource.text_speed
+
+
+func update_node_continue_previous_text() -> void:
+	continue_node.pressed = base_resource.continue_previous_text
+
+
 func after_collapse_properties() -> void:
 	update_node_text()
 	preview_text_node.visible = true
@@ -67,6 +82,8 @@ func after_expand_properties() -> void:
 
 
 func _set_timeline(value:DialogTimelineResource) -> void:
+	if not value:
+		return
 	timeline_resource = value
 	character_button_node.characters = timeline_resource._related_characters
 	_update_node_values()
@@ -104,3 +121,11 @@ func _on_CharacterList_character_added() -> void:
 
 func _on_CustomTextEdit_text_changed(new_text:String) -> void:
 	base_resource.set("text", new_text)
+
+
+func _on_TextSpeed_value_changed(value: float) -> void:
+	base_resource.set("text_speed", value)
+
+
+func _on_ContinuePrevious_toggled(button_pressed: bool) -> void:
+	base_resource.set("continue_previous_text", button_pressed)
