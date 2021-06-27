@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_container.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/set_event_button/set_event_button.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/if_else_event_button/if_else_event_button.tscn" type="PackedScene" id=13]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/comment_event_button/commnet_event_button.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_with_audio_event_button/text_with_audio_event_button.tscn" type="PackedScene" id=15]
 
 [node name="EventsContainer" type="HBoxContainer"]
 anchor_right = 1.0
@@ -71,13 +72,17 @@ text = "Text Events"
 align = 1
 
 [node name="Events" type="HBoxContainer" parent="Category1"]
-margin_left = 24.0
+margin_left = 10.0
 margin_top = 18.0
-margin_right = 48.0
+margin_right = 62.0
 margin_bottom = 42.0
 size_flags_horizontal = 4
 
 [node name="TextEventButton" parent="Category1/Events" instance=ExtResource( 2 )]
+
+[node name="TextWithAudioEventButton" parent="Category1/Events" instance=ExtResource( 15 )]
+margin_left = 28.0
+margin_right = 52.0
 
 [node name="VSeparator" type="VSeparator" parent="."]
 margin_left = 77.0
@@ -202,6 +207,8 @@ size_flags_horizontal = 4
 
 [connection signal="being_dragged" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_being_dragged"]
 [connection signal="pressed" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_pressed"]
+[connection signal="being_dragged" from="Category1/Events/TextWithAudioEventButton" to="." method="_on_EventButton_being_dragged"]
+[connection signal="pressed" from="Category1/Events/TextWithAudioEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/If_Else_EventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/SetEventButton" to="." method="_on_EventButton_pressed"]
 [connection signal="pressed" from="Category2/Events/WaitTimeButton" to="." method="_on_EventButton_pressed"]

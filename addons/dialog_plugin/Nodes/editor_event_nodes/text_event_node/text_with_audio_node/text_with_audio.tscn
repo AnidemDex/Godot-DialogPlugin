@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_with_audio_node/text_with_audio.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/OptionButtonGenerator.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/text/text_w_sound_bubble.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
@@ -29,6 +31,12 @@ anti_aliasing = false
 
 [node name="TextEventNode" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
+BlipButton_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Blip/Button")
+BlipLoop_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties/LoopBlip")
+BlipForce_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties/ForceBlip")
+
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+texture = ExtResource( 4 )
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -40,4 +48,99 @@ custom_styles/panel = SubResource( 2 )
 items = [ "Empty", null, false, 0, null ]
 
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+margin_bottom = 316.0
 custom_styles/panel = SubResource( 3 )
+
+[node name="Margin" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties" index="0"]
+margin_bottom = 284.0
+
+[node name="VBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="0"]
+margin_bottom = 284.0
+
+[node name="CustomProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="0"]
+margin_bottom = 261.0
+
+[node name="HSeparator" type="HSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="2"]
+margin_top = 165.0
+margin_right = 804.0
+margin_bottom = 169.0
+
+[node name="Blip" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="3"]
+margin_top = 172.0
+margin_right = 804.0
+margin_bottom = 215.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Blip" index="0"]
+margin_right = 804.0
+margin_bottom = 20.0
+text = "Blip Sound"
+
+[node name="Button" type="Button" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Blip" index="1"]
+margin_top = 23.0
+margin_right = 804.0
+margin_bottom = 43.0
+text = "None"
+
+[node name="BlipProperties" type="HBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="4"]
+margin_top = 218.0
+margin_right = 804.0
+margin_bottom = 238.0
+
+[node name="LoopBlip" type="CheckBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="0"]
+margin_right = 124.0
+margin_bottom = 20.0
+text = "Loop Blip Sound"
+
+[node name="VSeparator" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="1"]
+margin_left = 127.0
+margin_right = 131.0
+margin_bottom = 20.0
+
+[node name="ForceBlip" type="CheckBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="2"]
+margin_left = 134.0
+margin_right = 261.0
+margin_bottom = 20.0
+text = "Force blip sound"
+
+[node name="VSeparator2" type="VSeparator" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="3"]
+margin_left = 264.0
+margin_right = 268.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="4"]
+margin_left = 271.0
+margin_right = 342.0
+margin_bottom = 20.0
+text = "Audio Bus"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionButton" type="OptionButton" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties" index="5"]
+margin_left = 345.0
+margin_right = 406.0
+margin_bottom = 20.0
+text = "Empty"
+items = [ "Empty", null, false, 0, null ]
+selected = 0
+script = ExtResource( 3 )
+
+[node name="Translation" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="5"]
+margin_top = 241.0
+margin_bottom = 261.0
+
+[node name="BaseProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="1"]
+margin_top = 264.0
+margin_bottom = 284.0
+
+[node name="ReferenceRect" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="1"]
+margin_bottom = 284.0
+
+[node name="FileDialog" type="FileDialog" parent="." index="1"]
+margin_right = 289.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Guardar un Archivo"
+
+[connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties/LoopBlip" to="." method="_on_LoopBlip_toggled"]
+[connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/BlipProperties/ForceBlip" to="." method="_on_ForceBlip_toggled"]

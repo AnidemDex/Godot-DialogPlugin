@@ -10,7 +10,7 @@ onready var dialog_node:DialogBaseNode = get_node(DialogNode_path) as DialogBase
 
 func preview_event(event:DialogEventResource) -> void:
 	displayed_event = event
-	var _events:Array = (base_resource as DialogTimelineResource).events.get_resources()
+	var _events:Array = (base_resource as DialogTimelineResource).events
 	var _event_idx:int = _events.find(displayed_event)
 	base_resource.current_event = clamp(_event_idx, 0, _events.size())
 	dialog_node.timeline = base_resource

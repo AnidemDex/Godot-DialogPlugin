@@ -42,7 +42,7 @@ func configure_separator_node() -> void:
 
 func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 	
-	var _events:Array = timeline_resource.events.get_resources()
+	var _events:Array = timeline_resource.events
 
 	if in_place != -1:
 		_events.insert(in_place, event)
@@ -63,7 +63,7 @@ func unload_events():
 func load_events():
 	loading_events = true
 	
-	var _events:Array = timeline_resource.events.get_resources()
+	var _events:Array = timeline_resource.events
 	
 	for event_idx in _events.size():
 		var event:DialogEventResource = _events[event_idx] as DialogEventResource
@@ -118,7 +118,7 @@ func _on_EventNode_deletion_requested(event_resource:DialogEventResource=null) -
 	if not event_resource:
 		return
 	
-	var _events:Array = timeline_resource.events.get_resources()
+	var _events:Array = timeline_resource.events
 	_events.erase(event_resource)
 	emit_signal("save")
 	force_reload()
