@@ -28,6 +28,8 @@ class Logger:
 	const INFO = "[Dialog]"
 	
 	static func print(who:Object, what) -> void:
+		if not OS.is_stdout_verbose():
+			return
 		
 		var _info = "[Dialog]"
 		
