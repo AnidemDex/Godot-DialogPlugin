@@ -71,12 +71,12 @@ func prepare_text() -> void:
 	configure_text_node_fonts(text_node)
 	
 	var _variables:Dictionary = load(VARIABLES_PATH).variables
-	var final_text = text.format(_variables)
+	var final_text:String = text.format(_variables)
 	
 	if continue_previous_text:
-		text_node.append_bbcode(text)
+		text_node.append_bbcode(final_text)
 	else:
-		text_node.bbcode_text = text.format(_variables)
+		text_node.bbcode_text = final_text
 		text_node.visible_characters = 0
 
 
@@ -105,9 +105,6 @@ func prepare_character_name() -> void:
 
 
 func _update_text() -> void:
-	if not _DialogNode:
-		finish(true)
-		return
 	
 	var text_node:RichTextLabel = _DialogNode.TextNode
 	
