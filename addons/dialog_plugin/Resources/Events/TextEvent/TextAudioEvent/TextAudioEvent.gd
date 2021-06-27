@@ -17,7 +17,7 @@ func _init() -> void:
 	text_speed = 0.04
 
 	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	#event_editor_scene_path = "res://path/to/your/editor/node/scene.tscn"
+	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_with_audio_node/text_with_audio.tscn"
 
 
 func execute(caller:DialogBaseNode) -> void:

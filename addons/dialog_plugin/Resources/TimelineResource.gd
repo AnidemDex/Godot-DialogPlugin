@@ -5,22 +5,23 @@ extends Resource
 # Por si se te llega a olvidar: NO HAGAS ESTE SCRIPT CON TIPADO ESTATICO
 # Generas dependencias ciclicas y luego el mundo pierde la cabeza.
 
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
+
 signal timeline_ended
 
-var events:EventsArray = EventsArray.new()
+var events:Array = []
 var current_event:int = 0
 
 var _related_characters:Array = []
 
 func start(caller):
 	var _err
-	var _events:Array = events.get_resources()
 	
-	if _events.empty() or current_event >= _events.size():
+	if events.empty() or current_event >= events.size():
 		emit_signal("timeline_ended")
 		return
 	
-	var _event:Resource = _events[current_event]
+	var _event:Resource = events[current_event]
 	var _caller:Node = caller as Node
 	
 	connect_event_signals(_event, _caller)
@@ -51,9 +52,8 @@ func _get_property_list() -> Array:
 	properties.append(
 		{
 			"name":"events",
-			"type":TYPE_OBJECT,
-			"hint":PROPERTY_HINT_RESOURCE_TYPE,
-			"hint_string":"EventsArray",
+			"type":TYPE_ARRAY,
+			"usage":PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE
 		}
 	)
 	properties.append(

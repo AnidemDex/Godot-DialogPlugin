@@ -37,7 +37,7 @@ func execute(caller:DialogBaseNode) -> void:
 	else:
 		timeline = events_else
 	
-	if timeline and not(timeline.events.get_resources().empty()):
+	if timeline and not(timeline.events.empty()):
 		timeline.connect("timeline_ended", self, "_on_Timeline_ended", [], CONNECT_ONESHOT)
 		caller.timeline = timeline
 	
