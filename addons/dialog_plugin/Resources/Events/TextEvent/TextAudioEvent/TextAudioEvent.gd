@@ -5,6 +5,7 @@ extends DialogTextEvent
 export(AudioStream) var blip_sound:AudioStream
 export(bool) var loop_blip_sound:bool = false
 export(bool) var force_blip_sound:bool = false
+export(String) var audio_bus:String = "Master"
 
 var sound_generator:AudioStreamPlayer
 
@@ -31,6 +32,7 @@ func prepare_sound_generator():
 	if not sound_generator.is_inside_tree():
 		_caller.add_child(sound_generator)
 	
+	sound_generator.bus = audio_bus
 	sound_generator.stream = get_blip_sound()
 
 
