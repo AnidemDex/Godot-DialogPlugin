@@ -17,10 +17,6 @@ func _init():
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
-	
-	_caller = caller
 	_caller.visible = true
 	_PortraitManager = (caller.PortraitManager as DialogPortraitManager)
 	

@@ -42,25 +42,25 @@ TextSpeed_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Proper
 Continue_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer2/ContinuePrevious/HBoxContainer/ContinuePrevious")
 
 [node name="HContainer" parent="." index="0"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="Branch" parent="HContainer" index="0"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="VContainer" parent="HContainer/Branch" index="0"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
 texture = ExtResource( 5 )
 
 [node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="HContainer" parent="HContainer" index="1"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="NameMargin" parent="HContainer/HContainer" index="0"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -71,10 +71,7 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Text Event"
 
 [node name="InfoMargin" parent="HContainer/HContainer" index="1"]
-margin_bottom = 244.0
-
-[node name="InfoContainer" parent="HContainer/HContainer/InfoMargin" index="0"]
-margin_bottom = 244.0
+margin_bottom = 46.0
 
 [node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
 custom_styles/panel = SubResource( 2 )
@@ -107,7 +104,6 @@ align = 1
 clip_text = true
 
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
-visible = true
 margin_right = 820.0
 margin_bottom = 240.0
 custom_styles/panel = SubResource( 3 )

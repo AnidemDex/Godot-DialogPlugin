@@ -15,8 +15,6 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
 
 	# There goes your event code.
 

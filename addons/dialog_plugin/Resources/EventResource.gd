@@ -14,10 +14,15 @@ export(bool) var skip:bool = false
 var _caller:DialogBaseNode = null
 var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
 
-#warning-ignore-all:unused_argument
-func execute(caller:DialogBaseNode) -> void:
+
+func _execute(caller:DialogBaseNode) -> void:
 	_caller = caller
 	emit_signal("event_started", self)
+	execute(caller)
+
+
+func execute(caller:DialogBaseNode) -> void:
+	push_warning("Olvidaste reemplazar este metodo")
 
 
 func finish(jump_to_next_event=skip) -> void:

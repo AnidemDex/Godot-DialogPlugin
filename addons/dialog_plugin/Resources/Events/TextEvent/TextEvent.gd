@@ -30,7 +30,6 @@ func _init():
 
 
 func execute(caller:DialogBaseNode) -> void:
-	.execute(caller)
 	
 	_DialogNode = caller.DialogNode
 	

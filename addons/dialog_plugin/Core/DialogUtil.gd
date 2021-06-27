@@ -1,7 +1,5 @@
 tool
 
-const DialogDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd")
-
 class Error:
 	const Dialog_ERROR = "[Dialog Error]"
 	const TIMELINE_NOT_FOUND = "TIMELINE_NOT_FOUND"
@@ -9,7 +7,7 @@ class Error:
 	
 	const DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER = "DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER"
 	
-	static func not_found_timeline() -> DialogTimelineResource:
+	static func not_found_timeline():
 		var tml_res = load("res://addons/dialog_plugin/Resources/TimelineResource.gd")
 		var txt_evnt = load("res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd")
 		var chara = load("res://addons/dialog_plugin/Resources/CharacterResource.gd")
@@ -30,8 +28,6 @@ class Logger:
 	const INFO = "[Dialog]"
 	
 	static func print(who:Object, what) -> void:
-		if not DialogDB.get_editor_configuration().editor_debug_mode:
-			return
 		
 		var _info = "[Dialog]"
 		

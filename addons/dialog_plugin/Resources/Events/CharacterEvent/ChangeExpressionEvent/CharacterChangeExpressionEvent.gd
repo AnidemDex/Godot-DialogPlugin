@@ -10,8 +10,6 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
 	if not caller.PortraitManager or not character:
 		finish(true)
 		return

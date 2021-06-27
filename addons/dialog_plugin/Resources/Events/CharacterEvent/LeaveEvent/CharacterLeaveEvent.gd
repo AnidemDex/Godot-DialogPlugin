@@ -9,8 +9,6 @@ func _init():
 
 
 func execute(caller:DialogBaseNode) -> void:
-	.execute(caller)
-	
 	var PortraitManager:DialogPortraitManager = caller.PortraitManager
 	if not PortraitManager:
 		finish(true)

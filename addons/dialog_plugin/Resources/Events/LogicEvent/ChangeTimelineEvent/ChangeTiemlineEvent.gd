@@ -16,8 +16,7 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
+	
 	if not timeline and timeline_path:
 		timeline = load(timeline_path) as DialogTimelineResource
 	if not timeline or not(timeline is DialogTimelineResource):

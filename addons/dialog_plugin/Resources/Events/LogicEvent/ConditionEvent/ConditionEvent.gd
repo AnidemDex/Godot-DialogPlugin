@@ -22,9 +22,7 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
-	
+
 	old_timeline = caller.timeline
 	
 	var variables:Dictionary = load(VARIABLES_PATH).variables

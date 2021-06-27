@@ -2,10 +2,13 @@ tool
 class_name DialogTimelineResource, "res://addons/dialog_plugin/assets/Images/icons/timeline_icon.png"
 extends Resource
 
+# Por si se te llega a olvidar: NO HAGAS ESTE SCRIPT CON TIPADO ESTATICO
+# Generas dependencias ciclicas y luego el mundo pierde la cabeza.
+
 signal timeline_ended
 
 var events:EventsArray = EventsArray.new()
-var current_event = 0
+var current_event:int = 0
 
 var _related_characters:Array = []
 
@@ -13,41 +16,33 @@ func start(caller):
 	var _err
 	var _events:Array = events.get_resources()
 	
-	if _events.empty():
+	if _events.empty() or current_event >= _events.size():
 		emit_signal("timeline_ended")
 		return
 	
-	if not _events[current_event].is_connected("event_started", caller, "_on_event_start"):
-		_err = _events[current_event].connect("event_started", caller, "_on_event_start")
-		assert(_err == OK)
-	if not _events[current_event].is_connected("event_finished", caller, "_on_event_finished"):
-		_err = _events[current_event].connect("event_finished", caller, "_on_event_finished")
-		assert(_err == OK)
+	var _event:Resource = _events[current_event]
+	var _caller:Node = caller as Node
 	
-	_events[current_event].execute(caller)
+	connect_event_signals(_event, _caller)
+	
+	_event._execute(_caller)
+
 
 func go_to_next_event(caller):
 	current_event += 1
-	current_event = clamp(current_event, 0, events.get_resources().size())
-	if current_event == events.get_resources().size():
-		emit_signal("timeline_ended")
-	else:
-		start(caller)
+	start(caller)
 
-# This method is probably unused, should be removed
-func get_good_name(with_name:String="") -> String:
-	var _good_name = with_name
+
+func connect_event_signals(event:Resource, caller_node:Node) -> void:
+	var _err:int
+	if not event.is_connected("event_started", caller_node, "_on_event_start"):
+		_err = event.connect("event_started", caller_node, "_on_event_start")
+		assert(_err == OK)
 	
-	if not _good_name:
-		_good_name = resource_name if resource_name else resource_path
-	else:
-		if _good_name.begins_with("res://"):
-			_good_name = _good_name.replace("res://", "")
-		if _good_name.ends_with(".tres"):
-			_good_name = _good_name.replace(".tres", "")
-		_good_name = _good_name.capitalize()
-	
-	return _good_name
+	if not event.is_connected("event_finished", caller_node, "_on_event_finished"):
+		event.connect("event_finished", caller_node, "_on_event_finished")
+		assert(_err == OK)
+
 
 # Esto debe hacerse al menos hasta que https://github.com/godotengine/godot/pull/44879
 # sea añadido a Godot

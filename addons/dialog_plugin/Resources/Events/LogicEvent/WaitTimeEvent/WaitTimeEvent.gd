@@ -10,6 +10,5 @@ func _init():
 
 
 func execute(caller:DialogBaseNode) -> void:
-	.execute(caller)
 	yield(caller.get_tree().create_timer(wait_time), "timeout")
 	finish()

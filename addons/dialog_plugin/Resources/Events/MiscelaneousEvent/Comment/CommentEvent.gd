@@ -11,5 +11,4 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	.execute(caller)
 	finish(true)

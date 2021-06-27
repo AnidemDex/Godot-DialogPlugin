@@ -13,8 +13,6 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
 	
 	if not event_resource:
 		finish(true)
@@ -28,7 +26,7 @@ func execute(caller:DialogBaseNode) -> void:
 
 	var _err = (event_resource as DialogEventResource).connect("event_finished", self, "_on_CustomEvent_end")
 	assert(_err == OK)
-	event_resource.execute(caller)
+	event_resource._execute(caller)
 
 	# Notify that you end this event
 

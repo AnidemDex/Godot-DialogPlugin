@@ -18,8 +18,6 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
 	# Try to convert variable.name to variable:name in case using object
 	variable_name = variable_name.replace(".", ":")
 	# Load variables resource

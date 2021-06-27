@@ -2,7 +2,7 @@ tool
 class_name DialogJumpToEvent
 extends DialogEventResource
 
-export(int) var event_index = -1
+export(int) var event_index:int = -1
 
 func _init() -> void:
 	resource_name = "JumpToEvent"
@@ -11,8 +11,6 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	# Parent function must be called at the start
-	.execute(caller)
 	
 	if event_index >= 0:
 		var _timeline:DialogTimelineResource = caller.timeline
