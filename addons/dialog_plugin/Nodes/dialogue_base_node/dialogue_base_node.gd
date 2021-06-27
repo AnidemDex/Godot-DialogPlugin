@@ -13,7 +13,6 @@ export(NodePath) var DialogNode_path:NodePath
 export(NodePath) var PortraitsNode_path:NodePath
 
 var timeline: DialogTimelineResource
-var text_speed = 0.02
 var event_finished = false
 var next_input = 'ui_accept'
 
