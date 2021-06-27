@@ -7,7 +7,7 @@ func generate_items() -> void:
 	if timeline_resource:
 		clear()
 		var _idx = 0
-		for event in timeline_resource.events.get_resources():
+		for event in timeline_resource.events:
 			add_item(str(_idx), _idx)
 			set_item_metadata(_idx, _idx)
 			_idx += 1
