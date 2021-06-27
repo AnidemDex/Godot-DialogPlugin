@@ -1,6 +1,6 @@
 tool
 # class_name <your_event_class_name_here>
-extends DialogEventResource
+extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
 export(String) var variable_name:String = ""
 export(String) var variable_value:String = ""

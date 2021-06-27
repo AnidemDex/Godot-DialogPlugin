@@ -1,6 +1,6 @@
 tool
 class_name DialogWaitTimeEvent
-extends DialogEventResource
+extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
 export(float, 0, 60, 1) var wait_time = 0.0
 

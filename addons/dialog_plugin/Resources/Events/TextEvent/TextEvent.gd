@@ -1,6 +1,6 @@
 tool
 class_name DialogTextEvent
-extends DialogEventResource
+extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
 const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
@@ -10,7 +10,7 @@ const EventTimer = preload("res://addons/dialog_plugin/Resources/Events/TextEven
 export(String, MULTILINE) var text:String = ""
 export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.02
 export(bool) var continue_previous_text:bool = false
-export(String) var translation_key = SAME_AS_TEXT
+export(String) var translation_key:String = SAME_AS_TEXT
 
 var character:DialogCharacterResource = null setget set_character
 

@@ -1,6 +1,6 @@
 tool
 class_name DialogChangeTimelineEvent
-extends DialogEventResource
+extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
 export(int) var start_from_event = 0
 var timeline_path:String = ""
