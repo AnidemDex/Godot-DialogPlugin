@@ -29,45 +29,9 @@ anti_aliasing = false
 
 [node name="TextEventNode" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
-event_color = Color( 0.235294, 0.239216, 0.368627, 1 )
-IconNode_path = NodePath("")
-TopContent_path = NodePath("")
-PropertiesContainer_path = NodePath("")
-IndexLbl_path = NodePath("")
-SkipBtn_path = NodePath("")
-PreviewText_path = NodePath("")
-TextEdit_path = NodePath("")
-CharacterBtn_path = NodePath("")
-TranslationKeyLabel_path = NodePath("")
-TextSpeed_path = NodePath("")
-Continue_path = NodePath("")
-
-[node name="HContainer" parent="." index="0"]
-margin_bottom = 46.0
-
-[node name="Branch" parent="HContainer" index="0"]
-margin_bottom = 46.0
-
-[node name="VContainer" parent="HContainer/Branch" index="0"]
-margin_bottom = 46.0
-
-[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
-margin_bottom = 46.0
-
-[node name="HContainer" parent="HContainer" index="1"]
-margin_bottom = 46.0
-
-[node name="NameMargin" parent="HContainer/HContainer" index="0"]
-margin_bottom = 46.0
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
-
-[node name="InfoMargin" parent="HContainer/HContainer" index="1"]
-margin_bottom = 46.0
-
-[node name="InfoContainer" parent="HContainer/HContainer/InfoMargin" index="0"]
-margin_bottom = 36.0
 
 [node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
 custom_styles/panel = SubResource( 2 )
@@ -76,5 +40,4 @@ custom_styles/panel = SubResource( 2 )
 items = [ "Empty", null, false, 0, null ]
 
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
-visible = false
 custom_styles/panel = SubResource( 3 )
