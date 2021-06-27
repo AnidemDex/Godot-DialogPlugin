@@ -19,6 +19,11 @@ func _init() -> void:
 	#event_editor_scene_path = "res://path/to/your/editor/node/scene.tscn"
 
 
+func execute(caller:DialogBaseNode) -> void:
+	prepare_sound_generator()
+	.execute(caller)
+
+
 func prepare_sound_generator():
 	if not is_instance_valid(sound_generator):
 		sound_generator = get_sound_generator_instance()
@@ -48,7 +53,6 @@ func _will_loop() -> bool:
 
 
 func _on_TextTimer_timeout() -> void:
-	prepare_sound_generator()
 	_update_text()
 	if not _already_played:
 		_blip()
