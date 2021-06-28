@@ -19,12 +19,27 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialogue_base_node.gd"
 }, {
+"base": "Resource",
+"class": "DialogChangeTimelineEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/ChangeTimelineEvent/ChangeTiemlineEvent.gd"
+}, {
+"base": "DialogCharacterEvent",
+"class": "DialogCharacterChangeExpressionEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/ChangeExpressionEvent/CharacterChangeExpressionEvent.gd"
+}, {
 "base": "DialogEventResource",
+"class": "DialogCharacterEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/CharacterEvent.gd"
+}, {
+"base": "DialogCharacterEvent",
 "class": "DialogCharacterJoinEvent",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd"
 }, {
-"base": "DialogEventResource",
+"base": "DialogCharacterEvent",
 "class": "DialogCharacterLeaveEvent",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd"
@@ -33,6 +48,11 @@ _global_script_classes=[ {
 "class": "DialogCharacterResource",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/CharacterResource.gd"
+}, {
+"base": "DialogEventResource",
+"class": "DialogCustomEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/CustomEvent/CustomEvent.gd"
 }, {
 "base": "Resource",
 "class": "DialogDatabaseResource",
@@ -54,6 +74,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/EventResource.gd"
 }, {
+"base": "Resource",
+"class": "DialogJumpToEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/JumpToEvent/JumpToEvent.gd"
+}, {
 "base": "Control",
 "class": "DialogPortraitManager",
 "language": "GDScript",
@@ -64,20 +89,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/PortraitResource.gd"
 }, {
-"base": "DialogEventResource",
+"base": "Resource",
 "class": "DialogTextEvent",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
+}, {
+"base": "Resource",
+"class": "DialogTextWithAudioEvent",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Resources/Events/TextEvent/TextAudioEvent/TextAudioEvent.gd"
 }, {
 "base": "Resource",
 "class": "DialogTimelineResource",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/TimelineResource.gd"
 }, {
-"base": "DialogEventResource",
+"base": "Resource",
 "class": "DialogWaitTimeEvent",
 "language": "GDScript",
-"path": "res://addons/dialog_plugin/Resources/Events/WaitTimeEvent/WaitTimeEvent.gd"
+"path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/WaitTimeEvent/WaitTimeEvent.gd"
 }, {
 "base": "Resource",
 "class": "EventsArray",
@@ -107,17 +137,23 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Dialog": "",
 "DialogBaseNode": "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png",
+"DialogChangeTimelineEvent": "",
+"DialogCharacterChangeExpressionEvent": "",
+"DialogCharacterEvent": "",
 "DialogCharacterJoinEvent": "",
 "DialogCharacterLeaveEvent": "",
 "DialogCharacterResource": "",
+"DialogCustomEvent": "",
 "DialogDatabaseResource": "",
 "DialogDialogueNode": "",
 "DialogEditorEventNode": "",
 "DialogEventResource": "",
+"DialogJumpToEvent": "",
 "DialogPortraitManager": "",
 "DialogPortraitResource": "",
 "DialogTextEvent": "",
-"DialogTimelineResource": "",
+"DialogTextWithAudioEvent": "",
+"DialogTimelineResource": "res://addons/dialog_plugin/assets/Images/icons/timeline_icon.png",
 "DialogWaitTimeEvent": "",
 "EventsArray": "",
 "PortraitArray": "",
@@ -144,12 +180,7 @@ Display=8
 [application]
 
 config/name="dialog_plugin"
-run/main_scene="res://addons/dialog_plugin/Editor/EditorMainNode.tscn"
 config/icon="res://icon.png"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/WAT/plugin.cfg", "res://addons/dialog_plugin/plugin.cfg", "res://addons/godot-plugin-refresher/plugin.cfg" )
 
 [importer_defaults]
 
@@ -161,7 +192,7 @@ texture={
 "compress/normal_map": 0,
 "detect_3d": false,
 "flags/anisotropic": false,
-"flags/filter": false,
+"flags/filter": true,
 "flags/mipmaps": false,
 "flags/repeat": 0,
 "flags/srgb": 2,
@@ -173,6 +204,10 @@ texture={
 "stream": false,
 "svg/scale": 1.0
 }
+
+[locale]
+
+translations=PoolStringArray(  )
 
 [rendering]
 
