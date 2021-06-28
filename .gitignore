@@ -1,111 +1,22 @@
-# Addons preset
-# Defaults
-.import/
-.mono/
-
-*.translation
-*.import
-
-# Plugin created files
-/dialog_files
-
-####################
-# Extra plugins
-####################
-/addons/godot-plugin-refresher
+# Ignores everything
+/*
 
 
-####################
-# Extra files & folders
-####################
-/.vscode
-#/icon.png
-#/tests
-#default_env.tres
-Main.tscn
-#project.godot
+# Except:
+##########
+# GIT files
+##########
+!.gitignore
+!README.md
+!LICENSE
 
-*.txt
+##########
+# Addons files
+##########
 
-####################
-# Windows
-####################
-# Windows thumbnail cache files
-Thumbs.db
-ehthumbs.db
-ehthumbs_vista.db
+# the main plugin
+!/addons/dialog_plugin
 
-# Dump file
-*.stackdump
-
-# Folder config file
-[Dd]esktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-####################
-
-
-
-####################
-# macOS
-####################
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-####################
-
-
-
-####################
-# Linux
-####################
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-####################
-Main.gd
-
-addons/explore-editor-theme/
-
-aseprite/
-
-addons/zylann.editor_debugger/
-
-addons/metadata_inspector/
+# the unit-test plugin that needs an update
+!/addons/WAT
+!/tests/*
