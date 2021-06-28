@@ -20,7 +20,7 @@ class Error:
 		
 		_text_event.character = _character
 		_text_event.translation_key = TIMELINE_NOT_SELECTED
-		_timeline.events.add(_text_event)
+		_timeline.events.append(_text_event)
 		
 		return _timeline
 

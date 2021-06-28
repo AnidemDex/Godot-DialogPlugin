@@ -4,13 +4,14 @@ extends CanvasItem
 
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
-var DialogUtil = load("res://addons/dialog_plugin/Core/DialogUtil.gd")
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 ## The timeline to load when starting the scene
 export(String, FILE) var timeline_name: String
 
 export(NodePath) var DialogNode_path:NodePath
 export(NodePath) var PortraitsNode_path:NodePath
+export(NodePath) var OptionsContainer_path:NodePath
 
 var timeline: DialogTimelineResource
 var event_finished = false
@@ -18,6 +19,7 @@ var next_input = 'ui_accept'
 
 onready var DialogNode:DialogDialogueNode = get_node_or_null(DialogNode_path) as DialogDialogueNode
 onready var PortraitManager := get_node_or_null(PortraitsNode_path)
+onready var OptionsContainer:Container = get_node_or_null(OptionsContainer_path) as Container
 
 func _ready() -> void:
 	if not Engine.editor_hint:
@@ -55,6 +57,7 @@ func _verify_timeline() -> void:
 		timeline = load_timeline()
 		if not timeline:
 			timeline = DialogUtil.Error.not_found_timeline()
+			start_timeline()
 
 
 func _set_nodes_default_values() -> void:
