@@ -12,6 +12,7 @@ var options:Dictionary = {}
 
 var OptionsManager:DialogOptionsManager
 
+var _old_timeline:DialogTimelineResource
 
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
@@ -26,6 +27,7 @@ func _init() -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
+	
 	caller.visible = true
 	
 	OptionsManager = caller.OptionsContainer
@@ -34,7 +36,6 @@ func execute(caller:DialogBaseNode) -> void:
 		finish(true)
 		return
 	
-	print(options)
 	for option in options.keys():
 		OptionsManager.add_option(option)
 	
@@ -42,13 +43,18 @@ func execute(caller:DialogBaseNode) -> void:
 
 
 func _on_option_selected(option) -> void:
-	var timeline:DialogTimelineResource = options.get(option, DialogTimelineResource.new())
+	var timeline:DialogTimelineResource = options.get(option, null)
+	_old_timeline = _caller.timeline
 	
-	if not timeline:
-		timeline = DialogTimelineResource.new()
+	if timeline and not(timeline.events.empty()):
+		timeline.current_event = -1
+		timeline.connect("timeline_ended", self, "_on_Timeline_ended", [], CONNECT_ONESHOT)
+		_caller.timeline = timeline
 	
-	timeline.connect("timeline_ended", self, "on_OptionTimeline_ended")
+	finish(true)
 
 
-func _on_OptionTimeline_ended() -> void:
+func _on_Timeline_ended() -> void:
+	_caller.timeline = _old_timeline
+	_old_timeline = null
 	finish(true)

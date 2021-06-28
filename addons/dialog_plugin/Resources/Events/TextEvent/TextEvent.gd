@@ -30,7 +30,6 @@ func _init():
 
 
 func execute(caller:DialogBaseNode) -> void:
-	
 	_DialogNode = caller.DialogNode
 	
 	configure_timer()
@@ -65,7 +64,6 @@ func remove_timer() -> void:
 func prepare_text() -> void:
 	var text_node:RichTextLabel = _DialogNode.TextNode
 	if not text_node:
-		finish(true)
 		return
 	
 	configure_text_node_fonts(text_node)
