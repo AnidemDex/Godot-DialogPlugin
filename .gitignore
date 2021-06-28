@@ -10,6 +10,7 @@
 !README.md
 !LICENSE
 
+
 ##########
 # Addons files
 ##########
@@ -20,3 +21,9 @@
 # the unit-test plugin that needs an update
 !/addons/WAT
 !/tests/*
+
+
+##########
+# Docs
+##########
+!/docs/*
