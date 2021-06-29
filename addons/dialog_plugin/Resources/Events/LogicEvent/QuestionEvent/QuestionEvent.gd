@@ -19,7 +19,7 @@ func _init() -> void:
 	resource_name = "Question"
 
 	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	#event_editor_scene_path = "res://path/to/your/editor/node/scene.tscn"
+	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/question_event_node/question_event_node.tscn"
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)
