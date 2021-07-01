@@ -18,6 +18,7 @@ __meta__ = {
 TextNode_path = NodePath("ReferenceRect/TextNode")
 NameNode_path = NodePath("ReferenceRect2/NameLabel")
 NextIndicator_path = NodePath("ReferenceRect3/NextIndicator")
+TextTimer_path = NodePath("TextTimer")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="."]
 anchor_right = 1.0
@@ -83,3 +84,7 @@ stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="TextTimer" to="." method="_update_displayed_text"]

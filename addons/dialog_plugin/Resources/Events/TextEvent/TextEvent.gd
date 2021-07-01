@@ -5,7 +5,6 @@ extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
 # https://github.com/godotengine/godot/pull/37324
-const EventTimer = preload("res://addons/dialog_plugin/Resources/Events/TextEvent/TextEventTimer.gd")
 
 export(String, MULTILINE) var text:String = ""
 export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.02
@@ -19,8 +18,6 @@ var font_bold:Font = null
 var font_italics:Font = null
 var font_bold_italics:Font = null
 
-
-var _timer:EventTimer = null
 var _DialogNode:DialogDialogueManager = null
 
 
@@ -31,34 +28,15 @@ func _init():
 
 func execute(caller:DialogBaseNode) -> void:
 	_DialogNode = caller.DialogNode
-	
-	configure_timer()
 
 	caller.visible = true
 	if _DialogNode:
 		prepare_text()
 		prepare_character_name()
 		_DialogNode.visible = true
-		
-	
-	_timer.start(text_speed)
-
-
-func configure_timer() -> void:
-	if not is_instance_valid(_timer):
-		_timer = EventTimer.new()
-		_caller.add_child(_timer)
-	_timer.caller = _caller
-	
-	if not _timer.is_connected("timeout", self, "_on_TextTimer_timeout"):
-		var _err:int = _timer.connect("timeout", self, "_on_TextTimer_timeout")
-		assert(_err == OK)
-
-
-func remove_timer() -> void:
-	if is_instance_valid(_timer):
-		_timer.stop()
-		_timer.queue_free()
+		_DialogNode.text_speed = text_speed
+		_DialogNode.connect("text_displayed", self, "on_DialogNode_text_displayed", [], CONNECT_ONESHOT)
+		_DialogNode.display_text()
 
 
 func prepare_text() -> void:
@@ -72,10 +50,9 @@ func prepare_text() -> void:
 	var final_text:String = text.format(_variables)
 	
 	if continue_previous_text:
-		text_node.append_bbcode(final_text)
+		_DialogNode.add_text(final_text)
 	else:
-		text_node.bbcode_text = final_text
-		text_node.visible_characters = 0
+		_DialogNode.set_text(final_text)
 
 
 func configure_text_node_fonts(text_node:RichTextLabel) -> void:
@@ -102,19 +79,6 @@ func prepare_character_name() -> void:
 	name_node.add_color_override("font_color", character.color)
 
 
-func _update_text() -> void:
-	
-	var text_node:RichTextLabel = _DialogNode.TextNode
-	
-	text_node.visible_characters += 1
-	
-	if text_node.visible_characters < text_node.get_total_character_count():
-		_timer.start(text_speed)
-	else:
-		remove_timer()
-		finish()
-
-
 func set_character(value:DialogCharacterResource) -> void:
 	character = null
 	if (value is DialogCharacterResource) or (value == null):
@@ -125,8 +89,8 @@ func set_character(value:DialogCharacterResource) -> void:
 	property_list_changed_notify()
 
 
-func _on_TextTimer_timeout():
-	_update_text()
+func on_DialogNode_text_displayed() -> void:
+	finish()
 
 
 # Export stuff
