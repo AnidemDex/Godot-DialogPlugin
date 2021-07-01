@@ -15,6 +15,9 @@ DialogNode_path = NodePath("DialogNode")
 PortraitsNode_path = NodePath("Portraits")
 OptionsContainer_path = NodePath("Options")
 
+[node name="TextNode" parent="DialogNode/ReferenceRect" index="0"]
+scroll_following = true
+
 [node name="NameLabel" parent="DialogNode/ReferenceRect2" index="0"]
 custom_fonts/font = SubResource( 1 )
 

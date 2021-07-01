@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_displayer.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/question_event_node/option_editor/option_editor.gd" type="Script" id=2]
+
+[node name="OptionEditor" type="VBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 107.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_right = 1024.0
+margin_bottom = 24.0
+placeholder_text = "Option Name (If is empty, this option will be removed)"
+
+[node name="Timeline" type="VBoxContainer" parent="."]
+margin_top = 28.0
+margin_right = 1024.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 64 )
+custom_constants/separation = 0
+script = ExtResource( 1 )
+
+[connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
