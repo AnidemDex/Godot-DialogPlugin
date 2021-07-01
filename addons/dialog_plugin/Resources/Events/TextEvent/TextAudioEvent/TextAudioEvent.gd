@@ -23,6 +23,8 @@ func _init() -> void:
 func execute(caller:DialogBaseNode) -> void:
 	prepare_sound_generator()
 	.execute(caller)
+	if _DialogNode:
+		_DialogNode.connect("character_displayed", self, "_on_DialogManager_character_displayed")
 
 
 func prepare_sound_generator():
@@ -54,8 +56,7 @@ func _will_loop() -> bool:
 	return !loop_blip_sound
 
 
-func _on_TextTimer_timeout() -> void:
-	_update_text()
+func _on_DialogManager_character_displayed(character) -> void:
 	if not _already_played:
 		_blip()
 		_already_played = _will_loop()
@@ -64,4 +65,6 @@ func _on_TextTimer_timeout() -> void:
 func finish(_s=skip) -> void:
 	if is_instance_valid(sound_generator):
 		sound_generator.queue_free()
+	if _DialogNode:
+		_DialogNode.disconnect("character_displayed", self, "_on_DialogManager_character_displayed")
 	.finish(skip)
