@@ -21,7 +21,7 @@ var font_bold_italics:Font = null
 
 
 var _timer:EventTimer = null
-var _DialogNode:DialogDialogueNode = null
+var _DialogNode:DialogDialogueManager = null
 
 
 func _init():

@@ -60,7 +60,7 @@ _global_script_classes=[ {
 "path": "res://addons/dialog_plugin/Resources/Database/DatabaseResource.gd"
 }, {
 "base": "Control",
-"class": "DialogDialogueNode",
+"class": "DialogDialogueManager",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialog_node/dialog_node.gd"
 }, {
@@ -150,7 +150,7 @@ _global_script_class_icons={
 "DialogCharacterResource": "",
 "DialogCustomEvent": "",
 "DialogDatabaseResource": "",
-"DialogDialogueNode": "",
+"DialogDialogueManager": "",
 "DialogEditorEventNode": "",
 "DialogEventResource": "",
 "DialogJumpToEvent": "",

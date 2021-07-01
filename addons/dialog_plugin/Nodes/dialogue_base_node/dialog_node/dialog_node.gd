@@ -1,5 +1,5 @@
 tool
-class_name DialogDialogueNode
+class_name DialogDialogueManager
 extends Control
 
 export(NodePath) var TextNode_path:NodePath

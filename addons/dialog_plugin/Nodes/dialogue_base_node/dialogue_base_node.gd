@@ -17,7 +17,7 @@ var timeline: DialogTimelineResource
 var event_finished = false
 var next_input = 'ui_accept'
 
-onready var DialogNode:DialogDialogueNode = get_node_or_null(DialogNode_path) as DialogDialogueNode
+onready var DialogNode:DialogDialogueManager = get_node_or_null(DialogNode_path) as DialogDialogueManager
 onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 onready var OptionsContainer:Container = get_node_or_null(OptionsContainer_path) as Container
 
