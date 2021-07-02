@@ -32,6 +32,16 @@ script = ExtResource( 2 )
 Comment_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Comment")
 CommentPreview_Path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/TopContainer/HContainer/CommentPreview")
 
+[node name="Branch" parent="HContainer" index="0"]
+rect_min_size = Vector2( 32, 0 )
+
+[node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
+visible = false
+texture = null
+
+[node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
+margin_top = 4.0
+
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
 

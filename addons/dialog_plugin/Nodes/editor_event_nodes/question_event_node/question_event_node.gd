@@ -38,7 +38,6 @@ func _update_node_values() -> void:
 	for child in options_container_node.get_children():
 		child.queue_free()
 	for option in options.keys():
-		print("Adding option: ", option)
 		add_option(option)
 
 
