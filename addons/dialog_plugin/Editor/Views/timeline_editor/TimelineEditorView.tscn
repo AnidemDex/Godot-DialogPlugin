@@ -107,9 +107,9 @@ margin_right = 194.0
 margin_bottom = 42.0
 
 [node name="EventButtonsContainer" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 3 )]
+anchor_right = 0.0
 margin_left = 198.0
 margin_right = 1020.0
-margin_bottom = 42.0
 size_flags_horizontal = 3
 
 [node name="Body" type="VBoxContainer" parent="VBoxContainer"]
@@ -120,6 +120,7 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body"]
+visible = false
 margin_right = 1024.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 24 )
@@ -166,7 +167,6 @@ margin_bottom = 17.0
 text = "Null"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Body"]
-margin_top = 24.0
 margin_right = 1024.0
 margin_bottom = 550.0
 rect_min_size = Vector2( 0, 78 )
@@ -176,7 +176,7 @@ follow_focus = true
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/Body/ScrollContainer"]
 margin_right = 1024.0
-margin_bottom = 526.0
+margin_bottom = 550.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
