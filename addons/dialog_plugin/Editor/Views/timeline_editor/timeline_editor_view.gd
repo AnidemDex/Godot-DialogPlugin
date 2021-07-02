@@ -27,15 +27,15 @@ func _ready() -> void:
 	
 	timeline_events_container_node.timeline_resource = base_resource
 
-func _process(delta: float) -> void:
-	if not timeline_events_container_node:
-		return
-	if "last_selected_node" in timeline_events_container_node:
-		var last_item_selected = timeline_events_container_node.last_selected_node
-		if last_item_selected and is_instance_valid(last_item_selected):
-			last_item_selected_node.text = str(last_item_selected.idx)
-		else:
-			last_item_selected_node.text = str(null)
+#func _process(delta: float) -> void:
+#	if not timeline_events_container_node:
+#		return
+#	if "last_selected_node" in timeline_events_container_node:
+#		var last_item_selected = timeline_events_container_node.last_selected_node
+#		if last_item_selected and is_instance_valid(last_item_selected):
+#			last_item_selected_node.text = str(last_item_selected.idx)
+#		else:
+#			last_item_selected_node.text = str(null)
 
 func reload():
 	timeline_events_container_node.unload_events()
@@ -54,6 +54,10 @@ func _notification(what: int) -> void:
 
 
 func save_resource() -> void:
+	call_deferred("_deferred_save")
+
+
+func _deferred_save() -> void:
 	if not base_resource:
 		printerr("There's no resource to save, skiping")
 		return

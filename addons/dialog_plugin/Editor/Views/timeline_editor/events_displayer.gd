@@ -86,10 +86,10 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	assert(_err == OK)
 	_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
 	assert(_err == OK)
-	
+	_err = event_node.connect("ready", event_node, "set", ["idx", index_hint])
+	assert(_err == OK)
 	event_node.set_drag_forwarding(self)
-	add_child(event_node)
-	event_node.idx = index_hint
+	call_deferred("add_child", event_node)
 
 
 func force_reload() -> void:
