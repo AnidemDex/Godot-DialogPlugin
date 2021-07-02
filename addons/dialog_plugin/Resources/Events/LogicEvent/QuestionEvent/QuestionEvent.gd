@@ -23,7 +23,7 @@ func _init() -> void:
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)
-	#skip = false
+	skip = true
 
 
 func execute(caller:DialogBaseNode) -> void:
@@ -58,3 +58,10 @@ func _on_Timeline_ended() -> void:
 	_caller.timeline = _old_timeline
 	_old_timeline = null
 	finish(true)
+
+
+func _get_property_list() -> Array:
+	var _p:Array = []
+	var options_property:Dictionary = DialogUtil.get_property_dict("options", TYPE_DICTIONARY, PROPERTY_HINT_NONE, "" ,PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE)
+	_p.append(options_property)
+	return _p

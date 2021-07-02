@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_displayer.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/question_event_node/option_editor/option_editor.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+bg_color = Color( 0.368627, 0.368627, 0.368627, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.00784314, 0.00784314, 0.00784314, 1 )
 
 [node name="OptionEditor" type="VBoxContainer"]
 anchor_right = 1.0
@@ -10,18 +22,29 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+OptionLineEdit_path = NodePath("LineEdit")
+Timeline_path = NodePath("PanelContainer/Timeline")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 margin_right = 1024.0
 margin_bottom = 24.0
 placeholder_text = "Option Name (If is empty, this option will be removed)"
 
-[node name="Timeline" type="VBoxContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 margin_top = 28.0
 margin_right = 1024.0
-margin_bottom = 92.0
+margin_bottom = 96.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Timeline" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 1022.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 0, 64 )
 custom_constants/separation = 0
 script = ExtResource( 1 )
 
+[connection signal="focus_exited" from="LineEdit" to="." method="_on_LineEdit_focus_exited"]
 [connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="save" from="PanelContainer/Timeline" to="." method="_on_Timeline_save"]

@@ -30,6 +30,7 @@ anti_aliasing = false
 [node name="QuestionEvent" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 event_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+OptionsContainer_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/OptionsContainer")
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -53,13 +54,17 @@ margin_bottom = 43.0
 
 [node name="VBox" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="0"]
 margin_right = 812.0
-margin_bottom = 43.0
+margin_bottom = 46.0
 
 [node name="CustomProperties" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox" index="0"]
 margin_right = 804.0
 margin_bottom = 20.0
 
-[node name="AddOption" type="Button" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="0"]
+[node name="OptionsContainer" type="VBoxContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="0"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="AddOption" type="Button" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties" index="1"]
 margin_right = 804.0
 margin_bottom = 20.0
 text = "Add Option"
@@ -93,4 +98,6 @@ margin_bottom = 20.0
 
 [node name="ReferenceRect" parent="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin" index="1"]
 margin_right = 812.0
-margin_bottom = 43.0
+margin_bottom = 46.0
+
+[connection signal="pressed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/AddOption" to="." method="_on_AddOption_pressed"]
