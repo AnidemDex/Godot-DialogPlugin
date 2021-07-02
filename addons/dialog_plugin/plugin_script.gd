@@ -21,21 +21,23 @@ func _init() -> void:
 
 
 func _enter_tree() -> void:
-	if not load(DialogResources.CONFIGURATION_PATH).enabled:
-		return
-	DialogResources.verify_resource_directories()
-	_add_editor_translations()
+#	_add_editor_translations()
 	
 #	_add_editor_inspector_plugins()
-
-
-func _ready() -> void:
-	get_editor_interface().get_resource_filesystem().scan()
+	pass
 
 
 func enable_plugin() -> void:
+	show_alert()
 	for module in modules:
 		interface.set_plugin_enabled(module, true)
+
+
+func show_alert() -> void:
+	var alert_popup:AcceptDialog = load("res://addons/dialog_plugin/Editor/Popups/activation_alert/activation_alert.tscn").instance()
+	interface.add_child(alert_popup)
+	alert_popup.connect("hide", alert_popup, "queue_free")
+	alert_popup.popup_centered()
 
 
 func disable_plugin() -> void:
