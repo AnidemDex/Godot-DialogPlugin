@@ -61,7 +61,7 @@ func save_resource() -> void:
 
 func _deferred_save(_descarted_value) -> void:
 	if not base_resource:
-		printerr("There's no resource to save, skiping")
+		DialogUtil.Logger.print(self, ["There's no resource to save. Skipping"])
 		return
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
 	assert(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))

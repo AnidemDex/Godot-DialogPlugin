@@ -12,6 +12,7 @@ signal timeline_ended
 var events:Array = []
 var current_event:int = 0
 
+# Deprecated
 var _related_characters:Array = []
 
 func start(caller):
