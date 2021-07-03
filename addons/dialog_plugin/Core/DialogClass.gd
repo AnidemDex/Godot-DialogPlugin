@@ -24,7 +24,7 @@ const DefaultDialogBubble:String = "res://addons/dialog_plugin/Nodes/ingame_dial
 const _DialogDB = preload("res://addons/dialog_plugin/Core/DialogDatabase.gd")
 
 
-static func start(timeline, dialog_scene_path:String="", use_bubble:bool=false) -> DialogBaseNode:
+static func get_new_dialog_node(timeline="", dialog_scene_path:String="", use_bubble:bool=false) -> DialogBaseNode:
 	var _dialog_node = null
 	if dialog_scene_path:
 		var _dialog_scene:PackedScene = load(dialog_scene_path) as PackedScene
@@ -40,7 +40,7 @@ static func start(timeline, dialog_scene_path:String="", use_bubble:bool=false) 
 	
 	
 	if timeline is String:
-		(_dialog_node as DialogBaseNode).timeline = _DialogDB.Timelines.get_timeline(timeline.get_basename().get_file())
+		(_dialog_node as DialogBaseNode).timeline_name = timeline
 	elif timeline is DialogTimelineResource:
 		(_dialog_node as DialogBaseNode).timeline = timeline
 	return _dialog_node
