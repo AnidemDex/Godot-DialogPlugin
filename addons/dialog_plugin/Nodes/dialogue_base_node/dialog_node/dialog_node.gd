@@ -35,7 +35,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func display_all_text() -> void:
-	TextNode.visible_characters = TextNode.get_total_character_count()
+	TextNode.visible_characters = TextNode.get_total_character_count() -1
+	_update_displayed_text()
 
 
 func display_text() -> void:
