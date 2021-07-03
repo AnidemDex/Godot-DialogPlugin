@@ -53,16 +53,24 @@ func _notification(what: int) -> void:
 				reload()
 
 
+var _save_thread:Thread = Thread.new()
 func save_resource() -> void:
-	call_deferred("_deferred_save")
+	if not _save_thread.is_active():
+		_save_thread.start(self, "_deferred_save")
 
 
-func _deferred_save() -> void:
+func _deferred_save(_descarted_value) -> void:
 	if not base_resource:
 		printerr("There's no resource to save, skiping")
 		return
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
 	assert(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
+	_save_thread.call_deferred("wait_to_finish")
+
+
+func _exit_tree() -> void:
+	if _save_thread.is_active():
+		_save_thread.wait_to_finish()
 
 
 func _set_base_resource(_r:DialogTimelineResource) -> void:
