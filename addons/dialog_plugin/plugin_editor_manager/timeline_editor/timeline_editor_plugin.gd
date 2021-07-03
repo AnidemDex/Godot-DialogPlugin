@@ -21,7 +21,9 @@ func _enter_tree() -> void:
 
 func handles(object: Object) -> bool:
 	if object is DialogTimelineResource:
-		return true
+		# For now, I can't modify attached resources
+		if object.resource_path != "":
+			return true
 	return false
 
 
@@ -36,7 +38,8 @@ func make_visible(visible: bool) -> void:
 
 
 func save_external_data() -> void:
-	_timeline_editor_view.save_resource()
+	if is_instance_valid(_timeline_editor_view):
+		_timeline_editor_view.save_resource()
 
 
 func _exit_tree() -> void:
