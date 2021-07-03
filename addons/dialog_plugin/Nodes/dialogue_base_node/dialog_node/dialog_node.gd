@@ -44,7 +44,7 @@ func display_text() -> void:
 
 func set_text(text:String) -> void:
 	TextNode.bbcode_text = text
-	TextNode.visible_characters = 0
+	TextNode.visible_characters = 1
 
 
 func add_text(text:String) -> void:
@@ -52,13 +52,20 @@ func add_text(text:String) -> void:
 
 
 func _update_displayed_text() -> void:
-	TextNode.visible_characters += 1
-	var _text:String = TextNode.text
-	var _character = _text[min(TextNode.visible_characters-1, _text.length()-1)]
+	var _character = _get_current_character()
 	emit_signal("character_displayed", _character)
+	TextNode.visible_characters += 1
 	
 	if TextNode.visible_characters < TextNode.get_total_character_count():
 		_TextTimer.start(text_speed)
 	else:
 		_TextTimer.stop()
 		emit_signal("text_displayed")
+
+
+func _get_current_character() -> String:
+	var _text:String = TextNode.text
+	var _text_length = _text.length()-1
+	var _text_visible_characters = clamp(TextNode.visible_characters, 0, _text_length)
+	var _current_character = _text[min(_text_length, _text_visible_characters)]
+	return _current_character
