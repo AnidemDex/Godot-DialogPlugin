@@ -1,0 +1,126 @@
+[gd_resource type="Resource" load_steps=29 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Resources/TimelineResource.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/ConditionEvent/ConditionEvent.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/SetEvent/SetEvent.gd" type="Script" id=3]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/QuestionEvent/QuestionEvent.gd" type="Script" id=4]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/WaitTimeEvent/WaitTimeEvent.gd" type="Script" id=5]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd" type="Script" id=6]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/ChangeTimelineEvent/ChangeTiemlineEvent.gd" type="Script" id=7]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/TextEvent/TextAudioEvent/TextAudioEvent.gd" type="Script" id=8]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd" type="Script" id=9]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/CharacterEvent/ChangeExpressionEvent/CharacterChangeExpressionEvent.gd" type="Script" id=10]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd" type="Script" id=11]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd" type="Script" id=12]
+[ext_resource path="res://addons/dialog_plugin/Resources/Events/LogicEvent/JumpToEvent/JumpToEvent.gd" type="Script" id=13]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Comment"
+script = ExtResource( 11 )
+skip = true
+text = "Every event of 1.0 is here! "
+
+[sub_resource type="Resource" id=2]
+resource_name = "TextEvent"
+script = ExtResource( 9 )
+skip = false
+text = ""
+text_speed = 0.02
+continue_previous_text = false
+translation_key = "__SAME_AS_TEXT__"
+
+[sub_resource type="Resource" id=3]
+resource_name = "TextWithAudio"
+script = ExtResource( 8 )
+skip = false
+text = ""
+text_speed = 0.04
+continue_previous_text = false
+translation_key = "__SAME_AS_TEXT__"
+loop_blip_sound = false
+force_blip_sound = false
+audio_bus = "Master"
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 1 )
+events = [  ]
+_related_characters = [  ]
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+events = [  ]
+_related_characters = [  ]
+
+[sub_resource type="Resource" id=6]
+resource_name = "IF|ELSE"
+script = ExtResource( 2 )
+skip = false
+events_if = SubResource( 5 )
+events_else = SubResource( 4 )
+condition = ""
+
+[sub_resource type="Resource" id=7]
+resource_name = "SetVariableEvent"
+script = ExtResource( 3 )
+skip = true
+variable_name = ""
+variable_value = ""
+
+[sub_resource type="Resource" id=8]
+resource_name = "WaitTimeEvent"
+script = ExtResource( 5 )
+skip = false
+wait_time = 0.0
+
+[sub_resource type="Resource" id=9]
+resource_name = "JumpToEvent"
+script = ExtResource( 13 )
+skip = true
+event_index = -1
+
+[sub_resource type="Resource" id=10]
+resource_name = "ChangeTimelineEvent"
+script = ExtResource( 7 )
+skip = true
+start_from_event = 0
+
+[sub_resource type="Resource" id=11]
+resource_name = "Question"
+script = ExtResource( 4 )
+skip = true
+options = {
+}
+
+[sub_resource type="Resource" id=12]
+resource_name = "CharacterJoinEvent"
+script = ExtResource( 12 )
+skip = true
+percent_position_x = 0.41
+percent_position_y = 0.28
+rotation = 0
+flip_h = false
+flip_v = false
+selected_portrait = -1
+
+[sub_resource type="Resource" id=13]
+resource_name = "CharacterLeaveEvent"
+script = ExtResource( 6 )
+skip = true
+selected_portrait = -1
+
+[sub_resource type="Resource" id=14]
+resource_name = "CharacterChangeExpression"
+script = ExtResource( 10 )
+skip = true
+selected_portrait = -1
+
+[sub_resource type="Resource" id=15]
+resource_name = "Comment"
+script = ExtResource( 11 )
+skip = true
+text = "Pretty cool, isn't?"
+
+[resource]
+script = ExtResource( 1 )
+events = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ]
+_related_characters = [  ]
