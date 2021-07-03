@@ -1,7 +1,14 @@
 class_name Dialog
 ## Hello, traveler
 ##
-##
+## This is an exposed class to use the plugin.
+
+##########
+# DOCS
+##########
+# Read the documentation here:
+# "https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog"
+
 
 const _DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
 const _VarResourcePath = _DialogResources.DEFAULT_VARIABLES_PATH
