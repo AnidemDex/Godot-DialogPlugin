@@ -3,17 +3,20 @@ extends EditorPlugin
 
 const TimelineEditorView = preload("res://addons/dialog_plugin/Editor/Views/timeline_editor/timeline_editor_view.gd")
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 const PLUGIN_NAME = "Timeline Editor Manager"
 
 var _timeline_editor_view:TimelineEditorView
 var _dock_button:ToolButton
 
+func get_class(): return "TimelineEditorManager"
 
 func _init() -> void:
 	name = PLUGIN_NAME
 
 
 func _enter_tree() -> void:
+	DialogUtil.Logger.print_debug(self, "Timeline Editor Manager initialized.")
 	_timeline_editor_view = load(DialogResources.TIMELINE_EDITOR_PATH).instance() as TimelineEditorView
 	_dock_button = add_control_to_bottom_panel(_timeline_editor_view, "TimelineEditor")
 	_dock_button.visible = false
@@ -28,6 +31,7 @@ func handles(object: Object) -> bool:
 
 
 func edit(object: Object) -> void:
+	DialogUtil.Logger.print_debug(self, "Modifying {0}".format([object.resource_path]))
 	_timeline_editor_view.base_resource = object
 
 
