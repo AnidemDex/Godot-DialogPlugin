@@ -16,7 +16,7 @@ func _init() -> void:
 
 
 func _enter_tree() -> void:
-	DialogUtil.Logger.print_debug(self, "Timeline Editor Manager initialized.")
+	DialogUtil.Logger.print_debug(self, PLUGIN_NAME+" initialized.")
 	_timeline_editor_view = load(DialogResources.TIMELINE_EDITOR_PATH).instance() as TimelineEditorView
 	_dock_button = add_control_to_bottom_panel(_timeline_editor_view, "TimelineEditor")
 	_dock_button.visible = false
