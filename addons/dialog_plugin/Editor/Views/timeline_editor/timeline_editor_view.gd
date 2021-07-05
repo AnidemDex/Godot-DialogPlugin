@@ -19,6 +19,8 @@ onready var timeline_events_container_node:EventsDisplayer = get_node_or_null(Ti
 onready var locale_list_node:OptionButton = get_node(LocaleList_path) as OptionButton
 onready var last_item_selected_node:Label = get_node(LISelected_path) as Label
 
+func get_class(): return "TimelineEditorView"
+
 func _ready() -> void:
 	if (not Engine.editor_hint) and (debug_base_resource != ""):
 			base_resource = load(debug_base_resource) as DialogTimelineResource
@@ -38,6 +40,7 @@ func _ready() -> void:
 #			last_item_selected_node.text = str(null)
 
 func reload():
+	DialogUtil.Logger.print_debug(self, "Reloading events. . .")
 	timeline_events_container_node.unload_events()
 	timeline_events_container_node.load_events()
 
@@ -61,16 +64,19 @@ func save_resource() -> void:
 
 func _deferred_save(_descarted_value) -> void:
 	if not base_resource:
-		DialogUtil.Logger.print(self, ["There's no resource to save. Skipping"])
+		DialogUtil.Logger.print_debug(self, "There's no resource to save. Skipping")
 		return
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
-	assert(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
+	DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
 	_save_thread.call_deferred("wait_to_finish")
 
 
 func _exit_tree() -> void:
-	if _save_thread.is_active():
-		_save_thread.wait_to_finish()
+	DialogUtil.Logger.print_debug(self, "Exiting the tree")
+	DialogUtil.Logger.print_debug(self, "Waiting to save the resource...")
+	save_resource()
+	_save_thread.wait_to_finish()
+	DialogUtil.Logger.print_debug(self, "Resource Saved.")
 
 
 func _set_base_resource(_r:DialogTimelineResource) -> void:
@@ -80,7 +86,7 @@ func _set_base_resource(_r:DialogTimelineResource) -> void:
 
 	base_resource = _r
 	timeline_events_container_node.timeline_resource = base_resource
-	DialogUtil.Logger.print(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_r.resource_path})])
+	DialogUtil.Logger.print_info(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_r.resource_path})])
 
 
 func _on_LocaleList_item_selected(index: int) -> void:
