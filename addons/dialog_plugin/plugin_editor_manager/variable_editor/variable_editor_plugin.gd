@@ -2,17 +2,21 @@ tool
 extends EditorPlugin
 
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 const PLUGIN_NAME = "Variable Editor Manager"
 
 var _variable_editor_view
 var _variable_editor_scene:PackedScene
 var interface = get_editor_interface()
 
+func get_class(): return "VariableEditorManager"
+
 func _init() -> void:
 	name = PLUGIN_NAME
 
 
 func _enter_tree() -> void:
+	DialogUtil.Logger.print_debug(self, PLUGIN_NAME+" initialized.")
 	_add_variable_editor()
 
 
