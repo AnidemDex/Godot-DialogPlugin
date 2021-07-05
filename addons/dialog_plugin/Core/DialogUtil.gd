@@ -29,6 +29,7 @@ class Error:
 		return _timeline
 
 class Logger:
+	const Print = preload("res://addons/dialog_plugin/Other/console_print/print.gd")
 	
 	static func _parse_mark(from:String) -> String:
 		return from.format({"mark":Dialog_MARK})
@@ -43,7 +44,7 @@ class Logger:
 		return from.format({"message":message})
 	
 	static func _get_template_message() -> String:
-		return "{mark} {level} {object_class} {message}"
+		return "{mark} {level} [{object_class}] {message}"
 	
 	static func _get_formatted_message(from) -> String:
 		var _formatted_message:String = ""
@@ -69,7 +70,7 @@ class Logger:
 			return
 		
 		var _message:String = _build_message_from(Dialog_INFO, vargs, who.get_class())
-		print(_message)
+		prints(">", _message)
 	
 	
 	static func print_debug(who:Object, vargs) -> void:
@@ -77,7 +78,7 @@ class Logger:
 			return
 		
 		var _message:String = _build_message_from(Dialog_DEBUG, vargs, who.get_class())
-		print(_message)
+		Print.s(Print.YELLOW, [">", _message])
 	
 	
 	static func print_error(who:Object, vararg) -> void:
