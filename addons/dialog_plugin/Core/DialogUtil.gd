@@ -1,7 +1,11 @@
 tool
 
+const Dialog_MARK = "[Dialog]"
+const Dialog_INFO = "[Info]"
+const Dialog_DEBUG = "[Debug]"
+const Dialog_ERROR = "[Error]"
+
 class Error:
-	const Dialog_ERROR = "[Dialog Error]"
 	const TIMELINE_NOT_FOUND = "TIMELINE_NOT_FOUND"
 	const TIMELINE_NOT_SELECTED = "TIMELINE_NOT_SELECTED"
 	
@@ -25,21 +29,66 @@ class Error:
 		return _timeline
 
 class Logger:
-	const INFO = "[Dialog]"
 	
-	static func print(who:Object, what) -> void:
+	static func _parse_mark(from:String) -> String:
+		return from.format({"mark":Dialog_MARK})
+	
+	static func _parse_level(from:String, level:String) -> String:
+		return from.format({"level":level})
+	
+	static func _parse_object_class(from:String, object_class:String) -> String:
+		return from.format({"object_class":object_class})
+	
+	static func _parse_message(from:String, message:String) -> String:
+		return from.format({"message":message})
+	
+	static func _get_template_message() -> String:
+		return "{mark} {level} {object_class} {message}"
+	
+	static func _get_formatted_message(from) -> String:
+		var _formatted_message:String = ""
+		match typeof(from):
+			var _anything_else:
+				_formatted_message = str(from)
+		return _formatted_message
+	
+	
+	static func _build_message_from(level:String, what, object_class:String="") -> String:
+		var _message:String = _get_template_message()
+		
+		_message = _parse_mark(_message)
+		_message = _parse_level(_message, level)
+		_message = _parse_object_class(_message, object_class)
+		_message = _parse_message(_message, _get_formatted_message(what))
+		
+		return _message
+	
+	
+	static func print_info(who:Object, vargs) -> void:
+		if not OS.is_debug_build():
+			return
+		
+		var _message:String = _build_message_from(Dialog_INFO, vargs, who.get_class())
+		print(_message)
+	
+	
+	static func print_debug(who:Object, vargs) -> void:
 		if not OS.is_stdout_verbose():
 			return
 		
-		var _info = "[Dialog]"
+		var _message:String = _build_message_from(Dialog_DEBUG, vargs, who.get_class())
+		print(_message)
+	
+	
+	static func print_error(who:Object, vararg) -> void:
+		var _message:String = _build_message_from(Dialog_ERROR, vararg, who.get_class())
+		printerr(_message)
 		
-		match typeof(what):
-			var anything_else:
-				print("{mark} [{who}] {info}".format(
-					{"mark":INFO, 
-					"info":what,
-					"who":who.get_class(),
-					}))
+	
+	static func verify(condition:bool, error_message:String="Something failed. Verify the debugger") -> void:
+		var _err_msg:String = "{mark} {message}".format({"mark":Dialog_ERROR, "message":error_message})
+		assert(condition, _err_msg)
+
 
 # Based on: https://www.askpython.com/python/built-in-methods/python-eval
 ## Evaluates an string, excecutes it and returns the result
