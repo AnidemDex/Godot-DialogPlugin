@@ -3,8 +3,7 @@ class_name DialogEditorEventNode
 extends Control
 
 signal deletion_requested(item)
-signal save_item_requested(item)
-signal event_being_dragged()
+signal event_modified
 # Your script needs an timeline_resource property in order to get this signal
 # working properly
 signal timeline_requested(emitter_node)
@@ -12,7 +11,7 @@ signal timeline_requested(emitter_node)
 const DEFAULT_COLOR = Color("#999999")
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
-var DialogUtil := load("res://addons/dialog_plugin/Core/DialogUtil.gd")
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 # Te voy a comentar esto por si se te llega a olvidar:
 # base_resource es un DialogEventResource relacionado al evento
 # que va a modificar. Por ejemplo, en el nodo de TextEvent
@@ -50,7 +49,7 @@ func _ready() -> void:
 	if not base_resource.is_connected("changed", self, "_on_resource_change"):
 		base_resource.connect("changed", self, "_on_resource_change")
 	
-	skip_button_node.pressed = base_resource.skip
+	skip_button_node.set_deferred("pressed", base_resource.skip)
 
 
 func _draw() -> void:
@@ -84,7 +83,6 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	drag_preview_node.rect_min_size = Vector2(50,50)
 	set_drag_preview(drag_preview_node)
 	emit_signal("deletion_requested", base_resource)
-	emit_signal("event_being_dragged")
 	return data
 
 
@@ -138,9 +136,6 @@ func _unfocused() -> void:
 	
 	collapse_properties()
 	set_property_container_color(DEFAULT_COLOR)
-	_save_resource()
-	
-	
 
 
 func _input(event: InputEvent) -> void:
@@ -166,8 +161,15 @@ func _update_node_values() -> void:
 	assert(false, "You forgot to override '_update_node_values' method")
 
 
+# deprecated
 func _save_resource() -> void:
-	emit_signal("save_item_requested", base_resource)
+	DialogUtil.Logger.print_debug(self, "_save_resource() is deprecated, consider using value_modified() instead")
+	resource_value_modified()
+
+
+# Shorthand for emit_signal("event_modified"). Used whetever a base resource value is modified
+func resource_value_modified() -> void:
+	emit_signal("event_modified")
 
 
 func _set_event_color(value:Color) -> void:
@@ -184,5 +186,7 @@ func _on_resource_change() -> void:
 
 func _on_SkipButton_toggled(button_pressed: bool) -> void:
 	if base_resource:
-		base_resource.skip = button_pressed
-		_save_resource()
+		if base_resource.skip != button_pressed:
+			DialogUtil.Logger.print_debug(base_resource, "Skip property modified from {0} to {1}".format([base_resource.skip, button_pressed]))
+			base_resource.skip = button_pressed
+			resource_value_modified()

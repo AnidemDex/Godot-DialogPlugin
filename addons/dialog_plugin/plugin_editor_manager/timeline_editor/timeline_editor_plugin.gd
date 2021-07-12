@@ -36,14 +36,27 @@ func edit(object: Object) -> void:
 
 
 func make_visible(visible: bool) -> void:
-	if _dock_button and is_instance_valid(_dock_button):
+	if is_instance_valid(_dock_button):
 		_dock_button.visible = visible
 		_dock_button.pressed = visible
 
 
-func save_external_data() -> void:
+func save_all() -> void:
 	if is_instance_valid(_timeline_editor_view):
 		_timeline_editor_view.save_resource()
+
+
+func save_external_data() -> void:
+	save_all()
+
+
+func apply_changes() -> void:
+	save_all()
+
+
+func build() -> bool:
+	save_all()
+	return true
 
 
 func _exit_tree() -> void:

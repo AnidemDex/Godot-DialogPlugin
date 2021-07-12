@@ -9,7 +9,8 @@ const EventsDisplayer = preload("res://addons/dialog_plugin/Editor/Views/timelin
 
 export(NodePath) var TimelineEventsContainer_path:NodePath
 export(NodePath) var LocaleList_path:NodePath
-export(NodePath) var LISelected_path:NodePath
+export(NodePath) var Status_path:NodePath
+export(NodePath) var ResName_path:NodePath
 
 export(String, FILE) var debug_base_resource:String = ""
 
@@ -17,7 +18,8 @@ var base_resource:DialogTimelineResource setget _set_base_resource
 
 onready var timeline_events_container_node:EventsDisplayer = get_node_or_null(TimelineEventsContainer_path) as EventsDisplayer
 onready var locale_list_node:OptionButton = get_node(LocaleList_path) as OptionButton
-onready var last_item_selected_node:Label = get_node(LISelected_path) as Label
+onready var status_node:Label = get_node(Status_path) as Label
+onready var timeline_name_node:Label = get_node(ResName_path) as Label
 
 func get_class(): return "TimelineEditorView"
 
@@ -29,20 +31,24 @@ func _ready() -> void:
 	
 	timeline_events_container_node.timeline_resource = base_resource
 
-#func _process(delta: float) -> void:
-#	if not timeline_events_container_node:
-#		return
-#	if "last_selected_node" in timeline_events_container_node:
-#		var last_item_selected = timeline_events_container_node.last_selected_node
-#		if last_item_selected and is_instance_valid(last_item_selected):
-#			last_item_selected_node.text = str(last_item_selected.idx)
-#		else:
-#			last_item_selected_node.text = str(null)
 
 func reload():
-	DialogUtil.Logger.print_debug(self, "Reloading events. . .")
+	DialogUtil.Logger.print_debug(self, "Reloading events...")
 	timeline_events_container_node.unload_events()
 	timeline_events_container_node.load_events()
+	update_status_label()
+	update_resource_name_label()
+
+
+func update_status_label() -> void:
+	var is_modified:bool = timeline_events_container_node.modified
+	status_node.text = "Modified" if is_modified else "Saved"
+
+
+func update_resource_name_label() -> void:
+	var res_name:String = base_resource.resource_path
+	res_name = res_name.get_file()
+	timeline_name_node.text = res_name
 
 
 func _clips_input() -> bool:
@@ -56,37 +62,32 @@ func _notification(what: int) -> void:
 				reload()
 
 
-var _save_thread:Thread = Thread.new()
 func save_resource() -> void:
-	if not _save_thread.is_active():
-		_save_thread.start(self, "_deferred_save")
+	if timeline_events_container_node.modified:
+		call_deferred("_deferred_save")
 
 
-func _deferred_save(_descarted_value) -> void:
+func _deferred_save(_descarted_value=null) -> void:
+	DialogUtil.Logger.print_debug(self, "Saving a resource.")
 	if not base_resource:
 		DialogUtil.Logger.print_debug(self, "There's no resource to save. Skipping")
 		return
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
 	DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
-	_save_thread.call_deferred("wait_to_finish")
+	timeline_events_container_node.set_deferred("modified", false)
 
 
 func _exit_tree() -> void:
 	DialogUtil.Logger.print_debug(self, "Exiting the tree")
-	DialogUtil.Logger.print_debug(self, "Waiting to save the resource...")
 	save_resource()
-	_save_thread.wait_to_finish()
 	DialogUtil.Logger.print_debug(self, "Resource Saved.")
 
 
-func _set_base_resource(_r:DialogTimelineResource) -> void:
-	if not _r:
-#		push_error("No resource")
-		return
-
-	base_resource = _r
+func _set_base_resource(_resource:DialogTimelineResource) -> void:
+	base_resource = _resource
 	timeline_events_container_node.timeline_resource = base_resource
-	DialogUtil.Logger.print_info(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_r.resource_path})])
+	if base_resource:
+		DialogUtil.Logger.print_info(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_resource.resource_path})])
 
 
 func _on_LocaleList_item_selected(index: int) -> void:
@@ -102,3 +103,7 @@ func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource)
 		timeline_events_container_node.add_event(event_resource, _last_selected_node.idx+1)
 	else:
 		timeline_events_container_node.add_event(event_resource)
+
+
+func _on_TimelineEventsContainer_modified() -> void:
+	update_status_label()

@@ -6,6 +6,7 @@ extends Container
 # Puede ser añadido a cualquier contenedor
 
 signal save()
+signal modified
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
@@ -14,6 +15,7 @@ var last_selected_node:DialogEditorEventNode
 var separator_node:Control = PanelContainer.new()
 
 var loading_events:bool = false
+var modified:bool = false setget _set_modified
 
 onready var viewport:Viewport = get_viewport()
 
@@ -48,7 +50,7 @@ func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 	else:
 		_events.append(event)
 	
-	emit_signal("save")
+	set("modified", true)
 	force_reload()
 
 
@@ -85,7 +87,7 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	assert(_err == OK)
 	_err = event_node.connect("deletion_requested", self, "_on_EventNode_deletion_requested")
 	assert(_err == OK)
-	_err = event_node.connect("save_item_requested", self, "_on_EventNode_save_item_requested")
+	_err = event_node.connect("event_modified", self, "_on_EventNode_modified")
 	assert(_err == OK)
 	_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
 	assert(_err == OK)
@@ -101,6 +103,12 @@ func force_reload() -> void:
 	unload_events()
 	load_events()
 	DialogUtil.Logger.print_debug(self, "Reloaded!")
+
+
+func _set_modified(value:bool) -> void:
+	modified = value
+	DialogUtil.Logger.print_debug(self, "modified set to {0}, emmiting modified signal".format([value]))
+	emit_signal("modified")
 
 
 func _on_EventNode_selected(event_node:DialogEditorEventNode=null) -> void:
@@ -126,19 +134,17 @@ func _on_EventNode_deletion_requested(event_resource:DialogEventResource=null) -
 	DialogUtil.Logger.print_debug(event_resource, "Requested to be removed.")
 	var _events:Array = timeline_resource.events
 	_events.erase(event_resource)
-	emit_signal("save")
+	set("modified", true)
 	force_reload()
 
 
-func _on_EventNode_save_item_requested(event_resource:DialogEventResource) -> void:
+func _on_EventNode_modified(event_resource:DialogEventResource=null) -> void:
 	if not loading_events:
-		if event_resource:
-			DialogUtil.Logger.print_debug(event_resource, "Requested to be saved.")
-		emit_signal("save")
+		set("modified", true)
 
 
 func _on_EventNode_timeline_requested(node:DialogEditorEventNode) -> void:
-	node.timeline_resource = timeline_resource
+	node.set("timeline_resource", timeline_resource)
 
 
 ######################
@@ -172,13 +178,12 @@ func can_drop_data(position, data):
 func drop_data(position, data):
 	add_event(data, _drop_index_hint)
 	_drop_index_hint = -1
-	
-	emit_signal("save")
 
 
 func _event_being_dragged() -> void:
 	set("custom_constants/separation", 4)
 	separator_node.show()
+
 
 func _event_ended_dragged() -> void:
 	set("custom_constants/separation", 0)

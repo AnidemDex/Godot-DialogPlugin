@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/timeline_editor_view.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=2]
@@ -7,29 +7,6 @@
 [ext_resource path="res://addons/dialog_plugin/Other/translation_service/locale_list_node/locale_list_node.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
-content_margin_left = 2.0
-content_margin_right = 12.0
-content_margin_top = 2.0
-content_margin_bottom = 2.0
-bg_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-content_margin_left = 8.0
-content_margin_right = 8.0
-content_margin_top = 8.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.352941, 0.517647, 0.764706, 0.470588 )
-border_width_left = 6
-border_width_top = 8
-border_width_right = 6
-border_width_bottom = 8
-border_color = Color( 0.109804, 0.364706, 0.752941, 1 )
-border_blend = true
-shadow_color = Color( 0, 0, 0, 0.360784 )
-shadow_size = 1
-anti_aliasing = false
 
 [node name="TimelineEditorView" type="MarginContainer"]
 anchor_right = 1.0
@@ -40,7 +17,8 @@ __meta__ = {
 }
 TimelineEventsContainer_path = NodePath("VBoxContainer/Body/ScrollContainer/TimelineEventsContainer")
 LocaleList_path = NodePath("VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList")
-LISelected_path = NodePath("VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer/HBoxContainer/LastSelectedEvent")
+Status_path = NodePath("VBoxContainer/End/HBoxContainer/Status")
+ResName_path = NodePath("VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer/TimelineName")
 debug_base_resource = "res://test_timeline.tres"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -115,60 +93,39 @@ size_flags_horizontal = 3
 [node name="Body" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 50.0
 margin_right = 1024.0
-margin_bottom = 600.0
+margin_bottom = 560.0
 size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Body"]
-visible = false
 margin_right = 1024.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 0, 24 )
 custom_constants/margin_left = 8
 
 [node name="TimelineInformation" type="PanelContainer" parent="VBoxContainer/Body/MarginContainer"]
 margin_left = 8.0
 margin_right = 1024.0
-margin_bottom = 24.0
-custom_styles/panel = SubResource( 2 )
+margin_bottom = 28.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Body/MarginContainer/TimelineInformation"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 1004.0
-margin_bottom = 22.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1009.0
+margin_bottom = 21.0
 alignment = 1
 
 [node name="TimelineName" type="Label" parent="VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer"]
-margin_left = 404.0
-margin_top = 3.0
-margin_right = 432.0
-margin_bottom = 17.0
+margin_left = 446.0
+margin_right = 556.0
+margin_bottom = 14.0
 size_flags_horizontal = 6
-text = "TEST"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer"]
-margin_left = 840.0
-margin_right = 1002.0
-margin_bottom = 20.0
-custom_constants/separation = 8
-
-[node name="Label" type="Label" parent="VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer/HBoxContainer"]
-margin_top = 3.0
-margin_right = 128.0
-margin_bottom = 17.0
-text = "Last Selected Event:"
-
-[node name="LastSelectedEvent" type="Label" parent="VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer/HBoxContainer"]
-margin_left = 136.0
-margin_top = 3.0
-margin_right = 162.0
-margin_bottom = 17.0
-text = "Null"
+text = "<TimelineName>"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Body"]
+margin_top = 28.0
 margin_right = 1024.0
-margin_bottom = 550.0
+margin_bottom = 510.0
 rect_min_size = Vector2( 0, 78 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -176,7 +133,7 @@ follow_focus = true
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/Body/ScrollContainer"]
 margin_right = 1024.0
-margin_bottom = 550.0
+margin_bottom = 482.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0
@@ -185,31 +142,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DropData" type="Control" parent="."]
-visible = false
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 564.0
+margin_right = 1024.0
+margin_bottom = 568.0
+
+[node name="End" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 572.0
 margin_right = 1024.0
 margin_bottom = 600.0
-mouse_filter = 2
 
-[node name="DropDataArea" type="PanelContainer" parent="DropData"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/End"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 21.0
+alignment = 1
+
+[node name="Status" type="Label" parent="VBoxContainer/End/HBoxContainer"]
+margin_left = 473.0
+margin_right = 536.0
+margin_bottom = 14.0
+text = "<STATUS>"
+valign = 1
+
+[node name="LoadingProgress" type="ProgressBar" parent="VBoxContainer/End/HBoxContainer"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 489.0
-mouse_filter = 1
-custom_styles/panel = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="DropData/DropDataArea"]
-margin_left = 8.0
-margin_top = 48.0
-margin_right = 1016.0
-margin_bottom = 62.0
-text = "Drop the event here"
-align = 1
+margin_left = 67.0
+margin_right = 1010.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
 
 [connection signal="item_selected" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
 [connection signal="event_pressed" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
+[connection signal="modified" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_modified"]
 [connection signal="save" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="save_resource"]

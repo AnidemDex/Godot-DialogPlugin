@@ -29,9 +29,9 @@ func expand_properties() -> void:
 func _unfocused() -> void:
 	._unfocused()
 	comment_preview_node.visible = true
-	_save_resource()
 	_update_node_values()
 
 
 func _on_Comment_text_changed() -> void:
 	base_resource.text = comment_node.text
+	resource_value_modified()
