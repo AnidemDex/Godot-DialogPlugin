@@ -74,9 +74,14 @@ func _deferred_save(_descarted_value=null) -> void:
 	if not base_resource:
 		DialogUtil.Logger.print_debug(self, "There's no resource to save. Skipping")
 		return
-	var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
-	DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
+	var path:String = base_resource.resource_path
+	if "::" in path:
+		DialogUtil.Logger.print_debug(self, "Trying to save a sub-resource. Skipping")
+	else:
+		var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
+		DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
 	timeline_events_container_node.set_deferred("modified", false)
+	call_deferred("update_resource_name_label")
 
 
 func _exit_tree() -> void:

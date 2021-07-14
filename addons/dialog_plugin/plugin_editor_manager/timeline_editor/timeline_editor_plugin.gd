@@ -23,11 +23,7 @@ func _enter_tree() -> void:
 
 
 func handles(object: Object) -> bool:
-	if object is DialogTimelineResource:
-		# For now, I can't modify attached resources
-		if object.resource_path != "":
-			return true
-	return false
+	return object is DialogTimelineResource
 
 
 func edit(object: Object) -> void:
