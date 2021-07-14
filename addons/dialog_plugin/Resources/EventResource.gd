@@ -14,6 +14,7 @@ export(bool) var skip:bool = false
 var _caller:DialogBaseNode = null
 var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
 
+func get_class(): return "EventResource"
 
 func _execute(caller:DialogBaseNode) -> void:
 	_caller = caller
@@ -22,7 +23,7 @@ func _execute(caller:DialogBaseNode) -> void:
 
 
 func execute(caller:DialogBaseNode) -> void:
-	push_warning("Olvidaste reemplazar este metodo")
+	DialogUtil.Logger.print_info(self, "execute method was not overrided")
 
 
 func finish(jump_to_next_event=skip) -> void:
@@ -33,6 +34,6 @@ func finish(jump_to_next_event=skip) -> void:
 func get_event_editor_node() -> DialogEditorEventNode:
 	var _scene_resource:PackedScene = load(event_editor_scene_path)
 	_scene_resource.resource_local_to_scene = true
-	var _instance = _scene_resource.instance() as DialogEditorEventNode
+	var _instance := _scene_resource.instance() as DialogEditorEventNode
 	_instance.base_resource = self
 	return _instance
