@@ -19,6 +19,7 @@ TimelineEventsContainer_path = NodePath("VBoxContainer/Body/ScrollContainer/Time
 LocaleList_path = NodePath("VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList")
 Status_path = NodePath("VBoxContainer/End/HBoxContainer/Status")
 ResName_path = NodePath("VBoxContainer/Body/MarginContainer/TimelineInformation/HBoxContainer/TimelineName")
+LoadProgress_path = NodePath("VBoxContainer/End/HBoxContainer/LoadingProgress")
 debug_base_resource = "res://test_timeline.tres"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -173,7 +174,14 @@ margin_right = 1010.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 
+[node name="Lock" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.14902, 0.172549, 0.231373, 0.192157 )
+
 [connection signal="item_selected" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/LocaleList" to="." method="_on_LocaleList_item_selected"]
 [connection signal="event_pressed" from="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer/EventButtonsContainer" to="." method="_on_EventButtonsContainer_event_pressed"]
+[connection signal="displayer_loaded" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_displayer_loaded"]
+[connection signal="displayer_loading" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_displayer_loading"]
 [connection signal="modified" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="_on_TimelineEventsContainer_modified"]
 [connection signal="save" from="VBoxContainer/Body/ScrollContainer/TimelineEventsContainer" to="." method="save_resource"]

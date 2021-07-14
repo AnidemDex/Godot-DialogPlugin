@@ -11,6 +11,7 @@ export(NodePath) var TimelineEventsContainer_path:NodePath
 export(NodePath) var LocaleList_path:NodePath
 export(NodePath) var Status_path:NodePath
 export(NodePath) var ResName_path:NodePath
+export(NodePath) var LoadProgress_path:NodePath
 
 export(String, FILE) var debug_base_resource:String = ""
 
@@ -20,6 +21,7 @@ onready var timeline_events_container_node:EventsDisplayer = get_node_or_null(Ti
 onready var locale_list_node:OptionButton = get_node(LocaleList_path) as OptionButton
 onready var status_node:Label = get_node(Status_path) as Label
 onready var timeline_name_node:Label = get_node(ResName_path) as Label
+onready var loading_progress_node:ProgressBar = get_node(LoadProgress_path) as ProgressBar
 
 func get_class(): return "TimelineEditorView"
 
@@ -107,3 +109,14 @@ func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource)
 
 func _on_TimelineEventsContainer_modified() -> void:
 	update_status_label()
+
+
+func _on_TimelineEventsContainer_displayer_loaded() -> void:
+	$Lock.hide()
+	loading_progress_node.hide()
+
+
+func _on_TimelineEventsContainer_displayer_loading() -> void:
+	$Lock.show()
+	loading_progress_node.value = timeline_events_container_node.load_progress * 100
+	loading_progress_node.show()
