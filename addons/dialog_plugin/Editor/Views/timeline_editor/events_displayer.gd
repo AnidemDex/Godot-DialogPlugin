@@ -18,10 +18,9 @@ var separator_node:Control = PanelContainer.new()
 
 var loading_events:bool = false setget set_loading, is_loading
 var modified:bool = false setget _set_modified
-var load_thread:Thread = Thread.new()
-var mutex:Mutex = Mutex.new()
-var progress_mutex:Mutex = Mutex.new()
 var load_progress:float = 0.0 setget set_load_progress, get_load_progress
+
+var loaded_events:Array = []
 
 onready var viewport:Viewport = get_viewport()
 
@@ -36,11 +35,6 @@ func _process(delta: float) -> void:
 		_event_ended_dragged()
 
 
-func _exit_tree() -> void:
-	if load_thread.is_active():
-		load_thread.wait_to_finish()
-
-
 func configure_separator_node() -> void:
 	var stylebox:StyleBoxFlat = load("res://addons/dialog_plugin/assets/Themes/event_preview_separator.tres")
 	separator_node.add_stylebox_override("panel", stylebox)
@@ -53,10 +47,11 @@ func configure_separator_node() -> void:
 
 
 func add_event(event:DialogEventResource, in_place:int=-1) -> void:
-	DialogUtil.Logger.print_debug(self, "Attemping to add {0} event in {1}".format([event.get_class(), in_place]))
+	DialogUtil.Logger.print_debug(self, "Attemping to add {0} event in position {1}".format([event.get_class(), in_place]))
 	var _events:Array = timeline_resource.events
 
-	if in_place != -1:
+	if in_place > -1:
+		in_place = min(_events.size(), in_place)
 		_events.insert(in_place, event)
 	else:
 		_events.append(event)
@@ -67,42 +62,68 @@ func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 
 func unload_events():
 	DialogUtil.Logger.print_debug(self, "Unloading {0} events...".format([get_child_count()]))
-	for child in get_children():
-		if child == separator_node:
-			continue
-		child.queue_free()
+	for event in loaded_events:
+		remove_event_from_displayer(event)
 	DialogUtil.Logger.print_debug(self, "Done!")
 
-var events_to_load:int
 
 func load_events():
-	
-	events_to_load = timeline_resource.events.size()
-	
-	DialogUtil.Logger.print_debug(self, "Loading {0} events...".format([events_to_load]))
-	if load_thread.is_active():
-		load_thread.wait_to_finish()
-	load_next_event()
-	DialogUtil.Logger.print_debug(self, "Done!")
+	load_event_from()
 
-func load_from_event(event_idx:int=0) -> void:
-	set_loading(true)
+
+func load_event_from(event_idx:int=0) -> void:
 	var _events:Array = timeline_resource.events
-	for _event_idx in _events.size():
-		var event:DialogEventResource = _events[_event_idx] as DialogEventResource
-		progress_mutex.lock()
-		load_progress = _event_idx/float(events_to_load)
-		progress_mutex.unlock()
-		emit_signal("displayer_loading")
-		add_event_node_as_child(event, _event_idx)
-	emit_signal("displayer_loaded")
-	set_loading(false)
-	load_thread.call_deferred("wait_to_finish")
+	set_loading(true)
+	
+	if event_idx >= _events.size():
+		DialogUtil.Logger.print_debug(self, "Load index out of bounds. Probably end of the load, exiting...")
+		emit_signal("displayer_loaded")
+		set_loading(false)
+		return
+	
+	load_progress = float(event_idx) / float(_events.size())
+	emit_signal("displayer_loading")
+	
+	var _event:DialogEventResource = _events[event_idx]
+	DialogUtil.Logger.print_debug(self, "Loading event {0} of {1}: {2}".format([event_idx+1, _events.size(), _event.get("resource_name")]))
+	
+	if not is_already_loaded(_event):
+		loaded_events.insert(event_idx, _event)
+		add_event_node_as_child(_event, event_idx)
+	
+	elif not is_event_at_right_position(_event):
+		remove_event_from_displayer(_event)
+		loaded_events.insert(event_idx, _event)
+		add_event_node_as_child(_event, event_idx)
+	
+	
+	yield(get_tree(), "idle_frame")
+	call_deferred("load_event_from", event_idx+1)
 
-func load_next_event(next_event_idx:int=0) -> void:
-	if load_thread.is_active():
-		load_thread.wait_to_finish()
-	load_thread.start(self, "load_from_event", next_event_idx)
+
+func is_already_loaded(event:DialogEventResource) -> bool:
+	return event in loaded_events
+
+
+func is_event_at_right_position(event:DialogEventResource) -> bool:
+	var original_position:int = timeline_resource.events.find(event)
+	var node_idx:int = -2
+	for child in get_children():
+		child = child as Node
+		var _base_resource = child.get("base_resource")
+		if event == _base_resource:
+			node_idx = child.get("idx")
+	return node_idx == original_position
+
+
+func remove_event_from_displayer(event:DialogEventResource) -> void:
+	for child in get_children():
+		child = child as Node
+		var _base_resource = child.get("base_resource")
+		if event == _base_resource:
+			child.queue_free()
+			loaded_events.erase(event)
+			break
 
 
 func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
@@ -123,41 +144,29 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	assert(_err == OK)
 	event_node.set_drag_forwarding(self)
 	call_deferred("add_child", event_node)
+	call_deferred("move_child", event_node, index_hint)
 	DialogUtil.Logger.print_debug(event, "Added to event displayer")
 
 
 func force_reload() -> void:
 	DialogUtil.Logger.print_debug(self, "Reloading...")
-	unload_events()
 	load_events()
-	DialogUtil.Logger.print_debug(self, "Reloaded!")
 
 
 func set_loading(value:bool) -> void:
-	mutex.lock()
 	loading_events = value
-	mutex.unlock()
 
 
 func is_loading() -> bool:
-	var loading:bool
-	mutex.lock()
-	loading = loading_events
-	mutex.unlock()
-	return loading
+	return loading_events
 
 
 func set_load_progress(value:float) -> void:
-	progress_mutex.lock()
-	load_progress = value
-	progress_mutex.unlock()
+	push_warning("You can't set the value of the progress bar!")
 
 
 func get_load_progress() -> float:
-	progress_mutex.lock()
-	var progress:float = load_progress
-	progress_mutex.unlock()
-	return progress
+	return load_progress
 
 
 func _set_modified(value:bool) -> void:
@@ -189,8 +198,8 @@ func _on_EventNode_deletion_requested(event_resource:DialogEventResource=null) -
 	DialogUtil.Logger.print_debug(event_resource, "Requested to be removed.")
 	var _events:Array = timeline_resource.events
 	_events.erase(event_resource)
+	remove_event_from_displayer(event_resource)
 	set("modified", true)
-	force_reload()
 
 
 func _on_EventNode_modified(event_resource:DialogEventResource=null) -> void:
