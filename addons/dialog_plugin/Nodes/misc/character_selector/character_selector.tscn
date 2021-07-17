@@ -30,7 +30,7 @@ __meta__ = {
 margin_left = 197.0
 margin_right = 227.0
 margin_bottom = 24.0
-hint_tooltip = "Select a character from files"
+hint_tooltip = "Select a character from FileSystem"
 clip_text = true
 filters = PoolStringArray( "*.tres, *.res; Godot Resource" )
 
