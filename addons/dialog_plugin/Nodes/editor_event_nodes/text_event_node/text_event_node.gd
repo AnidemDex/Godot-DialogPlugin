@@ -3,7 +3,9 @@ extends DialogEditorEventNode
 
 const CustomTextEdit = preload("res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit_container.gd")
 const CharacterListButton = preload("res://addons/dialog_plugin/Nodes/misc/character_list_button/character_list_button.gd")
+const CharacterSelector = preload("res://addons/dialog_plugin/Nodes/misc/character_selector/character_selector.gd")
 
+export(NodePath) var PreviewCharacter_path:NodePath
 export(NodePath) var PreviewText_path:NodePath
 export(NodePath) var TextEdit_path:NodePath
 export(NodePath) var CharacterBtn_path:NodePath
@@ -13,10 +15,11 @@ export(NodePath) var Continue_path:NodePath
 
 var timeline_resource = null setget _set_timeline
 
+onready var preview_char_node:Label = get_node(PreviewCharacter_path) as Label
 onready var preview_text_node:Label = get_node(PreviewText_path) as Label
-onready var text_edit_node:CustomTextEdit = get_node_or_null(TextEdit_path) as CustomTextEdit
-onready var character_button_node:CharacterListButton = get_node_or_null(CharacterBtn_path) as CharacterListButton
-onready var translation_key_label_node:LineEdit = get_node_or_null(TranslationKeyLabel_path) as LineEdit
+onready var text_edit_node:CustomTextEdit = get_node(TextEdit_path) as CustomTextEdit
+onready var character_selector_node:CharacterSelector = get_node(CharacterBtn_path) as CharacterSelector
+onready var translation_key_label_node:LineEdit = get_node(TranslationKeyLabel_path) as LineEdit
 onready var text_speed_node:SpinBox = get_node(TextSpeed_path) as SpinBox
 onready var continue_node:CheckBox = get_node(Continue_path) as CheckBox
 
@@ -49,8 +52,10 @@ func update_node_character() -> void:
 	base_resource = base_resource as DialogTextEvent
 	
 	var _character:DialogCharacterResource = base_resource.character
+	var _character_name:String = _character.name if _character else ""
 	
-	character_button_node.select_item_by_resource(_character)
+	character_selector_node.set_character(_character_name)
+	preview_char_node.text = _character_name
 
 
 func update_node_translation_key() -> void:
@@ -74,31 +79,21 @@ func update_node_continue_previous_text() -> void:
 
 func after_collapse_properties() -> void:
 	update_node_text()
-	preview_text_node.visible = true
+	update_node_character()
+	preview_text_node.show()
+	preview_char_node.show()
 
 
 func after_expand_properties() -> void:
-	preview_text_node.visible = false
+	preview_text_node.hide()
+	preview_char_node.hide()
 
 
 func _set_timeline(value:DialogTimelineResource) -> void:
 	if not value:
 		return
 	timeline_resource = value
-	character_button_node.characters = timeline_resource._related_characters
 	_update_node_values()
-
-
-func _on_CharacterList_item_selected(index: int) -> void:
-	var _char_metadata = character_button_node.get_selected_metadata()
-	var _new_character:DialogCharacterResource = null
-	
-	if _char_metadata is Dictionary:
-		_new_character = _char_metadata.get("character", null)
-	
-	base_resource.set("character", _new_character)
-	
-	_save_resource()
 
 
 func _on_TranslationKey_text_changed(new_text: String) -> void:
@@ -114,18 +109,21 @@ func _on_TranslationKey_focus_exited() -> void:
 	_save_resource()
 
 
-func _on_CharacterList_character_added() -> void:
-	_save_resource()
-	_update_node_values()
-
-
 func _on_CustomTextEdit_text_changed(new_text:String) -> void:
 	base_resource.set("text", new_text)
+	resource_value_modified()
 
 
 func _on_TextSpeed_value_changed(value: float) -> void:
 	base_resource.set("text_speed", value)
+	resource_value_modified()
 
 
 func _on_ContinuePrevious_toggled(button_pressed: bool) -> void:
 	base_resource.set("continue_previous_text", button_pressed)
+	resource_value_modified()
+
+
+func _on_CharacterSelector_character_selected(character:DialogCharacterResource) -> void:
+	base_resource.set("character", character)
+	resource_value_modified()
