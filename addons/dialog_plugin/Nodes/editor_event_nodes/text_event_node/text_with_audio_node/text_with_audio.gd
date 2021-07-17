@@ -9,6 +9,7 @@ export(NodePath) var BlipForce_path:NodePath
 
 onready var blip_loop_node:CheckBox = get_node(BlipLoop_path) as CheckBox
 onready var blip_force_node:CheckBox = get_node(BlipForce_path) as CheckBox
+onready var blip_button_node:Button = get_node(BlipButton_path) as Button
 
 func _ready() -> void:
 	if base_resource:
@@ -23,7 +24,10 @@ func _update_node_values():
 
 
 func update_node_blip_button() -> void:
-	pass
+	if not is_instance_valid(blip_button_node):
+		return
+	var blip_sound:AudioStream = base_resource.blip_sound
+	blip_button_node.text = blip_sound.resource_path.get_file() if blip_sound else ""
 
 
 func update_node_blip_loop() -> void:
@@ -42,9 +46,15 @@ func update_node_force_blip() -> void:
 
 func _on_LoopBlip_toggled(button_pressed: bool) -> void:
 	base_resource.set("loop_blip_sound", button_pressed)
-	_save_resource()
+	resource_value_modified()
 
 
 func _on_ForceBlip_toggled(button_pressed: bool) -> void:
 	base_resource.set("force_blip_sound", button_pressed)
-	_save_resource()
+	resource_value_modified()
+
+
+func _on_ResourceSelector_resource_selected(resource:Resource) -> void:
+	if resource is AudioStream:
+		base_resource.set("blip_sound", resource)
+		resource_value_modified()
