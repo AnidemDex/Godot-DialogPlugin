@@ -43,25 +43,25 @@ TextSpeed_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Proper
 Continue_path = NodePath("HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer2/ContinuePrevious/HBoxContainer/ContinuePrevious")
 
 [node name="HContainer" parent="." index="0"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="Branch" parent="HContainer" index="0"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="VContainer" parent="HContainer/Branch" index="0"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="EventIcon" parent="HContainer/Branch/VContainer" index="1"]
 texture = ExtResource( 5 )
 
 [node name="LowerBranch" parent="HContainer/Branch/VContainer" index="2"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="HContainer" parent="HContainer" index="1"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="NameMargin" parent="HContainer/HContainer" index="0"]
-margin_bottom = 46.0
+margin_bottom = 269.0
 
 [node name="EventName" parent="HContainer/HContainer/NameMargin" index="0"]
 custom_styles/panel = SubResource( 1 )
@@ -72,7 +72,10 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Text Event"
 
 [node name="InfoMargin" parent="HContainer/HContainer" index="1"]
-margin_bottom = 46.0
+margin_bottom = 269.0
+
+[node name="InfoContainer" parent="HContainer/HContainer/InfoMargin" index="0"]
+margin_bottom = 269.0
 
 [node name="TopContainer" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="0"]
 custom_styles/panel = SubResource( 2 )
@@ -98,6 +101,7 @@ text = "{PREVIEW}"
 clip_text = true
 
 [node name="Properties" parent="HContainer/HContainer/InfoMargin/InfoContainer" index="1"]
+visible = true
 margin_right = 820.0
 margin_bottom = 265.0
 custom_styles/panel = SubResource( 3 )
@@ -236,5 +240,4 @@ margin_bottom = 233.0
 [connection signal="text_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/CustomTextEdit" to="." method="_on_CustomTextEdit_text_changed"]
 [connection signal="value_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer2/TextSpeed/HBoxContainer/TextSpeed" to="." method="_on_TextSpeed_value_changed"]
 [connection signal="toggled" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/HBoxContainer2/ContinuePrevious/HBoxContainer/ContinuePrevious" to="." method="_on_ContinuePrevious_toggled"]
-[connection signal="focus_exited" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Translation/TranslationKey" to="." method="_on_TranslationKey_focus_exited"]
-[connection signal="text_changed" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Translation/TranslationKey" to="." method="_on_TranslationKey_text_changed"]
+[connection signal="text_entered" from="HContainer/HContainer/InfoMargin/InfoContainer/Properties/Margin/VBox/CustomProperties/Translation/TranslationKey" to="." method="_on_TranslationKey_text_entered"]

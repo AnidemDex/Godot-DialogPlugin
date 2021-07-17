@@ -52,7 +52,7 @@ func update_node_character() -> void:
 	base_resource = base_resource as DialogTextEvent
 	
 	var _character:DialogCharacterResource = base_resource.character
-	var _character_name:String = _character.name if _character else ""
+	var _character_name:String = _character.display_name if _character else ""
 	
 	character_selector_node.set_character(_character_name)
 	preview_char_node.text = _character_name
@@ -96,17 +96,14 @@ func _set_timeline(value:DialogTimelineResource) -> void:
 	_update_node_values()
 
 
-func _on_TranslationKey_text_changed(new_text: String) -> void:
+func _on_TranslationKey_text_entered(new_text: String) -> void:
 	var _translation_key = new_text
 	if not _translation_key:
 		_translation_key = "__SAME_AS_TEXT__"
 	
 	if _translation_key != base_resource.translation_key:
 		base_resource.translation_key = _translation_key
-
-
-func _on_TranslationKey_focus_exited() -> void:
-	_save_resource()
+		resource_value_modified()
 
 
 func _on_CustomTextEdit_text_changed(new_text:String) -> void:

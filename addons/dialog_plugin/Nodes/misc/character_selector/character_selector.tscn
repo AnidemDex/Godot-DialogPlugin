@@ -13,13 +13,13 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="."]
 margin_top = 5.0
-margin_right = 60.0
+margin_right = 69.0
 margin_bottom = 19.0
-text = "Character"
+text = "Showname"
 
 [node name="LineEdit" type="LineEdit" parent="."]
-margin_left = 64.0
-margin_right = 184.0
+margin_left = 73.0
+margin_right = 193.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 120, 0 )
 __meta__ = {
@@ -27,8 +27,8 @@ __meta__ = {
 }
 
 [node name="ResourceSelector" parent="." instance=ExtResource( 1 )]
-margin_left = 188.0
-margin_right = 218.0
+margin_left = 197.0
+margin_right = 227.0
 margin_bottom = 24.0
 hint_tooltip = "Select a character from files"
 clip_text = true
