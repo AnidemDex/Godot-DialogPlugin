@@ -1,6 +1,8 @@
 tool
 extends VBoxContainer
 
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
+
 var base_resource:DialogCharacterResource = null setget _set_base_resource
 
 export(NodePath) var Name_path:NodePath
@@ -14,6 +16,8 @@ onready var name_node:Label = get_node(Name_path) as Label
 onready var display_name_node:LineEdit = get_node(DisplayName_path) as LineEdit
 onready var icon_node:Button = get_node(Icon_path) as Button
 onready var portrait_container_node := get_node(PortraitContainer_path)
+
+func get_class() -> String: return "CharacterEditorView"
 
 func _ready() -> void:
 	if (not Engine.editor_hint) and (debug_base_resource != ""):
@@ -46,7 +50,19 @@ func _save() -> void:
 	if not base_resource:
 		return
 	var _err = ResourceSaver.save(base_resource.resource_path, base_resource as Resource)
-	assert(_err == OK)
+	Dialog
+
+func _deferred_save(_descarted_value=null) -> void:
+	DialogUtil.Logger.print_debug(self, "Saving a resource.")
+	if not base_resource:
+		DialogUtil.Logger.print_debug(self, "There's no resource to save. Skipping")
+		return
+	var path:String = base_resource.resource_path
+	if "::" in path:
+		DialogUtil.Logger.print_debug(self, "Trying to save a sub-resource. Skipping")
+	else:
+		var _err = ResourceSaver.save(base_resource.resource_path, base_resource)
+		DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
 
 
 func _on_BaseResource_changed() -> void:

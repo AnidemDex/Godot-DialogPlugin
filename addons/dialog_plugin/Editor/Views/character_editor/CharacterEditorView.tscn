@@ -24,7 +24,7 @@ Name_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/PanelContainer
 DisplayName_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/DisplayName")
 Icon_path = NodePath("MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/Icon")
 PortraitContainer_path = NodePath("PortraitContainer")
-debug_base_resource = "res://GodotCharacter.tres"
+debug_base_resource = "res://test_character.tres"
 
 [node name="Title" type="PanelContainer" parent="."]
 margin_right = 1024.0
