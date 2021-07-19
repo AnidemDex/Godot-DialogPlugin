@@ -39,6 +39,23 @@ func make_visible(visible: bool) -> void:
 		_dock_button.pressed = visible
 
 
+func save_all() -> void:
+	if is_instance_valid(_character_editor_view):
+		_character_editor_view._save()
+
+
+func save_external_data() -> void:
+	save_all()
+
+
+func apply_changes() -> void:
+	save_all()
+
+
+func build() -> bool:
+	save_all()
+	return true
+
 func _exit_tree() -> void:
 	if _character_editor_view:
 		remove_control_from_bottom_panel(_character_editor_view)
