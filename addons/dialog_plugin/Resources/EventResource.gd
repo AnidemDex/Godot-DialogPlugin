@@ -17,6 +17,7 @@ var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nod
 func get_class(): return "EventResource"
 
 func _execute(caller:DialogBaseNode) -> void:
+	DialogUtil.Logger.print_debug(self, "Event started")
 	_caller = caller
 	emit_signal("event_started", self)
 	execute(caller)
@@ -27,6 +28,7 @@ func execute(caller:DialogBaseNode) -> void:
 
 
 func finish(jump_to_next_event=skip) -> void:
+	DialogUtil.Logger.print_debug(self, "Event finished")
 	emit_signal("event_finished", self, jump_to_next_event)
 
 

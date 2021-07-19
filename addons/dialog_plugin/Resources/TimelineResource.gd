@@ -15,10 +15,14 @@ var current_event:int = 0
 # Deprecated
 var _related_characters:Array = []
 
+func get_class() -> String: return "DialogTimelineResource"
+
 func start(caller):
+	DialogUtil.Logger.print_debug(self,"Timeline started in event %s"%current_event)
 	var _err
 	
 	if events.empty() or current_event >= events.size():
+		DialogUtil.Logger.print_debug(self,"Timeline finished")
 		emit_signal("timeline_ended")
 		return
 	
