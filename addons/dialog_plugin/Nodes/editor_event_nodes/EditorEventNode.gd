@@ -43,7 +43,7 @@ func _ready() -> void:
 	event_name_container.set_drag_forwarding(self)
 	
 	if not base_resource:
-		DialogUtil.Logger.print(self,["There's no resource reference for this event", name])
+		DialogUtil.Logger.print_debug(self,["There's no resource reference for this event", name])
 		return
 	
 	if not base_resource.is_connected("changed", self, "_on_resource_change"):
