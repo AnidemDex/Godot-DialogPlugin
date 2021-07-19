@@ -9,6 +9,8 @@ var events_else:DialogTimelineResource = DialogTimelineResource.new()
 
 var old_timeline:DialogTimelineResource
 
+func get_class() -> String: return "ConditionEvent"
+
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "IF|ELSE"
@@ -28,7 +30,7 @@ func execute(caller:DialogBaseNode) -> void:
 	var variables:Dictionary = load(VARIABLES_PATH).variables
 	
 	var evaluated_condition = DialogUtil.evaluate(condition, caller, variables)
-#	print(condition,": ",evaluated_condition)
+	DialogUtil.Logger.print_debug(self, [condition,": ",evaluated_condition])
 	
 	var timeline:DialogTimelineResource
 	
@@ -39,6 +41,7 @@ func execute(caller:DialogBaseNode) -> void:
 	
 	if timeline and not(timeline.events.empty()):
 		timeline.connect("timeline_ended", self, "_on_Timeline_ended", [], CONNECT_ONESHOT)
+		timeline.current_event = -1
 		caller.timeline = timeline
 	
 	finish(true)
