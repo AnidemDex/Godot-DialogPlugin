@@ -20,6 +20,7 @@ var font_bold_italics:Font = null
 
 var _DialogNode:DialogDialogueManager = null
 
+func get_class() -> String: return "DialogTextEvent"
 
 func _init():
 	resource_name = "TextEvent"
