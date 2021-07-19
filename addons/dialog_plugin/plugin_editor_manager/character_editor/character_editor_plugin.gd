@@ -23,9 +23,7 @@ func _enter_tree() -> void:
 
 
 func handles(object: Object) -> bool:
-	if object is DialogCharacterResource:
-		return true
-	return false
+	return object is DialogCharacterResource
 
 
 func edit(object: Object) -> void:
@@ -34,7 +32,7 @@ func edit(object: Object) -> void:
 
 
 func make_visible(visible: bool) -> void:
-	if _dock_button and is_instance_valid(_dock_button):
+	if is_instance_valid(_dock_button):
 		_dock_button.visible = visible
 		_dock_button.pressed = visible
 
