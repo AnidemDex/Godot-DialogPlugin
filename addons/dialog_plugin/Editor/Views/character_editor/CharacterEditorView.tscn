@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/styleboxflat_title_header.tres" type="StyleBox" id=1]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/CharacterEditorView.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/resource_selector/texture_selector.gd" type="Script" id=3]
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/character_editor/portrait_container/portrait_container.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -77,6 +78,8 @@ rect_min_size = Vector2( 64, 64 )
 text = "icon"
 clip_text = true
 expand_icon = true
+script = ExtResource( 3 )
+filters = PoolStringArray( "*.png;PNG", "*.jpg;JPG" )
 
 [node name="RemoveIconBtn" type="ToolButton" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 margin_top = 72.0
@@ -130,15 +133,5 @@ margin_top = 150.0
 margin_right = 1024.0
 margin_bottom = 600.0
 
-[node name="FileDialog" type="FileDialog" parent="."]
-margin_right = 315.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 150, 52.5 )
-window_title = "Open a File"
-mode = 0
-filters = PoolStringArray( "*.png;PNG" )
-
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/Icon" to="." method="_on_Icon_pressed"]
+[connection signal="resource_selected" from="MarginContainer/HBoxContainer/VBoxContainer2/PanelContainer/Icon" to="." method="_on_Icon_resource_selected"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/RemoveIconBtn" to="." method="_on_RemoveIconBtn_pressed"]
-[connection signal="save_requested" from="PortraitContainer" to="." method="_save"]
-[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]

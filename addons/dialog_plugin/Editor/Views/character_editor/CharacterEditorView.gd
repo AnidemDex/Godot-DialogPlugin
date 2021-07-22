@@ -22,35 +22,41 @@ func get_class() -> String: return "CharacterEditorView"
 func _ready() -> void:
 	if (not Engine.editor_hint) and (debug_base_resource != ""):
 		base_resource = load(debug_base_resource) as DialogCharacterResource
-	if not base_resource:
-		return
-	if not base_resource.is_connected("changed", self, "_on_BaseResource_changed"):
-		var _err = base_resource.connect("changed", self, "_on_BaseResource_changed")
-		assert(_err == OK)
-	_update_values()
 
-func _update_values() -> void:
-	visible = true
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED:
+		if visible and base_resource:
+			configure_resource()
+			update_values()
+
+
+func configure_resource() -> void:
+	if not base_resource.is_connected("changed", self, "update_values"):
+		base_resource.connect("changed", self, "update_values")
+
+
+func update_values() -> void:
 	name_node.text = base_resource.name
 	display_name_node.text = base_resource.display_name
 	icon_node.icon = base_resource.icon
-	portrait_container_node.base_resource = base_resource
+	portrait_container_node.character = base_resource
+	portrait_container_node._update_values()
 
 
 func _set_base_resource(value:DialogCharacterResource) -> void:
-	base_resource = value
-	if not base_resource.is_connected("changed", self, "_on_BaseResource_changed"):
-		base_resource.connect("changed", self, "_on_BaseResource_changed")
+	if base_resource and base_resource.is_connected("changed", self, "update_values"):
+		base_resource.disconnect("changed", self, "update_values")
 	
-	if is_inside_tree():
-		_update_values()
+	base_resource = value
+	configure_resource()
 
 
 func _save() -> void:
 	if not base_resource:
 		return
-	var _err = ResourceSaver.save(base_resource.resource_path, base_resource as Resource)
-	Dialog
+	call_deferred("_deferred_save")
+
 
 func _deferred_save(_descarted_value=null) -> void:
 	DialogUtil.Logger.print_debug(self, "Saving a resource.")
@@ -65,10 +71,6 @@ func _deferred_save(_descarted_value=null) -> void:
 		DialogUtil.Logger.verify(_err == OK, "There was an error while saving a resource in {path}: {error}".format({"path":base_resource.resource_path, "error":_err}))
 
 
-func _on_BaseResource_changed() -> void:
-	_update_values()
-
-
 func _on_DisplayName_text_changed(new_text: String) -> void:
 	if not base_resource:
 		return
@@ -79,22 +81,12 @@ func _on_DefaultspeakerButton_toggled(button_pressed: bool) -> void:
 	if not base_resource:
 		return
 	base_resource.default_speaker = button_pressed
-	_save()
-
-
-func _on_Icon_pressed() -> void:
-	$FileDialog.popup_centered_ratio()
-
-
-func _on_FileDialog_file_selected(path: String) -> void:
-	var _image = load(path)
-	if _image is Texture:
-		base_resource.icon = _image
-		_save()
-		_update_values()
 
 
 func _on_RemoveIconBtn_pressed() -> void:
+	icon_node.text = "icon"
 	base_resource.icon = null
-	_save()
-	_update_values()
+
+
+func _on_Icon_resource_selected(resource:Texture) -> void:
+	base_resource.icon = resource
