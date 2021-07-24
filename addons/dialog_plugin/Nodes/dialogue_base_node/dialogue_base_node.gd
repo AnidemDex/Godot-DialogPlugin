@@ -2,6 +2,8 @@ tool
 class_name DialogBaseNode, "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png"
 extends CanvasItem
 
+signal custom_signal(value)
+
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
