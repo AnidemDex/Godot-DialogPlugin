@@ -1,4 +1,4 @@
-tool
+# tool
 class_name DialogEditorEventNode
 extends Control
 
@@ -17,39 +17,28 @@ const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 # que va a modificar. Por ejemplo, en el nodo de TextEvent
 # tendrás un base_resource de DialogTextEvent
 var base_resource:Resource = null
-var idx:int = 0 setget _set_idx
+
 
 var _is_focused = false
 
-export(Color) var event_color:Color = Color("3c3d5e") setget _set_event_color
 
-export(NodePath) var IconNode_path:NodePath
-export(NodePath) var TopContent_path:NodePath
-export(NodePath) var PropertiesContainer_path:NodePath
-export(NodePath) var IndexLbl_path:NodePath
-export(NodePath) var SkipBtn_path:NodePath
+export(NodePath) var Branch_path:NodePath
+export(NodePath) var Name_path:NodePath
+export(NodePath) var Preview_path:NodePath
+export(NodePath) var Properties_path:NodePath
 
-var EventName_Path:NodePath = "HContainer/HContainer/NameMargin/EventName"
-
-onready var top_content_node:PanelContainer = get_node(TopContent_path) as PanelContainer
-onready var properties_content_node:PanelContainer = get_node(PropertiesContainer_path) as PanelContainer
-onready var icon_node:TextureRect = get_node(IconNode_path) as TextureRect
-onready var index_label_node:Label = get_node(IndexLbl_path) as Label
-onready var skip_button_node:CheckBox = get_node(SkipBtn_path) as CheckBox
-onready var event_name_container:Container = get_node(EventName_Path) as Container
+onready var event_node_branch:Container = get_node(Branch_path) as Container
+onready var event_node_name:Container = get_node(Name_path) as Container
+onready var event_node_preview:Container = get_node(Preview_path) as Container
+onready var event_node_properties:Container = get_node(Properties_path) as Container
 
 func _ready() -> void:
 	
-	event_name_container.set_drag_forwarding(self)
+	event_node_name.set_drag_forwarding(self)
 	
 	if not base_resource:
 		DialogUtil.Logger.print_debug(self,["There's no resource reference for this event", name])
 		return
-	
-	if not base_resource.is_connected("changed", self, "_on_resource_change"):
-		base_resource.connect("changed", self, "_on_resource_change")
-	
-	skip_button_node.set_deferred("pressed", base_resource.skip)
 
 
 func _draw() -> void:
@@ -86,30 +75,11 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	return data
 
 
-func set_property_container_color(new_color:Color) -> void:
-	
-	var _stylebox:StyleBoxFlat
-	_stylebox = top_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = new_color
-	_stylebox = properties_content_node.get_stylebox("panel") as StyleBoxFlat
-	_stylebox.bg_color = new_color
-
-
 func expand_properties() -> void:
-	var _top_container_node = top_content_node.get_node("HContainer")
-	if not _top_container_node:
-		return
-	
-	_top_container_node.toggle(true)
 	after_expand_properties()
 
 
 func collapse_properties() -> void:
-	var _top_container_node = top_content_node.get_node("HContainer")
-	if not _top_container_node:
-		return
-	
-	_top_container_node.toggle(false)
 	after_collapse_properties()
 
 
@@ -125,8 +95,6 @@ func after_collapse_properties() -> void:
 func _focused() -> void:
 	_is_focused = true
 	emit_signal("focus_entered", self)
-	
-	set_property_container_color(event_color)
 	expand_properties()
 
 
@@ -135,7 +103,6 @@ func _unfocused() -> void:
 	emit_signal("focus_exited", self)
 	
 	collapse_properties()
-	set_property_container_color(DEFAULT_COLOR)
 
 
 func _input(event: InputEvent) -> void:
@@ -151,12 +118,7 @@ func _gui_input(event: InputEvent) -> void:
 			emit_signal("deletion_requested", base_resource)
 
 
-func _set_idx(value):
-	if index_label_node:
-		idx = value
-		index_label_node.text = str(value)
-
-
+# deprecated
 func _update_node_values() -> void:
 	assert(false, "You forgot to override '_update_node_values' method")
 
@@ -167,26 +129,23 @@ func _save_resource() -> void:
 	resource_value_modified()
 
 
-# Shorthand for emit_signal("event_modified"). Used whetever a base resource value is modified
+# deprecated
 func resource_value_modified() -> void:
 	emit_signal("event_modified")
 
-
-func _set_event_color(value:Color) -> void:
-	event_color = value
-	
-	if event_name_container:
-		event_name_container.get_stylebox("panel").bg_color = event_color
-	property_list_changed_notify()
+func update_event_node_branch() -> void:
+	pass
 
 
-func _on_resource_change() -> void:
-	_update_node_values()
+func update_event_node_name() -> void:
+	pass
 
 
-func _on_SkipButton_toggled(button_pressed: bool) -> void:
-	if base_resource:
-		if base_resource.skip != button_pressed:
-			DialogUtil.Logger.print_debug(base_resource, "Skip property modified from {0} to {1}".format([base_resource.skip, button_pressed]))
-			base_resource.skip = button_pressed
-			resource_value_modified()
+func update_event_node_bar() -> void:
+	pass
+
+
+func update_event_node_values() -> void:
+	update_event_node_branch()
+	update_event_node_name()
+	update_event_node_bar()

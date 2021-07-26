@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/event_icon_circle_outline.material" type="Material" id=1]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/warning.png" type="Texture" id=2]
+
+[node name="EventNodeBranch" type="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 48 )
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+material = ExtResource( 1 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="TextureRect3" type="NinePatchRect" parent="."]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 48.0
+size_flags_vertical = 3

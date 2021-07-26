@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/left_side_default_color.tres" type="StyleBox" id=1]
+
+[node name="EventNodeName" type="PanelContainer"]
+margin_right = 107.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 32 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.3
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 17.0
+margin_right = 107.0
+margin_bottom = 31.0
+text = "EVENT_NAME"
