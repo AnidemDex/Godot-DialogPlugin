@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_template.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/set_event_node/set_event_node.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/set_variable.png" type="Texture" id=3]
+
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
