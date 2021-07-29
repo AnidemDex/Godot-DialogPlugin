@@ -1,3 +1,4 @@
+tool
 extends PanelContainer
 
 export(NodePath) var PreviewLabel_path:NodePath

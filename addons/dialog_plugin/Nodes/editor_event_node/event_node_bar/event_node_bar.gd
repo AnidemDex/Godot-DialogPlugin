@@ -1,3 +1,4 @@
+tool
 extends VBoxContainer
 
 export(NodePath) var Preview_path:NodePath
