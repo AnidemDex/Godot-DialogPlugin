@@ -60,4 +60,10 @@ func set_skip(value:bool) -> void:
 func _get_property_list() -> Array:
 	var properties:Array = []
 	var skip_property:Dictionary = DialogUtil.get_property_dict("skip", TYPE_BOOL, PROPERTY_HINT_NONE, "CheckButton", PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE)
+	properties.append(skip_property)
 	return properties
+
+
+func _get(property: String):
+	if property == "skip_alternative_name":
+		return "Jump inmediatly to next event?"
