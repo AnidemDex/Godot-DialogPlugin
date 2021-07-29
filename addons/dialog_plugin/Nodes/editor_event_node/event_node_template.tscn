@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_branch/event_node_branch.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/EditorEventNode.gd" type="Script" id=2]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_name/event_node_name.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_bar/event_node_bar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_branch/event_node_branch.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/EditorEventNode.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_name/event_node_name.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_bar/event_node_bar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/event_theme.tres" type="Theme" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -19,6 +19,7 @@ anti_aliasing = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -552.0
+rect_min_size = Vector2( 0, 32 )
 focus_mode = 1
 size_flags_horizontal = 3
 theme = ExtResource( 5 )
@@ -27,6 +28,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Branch_path = NodePath("EventNodeBranch")
+Name_path = NodePath("EventNodeName")
+Info_path = NodePath("EventNodeBar")
 
 [node name="EventNodeBranch" parent="." instance=ExtResource( 1 )]
 margin_bottom = 48.0
