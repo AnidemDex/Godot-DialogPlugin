@@ -12,6 +12,8 @@ signal displayer_loaded
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
+var event_node_template_scene:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_node_template.tscn")
+
 var timeline_resource:DialogTimelineResource
 var last_selected_node:DialogEditorEventNode
 var separator_node:Control = PanelContainer.new()
@@ -112,7 +114,7 @@ func is_event_at_right_position(event:DialogEventResource) -> bool:
 		child = child as Node
 		var _base_resource = child.get("base_resource")
 		if event == _base_resource:
-			node_idx = child.get("idx")
+			node_idx = child.get("event_index")
 	return node_idx == original_position
 
 
@@ -128,7 +130,7 @@ func remove_event_from_displayer(event:DialogEventResource) -> void:
 
 func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	var _err:int
-	var event_node:DialogEditorEventNode = event.get_event_editor_node()
+	var event_node:DialogEditorEventNode = get_editor_node_for_event(event)
 
 	_err = event_node.connect("focus_entered", self, "_on_EventNode_selected")
 	assert(_err == OK)
@@ -140,8 +142,9 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	assert(_err == OK)
 	_err = event_node.connect("timeline_requested", self, "_on_EventNode_timeline_requested")
 	assert(_err == OK)
-	_err = event_node.connect("ready", event_node, "set", ["idx", index_hint])
-	assert(_err == OK)
+	event_node.connect("ready", event_node, "call", ["update_event_node_values"])
+	event_node.event_index = index_hint
+	event_node.base_resource = event
 	event_node.set_drag_forwarding(self)
 	call_deferred("add_child", event_node)
 	call_deferred("move_child", event_node, index_hint)
@@ -167,6 +170,16 @@ func set_load_progress(value:float) -> void:
 
 func get_load_progress() -> float:
 	return load_progress
+
+func get_editor_node_for_event(event:DialogEventResource) -> DialogEditorEventNode:
+	var event_node_template:DialogEditorEventNode
+#	if event.event_editor_scene_path != "" and ResourceLoader.exists(event.event_editor_scene_path):
+#		event_node_template = load(event.event_editor_scene_path).instance()
+#	else:
+#		pass
+	event_node_template = event_node_template_scene.instance() as DialogEditorEventNode
+	
+	return event_node_template
 
 
 func _set_modified(value:bool) -> void:
@@ -200,6 +213,7 @@ func _on_EventNode_deletion_requested(event_resource:DialogEventResource=null) -
 	_events.erase(event_resource)
 	remove_event_from_displayer(event_resource)
 	set("modified", true)
+	force_reload()
 
 
 func _on_EventNode_modified(event_resource:DialogEventResource=null) -> void:
@@ -226,9 +240,9 @@ func can_drop_data_fw(position: Vector2, data, node:Control) -> bool:
 	var node_rect:Rect2 = node.get_rect()
 	
 	if position.y > node_rect.size.y/2:
-		_drop_index_hint = node.idx+1
+		_drop_index_hint = int(node.get("event_index"))+1
 	else:
-		_drop_index_hint = node.idx
+		_drop_index_hint = int(node.get("event_index"))
 	
 	move_child(separator_node, _drop_index_hint)
 	
