@@ -37,10 +37,12 @@ margin_bottom = 48.0
 
 [node name="EventNodeName" parent="." instance=ExtResource( 3 )]
 margin_left = 32.0
-margin_right = 260.0
+margin_right = 230.0
 margin_bottom = 32.0
+size_flags_stretch_ratio = 1.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="EventNodeBar" parent="." instance=ExtResource( 4 )]
-margin_left = 260.0
+margin_left = 230.0
 margin_bottom = 48.0
+size_flags_stretch_ratio = 4.0
