@@ -36,8 +36,6 @@ func _ready() -> void:
 	if not base_resource:
 		DialogUtil.Logger.print_debug(self,["There's no resource reference for this event", name])
 		return
-	
-	update_event_node_values()
 
 
 func _clips_input() -> bool:
@@ -49,6 +47,8 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 		return
 	var data = base_resource
 	var drag_preview_node:Control = self.duplicate()
+	drag_preview_node.set("base_resource", base_resource)
+	drag_preview_node.set("event_index", -1)
 	
 	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
 	drag_preview_node.size_flags_vertical = Control.SIZE_FILL
@@ -57,6 +57,7 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	drag_preview_node.rect_size = Vector2(50,50)
 	drag_preview_node.rect_min_size = Vector2(50,50)
 	set_drag_preview(drag_preview_node)
+	drag_preview_node.call("update_event_node_values")
 	emit_signal("deletion_requested", base_resource)
 	return data
 
