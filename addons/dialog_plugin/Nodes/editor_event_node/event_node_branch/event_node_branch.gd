@@ -18,7 +18,7 @@ func update_node_values() -> void:
 func _on_LowerBranch_draw() -> void:
 	if not base_resource:
 		return
-	
+	var used_color:Color = Color.black
 	var line_width:float = 4.0
 	var height:float = lower_branch_node.rect_size.y
 	var width:float = lower_branch_node.rect_size.x
@@ -27,8 +27,16 @@ func _on_LowerBranch_draw() -> void:
 	var _skip:bool = base_resource.skip
 	
 	if _skip:
-		var arrow:PoolVector2Array = PoolVector2Array([Vector2(width/2, height), Vector2(lerp(0, width, 0.2), height/2), Vector2(lerp(0, width, 0.8), height/2)])
-		end_position = Vector2(0, height/2) + middle_position
-		lower_branch_node.draw_colored_polygon(arrow, Color.black)
-	
-	lower_branch_node.draw_line(middle_position, end_position, Color.black, line_width)
+		var relative_height:float = height-12
+		var arrow:PoolVector2Array = PoolVector2Array([Vector2(width/2, height), Vector2(lerp(0, width, 0.2), relative_height), Vector2(lerp(0, width, 0.8), relative_height)])
+		end_position = Vector2(0, relative_height) + middle_position
+		used_color = Color("#FBB13C")
+		lower_branch_node.draw_colored_polygon(arrow, used_color)
+		lower_branch_node.draw_line(middle_position, end_position, used_color, line_width)
+	else:
+		var second_part:Vector2 = Vector2(middle_position.x, height-8)
+		var first_part:Vector2 = Vector2(middle_position.x, height-16)
+		lower_branch_node.draw_line(middle_position, first_part, used_color, line_width)
+		lower_branch_node.draw_line(Vector2(lerp(0, width, 0.2), height-8), Vector2(lerp(0, width, 0.8), height-8), used_color, 4)
+		lower_branch_node.draw_line(second_part, end_position, used_color, line_width)
+		lower_branch_node.draw_line(Vector2(lerp(0, width, 0.2), height-16), Vector2(lerp(0, width, 0.8), height-16), used_color, 4)
