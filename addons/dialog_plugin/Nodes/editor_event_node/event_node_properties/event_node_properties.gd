@@ -9,6 +9,8 @@ var base_resource:DialogEventResource
 
 var properties_generated:bool = false
 
+onready var properties_container:Container = get_node("VBoxContainer") as Container
+
 func update_node_values() -> void:
 	print_debug("Updating properties")
 	if not properties_generated and base_resource:
@@ -21,6 +23,7 @@ func generate_properties() -> void:
 		var required_condition:bool = bool(property["usage"] & CONDITION == CONDITION)
 		if required_condition:
 			generate_property_for(property)
+	properties_generated = true
 
 
 func generate_property_for(property:Dictionary) -> void:
@@ -36,8 +39,8 @@ func generate_property_for(property:Dictionary) -> void:
 	match property_type:
 		TYPE_BOOL:
 			var check_button:CheckButton = EditorCheckButton.instance() as CheckButton
-			var alternative_name:String = base_resource.get(property_name + "_alternative_name")
-			alternative_name = alternative_name if alternative_name else property_name
+			var alternative_name:String = str(base_resource.get(property_name + "_alternative_name"))
+			alternative_name = alternative_name if alternative_name != str(null) else property_name.capitalize()
 			property_node = check_button
 			check_button.set("text", alternative_name)
 	
@@ -47,7 +50,7 @@ func generate_property_for(property:Dictionary) -> void:
 	
 	property_node.set("base_resource", base_resource)
 	property_node.set("used_property", property_name)
-	add_child(property_node)
+	properties_container.add_child(property_node)
 
 
 func print_s(_a=null):
@@ -58,4 +61,6 @@ func print_r():
 
 func remove_all_childs() -> void:
 	for child in get_children():
+		if child == properties_container:
+			continue
 		child.queue_free()

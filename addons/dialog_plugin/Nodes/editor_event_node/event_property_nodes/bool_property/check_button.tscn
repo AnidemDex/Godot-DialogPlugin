@@ -5,7 +5,7 @@
 [node name="BoolProperty" type="CheckButton"]
 margin_right = 134.0
 margin_bottom = 47.0
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 text = "{VAR_NAME}"
 script = ExtResource( 1 )
 __meta__ = {

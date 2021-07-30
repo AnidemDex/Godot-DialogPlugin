@@ -48,7 +48,8 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	if not base_resource:
 		return
 	var data = base_resource
-	var drag_preview_node:Control = self
+	var drag_preview_node:Control = self.duplicate()
+	
 	drag_preview_node.size_flags_horizontal = Control.SIZE_FILL
 	drag_preview_node.size_flags_vertical = Control.SIZE_FILL
 	drag_preview_node.anchor_right = 0
@@ -86,6 +87,8 @@ func resource_value_modified() -> void:
 	emit_signal("event_modified")
 
 func update_event_node_branch() -> void:
+	if not base_resource.is_connected("changed", event_node_branch, "update_node_values"):
+		base_resource.connect("changed", event_node_branch, "update_node_values")
 	event_node_branch.set("base_resource", base_resource)
 	event_node_branch.call("update_node_values")
 
