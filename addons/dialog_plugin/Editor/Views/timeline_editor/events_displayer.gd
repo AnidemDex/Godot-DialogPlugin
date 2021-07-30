@@ -145,6 +145,7 @@ func add_event_node_as_child(event:DialogEventResource, index_hint:int) -> void:
 	event_node.connect("ready", event_node, "call", ["update_event_node_values"])
 	event_node.event_index = index_hint
 	event_node.base_resource = event
+	event_node.name = event.event_name
 	event_node.set_drag_forwarding(self)
 	call_deferred("add_child", event_node)
 	call_deferred("move_child", event_node, index_hint)
