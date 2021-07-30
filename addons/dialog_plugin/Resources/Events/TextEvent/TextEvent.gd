@@ -23,7 +23,9 @@ var _DialogNode:DialogDialogueManager = null
 func get_class() -> String: return "DialogTextEvent"
 
 func _init():
-	resource_name = "TextEvent"
+	event_color = Color("#2892D7")
+	event_name = "TextEvent"
+	resource_name = event_name
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_event_node.tscn"
 
 
