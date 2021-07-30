@@ -14,9 +14,22 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+PropertiesContainer_path = NodePath("MarginContainer/PropertiesContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 206.0
 margin_bottom = 76.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 2
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 2
+
+[node name="PropertiesContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 198.0
+margin_bottom = 74.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

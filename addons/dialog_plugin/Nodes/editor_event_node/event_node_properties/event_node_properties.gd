@@ -5,11 +5,14 @@ const CONDITION = PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE
 
 const EditorCheckButton = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn")
 
+export(NodePath) var PropertiesContainer_path:NodePath
+
 var base_resource:DialogEventResource
 
 var properties_generated:bool = false
 
-onready var properties_container:Container = get_node("VBoxContainer") as Container
+onready var properties_container:Container = get_node(PropertiesContainer_path) as Container
+onready var panel_stylebox:StyleBoxFlat = get_stylebox("panel")
 
 func update_node_values() -> void:
 	print_debug("Updating properties")
@@ -50,17 +53,20 @@ func generate_property_for(property:Dictionary) -> void:
 	
 	property_node.set("base_resource", base_resource)
 	property_node.set("used_property", property_name)
-	properties_container.add_child(property_node)
+	properties_container.call_deferred("add_child", property_node)
 
-
-func print_s(_a=null):
-	print("Button toggled")
-
-func print_r():
-	print("Base resource changed")
 
 func remove_all_childs() -> void:
 	for child in get_children():
-		if child == properties_container:
+		if child == properties_container or child.is_a_parent_of(properties_container):
 			continue
 		child.queue_free()
+
+
+func _after_expand() -> void:
+	if base_resource:
+		panel_stylebox.bg_color = base_resource.event_color
+
+func _after_collapse() -> void:
+	if base_resource:
+		panel_stylebox.bg_color = Color("999999")

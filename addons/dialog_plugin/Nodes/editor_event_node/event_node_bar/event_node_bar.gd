@@ -51,7 +51,15 @@ func update_node_values() -> void:
 
 func show_properties() -> void:
 	event_node_properties.show()
+	if event_node_preview.has_method("_after_expand"):
+		event_node_preview.call("_after_expand")
+	if event_node_properties.has_method("_after_expand"):
+		event_node_properties.call("_after_expand")
 
 
 func hide_properties() -> void:
 	event_node_properties.hide()
+	if event_node_preview.has_method("_after_collapse"):
+		event_node_preview.call("_after_collapse")
+	if event_node_properties.has_method("_after_collapse"):
+		event_node_properties.call("_after_collapse")
