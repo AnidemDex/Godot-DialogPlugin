@@ -15,7 +15,7 @@ signal event_finished(event_resource, jump_to_next_event)
 
 var event_icon:Texture = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/warning.png")
 var event_color:Color = Color("3c3d5e")
-var event_name:String = "CustomEvent"
+var event_name:String = "CustomEvent" setget ,get_event_name
 var event_preview_string:String = ""
 var event_hint:String = ""
 
@@ -55,6 +55,11 @@ func finish(jump_to_next_event=skip) -> void:
 func set_skip(value:bool) -> void:
 	skip = value
 	emit_changed()
+
+func get_event_name() -> String:
+	if event_name != resource_name and resource_name != "":
+		return resource_name
+	return event_name
 
 
 func _get_property_list() -> Array:
