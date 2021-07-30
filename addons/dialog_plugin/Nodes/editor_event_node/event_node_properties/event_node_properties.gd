@@ -2,8 +2,8 @@ tool
 extends PanelContainer
 
 const CONDITION = PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE
-
 const EditorCheckButton = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn")
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 export(NodePath) var PropertiesContainer_path:NodePath
 
@@ -48,7 +48,7 @@ func generate_property_for(property:Dictionary) -> void:
 			check_button.set("text", alternative_name)
 	
 	if not property_node:
-		push_error("There's no node for this property: {0}".format([property_name]))
+		DialogUtil.Logger.print_debug(base_resource,"There's no node for this property: {0}".format([property_name]))
 		return
 	
 	property_node.set("base_resource", base_resource)
