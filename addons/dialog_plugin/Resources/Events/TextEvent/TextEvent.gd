@@ -99,6 +99,14 @@ func on_DialogNode_text_displayed() -> void:
 # Export stuff
 # DO NOT MODIFY ANYTHING HERE
 
+func _get(property: String):
+	if property == "text_use_complex_instead":
+		return true
+	
+	if property == "translation_key_alternative_node":
+		return load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/translation_key/translation_key.tscn")
+
+
 func _get_property_list() -> Array:
 	var _p:Array = []
 	
@@ -108,6 +116,7 @@ func _get_property_list() -> Array:
 	var font_bold_property := DialogUtil.get_property_dict("font_bold", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Font", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_SCRIPT_VARIABLE)
 	var font_italics_property := DialogUtil.get_property_dict("font_italics", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Font", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_SCRIPT_VARIABLE)
 	var font_bold_italics_property := DialogUtil.get_property_dict("font_bold_italics", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "Font", PROPERTY_USAGE_DEFAULT | PROPERTY_USAGE_SCRIPT_VARIABLE)
-	_p.append_array([character_property, font_category, font_normal_property, font_bold_property, font_italics_property, font_bold_italics_property])
+#	_p.append_array([character_property, font_category, font_normal_property, font_bold_property, font_italics_property, font_bold_italics_property])
+	_p.append(character_property)
 	return _p
 
