@@ -4,7 +4,8 @@ func _ready() -> void:
 	connect("resource_selected", self, "_on_resource_selected")
 
 func update_node_values() -> void:
-	text = str(base_resource.get(used_property))
+	var final_text:String = str(base_resource.get(used_property))
+	text = "[None]" if final_text == str(null) else final_text
 
 func _on_resource_selected(resource:Resource) -> void:
 	base_resource.set(used_property, resource)
