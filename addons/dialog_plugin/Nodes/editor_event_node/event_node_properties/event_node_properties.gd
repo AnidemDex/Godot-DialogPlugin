@@ -2,7 +2,6 @@ tool
 extends PanelContainer
 
 const CONDITION = PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE
-const EditorCheckButton = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn")
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 export(NodePath) var PropertiesContainer_path:NodePath
@@ -41,11 +40,12 @@ func generate_property_for(property:Dictionary) -> void:
 	
 	match property_type:
 		TYPE_BOOL:
-			var check_button:CheckButton = EditorCheckButton.instance() as CheckButton
-			var alternative_name:String = str(base_resource.get(property_name + "_alternative_name"))
-			alternative_name = alternative_name if alternative_name != str(null) else property_name.capitalize()
-			property_node = check_button
-			check_button.set("text", alternative_name)
+			property_node = _get_bool_node_for(property)
+		TYPE_STRING:
+			property_node = _get_string_node_for(property)
+		TYPE_OBJECT:
+			if property_hint == PROPERTY_HINT_RESOURCE_TYPE:
+				property_node = _get_resource_node_for(property)
 	
 	if not property_node:
 		DialogUtil.Logger.print_debug(base_resource,"There's no node for this property: {0}".format([property_name]))
@@ -70,3 +70,88 @@ func _after_expand() -> void:
 func _after_collapse() -> void:
 	if base_resource:
 		panel_stylebox.bg_color = Color("999999")
+
+
+func _get_alternative_scene_for(property_name:String) -> PackedScene:
+	return base_resource.get(property_name+"_alternative_node")
+
+
+func _get_bool_node_for(property:Dictionary) -> Node:
+	var EditorCheckButton:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn") as PackedScene
+	
+	var property_name:String = property.get("name", "")
+	var property_type:int = property.get("type", TYPE_NIL)
+	var property_hint:int = property.get("hint", PROPERTY_HINT_NONE)
+	var property_hint_string:String = property.get("hint_string", "")
+	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
+	
+	var check_button:CheckButton
+	
+	var alternative_scene:PackedScene = _get_alternative_scene_for(property_name)
+	if alternative_scene:
+		check_button = alternative_scene.instance() as CheckButton
+	else:
+		check_button = EditorCheckButton.instance() as CheckButton
+		
+	var alternative_name:String = str(base_resource.get(property_name + "_alternative_name"))
+	alternative_name = alternative_name if alternative_name != str(null) else property_name.capitalize()
+	check_button.set("text", alternative_name)
+	return check_button
+
+
+func _get_string_node_for(property:Dictionary) -> Node:
+	
+	var SimpleTextEdit:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/simple_textedit/text_edit.tscn")
+	var AdvancedTextEdit:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/advanced_textedit/text_edit.tscn")
+	var LineEditScene:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/line_edit.tscn")
+	
+	var property_name:String = property.get("name", "")
+	var property_type:int = property.get("type", TYPE_NIL)
+	var property_hint:int = property.get("hint", PROPERTY_HINT_NONE)
+	var property_hint_string:String = property.get("hint_string", "")
+	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
+	
+	var string_node:Node = null
+	
+	var alternative_scene:PackedScene = _get_alternative_scene_for(property_name)
+	if alternative_scene:
+		return alternative_scene.instance()
+	
+	if property_hint == PROPERTY_HINT_MULTILINE_TEXT:
+		var use_complex_node = base_resource.get(property_name+"_use_complex_instead")
+		if use_complex_node:
+			string_node = AdvancedTextEdit.instance() as Control
+		else:
+			string_node = SimpleTextEdit.instance() as TextEdit
+	else:
+		string_node = LineEditScene.instance() as Control
+	
+	return string_node
+
+
+func _get_resource_node_for(property:Dictionary) -> Node:
+	var ResourceSelector:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/resource_property/resource_selector.tscn")
+	
+	var property_name:String = property.get("name", "")
+	var property_type:int = property.get("type", TYPE_NIL)
+	var property_hint:int = property.get("hint", PROPERTY_HINT_NONE)
+	var property_hint_string:String = property.get("hint_string", "")
+	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
+	
+	var resource_selector:Node = null
+	
+	resource_selector = ResourceSelector.instance() as Control
+	
+	var filters:PoolStringArray
+	match property_hint_string:
+		"DialogCharacterResource":
+			filters = PoolStringArray(["*.tres"])
+		"":
+			filters = PoolStringArray([])
+		_:
+			filters = ResourceLoader.get_recognized_extensions_for_type(property_hint_string)
+	resource_selector.set("filters", filters)
+	
+	resource_selector.set("hint_tooltip", property_name.capitalize())
+	
+	return resource_selector

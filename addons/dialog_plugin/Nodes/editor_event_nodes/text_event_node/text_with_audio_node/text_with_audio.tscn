@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/text/text_w_sound_bubble.png" type="Texture" id=4]
 [ext_resource path="res://addons/dialog_plugin/Nodes/misc/resource_selector/resource_selector.tscn" type="PackedScene" id=5]
 
+
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
 content_margin_left = 24.0

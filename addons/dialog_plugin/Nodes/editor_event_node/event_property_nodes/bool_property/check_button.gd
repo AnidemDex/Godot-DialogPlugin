@@ -1,3 +1,4 @@
+tool
 extends CheckButton
 
 var used_property:String

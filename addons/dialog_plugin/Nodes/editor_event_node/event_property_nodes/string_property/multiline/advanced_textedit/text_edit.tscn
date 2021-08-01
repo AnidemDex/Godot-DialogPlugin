@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_nodes/custom_text_edit_node/text_edit_container.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/advanced_textedit/text_edit.gd" type="Script" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/advanced_textedit/text_edit_container.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/text_edit_icons/underline.svg" type="Texture" id=3]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/text_edit_icons/italic.svg" type="Texture" id=4]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/text_edit_icons/bold.svg" type="Texture" id=5]
@@ -297,5 +297,6 @@ __meta__ = {
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Center" to="." method="insert_bbcode" binds= [ "center" ]]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/AlignmentCategory/Tools/Right" to="." method="insert_bbcode" binds= [ "right" ]]
 [connection signal="pressed" from="VBoxContainer/PanelContainer/ToolBar/LinkButton" to="." method="_on_LinkButton_pressed"]
-[connection signal="text_changed" from="VBoxContainer/TextEdit" to="VBoxContainer/TextEdit" method="_on_TextEdit_text_changed"]
+[connection signal="focus_exited" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_focus_exited"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="_on_TextEdit_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/TextEdit" to="VBoxContainer/TextEdit" method="_on_TextEdit_text_changed"]

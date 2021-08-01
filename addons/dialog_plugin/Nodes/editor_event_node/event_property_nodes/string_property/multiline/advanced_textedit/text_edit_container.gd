@@ -1,5 +1,5 @@
 tool
-extends PanelContainer
+extends "res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/event_property.gd".PControl
 
 signal text_changed(new_text)
 
@@ -7,11 +7,17 @@ export(NodePath) var TextEdit_path:NodePath
 
 onready var text_edit_node:TextEdit = get_node(TextEdit_path) as TextEdit
 
+func update_node_values() -> void:
+	var _res_text:String = str(base_resource.get(used_property))
+	set_text(_res_text)
+
+
 func insert_bbcode(bbcode:String) -> void:
 	var selected_text:String = get_selected_text()
 	var formatted_text = get_formatted_text_with_bbcode(selected_text, bbcode)
 	
 	text_edit_node.insert_text_at_cursor(formatted_text)
+	base_resource.set(used_property, get_text())
 
 
 func get_selected_text() -> String:
@@ -55,3 +61,7 @@ func _on_LinkButton_pressed() -> void:
 
 func _on_TextEdit_text_changed() -> void:
 	emit_signal("text_changed", get_text())
+
+
+func _on_TextEdit_focus_exited() -> void:
+	base_resource.set(used_property, get_text())
