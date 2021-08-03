@@ -17,6 +17,9 @@ func update_node_values() -> void:
 func _on_LowerBranch_draw() -> void:
 	if not base_resource:
 		return
+	var branch_disabled = base_resource.get("branch_disabled")
+	if branch_disabled:
+		return
 	var used_color:Color = Color.black
 	var line_width:float = 4.0
 	var height:float = lower_branch_node.rect_size.y

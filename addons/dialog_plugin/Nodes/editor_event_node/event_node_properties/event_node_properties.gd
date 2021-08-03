@@ -118,6 +118,9 @@ func _get_bool_node_for(property:Dictionary) -> Node:
 		check_button = EditorCheckButton.instance() as CheckButton
 		
 	var alternative_name:String = str(base_resource.get(property_name + "_alternative_name"))
+	var property_disabled = base_resource.get(property_name + "_disabled")
+	if property_disabled:
+		check_button.set("disabled", true)
 	alternative_name = alternative_name if alternative_name != str(null) else property_name.capitalize()
 	check_button.set("text", alternative_name)
 	return check_button
