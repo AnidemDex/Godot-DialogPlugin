@@ -24,7 +24,6 @@ onready var properties_container:Container = get_node(PropertiesContainer_path) 
 onready var panel_stylebox:StyleBoxFlat = get_stylebox("panel")
 
 func update_node_values() -> void:
-	print_debug("Updating properties")
 	if not properties_generated and base_resource:
 		generate_properties()
 

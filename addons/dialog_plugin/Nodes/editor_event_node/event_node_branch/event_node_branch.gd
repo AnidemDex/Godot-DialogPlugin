@@ -10,7 +10,6 @@ onready var lower_branch_node:Control = get_node(LowBranch_path) as Control
 onready var icon_node:TextureRect = get_node(Icon_path) as TextureRect
 
 func update_node_values() -> void:
-	print_debug("Updating branch")
 	lower_branch_node.update()
 	icon_node.texture = base_resource.event_icon if base_resource else null
 

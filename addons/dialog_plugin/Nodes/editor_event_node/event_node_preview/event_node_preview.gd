@@ -15,7 +15,6 @@ onready var index_label:Label = get_node(Index_path) as Label
 onready var panel_stylebox:StyleBoxFlat = get_stylebox("panel")
 
 func update_node_values() -> void:
-	print_debug("Updating preview")
 	var preview_string:String = base_resource.event_preview_string if base_resource else ""
 	preview_string = preview_string.format(DialogUtil.get_property_values_from(base_resource))
 	preview_label.text = preview_string

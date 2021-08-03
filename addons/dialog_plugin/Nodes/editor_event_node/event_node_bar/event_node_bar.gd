@@ -40,7 +40,6 @@ func _unfocus() -> void:
 
 
 func update_node_values() -> void:
-	print_debug("Updating info")
 	event_node_preview.set("base_resource", base_resource)
 	event_node_preview.set("event_index", event_index)
 	event_node_preview.call("update_node_values")
