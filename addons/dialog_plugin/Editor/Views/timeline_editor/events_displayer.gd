@@ -174,11 +174,10 @@ func get_load_progress() -> float:
 
 func get_editor_node_for_event(event:DialogEventResource) -> DialogEditorEventNode:
 	var event_node_template:DialogEditorEventNode
-#	if event.event_editor_scene_path != "" and ResourceLoader.exists(event.event_editor_scene_path):
-#		event_node_template = load(event.event_editor_scene_path).instance()
-#	else:
-#		pass
-	event_node_template = event_node_template_scene.instance() as DialogEditorEventNode
+	if event.event_editor_scene_path != "" and ResourceLoader.exists(event.event_editor_scene_path):
+		event_node_template = load(event.event_editor_scene_path).instance()
+	else:
+		event_node_template = event_node_template_scene.instance() as DialogEditorEventNode
 	
 	return event_node_template
 
