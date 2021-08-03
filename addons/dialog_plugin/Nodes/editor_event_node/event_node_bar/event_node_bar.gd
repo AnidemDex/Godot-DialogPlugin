@@ -40,6 +40,8 @@ func _unfocus() -> void:
 
 
 func update_node_values() -> void:
+	if not base_resource.is_connected("changed", event_node_preview, "update_node_values"):
+		base_resource.connect("changed", event_node_preview, "update_node_values")
 	event_node_preview.set("base_resource", base_resource)
 	event_node_preview.set("event_index", event_index)
 	event_node_preview.call("update_node_values")
