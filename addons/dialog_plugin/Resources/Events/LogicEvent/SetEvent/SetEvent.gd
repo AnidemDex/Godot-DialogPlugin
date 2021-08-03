@@ -42,3 +42,7 @@ func execute(caller:DialogBaseNode) -> void:
 			_variable_resource.set_value(_variable_name, variable_value)
 			
 	finish()
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true

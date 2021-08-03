@@ -20,4 +20,10 @@ func execute(caller:DialogBaseNode) -> void:
 		_timeline.current_event = max(-1, event_index-1)
 
 	# Notify that you end this event
-	finish()
+	finish(true)
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true
+	if property == "branch_disabled":
+		return true

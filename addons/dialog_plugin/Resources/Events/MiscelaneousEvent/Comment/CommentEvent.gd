@@ -13,3 +13,7 @@ func _init() -> void:
 
 func execute(caller:DialogBaseNode) -> void:
 	finish(true)
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true

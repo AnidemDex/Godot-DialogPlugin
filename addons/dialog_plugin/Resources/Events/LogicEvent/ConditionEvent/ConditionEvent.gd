@@ -58,3 +58,7 @@ func _get_property_list() -> Array:
 	
 	_p.append_array([if_evnt_property, else_evnt_property])
 	return _p
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true

@@ -46,3 +46,9 @@ func _get_property_list() -> Array:
 		}
 	)
 	return properties
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true
+	if property == "branch_disabled":
+		return true
