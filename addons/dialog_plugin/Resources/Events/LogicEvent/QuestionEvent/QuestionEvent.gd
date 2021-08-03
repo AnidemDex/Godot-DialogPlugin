@@ -19,6 +19,7 @@ func _init() -> void:
 	event_name = "Question"
 	resource_name = event_name
 	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/question_event.png") as Texture
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)

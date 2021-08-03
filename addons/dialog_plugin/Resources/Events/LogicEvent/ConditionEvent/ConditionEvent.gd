@@ -16,6 +16,8 @@ func _init() -> void:
 	resource_name = "IF|ELSE"
 	event_name = "Condition"
 	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/condition_event.png") as Texture
+	event_preview_string = "If [ {condition} ]:"
 	skip = true
 
 

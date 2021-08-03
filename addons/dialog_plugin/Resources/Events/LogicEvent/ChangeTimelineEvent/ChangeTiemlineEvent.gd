@@ -10,8 +10,11 @@ var timeline:DialogTimelineResource
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "ChangeTimelineEvent"
-	skip = true
+	event_name = "Change Timeline"
 	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/change_timeline.png") as Texture
+	event_preview_string = "Jump to: [ {timeline_path} ] and start in event #[ {start_from_event} ]"
+	skip = true
 	
 
 

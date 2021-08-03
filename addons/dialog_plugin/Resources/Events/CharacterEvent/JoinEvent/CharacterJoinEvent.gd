@@ -12,7 +12,7 @@ var _PortraitManager: DialogPortraitManager
 
 func _init():
 	resource_name = "CharacterJoinEvent"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/join_event_node/join_event_node.tscn"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/character/character_join.png") as Texture
 	skip = true
 
 

@@ -10,9 +10,8 @@ func _init() -> void:
 	resource_name = "SetVariableEvent"
 	event_name = "Set Variable"
 	event_color = Color("#FBB13C")
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/set_event_node/set_event_node.tscn"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/set_variable.png") as Texture
+	event_preview_string = "Set [ {variable_name} ] to be [ {variable_value} ]"
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)

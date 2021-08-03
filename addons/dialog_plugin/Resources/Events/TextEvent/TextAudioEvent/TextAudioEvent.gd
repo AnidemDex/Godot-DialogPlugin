@@ -14,10 +14,9 @@ var _already_played:bool = false
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "TextWithAudio"
+	event_name = "Text With Audio"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/text/text_w_sound_bubble.png") as Texture
 	text_speed = 0.04
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_with_audio_node/text_with_audio.tscn"
 
 
 func execute(caller:DialogBaseNode) -> void:

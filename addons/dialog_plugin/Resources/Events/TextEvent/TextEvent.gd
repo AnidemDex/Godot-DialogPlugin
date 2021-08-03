@@ -25,6 +25,8 @@ func get_class() -> String: return "DialogTextEvent"
 func _init():
 	event_color = Color("#2892D7")
 	event_name = "TextEvent"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/text/text_bubble.png") as Texture
+	event_preview_string = "{text}"
 	resource_name = event_name
 
 
@@ -104,6 +106,9 @@ func _get(property: String):
 	
 	if property == "translation_key_alternative_node":
 		return load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/translation_key/translation_key.tscn")
+	
+	if property == "character_override_position":
+		return 0
 
 
 func _get_property_list() -> Array:

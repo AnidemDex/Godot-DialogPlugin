@@ -8,6 +8,8 @@ func _init() -> void:
 	resource_name = "JumpToEvent"
 	event_name = "Jump to Event"
 	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/jump_to_event.png") as Texture
+	event_preview_string = "Jump to event [ {event_index} ]"
 	skip = true
 
 

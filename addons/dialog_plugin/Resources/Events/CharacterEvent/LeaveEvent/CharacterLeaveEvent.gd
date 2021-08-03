@@ -4,7 +4,7 @@ extends DialogCharacterEvent
 
 func _init():
 	resource_name = "CharacterLeaveEvent"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/leave_event_node/leave_event_node.tscn"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/character/character_leave.png") as Texture
 	skip = true
 
 
