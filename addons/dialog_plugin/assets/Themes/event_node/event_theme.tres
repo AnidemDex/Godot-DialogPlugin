@@ -9972,7 +9972,7 @@ shadow_size = 3
 
 [resource]
 BoxContainer/constants/separation = 3
-Button/colors/font_color = Color( 0.0470588, 0.0470588, 0.0509804, 1 )
+Button/colors/font_color = Color( 0.960784, 0.968627, 0.984314, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.3 )
 Button/colors/font_color_hover = Color( 0.88, 0.8845, 0.8965, 1 )
 Button/colors/font_color_pressed = Color( 0.41, 0.61, 0.91, 1 )
