@@ -4,7 +4,7 @@ extends PanelContainer
 const CONDITION = PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
-var EditorCheckButton:PackedScene = preload("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn") as PackedScene
+var EditorCheckButton:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn") as PackedScene
 
 var SimpleTextEdit:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/simple_textedit/text_edit.tscn")
 var AdvancedTextEdit:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/advanced_textedit/text_edit.tscn")
@@ -26,6 +26,19 @@ onready var panel_stylebox:StyleBoxFlat = get_stylebox("panel")
 func update_node_values() -> void:
 	if not properties_generated and base_resource:
 		generate_properties()
+		call_deferred("reorganize_property_nodes")
+
+
+func reorganize_property_nodes() -> void:
+	for child in properties_container.get_children():
+		child = child as Node
+		var child_property:String = str(child.get("used_property"))
+		if child_property == str(null):
+			continue
+		var property_position = base_resource.get(child_property+"_override_position")
+		if property_position == null:
+			continue
+		properties_container.move_child(child, property_position)
 
 
 func generate_properties() -> void:
