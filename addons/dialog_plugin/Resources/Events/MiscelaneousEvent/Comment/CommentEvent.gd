@@ -2,7 +2,7 @@ tool
 # class_name <your_event_class_name_here>
 extends DialogEventResource
 
-export(String, MULTILINE) var text:String = ""
+export(String, MULTILINE) var text:String = "" setget set_text
 
 func _init() -> void:
 	resource_name = "Comment"
@@ -13,6 +13,11 @@ func _init() -> void:
 
 func execute(caller:DialogBaseNode) -> void:
 	finish(true)
+
+func set_text(value:String) -> void:
+	text = value
+	property_list_changed_notify()
+	emit_changed()
 
 func _get(property: String):
 	if property == "skip_disabled":
