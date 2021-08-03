@@ -6,7 +6,8 @@ export(int) var event_index:int = -1
 
 func _init() -> void:
 	resource_name = "JumpToEvent"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/jump_to_event_node/jump_to_event_node.tscn"
+	event_name = "Jump to Event"
+	event_color = Color("#FBB13C")
 	skip = true
 
 

@@ -2,7 +2,7 @@ tool
 # class_name <your_event_class_name_here>
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-var condition:String = ""
+export(String) var condition:String = ""
 
 var events_if:DialogTimelineResource = DialogTimelineResource.new()
 var events_else:DialogTimelineResource = DialogTimelineResource.new()
@@ -14,13 +14,9 @@ func get_class() -> String: return "ConditionEvent"
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "IF|ELSE"
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/if_else_event/if_else_event_node.tscn"
-
-	# Uncomment skip line if you want your event jump directly to next event 
-	# at finish or not (false by default)
-	#skip = false
+	event_name = "Condition"
+	event_color = Color("#FBB13C")
+	skip = true
 
 
 func execute(caller:DialogBaseNode) -> void:
@@ -55,25 +51,8 @@ func _on_Timeline_ended() -> void:
 
 func _get_property_list() -> Array:
 	var _p:Array = []
-	_p.append(
-		{
-			"name":"events_if",
-			"type":TYPE_OBJECT,
-			"usage":PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE
-		}
-	)
-	_p.append(
-		{
-			"name":"events_else",
-			"type":TYPE_OBJECT,
-			"usage":PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE
-		}
-	)
-	_p.append(
-		{
-			"name":"condition",
-			"type":TYPE_STRING,
-			"usage":PROPERTY_USAGE_SCRIPT_VARIABLE|PROPERTY_USAGE_DEFAULT
-		}
-	)
+	var if_evnt_property := DialogUtil.get_event_property_dict("events_if", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "DialogTimelineResource")
+	var else_evnt_property := DialogUtil.get_event_property_dict("events_else", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "DialogTimelineResource")
+	
+	_p.append_array([if_evnt_property, else_evnt_property])
 	return _p

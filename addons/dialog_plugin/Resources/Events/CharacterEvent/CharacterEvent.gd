@@ -5,6 +5,10 @@ extends DialogEventResource
 var character:DialogCharacterResource = null
 var selected_portrait:int = -1
 
+func _init() -> void:
+	event_color = Color("#4CB963")
+
+
 func get_selected_portrait() -> DialogPortraitResource:
 	var _selected_portrait:DialogPortraitResource = null
 	if character and selected_portrait != -1:

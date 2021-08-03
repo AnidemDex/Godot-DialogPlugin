@@ -11,8 +11,8 @@ func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "ChangeTimelineEvent"
 	skip = true
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/change_timeline_event_node/change_timeline_event_node.tscn"
+	event_color = Color("#FBB13C")
+	
 
 
 func execute(caller:DialogBaseNode) -> void:

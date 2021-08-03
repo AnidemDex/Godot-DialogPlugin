@@ -16,10 +16,9 @@ var _old_timeline:DialogTimelineResource
 
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
-	resource_name = "Question"
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/question_event_node/question_event_node.tscn"
+	event_name = "Question"
+	resource_name = event_name
+	event_color = Color("#FBB13C")
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)

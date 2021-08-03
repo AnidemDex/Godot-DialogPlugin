@@ -8,6 +8,8 @@ export(String) var variable_value:String = ""
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "SetVariableEvent"
+	event_name = "Set Variable"
+	event_color = Color("#FBB13C")
 
 	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
 	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/set_event_node/set_event_node.tscn"

@@ -6,7 +6,8 @@ export(float, 0, 60, 1) var wait_time = 0.0
 
 func _init():
 	resource_name = "WaitTimeEvent"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/wait_time_event_node/wait_time_event_node.tscn"
+	event_name = "Wait Time"
+	event_color = Color("#FBB13C")
 
 
 func execute(caller:DialogBaseNode) -> void:

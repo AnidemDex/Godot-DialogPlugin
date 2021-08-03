@@ -58,3 +58,22 @@ class PResourceSelector extends "res://addons/dialog_plugin/Nodes/misc/resource_
 				
 		base_resource.connect("changed", self, "update_node_values")
 		update_node_values()
+
+class PCharacterSelector extends "res://addons/dialog_plugin/Nodes/misc/character_selector/character_selector.gd":
+	var used_property:String
+	var base_resource:DialogEventResource
+	
+	func update_node_values() -> void:
+		return
+	
+	func _notification(what: int) -> void:
+		match what:
+			NOTIFICATION_READY:
+				call_deferred("_pseudo_ready")
+	
+	func _pseudo_ready():
+		if not base_resource:
+			return
+				
+		base_resource.connect("changed", self, "update_node_values")
+		update_node_values()
