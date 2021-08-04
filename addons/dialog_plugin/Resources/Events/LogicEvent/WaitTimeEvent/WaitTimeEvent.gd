@@ -2,7 +2,7 @@ tool
 class_name DialogWaitTimeEvent
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-export(float, 0, 60, 1) var wait_time = 0.0
+export(float, 0, 60, 1) var wait_time = 0.0 setget set_wait_time
 
 func _init():
 	resource_name = "WaitTimeEvent"
@@ -15,3 +15,9 @@ func _init():
 func execute(caller:DialogBaseNode) -> void:
 	yield(caller.get_tree().create_timer(wait_time), "timeout")
 	finish()
+
+
+func set_wait_time(value:float) -> void:
+	wait_time = value
+	emit_changed()
+	property_list_changed_notify()

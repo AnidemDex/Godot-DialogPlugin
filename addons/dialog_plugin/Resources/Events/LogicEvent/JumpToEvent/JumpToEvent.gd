@@ -2,7 +2,7 @@ tool
 class_name DialogJumpToEvent
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-export(int) var event_index:int = -1
+export(int) var event_index:int = -1 setget set_event_idx
 
 func _init() -> void:
 	resource_name = "JumpToEvent"
@@ -21,6 +21,13 @@ func execute(caller:DialogBaseNode) -> void:
 
 	# Notify that you end this event
 	finish(true)
+
+
+func set_event_idx(value:int) -> void:
+	event_index = value
+	emit_changed()
+	property_list_changed_notify()
+
 
 func _get(property: String):
 	if property == "skip_disabled":
