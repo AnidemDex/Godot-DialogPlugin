@@ -2,10 +2,10 @@ tool
 class_name DialogTextWithAudioEvent
 extends "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
 
-export(AudioStream) var blip_sound:AudioStream = null
-export(bool) var loop_blip_sound:bool = false
-export(bool) var force_blip_sound:bool = false
-export(String) var audio_bus:String = "Master"
+export(AudioStream) var blip_sound:AudioStream = null setget set_sound
+export(bool) var loop_blip_sound:bool = false setget set_loop_sound_bool
+export(bool) var force_blip_sound:bool = false setget force_blip
+export(String) var audio_bus:String = "Master" setget set_audio_bus
 
 var sound_generator:AudioStreamPlayer
 
@@ -67,3 +67,21 @@ func finish(_s=skip) -> void:
 	if _DialogNode:
 		_DialogNode.disconnect("character_displayed", self, "_on_DialogManager_character_displayed")
 	.finish(skip)
+
+
+func set_sound(value:AudioStream) -> void:
+	blip_sound = value
+	emit_changed()
+
+
+func set_loop_sound_bool(value:bool) -> void:
+	loop_blip_sound = value
+	emit_changed()
+
+func force_blip(value:bool) -> void:
+	force_blip_sound = value
+	emit_changed()
+
+func set_audio_bus(value:String) -> void:
+	audio_bus = value if value != "" else "Master"
+	emit_changed()
