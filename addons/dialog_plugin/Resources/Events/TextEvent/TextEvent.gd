@@ -6,10 +6,10 @@ const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
 # https://github.com/godotengine/godot/pull/37324
 
-export(String, MULTILINE) var text:String = ""
-export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.02
-export(bool) var continue_previous_text:bool = false
-export(String) var translation_key:String = SAME_AS_TEXT
+export(String, MULTILINE) var text:String = "" setget set_text
+export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.02 setget set_text_speed
+export(bool) var continue_previous_text:bool = false setget ammend_text
+export(String) var translation_key:String = SAME_AS_TEXT setget set_translation_key
 
 var character:DialogCharacterResource = null setget set_character
 
@@ -83,10 +83,31 @@ func prepare_character_name() -> void:
 	name_node.add_color_override("font_color", character.color)
 
 
+func set_text(value:String) -> void:
+	text = value
+	emit_changed()
+
+
+func set_text_speed(value:float) -> void:
+	text_speed = value
+	emit_changed()
+
+
+func ammend_text(value:bool) -> void:
+	continue_previous_text = value
+	emit_changed()
+
+
+func set_translation_key(value:String) -> void:
+	translation_key = value if value != "" else SAME_AS_TEXT
+	emit_changed()
+
+
 func set_character(value:DialogCharacterResource) -> void:
 	character = null
 	if (value is DialogCharacterResource) or (value == null):
 		character = value
+		emit_changed()
 		property_list_changed_notify()
 		return
 	printerr("Can't assing another type of resource to character")
