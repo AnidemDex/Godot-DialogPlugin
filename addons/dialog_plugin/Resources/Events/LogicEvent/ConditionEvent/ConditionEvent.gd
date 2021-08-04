@@ -2,10 +2,10 @@ tool
 # class_name <your_event_class_name_here>
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-export(String) var condition:String = ""
+export(String) var condition:String = "" setget set_condition
 
-var events_if:DialogTimelineResource = DialogTimelineResource.new()
-var events_else:DialogTimelineResource = DialogTimelineResource.new()
+var events_if:DialogTimelineResource = DialogTimelineResource.new() setget set_if_events
+var events_else:DialogTimelineResource = DialogTimelineResource.new() setget set_else_events
 
 var old_timeline:DialogTimelineResource
 
@@ -49,6 +49,21 @@ func _on_Timeline_ended() -> void:
 	_caller.timeline = old_timeline
 	old_timeline = null
 	finish(true)
+
+
+func set_condition(value:String) -> void:
+	condition = value
+	emit_changed()
+
+
+func set_if_events(value:DialogTimelineResource) -> void:
+	events_if = value if value != null else DialogTimelineResource.new()
+	emit_changed()
+
+
+func set_else_events(value:DialogTimelineResource) -> void:
+	events_else = value if value != null else DialogTimelineResource.new()
+	emit_changed()
 
 
 func _get_property_list() -> Array:
