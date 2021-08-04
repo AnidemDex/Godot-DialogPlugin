@@ -2,8 +2,8 @@ tool
 # class_name <your_event_class_name_here>
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-export(String) var variable_name:String = ""
-export(String) var variable_value:String = ""
+export(String) var variable_name:String = "" setget set_var_name
+export(String) var variable_value:String = "" setget set_var_value
 
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
@@ -42,6 +42,19 @@ func execute(caller:DialogBaseNode) -> void:
 			_variable_resource.set_value(_variable_name, variable_value)
 			
 	finish()
+
+
+func set_var_name(value:String) -> void:
+	variable_name = value
+	emit_changed()
+	property_list_changed_notify()
+
+
+func set_var_value(value:String) -> void:
+	variable_value = value
+	emit_changed()
+	property_list_changed_notify()
+
 
 func _get(property: String):
 	if property == "skip_disabled":
