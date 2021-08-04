@@ -2,8 +2,8 @@ tool
 class_name DialogChangeTimelineEvent
 extends "res://addons/dialog_plugin/Resources/EventResource.gd"
 
-export(int) var start_from_event = 0
-var timeline_path:String = ""
+export(String, FILE, "*.tres, *.res") var timeline_path:String = "" setget set_timeline_path
+export(int) var start_from_event = 0 setget set_start_event_idx
 # Do    N O T    store the timeline reference. Doing it causes cyclic references.
 var timeline:DialogTimelineResource
 
@@ -35,6 +35,19 @@ func execute(caller:DialogBaseNode) -> void:
 	finish(true)
 
 
+func set_timeline_path(value:String) -> void:
+	timeline_path = value
+	emit_changed()
+	property_list_changed_notify()
+
+
+func set_start_event_idx(value:int) -> void:
+	start_from_event = value
+	emit_changed()
+	property_list_changed_notify()
+
+
+
 func _get_property_list() -> Array:
 	var properties:Array = []
 	properties.append(
@@ -43,6 +56,7 @@ func _get_property_list() -> Array:
 			"type":TYPE_OBJECT,
 			"hint":PROPERTY_HINT_RESOURCE_TYPE,
 			"hint_string":"DialogTimelineResource",
+			"usage":PROPERTY_USAGE_STORAGE
 		}
 	)
 	return properties
