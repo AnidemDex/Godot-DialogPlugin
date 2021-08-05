@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_preview/event_node_preview.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_name/event_node_name.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/custom_nodes/character_join/event_node_properties/EventNodeProperties.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_bar/event_node_bar.gd" type="Script" id=4]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_branch/event_node_branch.tscn" type="PackedScene" id=5]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/EditorEventNode.gd" type="Script" id=6]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/event_theme.tres" type="Theme" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_local_to_scene = true
+content_margin_left = 24.0
+bg_color = Color( 0.235294, 0.239216, 0.368627, 1 )
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+corner_detail = 1
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 2.0
+content_margin_bottom = 2.0
+corner_radius_top_right = 8
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+anti_aliasing = false
+
+[node name="EventNodeTemplate" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -552.0
+rect_min_size = Vector2( 0, 32 )
+focus_mode = 1
+size_flags_horizontal = 3
+theme = ExtResource( 7 )
+custom_constants/separation = 0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Branch_path = NodePath("EventNodeBranch")
+Name_path = NodePath("EventNodeName")
+Info_path = NodePath("EventNodeBar")
+
+[node name="EventNodeBranch" parent="." instance=ExtResource( 5 )]
+margin_bottom = 48.0
+
+[node name="EventNodeName" parent="." instance=ExtResource( 2 )]
+margin_left = 32.0
+margin_right = 230.0
+margin_bottom = 32.0
+size_flags_stretch_ratio = 1.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="EventNodeBar" type="VBoxContainer" parent="."]
+margin_left = 230.0
+margin_right = 1024.0
+margin_bottom = 48.0
+focus_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+custom_constants/separation = 0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Preview_path = NodePath("EventNodePreview")
+Properties_path = NodePath("EventNodeProperties")
+
+[node name="EventNodePreview" parent="EventNodeBar" instance=ExtResource( 1 )]
+margin_right = 794.0
+margin_bottom = 32.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="EventNodeProperties" parent="EventNodeBar" instance=ExtResource( 3 )]
+visible = false
+margin_top = 32.0
+margin_right = 794.0
+margin_bottom = 87.0
+custom_styles/panel = SubResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="EventNodeBar"]
+margin_top = 32.0
+margin_right = 794.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_bottom = 8

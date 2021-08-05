@@ -15,6 +15,7 @@ var CharacterSelector:PackedScene = load("res://addons/dialog_plugin/Nodes/edito
 var TimelineSelector:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/resource_property/timeline_selector/timeline_selector.tscn")
 
 export(NodePath) var PropertiesContainer_path:NodePath
+export(Array, NodePath) var custom_properties:Array = []
 
 var base_resource:DialogEventResource
 
@@ -24,9 +25,20 @@ onready var properties_container:Container = get_node(PropertiesContainer_path) 
 onready var panel_stylebox:StyleBoxFlat = get_stylebox("panel")
 
 func update_node_values() -> void:
+	if not custom_properties.empty():
+		update_custom_properties()
+		return
+	
 	if not properties_generated and base_resource:
 		generate_properties()
 		call_deferred("reorganize_property_nodes")
+
+
+func update_custom_properties() -> void:
+	for path in custom_properties:
+		var node:Node = get_node(path)
+		node.set("base_resource", base_resource)
+		node.notification(NOTIFICATION_READY)
 
 
 func reorganize_property_nodes() -> void:
@@ -117,12 +129,6 @@ func _get_bool_node_for(property:Dictionary) -> Node:
 	else:
 		check_button = EditorCheckButton.instance() as CheckButton
 		
-	var alternative_name:String = str(base_resource.get(property_name + "_alternative_name"))
-	var property_disabled = base_resource.get(property_name + "_disabled")
-	if property_disabled:
-		check_button.set("disabled", true)
-	alternative_name = alternative_name if alternative_name != str(null) else property_name.capitalize()
-	check_button.set("text", alternative_name)
 	return check_button
 
 
