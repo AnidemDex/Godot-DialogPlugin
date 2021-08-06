@@ -1,7 +1,9 @@
+tool
 extends "res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/event_property.gd".PCharacterSelector
 
 func _ready() -> void:
-	connect("character_selected", self, "_on_Character_selected")
+	if not is_connected("character_selected", self, "_on_Character_selected"):
+		connect("character_selected", self, "_on_Character_selected")
 
 func update_node_values() -> void:
 	var character:DialogCharacterResource = base_resource.get(used_property)

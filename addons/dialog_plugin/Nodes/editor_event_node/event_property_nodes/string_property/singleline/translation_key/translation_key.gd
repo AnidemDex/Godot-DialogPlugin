@@ -1,3 +1,4 @@
+tool
 extends "res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/line_edit.gd"
 
 func update_node_values() -> void:

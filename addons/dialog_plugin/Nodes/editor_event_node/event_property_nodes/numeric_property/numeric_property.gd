@@ -1,3 +1,4 @@
+tool
 extends "res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/event_property.gd".PControl
 
 var step:float = 1.0
