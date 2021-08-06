@@ -1,5 +1,6 @@
 tool
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+class_name DialogEmitSignalEvent
+extends DialogLogicEvent
 
 export(String) var custom_value:String = ""
 

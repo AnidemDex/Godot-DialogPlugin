@@ -1,6 +1,6 @@
 tool
 class_name DialogTextWithAudioEvent
-extends "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
+extends DialogTextEvent
 
 export(AudioStream) var blip_sound:AudioStream = null setget set_sound
 export(bool) var loop_blip_sound:bool = false setget set_loop_sound_bool

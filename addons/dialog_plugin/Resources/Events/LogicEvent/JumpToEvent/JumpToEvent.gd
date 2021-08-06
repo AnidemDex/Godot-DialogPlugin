@@ -1,6 +1,6 @@
 tool
 class_name DialogJumpToEvent
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+extends DialogLogicEvent
 
 export(int) var event_index:int = -1 setget set_event_idx
 

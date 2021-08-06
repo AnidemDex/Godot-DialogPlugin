@@ -1,6 +1,6 @@
 tool
-# class_name <your_event_class_name_here>
-extends DialogEventResource
+class_name _DialogEventComment
+extends DialogMiscelaneousEvent
 
 export(String, MULTILINE) var text:String = "" setget set_text
 

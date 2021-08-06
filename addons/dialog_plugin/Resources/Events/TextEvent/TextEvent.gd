@@ -1,6 +1,6 @@
 tool
 class_name DialogTextEvent
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+extends DialogEventResource
 
 const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 

@@ -1,6 +1,6 @@
 tool
-# class_name <your_event_class_name_here>
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+class_name _DialogConditionEvent
+extends DialogLogicEvent
 
 export(String) var condition:String = "" setget set_condition
 

@@ -1,6 +1,6 @@
 tool
-# class_name <your_event_class_name_here>
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+class_name _DialogSetEvent
+extends DialogLogicEvent
 
 export(String) var variable_name:String = "" setget set_var_name
 export(String) var variable_value:String = "" setget set_var_value

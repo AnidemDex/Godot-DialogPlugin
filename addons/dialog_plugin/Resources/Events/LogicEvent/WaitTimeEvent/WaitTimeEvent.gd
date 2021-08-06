@@ -1,6 +1,6 @@
 tool
 class_name DialogWaitTimeEvent
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+extends DialogLogicEvent
 
 export(float, 0, 60, 1) var wait_time = 0.0 setget set_wait_time
 
