@@ -70,22 +70,29 @@ func generate_property_for(property:Dictionary) -> void:
 	var property_hint_string:String = property.get("hint_string", "")
 	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
 	
-	var property_node:Node = null
+	var skip_property = base_resource.get(property_name+"_ignore")
+	if skip_property:
+		return
 	
-	match property_type:
-		TYPE_BOOL:
-			property_node = _get_bool_node_for(property)
-		TYPE_STRING:
-			property_node = _get_string_node_for(property)
-		TYPE_OBJECT:
-			if property_hint == PROPERTY_HINT_RESOURCE_TYPE:
-				property_node = _get_resource_node_for(property)
-		TYPE_INT, TYPE_REAL:
-			property_node = _get_numeric_node_for(property)
+	var property_node:Node = null
+	var alternative_scene:PackedScene = null
+	alternative_scene = _get_alternative_scene_for(property_name)
+	if alternative_scene:
+		property_node = alternative_scene.instance()
+	else:
+		match property_type:
+			TYPE_BOOL:
+				property_node = _get_bool_node_for(property)
+			TYPE_STRING:
+				property_node = _get_string_node_for(property)
+			TYPE_OBJECT:
+				if property_hint == PROPERTY_HINT_RESOURCE_TYPE:
+					property_node = _get_resource_node_for(property)
+			TYPE_INT, TYPE_REAL:
+				property_node = _get_numeric_node_for(property)
 	
 	if not property_node:
 		var error:String = "There's no node for this property: {0} - Type: {1}".format([property_name, property_type])
-		push_error(error)
 		DialogUtil.Logger.print_debug(base_resource, error)
 		return
 	
@@ -122,12 +129,7 @@ func _get_bool_node_for(property:Dictionary) -> Node:
 	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
 	
 	var check_button:CheckButton
-	
-	var alternative_scene:PackedScene = _get_alternative_scene_for(property_name)
-	if alternative_scene:
-		check_button = alternative_scene.instance() as CheckButton
-	else:
-		check_button = EditorCheckButton.instance() as CheckButton
+	check_button = EditorCheckButton.instance() as CheckButton
 		
 	return check_button
 
@@ -141,10 +143,6 @@ func _get_string_node_for(property:Dictionary) -> Node:
 	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
 	
 	var string_node:Node = null
-	
-	var alternative_scene:PackedScene = _get_alternative_scene_for(property_name)
-	if alternative_scene:
-		return alternative_scene.instance()
 	
 	if property_hint == PROPERTY_HINT_MULTILINE_TEXT:
 		var use_complex_node = base_resource.get(property_name+"_use_complex_instead")

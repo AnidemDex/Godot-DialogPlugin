@@ -45,6 +45,28 @@ class PTextEdit extends TextEdit:
 		update_node_values()
 
 
+class POptionButton extends OptionButton:
+	export(String) var used_property:String
+	var base_resource:DialogEventResource
+	
+	func update_node_values() -> void:
+		return
+	
+	func _notification(what: int) -> void:
+		match what:
+			NOTIFICATION_READY:
+				call_deferred("_pseudo_ready")
+	
+	func _pseudo_ready():
+		if not base_resource:
+			return
+		
+		if not base_resource.is_connected("changed", self, "update_node_values"):
+			base_resource.connect("changed", self, "update_node_values")
+		
+		update_node_values()
+
+
 class PCheckButton extends CheckButton:
 	export(String) var used_property:String
 	var base_resource:DialogEventResource

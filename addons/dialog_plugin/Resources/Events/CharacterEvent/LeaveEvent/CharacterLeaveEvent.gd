@@ -23,3 +23,8 @@ func execute(caller:DialogBaseNode) -> void:
 		PortraitManager.remove_portrait(character)
 	
 	finish(skip)
+
+
+func _get(property: String):
+	if property == "selected_portrait_ignore":
+		return true

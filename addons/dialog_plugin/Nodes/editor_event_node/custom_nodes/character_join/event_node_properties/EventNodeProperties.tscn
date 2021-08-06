@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_properties/event_node_properties.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/custom_nodes/character_join/event_node_properties/slider.gd" type="Script" id=5]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/custom_nodes/character_join/event_node_properties/preview.gd" type="Script" id=6]
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/custom_nodes/character_join/event_node_properties/inverse_slider.gd" type="Script" id=7]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/resource_property/resource_selector.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/numeric_property/portrait_list.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 resource_local_to_scene = true
@@ -18,19 +20,29 @@ anti_aliasing = false
 margin_right = 719.0
 margin_bottom = 271.0
 custom_styles/panel = SubResource( 1 )
-custom_properties = [ NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer2/XProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer2/YProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/PanelContainer2/FlipH"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/PanelContainer2/FlipV"), NodePath("MarginContainer/PropertiesContainer/SkipProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/HBoxContainer/YModifier"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/MarginContainer2/XModifier"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer") ]
+custom_properties = [ NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer2/XProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/PanelContainer/HBoxContainer2/YProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/PanelContainer2/FlipH"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/PanelContainer2/FlipV"), NodePath("MarginContainer/PropertiesContainer/SkipProperty"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/HBoxContainer/YModifier"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/MarginContainer2/XModifier"), NodePath("MarginContainer/PropertiesContainer/HBoxContainer/VBoxContainer/HBoxContainer/PanelContainer"), NodePath("MarginContainer/PropertiesContainer/ResourceSelector"), NodePath("MarginContainer/PropertiesContainer/OptionButton") ]
 
 [node name="MarginContainer" parent="." index="0"]
 margin_right = 719.0
-margin_bottom = 334.0
+margin_bottom = 384.0
 
 [node name="PropertiesContainer" parent="MarginContainer" index="0"]
 margin_right = 711.0
-margin_bottom = 332.0
+margin_bottom = 382.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PropertiesContainer" index="0"]
+[node name="ResourceSelector" parent="MarginContainer/PropertiesContainer" index="0" instance=ExtResource( 8 )]
 margin_right = 703.0
-margin_bottom = 286.0
+margin_bottom = 22.0
+hint_tooltip = "Character"
+filters = PoolStringArray( "*.tres", "*.res" )
+used_property = "character"
+
+[node name="OptionButton" parent="MarginContainer/PropertiesContainer" index="1" instance=ExtResource( 9 )]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PropertiesContainer" index="2"]
+margin_top = 50.0
+margin_right = 703.0
+margin_bottom = 336.0
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PropertiesContainer/HBoxContainer" index="0"]
@@ -146,10 +158,10 @@ margin_bottom = 84.0
 text = ""
 used_property = "flip_v"
 
-[node name="SkipProperty" parent="MarginContainer/PropertiesContainer" index="1" instance=ExtResource( 2 )]
-margin_top = 290.0
+[node name="SkipProperty" parent="MarginContainer/PropertiesContainer" index="3" instance=ExtResource( 2 )]
+margin_top = 340.0
 margin_right = 76.0
-margin_bottom = 330.0
+margin_bottom = 380.0
 text = ""
 used_property = "skip"
 
