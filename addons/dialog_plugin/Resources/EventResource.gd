@@ -9,10 +9,30 @@ const VARIABLES_PATH = preload("res://addons/dialog_plugin/Core/DialogResources.
 signal event_started(event_resource)
 signal event_finished(event_resource, jump_to_next_event)
 
-export(bool) var skip:bool = false
+##########
+# Event Editor Properties
+##########
+
+var event_icon:Texture = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/warning.png")
+var event_color:Color = Color("3c3d5e")
+var event_name:String = "CustomEvent" setget ,get_event_name
+var event_preview_string:String = ""
+var event_hint:String = ""
+
+##########
+# Event Editor Node
+##########
+# "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
+var event_editor_scene_path:String = ""
+var event_node_preview_path:String = ""
+var event_node_properties_path:String = ""
+
+##########
+# Default Event Properties
+##########
+var skip:bool = false setget set_skip
 
 var _caller:DialogBaseNode = null
-var event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/event_node_template.tscn"
 
 func get_class(): return "EventResource"
 
@@ -32,10 +52,23 @@ func finish(jump_to_next_event=skip) -> void:
 	emit_signal("event_finished", self, jump_to_next_event)
 
 
-# Returns DialogEditorEventNode to be used inside the editor.
-func get_event_editor_node() -> DialogEditorEventNode:
-	var _scene_resource:PackedScene = load(event_editor_scene_path)
-	_scene_resource.resource_local_to_scene = true
-	var _instance := _scene_resource.instance() as DialogEditorEventNode
-	_instance.base_resource = self
-	return _instance
+func set_skip(value:bool) -> void:
+	skip = value
+	emit_changed()
+
+func get_event_name() -> String:
+	if event_name != resource_name and resource_name != "":
+		return resource_name
+	return event_name
+
+
+func _get_property_list() -> Array:
+	var properties:Array = []
+	var skip_property:Dictionary = DialogUtil.get_property_dict("skip", TYPE_BOOL, PROPERTY_HINT_NONE, "CheckButton", PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE)
+	properties.append(skip_property)
+	return properties
+
+
+func _get(property: String):
+	if property == "skip_alternative_name":
+		return "Jump inmediatly to next event?"

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/properties_default_color.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_properties/event_node_properties.gd" type="Script" id=2]
+
+[node name="EventNodeProperties" type="PanelContainer"]
+margin_right = 206.0
+margin_bottom = 76.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+PropertiesContainer_path = NodePath("MarginContainer/PropertiesContainer")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 206.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 2
+custom_constants/margin_left = 8
+custom_constants/margin_bottom = 2
+
+[node name="PropertiesContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 8.0
+margin_top = 2.0
+margin_right = 198.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

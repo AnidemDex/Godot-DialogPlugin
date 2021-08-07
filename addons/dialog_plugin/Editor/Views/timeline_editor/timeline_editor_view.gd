@@ -107,7 +107,7 @@ func _on_LocaleList_item_selected(index: int) -> void:
 func _on_EventButtonsContainer_event_pressed(event_resource:DialogEventResource) -> void:
 	var _last_selected_node = timeline_events_container_node.last_selected_node
 	if _last_selected_node and is_instance_valid(_last_selected_node):
-		timeline_events_container_node.add_event(event_resource, _last_selected_node.idx+1)
+		timeline_events_container_node.add_event(event_resource, _last_selected_node.event_index+1)
 	else:
 		timeline_events_container_node.add_event(event_resource)
 

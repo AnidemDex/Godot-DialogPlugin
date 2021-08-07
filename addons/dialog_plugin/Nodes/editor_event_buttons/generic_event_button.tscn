@@ -15,7 +15,6 @@ bg_color = Color( 0.45, 0.18, 0.18, 1 )
 margin_right = 24.0
 margin_bottom = 24.0
 grow_horizontal = 2
-rect_min_size = Vector2( 24, 24 )
 hint_tooltip = "Replace with event hint"
 size_flags_vertical = 4
 custom_styles/hover = SubResource( 1 )
@@ -30,8 +29,3 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-event_resource = null
-
-[node name="Tween" type="Tween" parent="."]
-
-[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_completed"]

@@ -129,3 +129,20 @@ static func can_evaluate(input:String, global:Object=null, locals:Dictionary={})
 # Util function to generate property dictionary
 static func get_property_dict(property_name:String,property_type:int,property_hint:int=PROPERTY_HINT_NONE,property_hint_string:String="",property_usage:int=PROPERTY_USAGE_STORAGE) -> Dictionary:
 	return {"name":property_name, "type":property_type, "hint":property_hint, "hint_string":property_hint_string, "usage":property_usage}
+
+
+static func get_event_property_dict(property_name:String,property_type:int,property_hint:int=PROPERTY_HINT_NONE,property_hint_string:String="") -> Dictionary:
+	var condition:int = PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_SCRIPT_VARIABLE
+	var dict:Dictionary = get_property_dict(property_name, property_type, property_hint, property_hint_string, condition)
+	return dict
+
+
+# Util function to get a dictionary of object property:value
+static func get_property_values_from(object:Object) -> Dictionary:
+	if object == null:
+		return {}
+	var dict = {}
+	# Hope this doesn't freeze the engine per call
+	for property in object.get_property_list():
+		dict[property.name] = object.get(property.name)
+	return dict

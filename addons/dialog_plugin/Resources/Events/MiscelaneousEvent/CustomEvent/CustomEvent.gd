@@ -1,6 +1,6 @@
 tool
 class_name DialogCustomEvent
-extends DialogEventResource
+extends DialogMiscelaneousEvent
 
 var event_resource:DialogEventResource = null
 

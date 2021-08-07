@@ -5,7 +5,8 @@ extends DialogCharacterEvent
 
 func _init() -> void:
 	resource_name = "CharacterChangeExpression"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/character_event/change_expression/change_expression_event_node.tscn"
+	event_name = "Change Expression"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/character/change_expression.png") as Texture
 	skip = true
 
 

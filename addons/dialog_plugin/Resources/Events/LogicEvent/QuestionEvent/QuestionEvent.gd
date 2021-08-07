@@ -1,6 +1,6 @@
 tool
-# class_name <your_event_class_name_here>
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+class_name DialogQuestionEvent
+extends DialogLogicEvent
 
 # - - - - - - - - - -
 # Base class for all dialog events
@@ -16,10 +16,10 @@ var _old_timeline:DialogTimelineResource
 
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
-	resource_name = "Question"
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/question_event_node/question_event_node.tscn"
+	event_name = "Question"
+	resource_name = event_name
+	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/question_event.png") as Texture
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)

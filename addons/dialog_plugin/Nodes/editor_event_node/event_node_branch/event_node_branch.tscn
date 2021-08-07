@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/event_node/event_icon_circle_outline.material" type="Material" id=1]
+[ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/warning.png" type="Texture" id=2]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_node_branch/event_node_branch.gd" type="Script" id=3]
+
+[node name="EventNodeBranch" type="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 0, 48 )
+custom_constants/separation = 0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+Icon_path = NodePath("EventIcon")
+LowBranch_path = NodePath("LowerBranch")
+
+[node name="EventIcon" type="TextureRect" parent="."]
+material = ExtResource( 1 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 24, 24 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="LowerBranch" type="Control" parent="."]
+margin_top = 32.0
+margin_right = 32.0
+margin_bottom = 48.0
+size_flags_vertical = 3
+
+[connection signal="draw" from="LowerBranch" to="." method="_on_LowerBranch_draw"]

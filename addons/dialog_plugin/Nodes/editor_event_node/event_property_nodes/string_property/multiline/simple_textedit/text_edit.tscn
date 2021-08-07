@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/multiline/simple_textedit/text_edit.gd" type="Script" id=1]
+
+[node name="TextEdit" type="TextEdit"]
+margin_right = 220.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 0, 66 )
+show_line_numbers = true
+wrap_enabled = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
