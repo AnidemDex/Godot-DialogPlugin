@@ -1,11 +1,11 @@
 tool
 class_name DialogTextWithAudioEvent
-extends "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
+extends DialogTextEvent
 
-export(AudioStream) var blip_sound:AudioStream
-export(bool) var loop_blip_sound:bool = false
-export(bool) var force_blip_sound:bool = false
-export(String) var audio_bus:String = "Master"
+export(AudioStream) var blip_sound:AudioStream = null setget set_sound
+export(bool) var loop_blip_sound:bool = false setget set_loop_sound_bool
+export(bool) var force_blip_sound:bool = false setget force_blip
+export(String) var audio_bus:String = "Master" setget set_audio_bus
 
 var sound_generator:AudioStreamPlayer
 
@@ -14,10 +14,9 @@ var _already_played:bool = false
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "TextWithAudio"
+	event_name = "Text With Audio"
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/text/text_w_sound_bubble.png") as Texture
 	text_speed = 0.04
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/text_event_node/text_with_audio_node/text_with_audio.tscn"
 
 
 func execute(caller:DialogBaseNode) -> void:
@@ -68,3 +67,21 @@ func finish(_s=skip) -> void:
 	if _DialogNode:
 		_DialogNode.disconnect("character_displayed", self, "_on_DialogManager_character_displayed")
 	.finish(skip)
+
+
+func set_sound(value:AudioStream) -> void:
+	blip_sound = value
+	emit_changed()
+
+
+func set_loop_sound_bool(value:bool) -> void:
+	loop_blip_sound = value
+	emit_changed()
+
+func force_blip(value:bool) -> void:
+	force_blip_sound = value
+	emit_changed()
+
+func set_audio_bus(value:String) -> void:
+	audio_bus = value if value != "" else "Master"
+	emit_changed()

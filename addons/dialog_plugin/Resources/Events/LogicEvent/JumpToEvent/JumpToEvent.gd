@@ -1,12 +1,15 @@
 tool
 class_name DialogJumpToEvent
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+extends DialogLogicEvent
 
-export(int) var event_index:int = -1
+export(int) var event_index:int = -1 setget set_event_idx
 
 func _init() -> void:
 	resource_name = "JumpToEvent"
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/jump_to_event_node/jump_to_event_node.tscn"
+	event_name = "Jump to Event"
+	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/jump_to_event.png") as Texture
+	event_preview_string = "Jump to event [ {event_index} ]"
 	skip = true
 
 
@@ -17,4 +20,17 @@ func execute(caller:DialogBaseNode) -> void:
 		_timeline.current_event = max(-1, event_index-1)
 
 	# Notify that you end this event
-	finish()
+	finish(true)
+
+
+func set_event_idx(value:int) -> void:
+	event_index = value
+	emit_changed()
+	property_list_changed_notify()
+
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true
+	if property == "branch_disabled":
+		return true

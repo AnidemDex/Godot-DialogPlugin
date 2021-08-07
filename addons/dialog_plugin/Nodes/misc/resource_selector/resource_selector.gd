@@ -27,6 +27,12 @@ func _pressed() -> void:
 	
 	popup_reference.popup_centered_ratio()
 
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_RIGHT and event.pressed:
+			emit_signal("resource_selected", null)
+			text = "[None]"
+
 
 func _on_FileEditor_file_selected(file_path:String) -> void:
 	text = file_path.get_file()

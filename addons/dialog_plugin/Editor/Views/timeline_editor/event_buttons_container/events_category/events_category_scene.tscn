@@ -1,41 +1,30 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="Category" type="PanelContainer"]
-margin_right = 1016.0
-margin_bottom = 32.0
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_category/events_category_scene.gd" type="Script" id=1]
+
+[node name="Category" type="VBoxContainer"]
+margin_right = 121.0
+margin_bottom = 18.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+NameLabel_path = NodePath("CategoryName")
+EventContainer_path = NodePath("Events")
 
-[node name="CategoryRow" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1009.0
-margin_bottom = 25.0
-
-[node name="Row1" type="MarginContainer" parent="CategoryRow"]
-margin_right = 1002.0
+[node name="CategoryName" type="Label" parent="."]
+margin_right = 121.0
 margin_bottom = 14.0
+size_flags_horizontal = 7
+size_flags_vertical = 6
+align = 1
 
-[node name="Items" type="HBoxContainer" parent="CategoryRow/Row1"]
-margin_right = 1002.0
-margin_bottom = 14.0
-
-[node name="Title" type="Label" parent="CategoryRow/Row1/Items"]
-margin_right = 89.0
-margin_bottom = 14.0
-text = "Category_Title"
-
-[node name="HSeparator" type="HSeparator" parent="CategoryRow/Row1/Items"]
-margin_left = 93.0
-margin_right = 1002.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-
-[node name="Row2" type="MarginContainer" parent="CategoryRow"]
+[node name="Events" type="HBoxContainer" parent="."]
 margin_top = 18.0
-margin_right = 1002.0
+margin_right = 121.0
 margin_bottom = 18.0
-
-[node name="Items" type="HBoxContainer" parent="CategoryRow/Row2"]
-margin_right = 1002.0
+size_flags_vertical = 4
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

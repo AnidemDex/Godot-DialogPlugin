@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/bool_property/check_button.gd" type="Script" id=1]
+
+[node name="BoolProperty" type="CheckButton"]
+margin_right = 134.0
+margin_bottom = 47.0
+size_flags_horizontal = 0
+text = "{VAR_NAME}"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

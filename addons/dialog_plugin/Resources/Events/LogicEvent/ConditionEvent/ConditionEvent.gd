@@ -1,11 +1,11 @@
 tool
-# class_name <your_event_class_name_here>
-extends "res://addons/dialog_plugin/Resources/EventResource.gd"
+class_name _DialogConditionEvent
+extends DialogLogicEvent
 
-var condition:String = ""
+export(String) var condition:String = "" setget set_condition
 
-var events_if:DialogTimelineResource = DialogTimelineResource.new()
-var events_else:DialogTimelineResource = DialogTimelineResource.new()
+var events_if:DialogTimelineResource = DialogTimelineResource.new() setget set_if_events
+var events_else:DialogTimelineResource = DialogTimelineResource.new() setget set_else_events
 
 var old_timeline:DialogTimelineResource
 
@@ -14,13 +14,11 @@ func get_class() -> String: return "ConditionEvent"
 func _init() -> void:
 	# Uncomment resource_name line if you want to display a name in the editor
 	resource_name = "IF|ELSE"
-
-	# Uncomment event_editor_scene_path line and replace it with your custom DialogEditorEventNode scene
-	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_nodes/if_else_event/if_else_event_node.tscn"
-
-	# Uncomment skip line if you want your event jump directly to next event 
-	# at finish or not (false by default)
-	#skip = false
+	event_name = "Condition"
+	event_color = Color("#FBB13C")
+	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/condition_event.png") as Texture
+	event_preview_string = "If [ {condition} ]:"
+	skip = true
 
 
 func execute(caller:DialogBaseNode) -> void:
@@ -53,27 +51,29 @@ func _on_Timeline_ended() -> void:
 	finish(true)
 
 
+func set_condition(value:String) -> void:
+	condition = value
+	emit_changed()
+
+
+func set_if_events(value:DialogTimelineResource) -> void:
+	events_if = value if value != null else DialogTimelineResource.new()
+	emit_changed()
+
+
+func set_else_events(value:DialogTimelineResource) -> void:
+	events_else = value if value != null else DialogTimelineResource.new()
+	emit_changed()
+
+
 func _get_property_list() -> Array:
 	var _p:Array = []
-	_p.append(
-		{
-			"name":"events_if",
-			"type":TYPE_OBJECT,
-			"usage":PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE
-		}
-	)
-	_p.append(
-		{
-			"name":"events_else",
-			"type":TYPE_OBJECT,
-			"usage":PROPERTY_USAGE_NOEDITOR|PROPERTY_USAGE_SCRIPT_VARIABLE
-		}
-	)
-	_p.append(
-		{
-			"name":"condition",
-			"type":TYPE_STRING,
-			"usage":PROPERTY_USAGE_SCRIPT_VARIABLE|PROPERTY_USAGE_DEFAULT
-		}
-	)
+	var if_evnt_property := DialogUtil.get_event_property_dict("events_if", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "DialogTimelineResource")
+	var else_evnt_property := DialogUtil.get_event_property_dict("events_else", TYPE_OBJECT, PROPERTY_HINT_RESOURCE_TYPE, "DialogTimelineResource")
+	
+	_p.append_array([if_evnt_property, else_evnt_property])
 	return _p
+
+func _get(property: String):
+	if property == "skip_disabled":
+		return true

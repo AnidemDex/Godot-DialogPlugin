@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/line_edit.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/string_property/singleline/translation_key/translation_key.gd" type="Script" id=2]
+
+[node name="HBoxContainer" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
