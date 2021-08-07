@@ -1,7 +1,7 @@
 # Dialogue Plugin for Godot Engine
 [![Godot Engine](https://img.shields.io/badge/Godot%20Engine-Plugin-blue?style=flat-square&logo=godot-engine&logoColor=white&logoWidth=20)]() [![GitHub license](https://img.shields.io/github/license/AnidemDex/Godot-DialogPlugin?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/blob/main/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/AnidemDex/Godot-DialogPlugin?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/issues)
-[![Godot Engine](https://img.shields.io/badge/Version-0.2.0-red?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/releases/tag/v0.2.0)
+[![Godot Engine](https://img.shields.io/badge/Version-0.3.0-red?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/releases/tag/v0.3.0)
 
 <p align="center">
   <a href="https://twitter.com/anidemdex" target="_blank"><img src="https://raw.githubusercontent.com/AnidemDex/Godot-DialogPlugin/main/.images/banner_animation.gif"></a><br/>
