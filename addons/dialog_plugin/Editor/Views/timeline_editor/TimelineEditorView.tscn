@@ -32,7 +32,7 @@ __meta__ = {
 
 [node name="Head" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 1024.0
-margin_bottom = 46.0
+margin_bottom = 52.0
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,11 +42,11 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 1022.0
-margin_bottom = 44.0
+margin_bottom = 50.0
 
 [node name="ControlPanel" type="HBoxContainer" parent="VBoxContainer/Head/VBoxContainer"]
 margin_right = 1020.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 size_flags_horizontal = 7
 size_flags_vertical = 6
 __meta__ = {
@@ -56,43 +56,42 @@ __meta__ = {
 
 [node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/Head/VBoxContainer/ControlPanel"]
 margin_right = 1020.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2"]
 margin_right = 1020.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
-margin_top = 14.0
+margin_top = 17.0
 margin_right = 104.0
-margin_bottom = 28.0
+margin_bottom = 31.0
 text = "Locale Selection"
 
 [node name="LocaleList" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 108.0
-margin_top = 11.0
+margin_top = 14.0
 margin_right = 186.0
-margin_bottom = 31.0
+margin_bottom = 34.0
 size_flags_vertical = 4
 items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
 margin_left = 190.0
 margin_right = 194.0
-margin_bottom = 42.0
+margin_bottom = 48.0
 
 [node name="EventButtonsContainer" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 margin_left = 198.0
 margin_right = 1020.0
-size_flags_horizontal = 3
 
 [node name="Body" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 50.0
+margin_top = 56.0
 margin_right = 1024.0
 margin_bottom = 560.0
 size_flags_vertical = 3
@@ -126,7 +125,7 @@ text = "<TimelineName>"
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Body"]
 margin_top = 28.0
 margin_right = 1024.0
-margin_bottom = 510.0
+margin_bottom = 504.0
 rect_min_size = Vector2( 0, 78 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -134,7 +133,7 @@ follow_focus = true
 
 [node name="TimelineEventsContainer" type="VBoxContainer" parent="VBoxContainer/Body/ScrollContainer"]
 margin_right = 1024.0
-margin_bottom = 482.0
+margin_bottom = 476.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 0

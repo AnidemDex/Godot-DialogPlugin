@@ -1,225 +1,29 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_container.gd" type="Script" id=1]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_event_button/dialog_event_button.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/leave_event_button/leave_event_button.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/audio_event_button/stop_audio_button/stop_audio_event_button.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/change_expression_button/change_expression_event_button.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/wait_time_event_button/wait_time_event_button.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/character_event_button/join_event_button/join_event_button.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/audio_event_button/play_audio_button/play_audio_button.tscn" type="PackedScene" id=8]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/jump_to_event_button/jump_to_event_button.tscn" type="PackedScene" id=9]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/custom_event_button/custom_event_button.tscn" type="PackedScene" id=10]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/change_timeline_button/change_timeline_button.tscn" type="PackedScene" id=11]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/set_event_button/set_event_button.tscn" type="PackedScene" id=12]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/if_else_event_button/if_else_event_button.tscn" type="PackedScene" id=13]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/comment_event_button/commnet_event_button.tscn" type="PackedScene" id=14]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/text_with_audio_event_button/text_with_audio_event_button.tscn" type="PackedScene" id=15]
-[ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_buttons/question_event_button/question_event_button.tscn" type="PackedScene" id=16]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/event_buttons_container.gd" type="Script" id=2]
 
-[node name="EventsContainer" type="HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer"]
 anchor_right = 1.0
-margin_bottom = 42.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 48 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_vertical_enabled = false
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Unimplemented Events" type="Tabs" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+[node name="EventsContainer" type="HBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EventButtons" type="GridContainer" parent="Unimplemented Events"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-columns = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StopAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 4 )]
-margin_right = 93.0
-disabled = true
-clip_text = false
-
-[node name="PlayAudioButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 8 )]
-margin_left = 308.0
-margin_right = 399.0
-disabled = true
-clip_text = false
-
-[node name="CustomEventButton" parent="Unimplemented Events/EventButtons" instance=ExtResource( 10 )]
-disabled = true
-event_resource = null
-
-[node name="Category1" type="VBoxContainer" parent="."]
-margin_right = 73.0
-margin_bottom = 42.0
-alignment = 1
-
-[node name="CategoryName" type="Label" parent="Category1"]
-margin_right = 73.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Text Events"
-align = 1
-
-[node name="Events" type="HBoxContainer" parent="Category1"]
-margin_left = 10.0
-margin_top = 18.0
-margin_right = 62.0
-margin_bottom = 42.0
-size_flags_horizontal = 4
-
-[node name="TextEventButton" parent="Category1/Events" instance=ExtResource( 2 )]
-
-[node name="TextWithAudioEventButton" parent="Category1/Events" instance=ExtResource( 15 )]
-margin_left = 28.0
-margin_right = 52.0
-
-[node name="VSeparator" type="VSeparator" parent="."]
-margin_left = 77.0
-margin_right = 81.0
-margin_bottom = 42.0
-
-[node name="Category2" type="VBoxContainer" parent="."]
-margin_left = 85.0
-margin_right = 249.0
-margin_bottom = 42.0
-alignment = 1
-
-[node name="CategoryName" type="Label" parent="Category2"]
-margin_right = 164.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Logic Events"
-align = 1
-
-[node name="Events" type="HBoxContainer" parent="Category2"]
-margin_top = 18.0
-margin_right = 164.0
-margin_bottom = 42.0
-size_flags_horizontal = 4
-
-[node name="If_Else_EventButton" parent="Category2/Events" instance=ExtResource( 13 )]
-
-[node name="SetEventButton" parent="Category2/Events" instance=ExtResource( 12 )]
-margin_left = 28.0
-margin_right = 52.0
-
-[node name="WaitTimeButton" parent="Category2/Events" instance=ExtResource( 6 )]
-margin_left = 56.0
-margin_right = 80.0
-
-[node name="JumpToEventButton" parent="Category2/Events" instance=ExtResource( 9 )]
-margin_left = 84.0
-margin_right = 108.0
-
-[node name="ChangeTimelineButton" parent="Category2/Events" instance=ExtResource( 11 )]
-margin_left = 112.0
-margin_right = 136.0
-
-[node name="QuestionEventButton" parent="Category2/Events" instance=ExtResource( 16 )]
-margin_left = 140.0
-margin_right = 164.0
-
-[node name="VSeparator2" type="VSeparator" parent="."]
-margin_left = 253.0
-margin_right = 257.0
-margin_bottom = 42.0
-
-[node name="Category3" type="VBoxContainer" parent="."]
-margin_left = 261.0
-margin_right = 367.0
-margin_bottom = 42.0
-alignment = 1
-
-[node name="CategoryName" type="Label" parent="Category3"]
-margin_right = 106.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Character Events"
-align = 1
-
-[node name="Events" type="HBoxContainer" parent="Category3"]
-margin_left = 13.0
-margin_top = 18.0
-margin_right = 93.0
-margin_bottom = 42.0
-size_flags_horizontal = 4
-
-[node name="JoinEventButton" parent="Category3/Events" instance=ExtResource( 7 )]
-
-[node name="LeaveEventButton" parent="Category3/Events" instance=ExtResource( 3 )]
-margin_left = 28.0
-margin_right = 52.0
-
-[node name="ChangeExpressionButton" parent="Category3/Events" instance=ExtResource( 5 )]
-margin_left = 56.0
-margin_right = 80.0
-
-[node name="VSeparator3" type="VSeparator" parent="."]
-margin_left = 371.0
-margin_right = 375.0
-margin_bottom = 42.0
-
-[node name="Category4" type="VBoxContainer" parent="."]
-margin_left = 379.0
-margin_right = 409.0
-margin_bottom = 42.0
-alignment = 1
-
-[node name="CategoryName" type="Label" parent="Category4"]
-margin_right = 30.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-text = "Misc"
-align = 1
-
-[node name="Events" type="HBoxContainer" parent="Category4"]
-margin_left = 3.0
-margin_top = 18.0
-margin_right = 27.0
-margin_bottom = 42.0
-size_flags_horizontal = 4
-
-[node name="CommentButton" parent="Category4/Events" instance=ExtResource( 14 )]
-
-[node name="Template" type="VBoxContainer" parent="."]
-visible = false
-margin_left = 48.0
-margin_right = 48.0
-margin_bottom = 40.0
-alignment = 1
-
-[node name="CategoryName" type="Label" parent="Template"]
-margin_bottom = 14.0
-size_flags_horizontal = 3
-align = 1
-
-[node name="Events" type="HBoxContainer" parent="Template"]
-margin_top = 18.0
-margin_bottom = 18.0
-size_flags_horizontal = 4
-
-[connection signal="being_dragged" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_being_dragged"]
-[connection signal="pressed" from="Category1/Events/TextEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="being_dragged" from="Category1/Events/TextWithAudioEventButton" to="." method="_on_EventButton_being_dragged"]
-[connection signal="pressed" from="Category1/Events/TextWithAudioEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category2/Events/If_Else_EventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category2/Events/SetEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category2/Events/WaitTimeButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category2/Events/JumpToEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category2/Events/ChangeTimelineButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category3/Events/JoinEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category3/Events/LeaveEventButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category3/Events/ChangeExpressionButton" to="." method="_on_EventButton_pressed"]
-[connection signal="pressed" from="Category4/Events/CommentButton" to="." method="_on_EventButton_pressed"]
+[connection signal="event_pressed" from="EventsContainer" to="." method="_on_EventsContainer_event_pressed"]
