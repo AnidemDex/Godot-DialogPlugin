@@ -64,8 +64,11 @@ func add_event(event:DialogEventResource, in_place:int=-1) -> void:
 
 func unload_events():
 	DialogUtil.Logger.print_debug(self, "Unloading {0} events...".format([get_child_count()]))
-	for event in loaded_events:
+	
+	var events:Array = loaded_events.duplicate()
+	for event in events:
 		remove_event_from_displayer(event)
+	
 	DialogUtil.Logger.print_debug(self, "Done!")
 
 
@@ -74,8 +77,14 @@ func load_events():
 
 
 func load_event_from(event_idx:int=0) -> void:
-	var _events:Array = timeline_resource.events
+	if timeline_resource == null:
+		DialogUtil.Logger.print_debug(self, "Trying to load events, but there's no timeline to load!")
+		emit_signal("displayer_loaded")
+		set_loading(false)
+		return
+	
 	set_loading(true)
+	var _events:Array = timeline_resource.events
 	
 	if event_idx >= _events.size():
 		DialogUtil.Logger.print_debug(self, "Load index out of bounds. Probably end of the load, exiting...")
@@ -98,7 +107,6 @@ func load_event_from(event_idx:int=0) -> void:
 		loaded_events.insert(event_idx, _event)
 		add_event_node_as_child(_event, event_idx)
 	
-	
 	yield(get_tree(), "idle_frame")
 	call_deferred("load_event_from", event_idx+1)
 
@@ -119,6 +127,9 @@ func is_event_at_right_position(event:DialogEventResource) -> bool:
 
 
 func remove_event_from_displayer(event:DialogEventResource) -> void:
+	if event == null:
+		return
+	
 	for child in get_children():
 		child = child as Node
 		var _base_resource = child.get("base_resource")

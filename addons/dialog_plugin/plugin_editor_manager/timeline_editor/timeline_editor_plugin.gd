@@ -17,10 +17,10 @@ func _init() -> void:
 
 func _enter_tree() -> void:
 	DialogUtil.Logger.print_debug(self, PLUGIN_NAME+" initialized.")
+	add_events_to_settings()
 	_timeline_editor_view = load(DialogResources.TIMELINE_EDITOR_PATH).instance() as TimelineEditorView
 	_dock_button = add_control_to_bottom_panel(_timeline_editor_view, "TimelineEditor")
 	_dock_button.visible = false
-	add_events_to_settings()
 
 func add_events_to_settings() -> void:
 	DialogUtil.Logger.print_debug(self, "Adding events to settings...")
@@ -73,7 +73,7 @@ func handles(object: Object) -> bool:
 
 func edit(object: Object) -> void:
 	DialogUtil.Logger.print_debug(self, "Modifying {0}".format([object.resource_path]))
-	_timeline_editor_view.base_resource = object
+	_timeline_editor_view.set("base_resource", object)
 
 
 func make_visible(visible: bool) -> void:
