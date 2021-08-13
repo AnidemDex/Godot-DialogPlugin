@@ -4,7 +4,7 @@ class_name DialogCharacterResource
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
-export(String) var name:String = "" setget set_name,get_name
+export(String) var name:String = "" setget set_name
 export(String) var display_name:String setget set_display_name,get_display_name
 export(Color) var color:Color = Color.white setget set_color
 export(Texture) var icon:Texture = null setget set_icon
@@ -44,6 +44,7 @@ func set_name(value:String) -> void:
 func set_display_name(value:String) -> void:
 	display_name = value
 	emit_changed()
+	property_list_changed_notify()
 
 
 func set_color(value:Color) -> void:
@@ -54,15 +55,6 @@ func set_color(value:Color) -> void:
 func set_icon(value:Texture) -> void:
 	icon = value
 	emit_changed()
-
-
-func get_name() -> String:
-	if name == "":
-		name = resource_path.get_file().replace("."+resource_path.get_extension(),"")
-		resource_name = name
-		emit_changed()
-		
-	return name
 
 
 func get_display_name() -> String:

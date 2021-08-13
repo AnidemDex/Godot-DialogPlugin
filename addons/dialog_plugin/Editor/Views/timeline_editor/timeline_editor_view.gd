@@ -27,7 +27,8 @@ func get_class(): return "TimelineEditorView"
 
 func _ready() -> void:
 	if (not Engine.editor_hint) and (debug_base_resource != ""):
-			base_resource = load(debug_base_resource) as DialogTimelineResource
+		var _res:DialogTimelineResource = load(debug_base_resource) as DialogTimelineResource
+		_set_base_resource(_res)
 	if base_resource == null:
 		return
 	
@@ -36,8 +37,9 @@ func _ready() -> void:
 
 func reload():
 	DialogUtil.Logger.print_debug(self, "Reloading events...")
-	timeline_events_container_node.unload_events()
-	timeline_events_container_node.load_events()
+	timeline_events_container_node.set("timeline_resource", base_resource)
+	timeline_events_container_node.call("unload_events")
+	timeline_events_container_node.call_deferred("load_events")
 	update_status_label()
 	update_resource_name_label()
 
@@ -48,20 +50,13 @@ func update_status_label() -> void:
 
 
 func update_resource_name_label() -> void:
-	var res_name:String = base_resource.resource_path
+	var res_name:String = base_resource.resource_path if base_resource else ""
 	res_name = res_name.get_file()
 	timeline_name_node.text = res_name
 
 
 func _clips_input() -> bool:
 	return true
-
-
-func _notification(what: int) -> void:
-	match what:
-		NOTIFICATION_VISIBILITY_CHANGED:
-			if visible and (base_resource != null):
-				reload()
 
 
 func save_resource() -> void:
@@ -92,9 +87,9 @@ func _exit_tree() -> void:
 
 func _set_base_resource(_resource:DialogTimelineResource) -> void:
 	base_resource = _resource
-	timeline_events_container_node.timeline_resource = base_resource
 	if base_resource:
 		DialogUtil.Logger.print_info(self,["Using {res} at {path}".format({"res":base_resource.get_class(), "path":_resource.resource_path})])
+	call_deferred("reload")
 
 
 func _on_LocaleList_item_selected(index: int) -> void:

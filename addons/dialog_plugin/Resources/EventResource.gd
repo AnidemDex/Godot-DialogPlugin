@@ -71,4 +71,4 @@ func _get_property_list() -> Array:
 
 func _get(property: String):
 	if property == "skip_alternative_name":
-		return "Jump inmediatly to next event?"
+		return "Jump immediately to next event?"

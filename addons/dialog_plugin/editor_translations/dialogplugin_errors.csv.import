@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+
+[deps]
+
+files=[ "res://addons/dialog_plugin/editor_translations/dialogplugin_errors.en.translation", "res://addons/dialog_plugin/editor_translations/dialogplugin_errors.es.translation" ]
+
+source_file="res://addons/dialog_plugin/editor_translations/dialogplugin_errors.csv"
+dest_files=[ "res://addons/dialog_plugin/editor_translations/dialogplugin_errors.en.translation", "res://addons/dialog_plugin/editor_translations/dialogplugin_errors.es.translation" ]
+
+[params]
+
+compress=true
+delimiter=0
