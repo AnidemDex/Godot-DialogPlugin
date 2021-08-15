@@ -75,21 +75,19 @@ text = "Locale Selection"
 [node name="LocaleList" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 6 )]
 margin_left = 108.0
 margin_top = 14.0
-margin_right = 182.0
+margin_right = 186.0
 margin_bottom = 34.0
 size_flags_vertical = 4
-text = "English"
 items = [ "English", null, false, 0, "en", "Spanish", null, false, 1, "es" ]
-selected = 0
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer"]
-margin_left = 186.0
-margin_right = 190.0
+margin_left = 190.0
+margin_right = 194.0
 margin_bottom = 48.0
 
 [node name="EventButtonsContainer" parent="VBoxContainer/Head/VBoxContainer/ControlPanel/PanelContainer2/HBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
-margin_left = 194.0
+margin_left = 198.0
 margin_right = 1020.0
 
 [node name="Body" type="VBoxContainer" parent="VBoxContainer"]
