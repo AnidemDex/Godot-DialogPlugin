@@ -14,16 +14,25 @@
 ##########
 # Addons files
 ##########
+!/addons
 
 # the main plugin
+!/addons/dialog_plugin/
 !/addons/dialog_plugin/*
 
 # the unit-test plugin that needs an update
+!/addons/WAT/
 !/addons/WAT/*
+!/tests/
 !/tests/*
 
 
 ##########
 # Docs
 ##########
+!/docs/
 !/docs/*
+
+
+# But at the end of it all, re-ignore .import files
+*.import
