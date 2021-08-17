@@ -1,2 +1,15 @@
-# Ignore all top level files from dowload ZIP downloads
-/* export-ignore
+# Ignore all top level files from dowload ZIP downloads.
+# This may help with the AssetLib download, making it easier to install.
+/.gitattributes     export-ignore
+/.gitignore         export-ignore
+/LICENSE            export-ignore
+/LICENSE.md         export-ignore
+/README.md          export-ignore
+/project.godot      export-ignore
+/icon.png           export-ignore
+/icon.svg           export-ignore
+/default_env.tres   export-ignore
+.images/            export-ignore
+tests/              export-ignore
+docs/               export-ignore
+addons/WAT/         export-ignore
