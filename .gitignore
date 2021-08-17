@@ -15,6 +15,7 @@
 ##########
 # Addons files
 ##########
+
 # Include the add-ons folder
 !/addons
 # ...but ignore its contents.
@@ -30,6 +31,9 @@ addons/*
 !/tests/
 !/tests/*
 
+# And for last (but not less important), script templates
+!/script_templates/
+!/script_templates/*
 
 ##########
 # Docs
