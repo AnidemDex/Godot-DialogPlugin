@@ -14,16 +14,24 @@
 ##########
 # Addons files
 ##########
+# Include the add-ons folder
+!/addons
+# ...but ignore its contents.
+addons/*
 
-# the main plugin
+# Except for the main plugin
+!/addons/dialog_plugin/
 !/addons/dialog_plugin/*
 
-# the unit-test plugin that needs an update
+# And the unit-test plugin that needs an update
+!/addons/WAT/
 !/addons/WAT/*
+!/tests/
 !/tests/*
 
 
 ##########
 # Docs
 ##########
+!/docs/
 !/docs/*
