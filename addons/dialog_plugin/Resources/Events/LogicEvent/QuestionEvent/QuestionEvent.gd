@@ -1,5 +1,6 @@
 tool
-class_name DialogQuestionEvent
+
+#class_name DialogQuestionEvent
 extends DialogLogicEvent
 
 # - - - - - - - - - -
@@ -20,6 +21,7 @@ func _init() -> void:
 	resource_name = event_name
 	event_color = Color("#FBB13C")
 	event_icon = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/logic/question_event.png") as Texture
+	event_editor_scene_path = "res://addons/dialog_plugin/Nodes/editor_event_node/custom_nodes/question/question_event_node.tscn"
 
 	# Uncomment skip line if you want your event jump directly to next event 
 	# at finish or not (false by default)
