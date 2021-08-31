@@ -1,3 +1,4 @@
+tool
 extends MenuButton
 
 signal item_selected(item_string)
@@ -8,6 +9,7 @@ onready var popup_menu:PopupMenu = get_popup()
 
 func _ready() -> void:
 	popup_menu.connect("index_pressed", self, "_on_PopupMenu_index_pressed")
+	generate_items()
 
 
 func generate_items() -> void:

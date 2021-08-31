@@ -3,7 +3,7 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/dictionary_property/key_value/key_value.gd" type="Script" id=1]
 
 [node name="KeyValue" type="HBoxContainer"]
-margin_right = 40.0
+margin_right = 245.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -22,12 +22,14 @@ text = "{KEY}"
 
 [node name="Value" type="PanelContainer" parent="."]
 margin_left = 36.0
-margin_right = 50.0
+margin_right = 229.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
 
 [node name="RemoveButton" type="Button" parent="."]
-margin_left = 54.0
-margin_right = 66.0
+margin_left = 233.0
+margin_right = 245.0
 margin_bottom = 40.0
 hint_tooltip = "Remove Item"
+
+[connection signal="pressed" from="RemoveButton" to="." method="_on_RemoveButton_pressed"]

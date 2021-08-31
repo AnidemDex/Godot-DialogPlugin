@@ -39,7 +39,8 @@ func show_timeline() -> void:
 
 func select_resource(resource:Resource) -> void:
 	if resource == null:
-		resource = DialogTimelineResource.new()
+		hide_timeline()
+		return
 	
 	if "::" in resource.resource_path or resource.resource_path == "":
 		show_timeline()

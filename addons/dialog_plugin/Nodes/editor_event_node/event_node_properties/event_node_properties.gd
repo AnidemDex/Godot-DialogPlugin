@@ -90,6 +90,8 @@ func generate_property_for(property:Dictionary) -> void:
 					property_node = _get_resource_node_for(property)
 			TYPE_INT, TYPE_REAL:
 				property_node = _get_numeric_node_for(property)
+			TYPE_DICTIONARY:
+				property_node = _get_dict_node_for(property)
 	
 	if not property_node:
 		var error:String = "There's no node for this property: {0} - Type: {1}".format([property_name, property_type])
@@ -202,3 +204,19 @@ func _get_numeric_node_for(property:Dictionary) -> Node:
 	if property_type == TYPE_REAL:
 		numeric_node.set("step", 0.01)
 	return numeric_node
+
+func _get_dict_node_for(property:Dictionary) -> Node:
+	var DictProperty:PackedScene = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_property_nodes/dictionary_property/dictionary_property.tscn") as PackedScene
+	
+	var property_name:String = property.get("name", "")
+	var property_type:int = property.get("type", TYPE_NIL)
+	var property_hint:int = property.get("hint", PROPERTY_HINT_NONE)
+	var property_hint_string:String = property.get("hint_string", "")
+	var property_usage:int = property.get("usage", PROPERTY_USAGE_NOEDITOR)
+	
+	var dict_node:Node = DictProperty.instance()
+	var fixed_type = base_resource.get(property_name+"_fixed_type")
+	if fixed_type:
+		dict_node.set("fixed_type", fixed_type)
+	
+	return dict_node
