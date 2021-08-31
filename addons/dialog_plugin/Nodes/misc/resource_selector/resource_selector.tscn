@@ -3,7 +3,6 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/misc/resource_selector/resource_selector.gd" type="Script" id=1]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/misc/Folder.svg" type="Texture" id=2]
 
-
 [node name="ResourceSelector" type="Button"]
 margin_right = 12.0
 margin_bottom = 20.0

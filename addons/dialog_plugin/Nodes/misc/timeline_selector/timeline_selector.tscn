@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/resource_selector/resource_selector.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/dialog_plugin/Nodes/misc/timeline_selector/timeline_selector.gd" type="Script" id=2]
+[ext_resource path="res://addons/dialog_plugin/assets/Themes/panel_container.tres" type="StyleBox" id=3]
+[ext_resource path="res://addons/dialog_plugin/Editor/Views/timeline_editor/events_displayer.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="TimelineSelector" type="HBoxContainer"]
+margin_right = 401.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+ResourceSelector_Path = NodePath("ResourceSelector")
+EventDisplayer_Path = NodePath("TimelineContainer/VBoxContainer/ScrollContainer/Timeline")
+TimelineContainer_path = NodePath("TimelineContainer")
+
+[node name="ResourceSelector" parent="." instance=ExtResource( 1 )]
+margin_right = 401.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+clip_text = true
+filters = PoolStringArray( "*.tres" )
+
+[node name="TimelineContainer" type="PanelContainer" parent="."]
+visible = false
+margin_left = 34.0
+margin_right = 401.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 0, 136 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TimelineContainer"]
+margin_left = 8.0
+margin_top = 4.0
+margin_right = 359.0
+margin_bottom = 128.0
+custom_constants/separation = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="TimelineContainer/VBoxContainer"]
+margin_right = 351.0
+margin_bottom = 22.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="TimelineContainer/VBoxContainer/PanelContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 347.0
+margin_bottom = 18.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Events"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TimelineContainer/VBoxContainer"]
+margin_top = 22.0
+margin_right = 351.0
+margin_bottom = 124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Timeline" type="VBoxContainer" parent="TimelineContainer/VBoxContainer/ScrollContainer"]
+margin_right = 351.0
+margin_bottom = 102.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = ExtResource( 4 )
+
+[connection signal="resource_selected" from="ResourceSelector" to="." method="_on_ResourceSelector_resource_selected"]
