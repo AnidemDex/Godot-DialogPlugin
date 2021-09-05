@@ -1,5 +1,5 @@
 tool
-class_name DialogDatabaseResource
+#class_name DialogDatabaseResource
 extends Resource
 
 const DialogResources = preload("res://addons/dialog_plugin/Core/DialogResources.gd")
