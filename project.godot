@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/CustomEvent/CustomEvent.gd"
 }, {
-"base": "Resource",
-"class": "DialogDatabaseResource",
-"language": "GDScript",
-"path": "res://addons/dialog_plugin/Resources/Database/DatabaseResource.gd"
-}, {
 "base": "Control",
 "class": "DialogDialogueManager",
 "language": "GDScript",
@@ -108,11 +103,6 @@ _global_script_classes=[ {
 "class": "DialogPortraitResource",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/PortraitResource.gd"
-}, {
-"base": "DialogLogicEvent",
-"class": "DialogQuestionEvent",
-"language": "GDScript",
-"path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/QuestionEvent/QuestionEvent.gd"
 }, {
 "base": "DialogEventResource",
 "class": "DialogTextEvent",
@@ -182,9 +172,8 @@ _global_script_class_icons={
 "DialogCharacterEvent": "",
 "DialogCharacterJoinEvent": "",
 "DialogCharacterLeaveEvent": "",
-"DialogCharacterResource": "",
+"DialogCharacterResource": "res://addons/dialog_plugin/assets/Images/icons/character_icon.png",
 "DialogCustomEvent": "",
-"DialogDatabaseResource": "",
 "DialogDialogueManager": "",
 "DialogEditorEventNode": "",
 "DialogEmitSignalEvent": "",
@@ -194,8 +183,7 @@ _global_script_class_icons={
 "DialogMiscelaneousEvent": "",
 "DialogOptionsManager": "",
 "DialogPortraitManager": "",
-"DialogPortraitResource": "",
-"DialogQuestionEvent": "",
+"DialogPortraitResource": "res://addons/dialog_plugin/assets/Images/icons/portrait_icon.png",
 "DialogTextEvent": "",
 "DialogTextWithAudioEvent": "",
 "DialogTimelineResource": "res://addons/dialog_plugin/assets/Images/icons/timeline_icon.png",
