@@ -1,6 +1,6 @@
 tool
 extends Resource
-class_name DialogCharacterResource
+class_name DialogCharacterResource, "res://addons/dialog_plugin/assets/Images/icons/character_icon.png"
 
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 

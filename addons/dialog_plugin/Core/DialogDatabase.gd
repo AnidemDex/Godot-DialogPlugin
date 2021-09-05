@@ -8,9 +8,9 @@ class _DB:
 		return _paths
 	
 	
-	static func get_database() -> DialogDatabaseResource:
+	static func get_database():
 		push_warning("Returning an empty database")
-		return DialogDatabaseResource.new()
+		return null
 	
 	
 	static func add(name) -> void:
@@ -21,7 +21,7 @@ class _DB:
 
 class Timelines extends _DB:
 	
-	static func get_database() -> DialogDatabaseResource:
+	static func get_database():
 		var _db = ResourceLoader.load(DialogResources.TIMELINEDB_PATH)
 		return _db
 	
@@ -54,7 +54,7 @@ class Timelines extends _DB:
 
 class Characters extends _DB:
 	
-	static func get_database() -> DialogDatabaseResource:
+	static func get_database():
 		var _db = ResourceLoader.load(DialogResources.CHARACTERDB_PATH)
 		return _db
 	
@@ -94,7 +94,7 @@ class Themes extends _DB:
 
 
 class EditorTranslations extends _DB:
-	static func get_database() -> DialogDatabaseResource:
+	static func get_database():
 		var _db = ResourceLoader.load(DialogResources.EDITOR_i18n_PATH)
 		return _db
 
@@ -103,7 +103,7 @@ class Translations extends _DB:
 	const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 	const Dialog_i18n = preload("res://addons/dialog_plugin/Core/Dialog_i18n.gd")
 	
-	static func get_database() -> DialogDatabaseResource:
+	static func get_database():
 		var _db = ResourceLoader.load(DialogResources.TRANSLATIONSDB_PATH)
 		return _db
 	

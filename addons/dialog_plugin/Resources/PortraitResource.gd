@@ -1,6 +1,6 @@
 tool
 extends Resource
-class_name DialogPortraitResource
+class_name DialogPortraitResource, "res://addons/dialog_plugin/assets/Images/icons/portrait_icon.png"
 
 export(String) var name:String = "" setget _set_name
 export(Texture) var image:Texture = null
