@@ -93,7 +93,7 @@ func _on_PopupMenu_id_pressed(id: int) -> void:
 func _on_ConfirmationDialog_confirmed() -> void:
 	var _selected:TreeItem = tree_node.get_selected()
 	var _meta = _selected.get_metadata(0)
-	(tree_resource as DialogDatabaseResource).remove(_meta)
+	tree_resource.remove(_meta)
 	tree_node.remove_item(tree_node.get_selected())
 	emit_signal("tree_item_selected", tree_node.get_root())
 
