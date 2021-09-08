@@ -59,8 +59,7 @@ func _clips_input() -> bool:
 
 
 func save_resource() -> void:
-	if timeline_events_container_node.modified:
-		call_deferred("_deferred_save")
+	call_deferred("_deferred_save")
 
 
 func _deferred_save(_descarted_value=null) -> void:
