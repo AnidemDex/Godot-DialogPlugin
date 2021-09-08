@@ -222,10 +222,6 @@ config/icon="res://icon.png"
 
 settings/stdout/verbose_stdout=true
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/dialog_plugin/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/character_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/timeline_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/variable_editor/plugin.cfg" )
-
 [importer_defaults]
 
 texture={

@@ -65,7 +65,7 @@ func remove_item(item:TreeItem = null):
 	if not item:
 		return
 	DialogUtil.Logger.print(self,["Attempt to delete item", item.get_metadata(0)])
-	(base_resource as DialogDatabaseResource).remove(item.get_metadata(0))
+	base_resource.remove(item.get_metadata(0))
 
 func rename_item(item:TreeItem = null):
 	item.set_editable(0, true)
