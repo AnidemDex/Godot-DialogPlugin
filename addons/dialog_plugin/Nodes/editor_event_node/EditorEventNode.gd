@@ -46,7 +46,7 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	if not base_resource:
 		return
 	var data = base_resource
-	var drag_preview_node:Control = self.duplicate()
+	var drag_preview_node:Control = load("res://addons/dialog_plugin/Nodes/editor_event_node/event_node_template.tscn").instance()
 	drag_preview_node.set("base_resource", base_resource)
 	drag_preview_node.set("event_index", -1)
 	
@@ -57,7 +57,8 @@ func get_drag_data_fw(position: Vector2, from_control:Control):
 	drag_preview_node.rect_size = Vector2(50,50)
 	drag_preview_node.rect_min_size = Vector2(50,50)
 	set_drag_preview(drag_preview_node)
-	drag_preview_node.call("update_event_node_values")
+	drag_preview_node.call("update_event_node_branch")
+	drag_preview_node.call("update_event_node_name")
 	emit_signal("deletion_requested", base_resource)
 	return data
 
