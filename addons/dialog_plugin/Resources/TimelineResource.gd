@@ -50,6 +50,20 @@ func connect_event_signals(event:Resource, caller_node:Node) -> void:
 		assert(_err == OK)
 
 
+func add_event(event:DialogEventResource, at_position:int=-1) -> void:
+	if at_position > -1:
+		at_position = min(events.size(), at_position)
+		events.insert(at_position, event)
+	else:
+		events.append(event)
+	emit_changed()
+
+
+func remove_event(event:DialogEventResource) -> void:
+	events.erase(event)
+	emit_changed()
+
+
 # Esto debe hacerse al menos hasta que https://github.com/godotengine/godot/pull/44879
 # sea añadido a Godot
 func _get_property_list() -> Array:
