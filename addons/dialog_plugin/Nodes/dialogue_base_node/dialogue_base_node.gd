@@ -10,6 +10,7 @@ const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 
 ## The timeline to load when starting the scene
 export(String, FILE) var timeline_name: String
+export(bool) var autostart:bool = false
 
 export(NodePath) var DialogNode_path:NodePath
 export(NodePath) var PortraitsNode_path:NodePath
