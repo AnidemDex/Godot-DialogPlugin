@@ -30,7 +30,7 @@ func set_event_idx(value:int) -> void:
 
 
 func _get(property: String):
-	if property == "skip_disabled":
+	if property == "skip_ignore":
 		return true
 	if property == "branch_disabled":
 		return true

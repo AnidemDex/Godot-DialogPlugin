@@ -75,7 +75,7 @@ func _get_property_list() -> Array:
 	return _p
 
 func _get(property: String):
-	if property == "skip_disabled":
+	if property == "skip_ignore":
 		return true
 	
 	if property == "can_drop_data":

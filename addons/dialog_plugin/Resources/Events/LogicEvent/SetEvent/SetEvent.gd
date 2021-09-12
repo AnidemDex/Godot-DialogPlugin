@@ -57,5 +57,5 @@ func set_var_value(value:String) -> void:
 
 
 func _get(property: String):
-	if property == "skip_disabled":
+	if property == "skip_ignore":
 		return true
