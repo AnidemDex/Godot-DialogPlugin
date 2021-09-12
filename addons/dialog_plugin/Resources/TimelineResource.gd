@@ -50,7 +50,9 @@ func connect_event_signals(event:Resource, caller_node:Node) -> void:
 		assert(_err == OK)
 
 
-func add_event(event:DialogEventResource, at_position:int=-1) -> void:
+#func add_event(event:DialogEventResource, at_position:int=-1) -> void:
+# We can't do that  because  C I C L Y C   D E P E N D E N C Y
+func add_event(event, at_position:int=-1) -> void:
 	if at_position > -1:
 		at_position = min(events.size(), at_position)
 		events.insert(at_position, event)
@@ -59,7 +61,8 @@ func add_event(event:DialogEventResource, at_position:int=-1) -> void:
 	emit_changed()
 
 
-func remove_event(event:DialogEventResource) -> void:
+#func remove_event(event:DialogEventResource) -> void:
+func remove_event(event) -> void:
 	events.erase(event)
 	emit_changed()
 
