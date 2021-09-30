@@ -1,6 +1,6 @@
 tool
 class_name DialogBaseNode, "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png"
-extends CanvasItem
+extends Control
 
 ##
 ## Base class of any Dialog node.
@@ -48,15 +48,34 @@ var event_finished = false
 ## The [InputEvent] that will trigger the skip action of the event on finish.
 var next_input = 'ui_accept'
 
+var _used_scene:String = "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialogue_base_node.tscn"
+
 onready var DialogNode:DialogDialogueManager = get_node_or_null(DialogNode_path) as DialogDialogueManager
 onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 onready var OptionsContainer:Container = get_node_or_null(OptionsContainer_path) as Container
+
+func _enter_tree() -> void:
+	if get_child_count() == 0 and get_tree().edited_scene_root != self:
+		call_deferred("_replace")
+		queue_free()
+
+
+func _replace() -> void:
+	var default_scene:PackedScene = load(_used_scene) as PackedScene
+	var default_node:Node = default_scene.instance()
+	default_node.set_deferred("filename", _used_scene)
+	replace_by(default_node)
+
 
 func _ready() -> void:
 	if not Engine.editor_hint:
 		# FIXME: You should handle this warning elsewhere
 		if not((get_parent() is CanvasLayer) or (get_parent() is Control)):
 			push_warning("[Dialogic] "+tr(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER))
+	
+		call_deferred("_set_nodes_default_values")
+		if autostart:
+			call_deferred("start_timeline")
 
 
 func _input(event: InputEvent) -> void:
