@@ -2,22 +2,50 @@ tool
 class_name DialogBaseNode, "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png"
 extends CanvasItem
 
+##
+## Base class of any Dialog node.
+##
+## @desc:
+##     Dialog nodes inheriths this class.
+##     Dialog nodes are not the same as Dialog class, is just a name
+##     that is used as a shorthand of DialogBaseNode node.
+##     This class works as a "Dialog Node Manager".
+##
+## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-base-node
+## 
+
+## Emmited when custom signal event is excecuted.
 signal custom_signal(value)
 
+## See [TranslationService]
 const TranslationService = preload("res://addons/dialog_plugin/Other/translation_service/translation_service.gd")
 
+## See [DialogUtil]
 const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
+
 
 ## The timeline to load when starting the scene
 export(String, FILE) var timeline_name: String
+
+## If [code]true[/code] call [method start_timeline] when the node is ready.
 export(bool) var autostart:bool = false
 
+
+## NodePath that refers to the DialogNode
 export(NodePath) var DialogNode_path:NodePath
+
+## NodePath that referes to the PortraitManager node
 export(NodePath) var PortraitsNode_path:NodePath
+
 export(NodePath) var OptionsContainer_path:NodePath
 
+## Timeline resource used by this node. If is null, timeline_nameis loaded.
 var timeline: DialogTimelineResource
+
+## If [code]true[/code] the event have just finished.
 var event_finished = false
+
+## The [InputEvent] that will trigger the skip action of the event on finish.
 var next_input = 'ui_accept'
 
 onready var DialogNode:DialogDialogueManager = get_node_or_null(DialogNode_path) as DialogDialogueManager
@@ -40,6 +68,7 @@ func _input(event: InputEvent) -> void:
 			timeline.go_to_next_event(self)
 
 
+## Starts the timeline.
 func start_timeline() -> void:
 	if Engine.editor_hint:
 		return
@@ -47,6 +76,7 @@ func start_timeline() -> void:
 	timeline.start(self)
 
 
+## Loads the timeline defined in timeline_name.
 func load_timeline() -> DialogTimelineResource:
 	if not timeline_name:
 		return null
@@ -80,6 +110,7 @@ func _get_configuration_warning() -> String:
 	if (get_parent() is CanvasLayer) or (get_parent() is Control):
 		return ""
 	return TranslationService.translate(DialogUtil.Error.DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER, TranslationService.get_editor_locale())
+
 
 func _on_event_start(_event):
 	event_finished = false
