@@ -14,10 +14,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Core/DialogClass.gd"
 }, {
-"base": "CanvasItem",
+"base": "Control",
 "class": "DialogBaseNode",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Nodes/dialogue_base_node/dialogue_base_node.gd"
+}, {
+"base": "DialogBaseNode",
+"class": "DialogBoxNode",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/ingame_dialogue_box/dialog_box.gd"
+}, {
+"base": "DialogBaseNode",
+"class": "DialogBubbleNode",
+"language": "GDScript",
+"path": "res://addons/dialog_plugin/Nodes/ingame_dialogue_bubble/dialog_bubble.gd"
 }, {
 "base": "DialogLogicEvent",
 "class": "DialogChangeTimelineEvent",
@@ -167,6 +177,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Dialog": "",
 "DialogBaseNode": "res://addons/dialog_plugin/assets/Images/Plugin/bubble_icon.png",
+"DialogBoxNode": "",
+"DialogBubbleNode": "",
 "DialogChangeTimelineEvent": "",
 "DialogCharacterChangeExpressionEvent": "",
 "DialogCharacterEvent": "",
@@ -218,9 +230,9 @@ Display=8
 config/name="dialog_plugin"
 config/icon="res://icon.png"
 
-[debug]
+[editor_plugins]
 
-settings/stdout/verbose_stdout=true
+enabled=PoolStringArray( "res://addons/dialog_plugin/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/character_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/timeline_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/variable_editor/plugin.cfg" )
 
 [importer_defaults]
 
@@ -272,3 +284,4 @@ events/logic_event/wait_time="res://addons/dialog_plugin/Resources/Events/LogicE
 events/logic_event/condition="res://addons/dialog_plugin/Resources/Events/LogicEvent/ConditionEvent/ConditionEvent.gd"
 events/miscelaneous_event/comment="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd"
 events/logic_event/set="res://addons/dialog_plugin/Resources/Events/LogicEvent/SetEvent/SetEvent.gd"
+events/miscelaneous_event/test="res://example_event.gd"

@@ -1,4 +1,5 @@
 tool
+class_name DialogBoxNode
 extends DialogBaseNode
 
 # This does nothing special. It's just a placeholder.
@@ -7,9 +8,7 @@ extends DialogBaseNode
 # if you want to use a custom DialogNode, or inherith this scene
 # and replace this script.
 
-# DO NOT MODIFY THIS FILE. ANOTHER RESOURCES THAT DEPENDS ON IT MAY BE AFFECTED
+# DO NOT MODIFY THIS FILE. OTHER RESOURCES THAT DEPENDS ON IT MAY BE AFFECTED
 
-func _ready() -> void:
-	_set_nodes_default_values()
-	if autostart:
-		start_timeline()
+func _init() -> void:
+	_used_scene = "res://addons/dialog_plugin/Nodes/ingame_dialogue_box/dialog_box.tscn"
