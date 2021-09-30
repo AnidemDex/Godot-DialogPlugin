@@ -2,6 +2,16 @@ tool
 class_name DialogDialogueManager
 extends Control
 
+## 
+## Base class for all dialogue nodes.
+##
+## @desc:
+##     This node takes cares about displaying text and showing an indicator.
+##
+## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-dialogue-node
+##
+
+
 signal text_displayed
 signal character_displayed(character)
 
