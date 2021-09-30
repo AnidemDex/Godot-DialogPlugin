@@ -2,9 +2,24 @@ tool
 class_name DialogPortraitManager
 extends Control
 
+##
+## Base class for any DialogPortraitManager node.
+##
+## @desc:
+##     Manages the displayed portrait of any character, saving their reference.
+##
+## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-portrait-manager
+##
+
+## Emmited when a character[DialogCharacterResource] portrait was added.
 signal portrait_added(character, new_portrait)
+
+## Emmited when a portrait was changed with a new one.
 signal portrait_changed(character, new_portrait)
+
+## Emmited when a character portrait was removed from scene.
 signal portrait_removed(character)
+
 
 export(NodePath) var ReferenceSize:NodePath
 
