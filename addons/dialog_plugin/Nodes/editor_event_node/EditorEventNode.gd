@@ -2,6 +2,17 @@ tool
 class_name DialogEditorEventNode
 extends Control
 
+##
+## Base class for all event editor nodes.
+##
+## @desc:
+##     This is the generic node that is displayed inside the timeline editor.
+##     You can extend this class on any Control Node to make your own custom
+##     event editor node for your custom events.
+##
+## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-editor-event-node
+##
+
 signal deletion_requested(item)
 signal event_modified
 # Your script needs an timeline_resource property in order to get this signal
