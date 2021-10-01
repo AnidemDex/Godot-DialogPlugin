@@ -55,12 +55,28 @@ onready var PortraitManager := get_node_or_null(PortraitsNode_path)
 onready var OptionsContainer:Container = get_node_or_null(OptionsContainer_path) as Container
 
 func _enter_tree() -> void:
-	if get_child_count() == 0 and get_tree().edited_scene_root != self:
+	if get_tree().edited_scene_root == self:
+		# Warn about instancing class as root of scene
+		return
+	
+	if _used_scene == "":
+		# No used scene, then no replace
+		return
+	
+	if _no_childs():
 		call_deferred("_replace")
 		queue_free()
 
 
+func _no_childs() -> bool:
+	return get_child_count() == 0
+
+
 func _replace() -> void:
+	if _used_scene == "":
+		# There's no used scene, you may warn the user about that.
+		return
+	
 	var default_scene:PackedScene = load(_used_scene) as PackedScene
 	var default_node:Node = default_scene.instance()
 	default_node.set_deferred("filename", _used_scene)
