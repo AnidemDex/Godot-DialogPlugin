@@ -55,6 +55,7 @@ func _on_AddItemBtn_pressed() -> void:
 	var _new_portrait = DialogPortraitResource.new()
 	_new_portrait.name = "New Portrait"
 	character.add_portrait(_new_portrait)
+	character.property_list_changed_notify()
 	_save()
 
 

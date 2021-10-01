@@ -6,15 +6,13 @@ const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 var base_resource:DialogCharacterResource = null setget _set_base_resource
 
 export(NodePath) var Name_path:NodePath
-export(NodePath) var DisplayName_path:NodePath
 export(NodePath) var Icon_path:NodePath
 export(NodePath) var PortraitContainer_path:NodePath
 
 export(String, FILE) var debug_base_resource:String = ""
 
 onready var name_node:Label = get_node(Name_path) as Label
-onready var display_name_node:LineEdit = get_node(DisplayName_path) as LineEdit
-onready var icon_node:Button = get_node(Icon_path) as Button
+onready var icon_node:TextureRect = get_node(Icon_path) as TextureRect
 onready var portrait_container_node := get_node(PortraitContainer_path)
 
 func get_class() -> String: return "CharacterEditorView"
@@ -37,9 +35,10 @@ func configure_resource() -> void:
 
 
 func update_values() -> void:
-	name_node.text = base_resource.name
-	display_name_node.text = base_resource.display_name
-	icon_node.icon = base_resource.icon
+	var name_text:String = "{CHARACTER_NAME} | Display Name: <{ALTERNATIVE_NAME}>"
+	var format:Dictionary = {"CHARACTER_NAME":base_resource.name, "ALTERNATIVE_NAME":base_resource.display_name}
+	name_node.text = name_text.format(format)
+	icon_node.texture = base_resource.icon
 	portrait_container_node.character = base_resource
 	portrait_container_node._update_values()
 

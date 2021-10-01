@@ -29,13 +29,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Nodes/ingame_dialogue_bubble/dialog_bubble.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "DialogChangeTimelineEvent",
+"base": "logic_event",
+"class": "change_timeline",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/ChangeTimelineEvent/ChangeTiemlineEvent.gd"
 }, {
-"base": "DialogCharacterEvent",
-"class": "DialogCharacterChangeExpressionEvent",
+"base": "character_event",
+"class": "character_change_expression",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/ChangeExpressionEvent/CharacterChangeExpressionEvent.gd"
 }, {
@@ -44,13 +44,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/CharacterEvent.gd"
 }, {
-"base": "DialogCharacterEvent",
-"class": "DialogCharacterJoinEvent",
+"base": "character_event",
+"class": "character_join",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd"
 }, {
-"base": "DialogCharacterEvent",
-"class": "DialogCharacterLeaveEvent",
+"base": "character_event",
+"class": "character_leave",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd"
 }, {
@@ -59,8 +59,8 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/CharacterResource.gd"
 }, {
-"base": "DialogMiscelaneousEvent",
-"class": "DialogCustomEvent",
+"base": "miscelaneous_event",
+"class": "custom",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/CustomEvent/CustomEvent.gd"
 }, {
@@ -74,8 +74,8 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Nodes/editor_event_node/EditorEventNode.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "DialogEmitSignalEvent",
+"base": "logic_event",
+"class": "emit_signal",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/EmitSignalEvent/EmitSignalEvent.gd"
 }, {
@@ -84,8 +84,8 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/EventResource.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "DialogJumpToEvent",
+"base": "logic_event",
+"class": "jump_to",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/JumpToEvent/JumpToEvent.gd"
 }, {
@@ -114,13 +114,13 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/PortraitResource.gd"
 }, {
-"base": "DialogEventResource",
-"class": "DialogTextEvent",
+"base": "text_event",
+"class": "text",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
 }, {
-"base": "DialogTextEvent",
-"class": "DialogTextWithAudioEvent",
+"base": "text_event",
+"class": "text_with_audio",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/TextEvent/TextAudioEvent/TextAudioEvent.gd"
 }, {
@@ -129,8 +129,8 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/TimelineResource.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "DialogWaitTimeEvent",
+"base": "logic_event",
+"class": "wait_time",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/WaitTimeEvent/WaitTimeEvent.gd"
 }, {
@@ -159,18 +159,18 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/WAT/core/test/test.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "_DialogConditionEvent",
+"base": "logic_event",
+"class": "condition",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/ConditionEvent/ConditionEvent.gd"
 }, {
-"base": "DialogMiscelaneousEvent",
-"class": "_DialogEventComment",
+"base": "miscelaneous_event",
+"class": "comment",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd"
 }, {
-"base": "DialogLogicEvent",
-"class": "_DialogSetEvent",
+"base": "logic_event",
+"class": "set",
 "language": "GDScript",
 "path": "res://addons/dialog_plugin/Resources/Events/LogicEvent/SetEvent/SetEvent.gd"
 } ]
@@ -230,10 +230,6 @@ Display=8
 config/name="dialog_plugin"
 config/icon="res://icon.png"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/dialog_plugin/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/character_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/timeline_editor/plugin.cfg", "res://addons/dialog_plugin/plugin_editor_manager/variable_editor/plugin.cfg" )
-
 [importer_defaults]
 
 texture={
@@ -268,20 +264,3 @@ vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"
 
-[textalog]
-
-events/logic_event/change_timeline="res://addons/dialog_plugin/Resources/Events/LogicEvent/ChangeTimelineEvent/ChangeTiemlineEvent.gd"
-events/character_event/character_change_expression="res://addons/dialog_plugin/Resources/Events/CharacterEvent/ChangeExpressionEvent/CharacterChangeExpressionEvent.gd"
-events/character_event/character_join="res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd"
-events/character_event/character_leave="res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd"
-events/miscelaneous_event/custom="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/CustomEvent/CustomEvent.gd"
-events/logic_event/emit_signal="res://addons/dialog_plugin/Resources/Events/LogicEvent/EmitSignalEvent/EmitSignalEvent.gd"
-events/logic_event/jump_to="res://addons/dialog_plugin/Resources/Events/LogicEvent/JumpToEvent/JumpToEvent.gd"
-events/logic_event/question="res://addons/dialog_plugin/Resources/Events/LogicEvent/QuestionEvent/QuestionEvent.gd"
-events/text_event/text="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
-events/text_event/text_with_audio="res://addons/dialog_plugin/Resources/Events/TextEvent/TextAudioEvent/TextAudioEvent.gd"
-events/logic_event/wait_time="res://addons/dialog_plugin/Resources/Events/LogicEvent/WaitTimeEvent/WaitTimeEvent.gd"
-events/logic_event/condition="res://addons/dialog_plugin/Resources/Events/LogicEvent/ConditionEvent/ConditionEvent.gd"
-events/miscelaneous_event/comment="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd"
-events/logic_event/set="res://addons/dialog_plugin/Resources/Events/LogicEvent/SetEvent/SetEvent.gd"
-events/miscelaneous_event/test="res://example_event.gd"
