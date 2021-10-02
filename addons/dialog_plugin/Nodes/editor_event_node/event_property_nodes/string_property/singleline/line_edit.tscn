@@ -9,6 +9,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+used_property = ""
 
 [node name="Label" type="Label" parent="."]
 margin_top = 5.0
@@ -23,4 +24,5 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [connection signal="focus_exited" from="LineEdit" to="." method="_on_LineEdit_focus_exited"]
+[connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="LineEdit" to="." method="_on_LineEdit_text_entered"]

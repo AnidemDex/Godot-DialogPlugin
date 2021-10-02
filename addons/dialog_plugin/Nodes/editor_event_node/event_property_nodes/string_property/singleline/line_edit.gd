@@ -15,3 +15,7 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 
 func _on_LineEdit_focus_exited() -> void:
 	base_resource.set(used_property, line_edit_node.text)
+
+
+func _on_LineEdit_text_changed(new_text: String) -> void:
+	base_resource.set(used_property, new_text)
