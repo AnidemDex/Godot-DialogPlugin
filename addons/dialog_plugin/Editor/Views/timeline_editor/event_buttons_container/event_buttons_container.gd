@@ -3,6 +3,7 @@ extends HBoxContainer
 
 signal event_pressed(event)
 
+const DialogUtil = preload("res://addons/dialog_plugin/Core/DialogUtil.gd")
 const Category = preload("res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_category/events_category_scene.gd")
 
 var category_scene:PackedScene = load("res://addons/dialog_plugin/Editor/Views/timeline_editor/event_buttons_container/events_category/events_category_scene.tscn") as PackedScene
@@ -47,20 +48,7 @@ func add_category(category_name:String, category_events:PoolStringArray) -> void
 	
 
 func _get_event_groups() -> Dictionary:
-	var settings:ConfigFile = ConfigFile.new()
-	settings.load("project.godot")
-	var keys:PoolStringArray = settings.get_section_keys("textalog")
-	var groups:Dictionary = {}
-	for event_property in keys:
-		# events/{base}/{class} -> String (Script path)
-		event_property = event_property as String
-		var sections = event_property.split("/")
-		var _base:String = sections[1]
-		var _class:String = sections[2]
-		if not _base in groups:
-			groups[_base] = []
-		groups[_base].append("textalog/"+event_property)
-	return groups
+	return DialogUtil.get_project_events()
 
 
 func _on_Category_event_button_pressed(event:DialogEventResource) -> void:

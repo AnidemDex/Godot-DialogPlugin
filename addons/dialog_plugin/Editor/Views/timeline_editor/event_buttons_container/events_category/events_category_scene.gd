@@ -21,8 +21,7 @@ func _ready() -> void:
 
 
 func generate_buttons_from_events() -> void:	
-	for event_property in category_events:
-		var event_path = ProjectSettings.get_setting(event_property)
+	for event_path in category_events:
 		var event_script:Script = load(event_path) as Script
 		if not event_script:
 			continue

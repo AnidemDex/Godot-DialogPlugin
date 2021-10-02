@@ -146,3 +146,60 @@ static func get_property_values_from(object:Object) -> Dictionary:
 	for property in object.get_property_list():
 		dict[property.name] = object.get(property.name)
 	return dict
+
+
+## Returns events registered by class_name in project
+static func get_project_events() -> Dictionary:
+	var globa_script_classes = ProjectSettings.get_setting("_global_script_classes")
+
+	var groups:Dictionary = {}
+	
+	for script_class in globa_script_classes:
+		#
+		# {
+		#	base : Object's Base Class,
+		#	class: Object's class_name,
+		# 	path: Object's script path
+		# }
+		#
+		var _base:String = script_class["base"]
+		var _class:String = script_class["class"]
+		var _lang:String = script_class["language"]
+		var _path:String = script_class["path"]
+		var _script = load(_path)
+		var _dialog_event_resource_script = load("res://addons/dialog_plugin/Resources/EventResource.gd")
+		
+		if _get_base_script_until_null(_script) == _dialog_event_resource_script:
+			if _base == "Resource":
+				continue
+			
+			if _class in ["DialogCharacterEvent", "DialogMiscelaneousEvent", "DialogLogicEvent"]:
+				continue
+
+			if _base == "DialogEventResource":
+				_base = _class
+			
+			# Remove "Dialog" and "Event", then format in camel_case
+			_class = _class.replace("Dialog", "")
+			_class = _class.replace("Event", "")
+			_class = _class.capitalize()
+			_class = _class.to_lower()
+			_class = _class.replace(" ", "_")
+			
+			# Remove "Dialog", then format in camel_case
+			_base = _base.replace("Dialog", "")
+			_base = _base.capitalize()
+			_base = _base.replace(" ", "_")
+			_base = _base.to_lower()
+			
+
+			if not _base in groups:
+				groups[_base] = PoolStringArray([])
+			groups[_base].append(_path)
+	return groups
+			
+
+static func _get_base_script_until_null(script:Script) -> Script:
+	if script.get_base_script() == null or not is_instance_valid(script.get_base_script()):
+		return script
+	return _get_base_script_until_null(script.get_base_script())
