@@ -192,9 +192,8 @@ static func get_project_events() -> Dictionary:
 			_base = _base.replace(" ", "_")
 			_base = _base.to_lower()
 			
-
 			if not _base in groups:
-				groups[_base] = PoolStringArray([])
+				groups[_base] = []
 			groups[_base].append(_path)
 	return groups
 			
