@@ -1,6 +1,6 @@
 tool
 
-#class_name DialogQuestionEvent
+class_name DialogQuestionEvent
 extends DialogLogicEvent
 
 # - - - - - - - - - -
