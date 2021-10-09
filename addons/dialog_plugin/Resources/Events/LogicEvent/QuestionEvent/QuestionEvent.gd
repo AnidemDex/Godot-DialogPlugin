@@ -37,6 +37,8 @@ func execute(caller:DialogBaseNode) -> void:
 		finish(true)
 		return
 	
+	OptionsManager.show()
+	
 	for option in options.keys():
 		OptionsManager.add_option(option)
 	
