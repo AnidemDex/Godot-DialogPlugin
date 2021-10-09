@@ -17,7 +17,7 @@ var value_node:Control
 onready var key_label:Label = get_node(Key_Path) as Label
 onready var value_container:PanelContainer = get_node(ValueContainer_Path) as PanelContainer
 
-func _ready() -> void:
+func _pseudo_ready() -> void:
 	if not used_dict.has(key_name) or key_name == "":
 		_on_RemoveButton_pressed()
 		queue_free()

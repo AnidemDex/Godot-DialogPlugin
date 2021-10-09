@@ -34,7 +34,7 @@ margin_right = 243.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 text = "Add Key"
-items = [ "String", null, 0, false, false, 0, 0, null, "", false, "Int", null, 0, false, false, 1, 0, null, "", false, "Real", null, 0, false, false, 2, 0, null, "", false, "Resource", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "Bool", null, 0, false, false, 0, 0, null, "", false, "Int", null, 0, false, false, 1, 0, null, "", false, "Float", null, 0, false, false, 2, 0, null, "", false, "String", null, 0, false, false, 3, 0, null, "", false, "Resource", null, 0, false, false, 4, 0, null, "", false ]
 script = ExtResource( 1 )
 supported_types = PoolStringArray( "Bool", "Int", "Float", "String", "Resource" )
 

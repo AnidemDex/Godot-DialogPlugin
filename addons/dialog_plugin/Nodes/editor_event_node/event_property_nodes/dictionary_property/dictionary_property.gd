@@ -52,6 +52,7 @@ func add_key_node(key:String, forced_type:int = TYPE_NIL) -> void:
 		key_node.type_hint = fixed_type
 	
 	key_node.connect("remove_key", self, "_on_KeyNode_remove_key")
+	key_node.connect("ready", key_node, "_pseudo_ready", [], CONNECT_ONESHOT)
 	key_container.add_child(key_node)
 
 
