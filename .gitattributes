@@ -13,3 +13,4 @@
 tests/              export-ignore
 docs/               export-ignore
 addons/WAT/         export-ignore
+.github/            export-ignore
