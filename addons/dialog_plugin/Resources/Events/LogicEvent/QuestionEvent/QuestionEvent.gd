@@ -33,7 +33,7 @@ func execute(caller:DialogBaseNode) -> void:
 	
 	OptionsManager = caller.OptionsContainer
 	
-	if not OptionsManager:
+	if not is_instance_valid(OptionsManager):
 		finish(true)
 		return
 	
