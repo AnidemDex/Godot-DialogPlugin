@@ -31,7 +31,5 @@ Steps to reproduce the behavior:
 ## Workaround
 > Have you managed to solve it by your own or found a way to avoid this issue? Let us know!
 
-
-
 ## Screenshots
 > If applicable, add screenshots to help explain your problem. Videos/GIFS are appreciated too
