@@ -43,6 +43,7 @@ func generate_value_node() -> void:
 					var timeline_selector_scene:PackedScene = load("res://addons/dialog_plugin/Nodes/misc/timeline_selector/timeline_selector.tscn") as PackedScene
 					value_node = timeline_selector_scene.instance() as Control
 					value_node.connect("ready", value_node, "select_resource", [value], CONNECT_ONESHOT)
+					value_node.connect("resource_selected", self, "_on_resource_selected")
 				_:
 					var resource_selector_scene:PackedScene = load("res://addons/dialog_plugin/Nodes/misc/resource_selector/resource_selector.tscn") as PackedScene
 					value_node = resource_selector_scene.instance() as Control
@@ -60,6 +61,11 @@ func generate_value_node() -> void:
 
 func _on_value_modified() -> void:
 	used_dict[key_name] = value
+	emit_signal("modified")
+
+
+func _on_resource_selected(resource) -> void:
+	used_dict[key_name] = resource
 	emit_signal("modified")
 
 
