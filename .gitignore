@@ -25,11 +25,8 @@ addons/*
 !/addons/dialog_plugin/
 !/addons/dialog_plugin/*
 
-# And the unit-test plugin that needs an update
-!/addons/WAT/
-!/addons/WAT/*
-!/tests/
-!/tests/*
+# And the unit-test plugin that I will add sometime
+
 
 # And for last (but not less important), script templates
 !/script_templates/
