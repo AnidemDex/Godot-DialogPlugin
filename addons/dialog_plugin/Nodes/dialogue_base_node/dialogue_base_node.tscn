@@ -15,6 +15,9 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+DialogNode_path = NodePath("DialogNode")
+PortraitsNode_path = NodePath("Portraits")
+OptionsContainer_path = NodePath("Options")
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
