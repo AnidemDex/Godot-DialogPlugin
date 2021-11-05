@@ -2,7 +2,7 @@ tool
 extends "res://addons/dialog_plugin/Nodes/misc/resource_selector/resource_selector.gd"
 
 func _init() -> void:
-	filters = PoolStringArray(["*.png;PNG", "*.jpg;JPG"])
+	filters = PoolStringArray(["*.png;PNG", "*.jpg;JPG", "*.tres;TRES"])
 
 
 func _on_FileEditor_file_selected(file_path:String) -> void:
