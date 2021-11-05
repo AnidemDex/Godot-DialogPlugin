@@ -10,7 +10,7 @@
 
 An user-friendly dialog system for Godot Engine, with timelines, characters, text boxes, dialog bubbles and many more (planned) features for your games. 
 
-> **Note:** _If you find a bug, or want a feature to be included, feel free to [open a new issue](https://github.com/AnidemDex/Godot-DialogPlugin/issues/new). You can also send me a message on [twitter](https://twitter.com/anidemdex) or Discord (AnidemDex#6740)._
+> **Note:** _If you find a bug, or want a feature to be included, feel free to [open a new issue](https://github.com/AnidemDex/Godot-DialogPlugin/issues/new). You can also send me a message on [twitter](https://twitter.com/anidemdex) or [join us on Discord](https://discord.gg/83YgrKgSZX)._
 
 ## ⚠Warning⚠
 
