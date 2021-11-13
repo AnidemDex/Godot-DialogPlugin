@@ -22,8 +22,8 @@
 addons/*
 
 # Except for the main plugin
-!/addons/dialog_plugin/
-!/addons/dialog_plugin/*
+!/addons/textalog/
+!/addons/textalog/*
 
 # And the unit-test plugin that I will add sometime
 
