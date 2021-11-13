@@ -28,8 +28,8 @@ onready var size_reference_node:Control = get_node(ReferenceSize) as Control
 var portraits:Dictionary = {}
 
 func add_portrait(
-	character,
-	portrait,
+	character:Character,
+	portrait:Portrait,
 	relative_position:Vector2=Vector2(0.414,0.275),
 	rotation:float = 0,
 	flip_h:bool = false,
@@ -95,7 +95,7 @@ func _get_relative_position(from:Vector2) -> Vector2:
 	return _position
 
 
-func remove_portrait(character) -> void:
+func remove_portrait(character:Character) -> void:
 	if character:
 		var _old_p = portraits.get(character, Control.new())
 		if _old_p != null:
@@ -110,7 +110,7 @@ func remove_all_portraits() -> void:
 		remove_portrait(character)
 
 
-func change_portrait(character, portrait) -> void:
+func change_portrait(character:Character, portrait:Portrait) -> void:
 	if not character or not portrait:
 		emit_signal("portrait_changed", character, portrait)
 		return
