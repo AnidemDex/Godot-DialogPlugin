@@ -1,3 +1,4 @@
 # Table of contents
 
-* [🧐 What is EventSystem?](../README.md)
+* [🧐 What is EventSystem?](README.md)
+* [Changelog](changelog.md)
