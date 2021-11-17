@@ -12,7 +12,7 @@ export(String) var name:String = "" setget _set_name
 export(Texture) var image:Texture = null setget set_image
 
 ## Optional icon to be used in the editor
-export(Texture) var icon:Texture = load("res://addons/dialog_plugin/assets/Images/icons/event_icons/character/change_expression.png") as Texture setget _set_icon
+export(Texture) var icon:Texture = null setget _set_icon
 
 
 func set_image(value:Texture) -> void:

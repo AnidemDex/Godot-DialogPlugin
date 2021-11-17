@@ -1,3 +1,4 @@
+tool
 extends Control
 class_name DialogNode
 
@@ -13,11 +14,17 @@ signal option_selected(option_string)
 export(NodePath) var DialogNode_Path:NodePath
 export(NodePath) var PortraitNode_Path:NodePath
 export(NodePath) var OptionsNode_Path:NodePath
+export(NodePath) var NameNode_path:NodePath
 
 var dialog_manager:DialogManager
 var portrait_manager:PortraitManager
 var options_manager:OptionsManager
 
+onready var name_node:Label = get_node_or_null(NameNode_path)
+
+var _used_scene = "res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn"
+
+## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
 	if not is_instance_valid(dialog_manager):
 		return
@@ -26,6 +33,7 @@ func show_text(text:String, with_text_speed:float=0):
 	dialog_manager.display_text()
 
 
+## Adds a selectable option on screen
 func add_option(option:String) -> void:
 	if not is_instance_valid(options_manager):
 		return
@@ -33,16 +41,42 @@ func add_option(option:String) -> void:
 	options_manager.add_option(option)
 
 
-func _notification(what: int) -> void:
-	match what:
-		NOTIFICATION_POST_ENTER_TREE:
-			_fake_ready()
+static func instance() -> Node:
+	var _default_scene := load("res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn") as PackedScene
+	return _default_scene.instance()
 
+
+##########
+# Private things
+##########
 
 func _fake_ready() -> void:
 	_set_default_nodes()
 	_connect_dialog_manager_signals()
 	_connect_portrait_manager_signals()
+	
+	if not Engine.editor_hint:
+		hide()
+
+
+func _fake_enter_tree() -> void:
+	if get_tree().edited_scene_root == self:
+		# Warn about instancing class as root of scene
+		return
+	
+	if _used_scene == "":
+		# No used scene, then no replace
+		return
+	
+	if _have_no_childs():
+		call_deferred("_replace")
+		queue_free()
+
+
+func _update_all_childs():
+	for child in get_children():
+		child.update()
+
 
 func _set_default_nodes():
 	# This has to be done manually since POST_ENTER_TREE is too early
@@ -60,6 +94,7 @@ func _connect_dialog_manager_signals():
 	if not dialog_manager.is_connected("text_displayed", self, "emit_signal"):
 		dialog_manager.connect("text_displayed", self, "emit_signal", ["text_displayed"])
 
+
 func _connect_portrait_manager_signals():
 	if not is_instance_valid(portrait_manager):
 		return
@@ -73,6 +108,44 @@ func _connect_portrait_manager_signals():
 		portrait_manager.connect("portrait_removed", self, "__on_PortraitManager_portrait_removed")
 
 
+func _have_no_childs() -> bool:
+	return get_child_count() == 0
+
+
+func _replace() -> void:
+	if _used_scene == "":
+		# There's no used scene, you may warn the user about that.
+		push_warning("Tried to replace DialogNode but no scene was provided.")
+		return
+	
+	var default_scene:PackedScene = load(_used_scene) as PackedScene
+	var default_node:Node = default_scene.instance()
+	default_node.set_deferred("filename", _used_scene)
+	replace_by(default_node)
+
+
+func _get_configuration_warning() -> String:
+	var _error_string := ""
+	
+	if visible:
+		_error_string += "- Dialog node will hide by default unless you call show() or set visible to true.\nMaking them visible for editing is fine, but they will hide upon running.\n"
+	
+	if get_parent():
+		match get_parent().get_class():
+			"CanvasLayer", "Control", "Node", "Viewport":
+				pass
+			var _anything_else:
+				_error_string += "- DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER\n"
+	
+	return _error_string
+
+
+func _get_minimum_size() -> Vector2:
+	return Vector2(24, 24)
+
+##########
+# Signals
+##########
 func __on_PortraitManager_portrait_added(character, portrait) -> void:
 	print(character)
 	emit_signal("portrait_added", character, portrait)
@@ -88,3 +161,20 @@ func __on_OptionManager_option_added(option_button) -> void:
 
 func __on_OptionManager_option_selected(option_string) -> void:
 	emit_signal("option_selected", option_string)
+##########
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_ENTER_TREE:
+			_fake_enter_tree()
+		NOTIFICATION_POST_ENTER_TREE:
+			_fake_ready()
+		NOTIFICATION_VISIBILITY_CHANGED:
+			update_configuration_warning()
+		NOTIFICATION_THEME_CHANGED,NOTIFICATION_DRAW,NOTIFICATION_ENTER_CANVAS:
+			_update_all_childs()
+
+
+func _hide_script_from_inspector():
+	return true
