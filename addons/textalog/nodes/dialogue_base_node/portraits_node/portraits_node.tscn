@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd" type="Script" id=1]
+
+[node name="Portraits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+ReferenceSize = NodePath("ReferenceSize")
+
+[node name="ReferenceSize" type="ReferenceRect" parent="."]
+anchor_left = 0.414
+anchor_top = 0.275
+anchor_right = 0.586
+anchor_bottom = 0.725
+margin_left = 0.0639648
+margin_right = -0.0640259
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

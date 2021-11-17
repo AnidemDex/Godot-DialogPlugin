@@ -1,4 +1,0 @@
-key,en,es
-TIMELINE_NOT_FOUND,Timeline not found,No se encontró la secuencia especificada
-TIMELINE_NOT_SELECTED,No timeline specified,No se especificó una secuencia
-DIALOGNODE_IS_NOT_CHILD_OF_CANVASLAYER,"You didn't add this node to a CanvasLayer or Control node. If this was intentional, you can ignore this warning.","No añadiste este nodo como hijo de un nodo CanvasLayer o Control. Si fue intencional, puedes ignorar esta advertencia"

@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=2]
+
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/gray_n_black_stylebox.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/textalog/assets/fonts/Poppins/godot_fonts/Poppins-Normal.tres" type="DynamicFont" id=2]
+
+[resource]
+default_font = ExtResource( 2 )
+DialogNode/styles/bubble = null
+DialogNode/styles/name = ExtResource( 1 )
+DialogNode/styles/text = ExtResource( 1 )
