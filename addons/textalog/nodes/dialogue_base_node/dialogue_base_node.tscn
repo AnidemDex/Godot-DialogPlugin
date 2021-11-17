@@ -36,6 +36,7 @@ text_show_scroll_at_end = false
 [node name="Options" parent="." instance=ExtResource( 4 )]
 
 [node name="CharacterName" type="Label" parent="."]
+visible = false
 anchor_left = 0.023
 anchor_top = 0.643
 anchor_right = 0.181
