@@ -31,7 +31,7 @@ Characters are data containers to describe what expressions (portraits) are goin
 <!--TODO: Add an image here-->
 ## 🚩 Installation
 
-Download the lastest release and extract the ZIP file. Move the `addons` folders to the root of your project. It's that easy!
+Download the lastest release and extract the ZIP file. Move the `addons` folders to the root of your project. Finally, enable the plugin in your project settings, under `plugins` tab. It's that easy!
 
 > You can take a look in a more detailed tutorial in the [plugin's documentation](https://godotplugins.gitbook.io/textalog/getting-started/installation).
 
