@@ -4,8 +4,7 @@
 [ext_resource path="res://addons/dialog_plugin/Nodes/misc/resource_selector/texture_selector.gd" type="Script" id=2]
 [ext_resource path="res://addons/dialog_plugin/assets/Images/icons/event_icons/character/change_expression.png" type="Texture" id=3]
 
-
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -44,7 +43,7 @@ __meta__ = {
 margin_right = 24.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 24, 24 )
-custom_styles/hover = SubResource( 4 )
+custom_styles/hover = SubResource( 1 )
 custom_styles/focus = SubResource( 2 )
 custom_styles/normal = SubResource( 3 )
 text = "icon"
@@ -110,7 +109,7 @@ size_flags_horizontal = 5
 clip_text = true
 expand_icon = true
 script = ExtResource( 2 )
-filters = PoolStringArray( "*.png;PNG", "*.jpg;JPG" )
+filters = PoolStringArray( "*.png;PNG", "*.jpg;JPG", "*.tres;TRES" )
 
 [node name="RemoveImage" type="Button" parent="Body/PortraitContent/VBoxContainer"]
 margin_top = 150.0
