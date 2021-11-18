@@ -16,17 +16,20 @@ _If you find a bug, or want a feature to be included, feel free to _[_open a new
 
 A node implementation for dialog box and dialog bubble, fully customizable and build with common dialog commands to improve your game development in the dialogue interaction.
 
-#### 🪧 DialogNode
-
-![](.gitbook/assets/dialog\_box\_example\_1.png)
+![Dialog Node](.gitbook/assets/dialog\_box\_example\_1.png)
 
 #### 🗨️ DialogBubble
 
-![](.gitbook/assets/dialog\_bubble\_example\_1.png)
+![Dialog Bubble](.gitbook/assets/dialog\_bubble\_example\_1.png)
 
 ### 🐱‍👤 Characters and 🖼️ Portraits
 
 Characters are data containers to describe what expressions (portraits) are going to be used in dialogue and what properties of the dialogue will be overriden during the gameplay.
+
+### 🎨 Customization through Godot's Themes
+Modify the DialogNode through themes!
+
+![Theme Customization](./docs/.gitbook/assets/theme_customization.gif)
 
 ## 🧵 Usage
 

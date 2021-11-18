@@ -28,6 +28,11 @@ A node implementation for dialog box and dialog bubble, fully customizable and b
 Characters are data containers to describe what expressions (portraits) are going to be used in dialogue and what properties of the dialogue will be overriden during the gameplay.
 
 <!--TODO: Add an image here-->
+
+### 🎨 Customization through Godot's Themes
+Modify the DialogNode through themes!
+
+![Theme Customization](./docs/.gitbook/assets/theme_customization.gif)
 ## 🚩 Installation
 
 Download the lastest release and extract the ZIP file. Move the `addons` folders to the root of your project. Finally, enable the plugin in your project settings, under `plugins` tab. It's that easy!
