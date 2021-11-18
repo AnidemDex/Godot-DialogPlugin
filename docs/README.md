@@ -1,7 +1,5 @@
 # 🧐 What is Textalog?
 
-[![Godot Engine](https://img.shields.io/badge/Godot%20Engine-Plugin-blue?style=flat-square\&logo=godot-engine\&logoColor=white\&logoWidth=20)](./) [![GitHub license](https://img.shields.io/github/license/AnidemDex/Godot-DialogPlugin?style=flat-square)](../LICENSE/) [![GitHub issues](https://img.shields.io/github/issues/AnidemDex/Godot-DialogPlugin?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/issues) [![Godot Engine](https://img.shields.io/badge/Version-1.0-Green?style=flat-square)](https://github.com/AnidemDex/Godot-DialogPlugin/releases/tag/v1.0)
-
 ![](https://raw.githubusercontent.com/AnidemDex/Godot-DialogPlugin/main/.images/banner\_animation.gif)
 
 An user-friendly dialog system for Godot Engine with characters, text boxes, dialog bubbles and many more (planned) features for your games.
@@ -17,8 +15,6 @@ _If you find a bug, or want a feature to be included, feel free to _[_open a new
 A node implementation for dialog box and dialog bubble, fully customizable and build with common dialog commands to improve your game development in the dialogue interaction.
 
 ![Dialog Node](.gitbook/assets/dialog\_box\_example\_1.png)
-
-#### 🗨️ DialogBubble
 
 ![Dialog Bubble](.gitbook/assets/dialog\_bubble\_example\_1.png)
 
