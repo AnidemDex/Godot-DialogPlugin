@@ -1,3 +1,6 @@
+# Normalize EOL for all files that Git considers text files.
+* text=auto eol=lf
+
 # Ignore all top level files from dowload ZIP downloads.
 # This may help with the AssetLib download, making it easier to install.
 /.gitattributes     export-ignore
