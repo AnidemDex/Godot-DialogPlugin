@@ -11,22 +11,34 @@ class_name DialogManager
 ## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-dialogue-node
 ##
 
+## Anchor points that the bubble can take as reference
 enum BubblePosition {CENTER_LEFT,CENTER_RIGHT,CENTER_TOP,CENTER_DOWN}
 
+## Emmited when the text is fully displayed
 signal text_displayed
+## Emmited eveytime that a character is displayed
 signal character_displayed(character)
 
+## The speed that the node uses to wait before adding another character.
+## Values between 0.02 and 0.08 are good ones to use.
 export(float) var text_speed:float = 0.02
+## If true, DialogManager will try to scroll the text to fit new content
 export(bool) var text_autoscroll:bool = true
+## If true and [member text_autoscroll] is false, DialogManager will scale its size
+## to fit its content.
 export(bool) var text_fit_content_height:bool = true
+## If true, DialogManager will show an VScroll to scroll its content
 export(bool) var text_show_scroll_at_end:bool = true
+## The [member BubblePosition] that the bubble will take as reference point.
 export(BubblePosition) var bubble_anchor:int = BubblePosition.CENTER_DOWN setget _set_bubble_anchor
+## Offset of the bubble relative to the selected [member bubble_anchor]
 export(Vector2) var bubble_offset:Vector2 = Vector2() setget _set_bubble_offset
 
-var text_node:RichTextLabel
+## The node that actually displays the text
+var text_node:RichTextLabel setget ,get_text_node
 var _text_timer:Timer
 
-
+## Calling this method will make to all text to be visible inmediatly
 func display_all_text() -> void:
 	if text_node.visible_characters >= text_node.get_total_character_count():
 		return
@@ -34,10 +46,13 @@ func display_all_text() -> void:
 	_update_displayed_text()
 
 
+## Starts displaying the text setted by [method set_text]
 func display_text() -> void:
 	_text_timer.start(text_speed)
 
 
+## Set the text that this node will display. Call [method display_text]
+## after using this method to display the text.
 func set_text(text:String) -> void:
 	text_node.bbcode_text = text
 	text_node.visible_characters = 0
@@ -51,10 +66,13 @@ func set_text(text:String) -> void:
 	text_node.get_v_scroll().value = 0
 
 
+## Adds text to the current one at the end. No need to call
+## [method display_text] if the node is already displaying text
 func add_text(text:String) -> void:
 	text_node.append_bbcode(text)
 
 
+## Returns the used text_node
 func get_text_node() -> RichTextLabel:
 	if is_instance_valid(text_node):
 		return text_node

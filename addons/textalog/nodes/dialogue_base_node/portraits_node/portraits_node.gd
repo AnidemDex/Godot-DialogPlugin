@@ -10,10 +10,10 @@ class_name PortraitManager
 ## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/node-class/class_dialog-portrait-manager
 ##
 
-## Emmited when a character[DialogCharacterResource] portrait was added.
+## Emmited when a character portrait was added.
 signal portrait_added(character, new_portrait)
 
-## Emmited when a portrait was changed with a new one.
+## Emmited when a [Class Portrait] was changed with a new one.
 signal portrait_changed(character, new_portrait)
 
 ## Emmited when a character portrait was removed from scene.
@@ -27,6 +27,7 @@ onready var size_reference_node:Control = get_node(ReferenceSize) as Control
 # {CharacterResource: PortraitNode(TextureRect)}
 var portraits:Dictionary = {}
 
+## Adds a portrait for character to the scene
 func add_portrait(
 	character:Character,
 	portrait:Portrait,

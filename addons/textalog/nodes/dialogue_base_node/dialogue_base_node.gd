@@ -2,18 +2,28 @@ tool
 extends Control
 class_name DialogNode
 
+## Emmited when the text was fully displayed
 signal text_displayed
 
+## Emmited when a portrait was added
 signal portrait_added(character, portrait)
+## Emmited when a portrait that is already in the scene, changes
 signal portrait_changed(character, portrait)
+## Emmited when a portrait is removed from scene
 signal portrait_removed(character)
 
+## Emmited when an option is added
 signal option_added(option_button)
+## Emmited when an option is selected
 signal option_selected(option_string)
 
+## Path to [Class DialogManager] node
 export(NodePath) var DialogNode_Path:NodePath
+## Path to [Class PortraitManager] node
 export(NodePath) var PortraitNode_Path:NodePath
+## Path to [Class OptionsManager] node
 export(NodePath) var OptionsNode_Path:NodePath
+## Path to name node
 export(NodePath) var NameNode_path:NodePath
 
 var dialog_manager:DialogManager
@@ -41,6 +51,7 @@ func add_option(option:String) -> void:
 	options_manager.add_option(option)
 
 
+## Make an instance of this class. Required since you can't call .new() directly
 static func instance() -> Node:
 	var _default_scene := load("res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn") as PackedScene
 	return _default_scene.instance()
