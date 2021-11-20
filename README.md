@@ -77,7 +77,7 @@ Want to see the whole changelog? Take a look on the documentation, the [Changelo
 
 ## 📚 Documentation
 
-Now we have an official documentation! All the information about the plugin you will find it organized in the [documentation page]https://godotplugins.gitbook.io/textalog/). Tutorials, class information, FAQ and more will be added there, eventually.
+Now we have an official documentation! All the information about the plugin you will find it organized in the [documentation page](https://godotplugins.gitbook.io/textalog/). Tutorials, class information, FAQ and more will be added there, eventually.
 
 ## 📝Credits and license
 Made by [AnidemDex](https://github.com/anidemDex)
