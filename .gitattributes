@@ -5,6 +5,7 @@
 # This may help with the AssetLib download, making it easier to install.
 /.gitattributes     export-ignore
 /.gitignore         export-ignore
+/.gitbook.yaml      export-ignore
 /LICENSE            export-ignore
 /LICENSE.md         export-ignore
 /README.md          export-ignore
