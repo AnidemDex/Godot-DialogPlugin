@@ -39,6 +39,7 @@ func show_text(text:String, with_text_speed:float=0):
 	if not is_instance_valid(dialog_manager):
 		return
 	
+	show()
 	dialog_manager.set_text(text)
 	dialog_manager.display_text()
 
