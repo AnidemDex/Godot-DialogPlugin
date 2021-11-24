@@ -1,3 +1,4 @@
+tool
 extends "res://addons/textalog/events/character/char_event.gd"
 class_name EventCharacterLeave
 
