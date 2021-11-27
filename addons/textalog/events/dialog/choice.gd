@@ -23,9 +23,6 @@ func remove_option(option_name:String) -> void:
 
 
 func _set_option(option_name:String, value) -> void:
-	if (value == null) or not (value is Timeline):
-		value = Timeline.new()
-	
 	options[option_name] = value
 	emit_changed()
 	property_list_changed_notify()
@@ -53,7 +50,7 @@ func _on_option_selected(option) -> void:
 	var curr_tmln:Timeline = event_manager.timeline
 	var curr_queue := curr_tmln._event_queue.duplicate()
 	
-	var timeline:Timeline = options[option] as Timeline	
+	var timeline:Timeline = options[option] as Timeline
 	var events:Array = timeline.get_events()
 	events.invert()
 	
@@ -82,6 +79,21 @@ func _execute() -> void:
 	_options_manager.connect("option_selected", self, "_on_option_selected", [], CONNECT_ONESHOT)
 
 
+func property_can_revert(property):
+	if property.begins_with("options/"):
+		property = property.replace("options/", "")
+		if options.has(property):
+			return true
+	return false
+
+
+func property_get_revert(property):
+	if property.begins_with("options/"):
+		property = property.replace("options/", "")
+		if options.has(property):
+			return Timeline.new()
+
+
 func _get_property_list() -> Array:
 	var p := []
 	
@@ -99,7 +111,6 @@ func _get_property_list() -> Array:
 				"type":TYPE_OBJECT,
 				"usage":PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE,
 				"hint":PROPERTY_HINT_RESOURCE_TYPE,
-				"hint_string":"Timeline"
 			}
 		)
 	
