@@ -3,7 +3,9 @@ extends EditorPlugin
 
 const PLUGIN_NAME = "Textalog"
 
-var inspector_script_path := []
+var inspector_script_path := PoolStringArray([
+	"res://addons/textalog/events/dialog/choice_inspector.gd"
+])
 
 var _welcome_scene:PackedScene = load("res://addons/textalog/nodes/editor/welcome/hi.tscn")
 
@@ -73,6 +75,9 @@ func _add_inspector_events() -> void:
 	for script_path in inspector_script_path:
 		var inspector_plugin_script = load(script_path)
 		var inspector_plugin:EditorInspectorPlugin = inspector_plugin_script.new()
+		inspector_plugin.set("plugin_script", self)
+		inspector_plugin.set("editor_inspector", get_editor_interface().get_inspector())
+		inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
 		add_inspector_plugin(inspector_plugin)
 		_inspectors.append(inspector_plugin)
 
@@ -125,6 +130,8 @@ func _show_welcome() -> void:
 
 func enable_plugin() -> void:
 	_show_welcome()
+	if is_event_system_enabled():
+		_add_inspector_events()
 
 
 func _enter_tree() -> void:
