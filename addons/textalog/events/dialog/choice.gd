@@ -97,13 +97,6 @@ func property_get_revert(property):
 func _get_property_list() -> Array:
 	var p := []
 	
-	p.append(
-		{
-			"name":"Options",
-			"type":TYPE_NIL,
-			"usage":PROPERTY_USAGE_CATEGORY
-		}
-	)
 	for option in options:
 		p.append(
 			{
