@@ -40,8 +40,17 @@ class InspectorCategory extends Control:
 	func _ready() -> void:
 		var parent = get_parent()
 		if is_instance_valid(parent):
-			var category := parent.get_child(get_position_in_parent()-1) as Control
-			category.hide()
+			if get_position_in_parent() != 0:
+				var category := parent.get_child(get_position_in_parent()-1) as Control
+				category.hide()
+		
+		if icon == null:
+			icon = get_icon("Object", "EditorIcons")
+			update()
+		
+		if bg_color == null:
+			bg_color = get_color("prop_category", "Editor")
+			update()
 
 func get_category_instance() -> InspectorCategory:
 	return InspectorCategory.new()
