@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/event_node/event_node.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/textalog/nodes/misc/wrappable_container.gd" type="Script" id=2]
+[ext_resource path="res://addons/textalog/events/dialog/choice_event_node/choice_event.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_bottom = 4.0
+
+[sub_resource type="Theme" id=2]
+resource_local_to_scene = true
+HBoxContainer/constants/separation = 0
+Label/colors/font_color = Color( 0, 0, 0, 1 )
+PanelContainer/colors/default = Color( 0.6, 0.6, 0.6, 1 )
+PanelContainer/colors/event = Color( 0.984314, 0.694118, 0.235294, 1 )
+PanelContainer/colors/hover = Color( 0.156863, 0.572549, 0.843137, 1 )
+PanelContainer/colors/outline = Color( 0.0980392, 0.113725, 0.156863, 1 )
+PanelContainer/styles/panel = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+resource_local_to_scene = true
+content_margin_left = 8.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0.0980392, 0.113725, 0.156863, 1 )
+corner_radius_top_left = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id=4]
+resource_local_to_scene = true
+content_margin_left = 12.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.984314, 0.694118, 0.235294, 1 )
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+shadow_offset = Vector2( 2, 0 )
+
+[node name="EventNode" instance=ExtResource( 1 )]
+margin_bottom = 249.0
+theme = SubResource( 2 )
+script = ExtResource( 3 )
+OptionContainer = NodePath("HBoxContainer/VBoxContainer/Options")
+
+[node name="HBoxContainer" parent="." index="0"]
+margin_bottom = 66.0
+
+[node name="HBoxContainer" parent="HBoxContainer" index="0"]
+margin_bottom = 66.0
+
+[node name="Control" parent="HBoxContainer/HBoxContainer" index="0"]
+margin_bottom = 66.0
+
+[node name="NameContainer" parent="HBoxContainer" index="1"]
+custom_styles/panel = SubResource( 3 )
+
+[node name="VBoxContainer" parent="HBoxContainer" index="2"]
+margin_bottom = 66.0
+
+[node name="DescContainer" parent="HBoxContainer/VBoxContainer" index="0"]
+custom_styles/panel = SubResource( 4 )
+
+[node name="Options" type="Container" parent="HBoxContainer/VBoxContainer" index="1"]
+visible = false
+margin_top = 26.0
+margin_right = 351.0
+margin_bottom = 26.0
+size_flags_vertical = 0
+script = ExtResource( 2 )
+hseparation = 2
+vseparation = 2
