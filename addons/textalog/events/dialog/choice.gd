@@ -43,6 +43,12 @@ func _get(property: String):
 		if options.has(key):
 			return options[key]
 	
+	if property == "custom_event_node":
+		return load("res://addons/textalog/events/dialog/choice_event_node/choice_event.tscn").instance()
+	
+	if property == "q_options":
+		return options.size()
+	
 	return null
 
 
@@ -107,6 +113,13 @@ func _get_property_list() -> Array:
 			}
 		)
 	
+	p.append(
+		{
+			"name":"q_options",
+			"type":TYPE_INT,
+			"usage":PROPERTY_USAGE_NO_INSTANCE_STATE
+		}
+	)
 	return p
 
 
@@ -114,5 +127,5 @@ func _init() -> void:
 	event_color = Color("2892D7")
 	event_name = "Choice"
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/question_event.png") as Texture
-	
+	event_preview_string = "User will choose between [ {q_options} ] options."
 	options = options.duplicate()
