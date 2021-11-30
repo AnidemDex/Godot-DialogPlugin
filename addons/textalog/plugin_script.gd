@@ -3,8 +3,20 @@ extends EditorPlugin
 
 const PLUGIN_NAME = "Textalog"
 
+# Hardcoded paths because is not a good idea to rely on
+# scanning directories for now
 var inspector_script_path := PoolStringArray([
-	"res://addons/textalog/events/dialog/choice_inspector.gd"
+	"res://addons/textalog/events/dialog/choice_inspector.gd",
+	"res://addons/textalog/events/dialog/text_inspector.gd",
+])
+
+var event_scripts := PoolStringArray([
+	"res://addons/textalog/events/dialog/text.gd",
+	"res://addons/textalog/events/dialog/choice.gd",
+	"res://addons/textalog/events/character/change_expression.gd",
+	"res://addons/textalog/events/character/char_event.gd",
+	"res://addons/textalog/events/character/join.gd",
+	"res://addons/textalog/events/character/leave.gd",
 ])
 
 var _welcome_scene:PackedScene = load("res://addons/textalog/nodes/editor/welcome/hi.tscn")
@@ -24,43 +36,56 @@ func get_plugin_version() -> String:
 	return get_plugin_data("version")
 
 
-func is_event_system_enabled() -> bool:
+func get_event_system_plugin() -> EditorPlugin:
 	var editor_interface:EditorInterface = get_editor_interface()
-	var event_system = null
+	var event_system:EditorPlugin = null
 	
 	if get_tree().has_meta("EventSystem"):
 		# Mira si existe el "singleton"
-		event_system = get_tree().get_meta("EventSystem")
+		event_system = get_tree().get_meta("EventSystem") as EditorPlugin
 	else:
 		# Sino, buscalo manualmente
-		event_system = editor_interface.get_parent().get_node_or_null("Event System")
-	return is_instance_valid(event_system)
+		event_system = editor_interface.get_parent().get_node_or_null("Event System") as EditorPlugin
+	
+	return event_system
+
+
+func is_event_system_enabled() -> bool:
+	var editor_interface:EditorInterface = get_editor_interface()
+	var event_system = get_event_system_plugin()
+	var enabled = false
+	
+	
+	if is_instance_valid(event_system):
+		enabled = true
+	else:
+		# Finalmente, pregunta al editor, aunque llegados a este punto algo puede que este mal
+		enabled = editor_interface.is_plugin_enabled("event_system_plugin")
+		
+	return enabled
 
 
 func enable_event_system() -> void:
-	if is_event_system_enabled():
-		return
 	var editor_interface:EditorInterface = get_editor_interface()
 	editor_interface.set_plugin_enabled("event_system_plugin", true)
 	
 	var path = "res://addons/textalog/events/"
 	var file = ".gdignore"
-	if editor_interface.is_plugin_enabled("event_system_plugin"):
+	
+	if is_event_system_enabled():
 		var dir := Directory.new()
 		if dir.file_exists(path+file):
 			dir.remove(path+file)
+		
+		call_deferred("_remove_inspector_events")
+		call_deferred("_add_inspector_events")
+		call_deferred("_add_events_to_event_system")
 	else:
 		var _file := File.new()
 		_file.open(path+file,File.WRITE)
 		_file.close()
 		
-	
-	call_deferred("_remove_inspector_events")
-	call_deferred("_add_inspector_events")
-	
-	editor_interface.get_resource_filesystem().call_deferred("scan")
-	editor_interface.get_resource_filesystem().call_deferred("scan_sources")
-	editor_interface.get_resource_filesystem().call_deferred("update_script_classes")
+	_force_rescan()
 
 
 func _add_itself_to_editor_meta() -> void:
@@ -69,7 +94,7 @@ func _add_itself_to_editor_meta() -> void:
 
 func _add_inspector_events() -> void:
 	# if event system enabled
-	if not get_editor_interface().is_plugin_enabled("event_system_plugin"):
+	if not is_event_system_enabled():
 		push_warning("Event system is not enabled")
 		return
 	for script_path in inspector_script_path:
@@ -80,6 +105,30 @@ func _add_inspector_events() -> void:
 		inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
 		add_inspector_plugin(inspector_plugin)
 		_inspectors.append(inspector_plugin)
+
+
+func _add_events_to_event_system() -> void:
+	var event_system := get_event_system_plugin()
+	if is_instance_valid(event_system):
+		if event_system.has_method("register_event"):
+			for event_script in event_scripts:
+				var event = load(event_script)
+				event_system.call("register_event", event)
+		else:
+			# If the event system has no register_event for some reason, do it manually
+			var r_e_path := "res://addons/event_system_plugin/resources/registered_events/registered_events.tres"
+			var registered_events:Resource = load(r_e_path)
+			# shared array, be careful
+			var events:Array = registered_events.get("events").duplicate()
+			for event_script in event_scripts:
+				var event = load(event_script)
+				if not event in events:
+					events.append(event)
+			registered_events.set("events", events)
+			var err = ResourceSaver.save(r_e_path, registered_events)
+			if err != OK:
+				push_error("There was an error while trying to register events: %s"%err)
+			registered_events.emit_changed()
 
 
 func _add_version_button() -> void:
@@ -128,10 +177,19 @@ func _show_welcome() -> void:
 	get_editor_interface().get_base_control().add_child(_popup)
 
 
+func _force_rescan() -> void:
+	var editor_interface:EditorInterface = get_editor_interface()
+	editor_interface.get_resource_filesystem().call_deferred("scan")
+	editor_interface.get_resource_filesystem().call_deferred("scan_sources")
+	editor_interface.get_resource_filesystem().call_deferred("update_script_classes")
+
+
 func enable_plugin() -> void:
 	_show_welcome()
 	if is_event_system_enabled():
 		_add_inspector_events()
+		_add_events_to_event_system()
+		_force_rescan()
 
 
 func _enter_tree() -> void:
