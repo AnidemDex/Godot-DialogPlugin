@@ -14,12 +14,12 @@ func add_option(option:String) -> void:
 	var option_button:Button = OptionButtonScene.instance() as Button
 	option_button.connect("ready", self, "emit_signal", ["option_added", option_button])
 	option_button.connect("pressed", self, "_on_OptionButton_pressed", [option])
-	option_button.connect("pressed", self, "remove_options")
 	option_button.text = option
 	add_child(option_button)
 
 
 func _on_OptionButton_pressed(option:String) -> void:
+	remove_options()
 	emit_signal("option_selected", option)
 
 
