@@ -66,6 +66,7 @@ func _fake_ready() -> void:
 	_set_default_nodes()
 	_connect_dialog_manager_signals()
 	_connect_portrait_manager_signals()
+	_connect_options_manager_signals()
 	
 	if not Engine.editor_hint:
 		hide()
@@ -119,6 +120,15 @@ func _connect_portrait_manager_signals():
 	if not portrait_manager.is_connected("portrait_removed", self, "__on_PortraitManager_portrait_removed"):
 		portrait_manager.connect("portrait_removed", self, "__on_PortraitManager_portrait_removed")
 
+
+func _connect_options_manager_signals() -> void:
+	if not is_instance_valid(options_manager):
+		return
+	
+	if not options_manager.is_connected("option_added", self, "__on_OptionManager_option_added"):
+		options_manager.connect("option_added", self, "__on_OptionManager_option_added")
+	if not options_manager.is_connected("option_selected", self, "__on_OptionManager_option_selected"):
+		options_manager.connect("option_selected", self, "__on_OptionManager_option_selected")
 
 func _have_no_childs() -> bool:
 	return get_child_count() == 0
