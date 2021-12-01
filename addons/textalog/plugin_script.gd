@@ -100,6 +100,10 @@ func _add_inspector_events() -> void:
 	for script_path in inspector_script_path:
 		var inspector_plugin_script = load(script_path)
 		var inspector_plugin:EditorInspectorPlugin = inspector_plugin_script.new()
+		
+		if inspector_plugin in _inspectors:
+			continue
+		
 		inspector_plugin.set("plugin_script", self)
 		inspector_plugin.set("editor_inspector", get_editor_interface().get_inspector())
 		inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
@@ -184,17 +188,24 @@ func _force_rescan() -> void:
 	editor_interface.get_resource_filesystem().call_deferred("update_script_classes")
 
 
-func enable_plugin() -> void:
-	_show_welcome()
+func _initialize() -> void:
 	if is_event_system_enabled():
 		_add_inspector_events()
 		_add_events_to_event_system()
 		_force_rescan()
 
 
+func enable_plugin() -> void:
+	_show_welcome()
+
+
 func _enter_tree() -> void:
 	_add_version_button()
 	_add_itself_to_editor_meta()
+
+
+func _ready() -> void:
+	_initialize()
 
 
 func _exit_tree() -> void:
