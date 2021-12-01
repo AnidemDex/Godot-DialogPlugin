@@ -1,21 +1,21 @@
 tool
 extends Event
 
-const SAME_AS_TEXT = "__SAME_AS_TEXT__"
 
 # Dialog
-export(String) var display_name:String = "" setget set_display_name
-export(String) var translation_key:String = SAME_AS_TEXT setget set_translation_key
-export(String, MULTILINE) var text:String = "" setget set_text
-export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
+var display_name:String = "" setget set_display_name
+var translation_key:String = "" setget set_translation_key
+var text:String = "" setget set_text
 export(bool) var continue_previous_text:bool = false setget enable_text_ammend
+export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
+
 
 # Audio
-export(bool) var audio_same_as_character:bool = true setget use_character_sounds
-export(Array, AudioStream) var audio_sounds:Array = [] setget set_audio_sounds
-export(bool) var audio_loop:bool = false setget set_audio_loop
-export(bool) var audio_force:bool = false setget force_audio
-export(String) var audio_bus:String = "Master" setget set_audio_bus
+var audio_same_as_character:bool = true setget use_character_sounds
+var audio_sounds:Array = [] setget set_audio_sounds
+var audio_loop:bool = false setget set_audio_loop
+var audio_force:bool = false setget force_audio
+var audio_bus:String = "Master" setget set_audio_bus
 
 var character:Character = null setget set_character
 
@@ -40,7 +40,6 @@ func set_text(value:String) -> void:
 func set_text_speed(value:float) -> void:
 	text_speed = value
 	emit_changed()
-	property_list_changed_notify()
 
 
 func enable_text_ammend(value:bool) -> void:
@@ -50,7 +49,7 @@ func enable_text_ammend(value:bool) -> void:
 
 
 func set_translation_key(value:String) -> void:
-	translation_key = value if value != "" else SAME_AS_TEXT
+	translation_key = value
 	emit_changed()
 	property_list_changed_notify()
 
@@ -109,7 +108,7 @@ func _prepare_text_to_show() -> void:
 
 	var final_text := ""
 
-	if translation_key != SAME_AS_TEXT:
+	if translation_key != "":
 		final_text = tr(translation_key)
 	else:
 		final_text = text
@@ -209,6 +208,63 @@ func _execute() -> void:
 	_configure_sound_generator()
 	_prepare_text_to_show()
 	_show_text()
+
+
+func _get_property_list() -> Array:
+	var p := []
+	var default_usage := PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE
+	
+	# Text
+	
+	p.append({"type":TYPE_STRING, "name":"display_name", "usage":default_usage, "hint":PROPERTY_HINT_PLACEHOLDER_TEXT})
+	p.append({"type":TYPE_STRING, "name":"text", "usage":default_usage, "hint":PROPERTY_HINT_MULTILINE_TEXT})
+	
+	# Audio
+	p.append({"type":TYPE_NIL, "name":"Audio", "usage":PROPERTY_USAGE_GROUP, "hint_string":"audio_"})
+	
+	p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
+	p.append({"type":TYPE_ARRAY, "name":"audio_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+	p.append({"type":TYPE_BOOL, "name":"audio_loop", "usage":default_usage})
+	p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
+	
+	var audio_buses:String = ""
+	for bus_idx in AudioServer.bus_count:
+		audio_buses += AudioServer.get_bus_name(bus_idx)
+	
+	p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
+	
+	
+	p.append({"type":TYPE_STRING, "name":"translation_key", "usage":default_usage, "hint":PROPERTY_HINT_PLACEHOLDER_TEXT, "hint_string":"Same as text"})
+	
+	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Character"})
+	return p
+
+
+func property_can_revert(property:String) -> bool:
+	var registered_properties = []
+	for p in get_property_list():
+		if p["usage"] & 8199 == PROPERTY_USAGE_SCRIPT_VARIABLE:
+			registered_properties.append(p["name"])
+	return property in registered_properties
+
+
+func property_get_revert(property:String):
+	# get_property_default_value() doesn't return the default value of the script
+	# so, return must be done manually
+	# TODO: Open an issue about this
+	# var default_value = (get_script() as Script).get_property_default_value(property)
+	
+	match property:
+		"audio_same_as_character":
+			return true
+		"audio_sounds":
+			return [].duplicate()
+		"audio_loop", "audio_force":
+			return false
+		"audio_bus":
+			return "Master"
+		"translation_key", "text", "display_name":
+			return ""
 
 
 func _init() -> void:
