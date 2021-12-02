@@ -11,7 +11,7 @@ export(bool) var flip_v:bool = false setget set_flip_v
 func _init() -> void:
 	event_name = "Join"
 	event_hint = "Make a character portrait joins in the scene."
-	event_preview_string = "{character_name} will join with expression {expression_name}. X:{percent_position_x} | Y:{percent_position_y}"
+	event_preview_string = "[{character_name}] will join with expression [{expression_name}]. Position -> X:[{percent_position_x}] | Y:[{percent_position_y}]"
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/character_join.png") as Texture
 
 
