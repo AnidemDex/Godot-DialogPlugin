@@ -32,3 +32,28 @@ func set_character(value:Character) -> void:
 func set_selected_portrait(value:int) -> void:
 	selected_portrait = value
 	emit_changed()
+
+func _get(property: String):
+	if property == "character_name":
+		if character:
+			return character.display_name
+		else:
+			return "???"
+	
+	if property == "expression_name":
+		var xpsn := get_selected_portrait()
+		if xpsn:
+			return xpsn.get("name")
+		else:
+			return "???"
+		
+
+func _get_property_list() -> Array:
+	var p := []
+	p.append(
+		{"type":TYPE_STRING,"name":"character_name", "usage":0}
+	)
+	p.append(
+		{"type":TYPE_STRING, "name":"expression_name", "usage":0}
+	)
+	return p
