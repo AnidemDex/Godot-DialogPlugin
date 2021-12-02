@@ -14,7 +14,6 @@ var event_scripts := PoolStringArray([
 	"res://addons/textalog/events/dialog/text.gd",
 	"res://addons/textalog/events/dialog/choice.gd",
 	"res://addons/textalog/events/character/change_expression.gd",
-	"res://addons/textalog/events/character/char_event.gd",
 	"res://addons/textalog/events/character/join.gd",
 	"res://addons/textalog/events/character/leave.gd",
 ])
