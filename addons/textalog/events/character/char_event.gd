@@ -9,7 +9,7 @@ extends Event
 var character:Character = null setget set_character
 
 ## The portrait index selected for this event.
-var selected_portrait:int = 0 setget set_selected_portrait
+var selected_portrait:int = -1 setget set_selected_portrait
 
 func _init() -> void:
 	event_color = Color("4CB963")
@@ -27,11 +27,14 @@ func get_selected_portrait() -> Portrait:
 func set_character(value:Character) -> void:
 	character = value
 	emit_changed()
+	property_list_changed_notify()
 
 
 func set_selected_portrait(value:int) -> void:
 	selected_portrait = value
 	emit_changed()
+	property_list_changed_notify()
+
 
 func _get(property: String):
 	if property == "character_name":
@@ -50,10 +53,20 @@ func _get(property: String):
 
 func _get_property_list() -> Array:
 	var p := []
-	p.append(
-		{"type":TYPE_STRING,"name":"character_name", "usage":0}
-	)
-	p.append(
-		{"type":TYPE_STRING, "name":"expression_name", "usage":0}
-	)
+	var default_usage := PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE
+	p.append({"type":TYPE_STRING,"name":"character_name", "usage":0})
+	p.append({"type":TYPE_STRING, "name":"expression_name", "usage":0})
+	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Character"})
+	
+	if not get("selected_portrait_ignore"):
+		var portraits_hint = "[None]:-1"
+		# haha for loops goes brrrr~
+		if character:
+			for portrait_idx in character.portraits.size():
+				var portrait = character.portraits[portrait_idx] as Portrait
+				if portrait == null:
+					continue
+				portraits_hint += ","+portrait.name + ":%s"%portrait_idx
+			
+		p.append({"type":TYPE_INT, "name":"selected_portrait", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":portraits_hint})
 	return p
