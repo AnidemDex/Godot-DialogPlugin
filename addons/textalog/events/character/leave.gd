@@ -28,3 +28,8 @@ func _execute() -> void:
 
 func _on_portrait_removed(_c) -> void:
 	finish()
+
+
+func _get(property: String):
+	if property == "selected_portrait_ignore":
+		return true
