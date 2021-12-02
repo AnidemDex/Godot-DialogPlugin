@@ -5,8 +5,8 @@ class_name EventCharacterChangeExpression
 func _init() -> void:
 	event_name = "Change expression"
 	event_hint = "Changes the portrait of the character"
-	event_preview_string = "{character_name} expression will be {expression_name}"
-	event_icon = load("res://addons/textalog/assets/icons/event_icons/character_leave.png") as Texture
+	event_preview_string = "[{character_name}] expression will be [{expression_name}]"
+	event_icon = load("res://addons/textalog/assets/icons/event_icons/change_expression.png") as Texture
 
 
 func _execute() -> void:
