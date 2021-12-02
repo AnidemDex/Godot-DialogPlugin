@@ -5,7 +5,7 @@ class_name EventCharacterLeave
 func _init() -> void:
 	event_name = "Leave"
 	event_hint = "Make a character portrait leaves the scene."
-	event_preview_string = "{character_name}"
+	event_preview_string = "[{character_name}] will leave the scene"
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/character_leave.png") as Texture
 
 
