@@ -6,7 +6,7 @@ var options:Dictionary = {}
 var _options_manager:OptionsManager
 
 func add_option(option_name:String) -> void:
-	options[option_name] = Timeline.new()
+	options[option_name] = _get_empty_timeline("Option "+option_name)
 	emit_changed()
 	property_list_changed_notify()
 
@@ -97,7 +97,14 @@ func property_get_revert(property):
 	if property.begins_with("options/"):
 		property = property.replace("options/", "")
 		if options.has(property):
-			return Timeline.new()
+			return _get_empty_timeline("Option "+property)
+
+
+func _get_empty_timeline(with_name:String="") -> Timeline:
+	var tmln := Timeline.new()
+	if with_name != "":
+		tmln.resource_name = with_name
+	return tmln
 
 
 func _get_property_list() -> Array:
