@@ -220,25 +220,25 @@ func can_handle(object: Object) -> bool:
 	
 	if object is ChoiceClass:
 		return true
+	
+	if object is JoinClass:
+		return true
 		
 	return false
 
 
 func parse_begin(object: Object) -> void:
-	if not(object is ChoiceClass):
-		return
-	
-	var custom_category := InspectorTools.InspectorCategory.new()
-	custom_category.label = "OptionTool"
-	custom_category.icon = editor_gui.get_icon("Tools", "EditorIcons")
-	custom_category.bg_color = editor_gui.get_color("prop_category", "Editor")
-	
-	add_custom_control(custom_category)
-	
-	var custom_control:OptionAdder = OptionAdder.new()
-	custom_control.edited_object = object
-	custom_control.undo_redo = plugin_script.get_undo_redo()
-	add_custom_control(custom_control)
+	if object is ChoiceClass:
+		var custom_category := InspectorTools.InspectorCategory.new()
+		custom_category.label = "OptionTool"
+		custom_category.icon = editor_gui.get_icon("Tools", "EditorIcons")
+		custom_category.bg_color = editor_gui.get_color("prop_category", "Editor")
+		add_custom_control(custom_category)
+		
+		var custom_control:OptionAdder = OptionAdder.new()
+		custom_control.edited_object = object
+		custom_control.undo_redo = plugin_script.get_undo_redo()
+		add_custom_control(custom_control)
 
 
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
