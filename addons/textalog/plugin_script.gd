@@ -5,10 +5,6 @@ const PLUGIN_NAME = "Textalog"
 
 # Hardcoded paths because is not a good idea to rely on
 # scanning directories for now
-var inspector_script_path := PoolStringArray([
-	"res://addons/textalog/events/dialog/choice_inspector.gd",
-	"res://addons/textalog/events/dialog/text_inspector.gd",
-])
 
 var event_scripts := PoolStringArray([
 	"res://addons/textalog/events/dialog/text.gd",
@@ -23,7 +19,7 @@ var _welcome_scene:PackedScene = load("res://addons/textalog/nodes/editor/welcom
 var _plugin_data := ConfigFile.new()
 var _version_button:BaseButton
 
-var _inspectors := []
+var inspector_plugin:EditorInspectorPlugin = load("res://addons/textalog/events/inspector.gd").new()
 
 
 func get_plugin_data(data:String) -> String:
@@ -96,18 +92,11 @@ func _add_inspector_events() -> void:
 	if not is_event_system_enabled():
 		push_warning("Event system is not enabled")
 		return
-	for script_path in inspector_script_path:
-		var inspector_plugin_script = load(script_path)
-		var inspector_plugin:EditorInspectorPlugin = inspector_plugin_script.new()
-		
-		if inspector_plugin in _inspectors:
-			continue
-		
-		inspector_plugin.set("plugin_script", self)
-		inspector_plugin.set("editor_inspector", get_editor_interface().get_inspector())
-		inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
-		add_inspector_plugin(inspector_plugin)
-		_inspectors.append(inspector_plugin)
+	
+	inspector_plugin.set("plugin_script", self)
+	inspector_plugin.set("editor_inspector", get_editor_interface().get_inspector())
+	inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
+	add_inspector_plugin(inspector_plugin)
 
 
 func _add_events_to_event_system() -> void:
@@ -158,9 +147,7 @@ func _add_version_button() -> void:
 
 
 func _remove_inspector_events() -> void:
-	for inspector_plugin in _inspectors:
-		remove_inspector_plugin(inspector_plugin)
-	_inspectors = []
+	remove_inspector_plugin(inspector_plugin)
 
 
 func _remove_itself_from_editor_meta() -> void:
