@@ -2,11 +2,12 @@
 
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialog_node/dialog_node.gd" type="Script" id=1]
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.gd" type="Script" id=2]
-[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd" type="Script" id=3]
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/options_node/options_node.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/textalog/assets/themes/default_theme/default.tres" type="Theme" id=5]
 
 [node name="DialogNode" type="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 5 )
@@ -16,11 +17,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 DialogNode_Path = NodePath("DialogManager")
-PortraitNode_Path = NodePath("Portraits")
+PortraitNode_Path = NodePath("PortraitManager")
 OptionsNode_Path = NodePath("Options")
 NameNode_path = NodePath("CharacterName")
 
-[node name="Portraits" parent="." instance=ExtResource( 3 )]
+[node name="PortraitManager" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="DialogManager" type="Container" parent="."]
 anchor_left = 0.028

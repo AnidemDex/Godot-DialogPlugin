@@ -1,3 +1,4 @@
+tool
 extends Control
 class_name PortraitManager
 
@@ -19,10 +20,10 @@ signal portrait_changed(character, new_portrait)
 ## Emmited when a character portrait was removed from scene.
 signal portrait_removed(character)
 
+export(Vector2) var preview_relative_position := Vector2(0.35,0.2) setget _set_preview_relative_position
+export(Vector2) var preview_relative_size := Vector2(0.3, 0.7) setget _set_preview_relative_size
 
-export(NodePath) var ReferenceSize:NodePath
-
-onready var size_reference_node:Control = get_node(ReferenceSize) as Control
+var size_reference_node:Control
 
 # {CharacterResource: PortraitNode(TextureRect)}
 var portraits:Dictionary = {}
@@ -89,13 +90,6 @@ func add_portrait(
 	emit_signal("portrait_added", character, portrait)
 
 
-func _get_relative_position(from:Vector2) -> Vector2:
-	var _position:Vector2 = Vector2()
-	_position.x = float(lerp(0, rect_size.x, from.x))
-	_position.y = float(lerp(0, rect_size.y, from.y))
-	return _position
-
-
 func remove_portrait(character:Character) -> void:
 	if character:
 		var _old_p = portraits.get(character, Control.new())
@@ -127,3 +121,50 @@ func change_portrait(character:Character, portrait:Portrait) -> void:
 
 func grab_portrait_focus(char_portrait_node:TextureRect) -> void:
 	char_portrait_node.raise()
+
+
+##########
+# Private things
+##########
+
+func _get_relative_position(from:Vector2) -> Vector2:
+	var _position:Vector2 = Vector2()
+	_position.x = float(lerp(0, rect_size.x, from.x))
+	_position.y = float(lerp(0, rect_size.y, from.y))
+	return _position
+
+
+func _set_preview_relative_position(value:Vector2) -> void:
+	preview_relative_position = value
+	update()
+
+
+func _set_preview_relative_size(value:Vector2) -> void:
+	preview_relative_size = value
+	update()
+
+
+func _init() -> void:
+	size_reference_node = ReferenceRect.new()
+	size_reference_node.anchor_left = 0
+	size_reference_node.anchor_top = 0
+	size_reference_node.anchor_right = 1
+	size_reference_node.anchor_bottom = 1
+	add_child(size_reference_node)
+
+
+func _notification(what) -> void:
+	match what:
+		NOTIFICATION_DRAW:
+			_fake_draw()
+		
+		NOTIFICATION_PREDELETE:
+			if is_instance_valid(size_reference_node):
+				size_reference_node.queue_free()
+
+
+func _fake_draw() -> void:
+	var _relative_position := _get_relative_position(preview_relative_position)
+	var _relative_size := _get_relative_position(preview_relative_size)
+	size_reference_node.rect_position = _relative_position
+	size_reference_node.rect_size = _relative_size
