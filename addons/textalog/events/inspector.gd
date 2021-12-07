@@ -204,6 +204,36 @@ class OptionAdder extends PanelContainer:
 		undo_redo.commit_action()
 
 
+class PortraitPreview extends PanelContainer:
+	var p_m:PortraitManager
+	var d_m:DialogManager
+	var object:Resource
+
+	func _init() -> void:
+		p_m = PortraitManager.new()
+		d_m = DialogManager.new()
+		d_m.size_flags_vertical = SIZE_SHRINK_END
+		d_m.text_autoscroll = false
+		d_m.text_show_scroll_at_end = false
+		d_m.disconnect("draw", d_m.text_node, "set")
+
+		add_child(p_m)
+		add_child(d_m)
+		
+		rect_clip_content = true
+	
+	func _ready() -> void:
+		d_m.set_text("This is a placeholder.\nRed rectangle is just a visual reference.")
+		d_m.display_all_text()
+		_on_event_changed()
+	
+	
+	func _on_event_changed() -> void:
+		p_m.preview_relative_position.x = object.get("percent_position_x")
+		p_m.preview_relative_position.y = object.get("percent_position_y")
+		p_m.update()
+
+
 const InspectorTools = preload("res://addons/textalog/core/inspector_tools.gd")
 
 var plugin_script:EditorPlugin
@@ -243,10 +273,16 @@ func parse_begin(object: Object) -> void:
 	
 	if object is _JoinEvent:
 		var custom_category := InspectorTools.InspectorCategory.new()
-		custom_category.label = "OptionTool"
-		custom_category.icon = editor_gui.get_icon("Tools", "EditorIcons")
+		custom_category.label = "Preview"
+		custom_category.icon = editor_gui.get_icon("GuiVisibilityXray", "EditorIcons")
 		custom_category.bg_color = editor_gui.get_color("prop_category", "Editor")
 		add_custom_control(custom_category)
+
+		var custom_control := PortraitPreview.new()
+		custom_control.rect_min_size = Vector2(0, 254)
+		custom_control.object = object
+		object.connect("changed", custom_control, "_on_event_changed")
+		add_custom_control(custom_control)
 
 
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
