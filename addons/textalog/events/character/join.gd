@@ -38,19 +38,16 @@ func _execute() -> void:
 func set_percent_x(value:float) -> void:
 	percent_position_x = clamp(value, 0, 1)
 	emit_changed()
-	property_list_changed_notify()
 
 
 func set_percent_y(value:float) -> void:
 	percent_position_y = clamp(value, 0, 1)
 	emit_changed()
-	property_list_changed_notify()
 
 
 func set_rotation(value:float) -> void:
 	rotation = clamp(value, -360, 360)
 	emit_changed()
-	property_list_changed_notify()
 
 
 func set_flip_h(value:bool) -> void:
