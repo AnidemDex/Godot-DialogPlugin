@@ -212,16 +212,17 @@ var editor_gui:Control
 
 var TextClass = load("res://addons/textalog/events/dialog/text.gd")
 var ChoiceClass = load("res://addons/textalog/events/dialog/choice.gd")
+var _JoinEvent = load("res://addons/textalog/events/character/join.gd")
 
 func can_handle(object: Object) -> bool:
-	
+
 	if object is TextClass:
 		return true
 	
 	if object is ChoiceClass:
 		return true
 	
-	if object is JoinClass:
+	if object is _JoinEvent:
 		return true
 		
 	return false
@@ -239,9 +240,17 @@ func parse_begin(object: Object) -> void:
 		custom_control.edited_object = object
 		custom_control.undo_redo = plugin_script.get_undo_redo()
 		add_custom_control(custom_control)
+	
+	if object is _JoinEvent:
+		var custom_category := InspectorTools.InspectorCategory.new()
+		custom_category.label = "OptionTool"
+		custom_category.icon = editor_gui.get_icon("Tools", "EditorIcons")
+		custom_category.bg_color = editor_gui.get_color("prop_category", "Editor")
+		add_custom_control(custom_category)
 
 
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
+
 	if object is TextClass:
 		if type == TYPE_ARRAY and path == "audio_sounds":
 			if object.get("audio_same_as_character"):
