@@ -223,15 +223,43 @@ class PortraitPreview extends PanelContainer:
 		rect_clip_content = true
 	
 	func _ready() -> void:
-		d_m.set_text("This is a placeholder.\nRed rectangle is just a visual reference.")
-		d_m.display_all_text()
-		_on_event_changed()
+		d_m.set_text("This is a placeholder.\nRectangle is just a visual reference.")
+		d_m.display_text()
 	
 	
 	func _on_event_changed() -> void:
-		p_m.preview_relative_position.x = object.get("percent_position_x")
-		p_m.preview_relative_position.y = object.get("percent_position_y")
-		p_m.update()
+		var rect_data := {
+			"ignore_reference_size":object.get("rect_ignore_reference_size"),
+			"ignore_reference_position":object.get("rect_ignore_reference_position"),
+			"ignore_reference_rotation":object.get("rect_ignore_reference_rotation"),
+			"size":object.get("rect_percent_size"),
+			"position":object.get("rect_percent_position"),
+			"rotation":object.get("rect_rotation")
+		}
+		var texture_data := {
+			"expand":object.get("texture_expand"),
+			"stretch_mode":object.get("texture_stretch_mode"),
+			"flip_h":object.get("texture_flip_h"),
+			"flip_v":object.get("texture_flip_v")
+		}
+		var chara = object.get("character")
+		var portrait = object.call("get_selected_portrait")
+		
+		var args := [chara, portrait, rect_data, texture_data]
+		
+		if rect_data["ignore_reference_size"] or rect_data["ignore_reference_position"] or rect_data["ignore_reference_rotation"]:
+			p_m.reference_rect.border_color = get_color("disabled_font_color", "Editor")
+		else:
+			p_m.reference_rect.border_color = get_color("warning_color", "Editor")
+		
+		p_m.remove_all_portraits()
+		p_m.call_deferred("callv","add_portrait", args)
+	
+	
+	func _notification(what: int) -> void:
+		match what:
+			NOTIFICATION_RESIZED:
+				_on_event_changed()
 
 
 const InspectorTools = preload("res://addons/textalog/core/inspector_tools.gd")
