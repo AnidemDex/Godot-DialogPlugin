@@ -56,7 +56,7 @@ func _get_property_list() -> Array:
 	var default_usage := PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE
 	p.append({"type":TYPE_STRING,"name":"character_name", "usage":0})
 	p.append({"type":TYPE_STRING, "name":"expression_name", "usage":0})
-	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Character"})
+	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Resource"})
 	
 	if not get("selected_portrait_ignore"):
 		var portraits_hint = "[None]:-1"
