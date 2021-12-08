@@ -19,7 +19,8 @@ var _welcome_scene:PackedScene = load("res://addons/textalog/nodes/editor/welcom
 var _plugin_data := ConfigFile.new()
 var _version_button:BaseButton
 
-var inspector_plugin:EditorInspectorPlugin = load("res://addons/textalog/events/inspector.gd").new()
+var inspector_plugin_path:String = "res://addons/textalog/events/inspector.gd"
+var inspector_plugin:EditorInspectorPlugin
 
 
 func get_plugin_data(data:String) -> String:
@@ -93,6 +94,13 @@ func _add_inspector_events() -> void:
 		push_warning("Event system is not enabled")
 		return
 	
+	if not ResourceLoader.exists(inspector_plugin_path):
+		return
+	
+	if inspector_plugin != null:
+		return
+	
+	inspector_plugin = load(inspector_plugin_path).new()
 	inspector_plugin.set("plugin_script", self)
 	inspector_plugin.set("editor_inspector", get_editor_interface().get_inspector())
 	inspector_plugin.set("editor_gui", get_editor_interface().get_base_control())
@@ -147,7 +155,8 @@ func _add_version_button() -> void:
 
 
 func _remove_inspector_events() -> void:
-	remove_inspector_plugin(inspector_plugin)
+	if inspector_plugin != null:
+		remove_inspector_plugin(inspector_plugin)
 
 
 func _remove_itself_from_editor_meta() -> void:
