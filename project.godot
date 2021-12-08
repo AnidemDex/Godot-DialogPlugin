@@ -35,9 +35,29 @@ _global_script_classes=[ {
 "path": "res://addons/event_system_plugin/resources/event_class/event_class.gd"
 }, {
 "base": "Event",
+"class": "EventCall",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/call.gd"
+}, {
+"base": "Event",
 "class": "EventChangeTimeline",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/change_timeline.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterChangeExpression",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/change_expression.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterJoin",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/join.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterLeave",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/leave.gd"
 }, {
 "base": "Event",
 "class": "EventComment",
@@ -55,6 +75,11 @@ _global_script_classes=[ {
 "path": "res://addons/event_system_plugin/events/emit_signal.gd"
 }, {
 "base": "Event",
+"class": "EventHide",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/hide.gd"
+}, {
+"base": "Event",
 "class": "EventJumpToEvent",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/jump_to.gd"
@@ -68,6 +93,11 @@ _global_script_classes=[ {
 "class": "EventSet",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/set.gd"
+}, {
+"base": "Event",
+"class": "EventShow",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/show.gd"
 }, {
 "base": "Event",
 "class": "EventWait",
@@ -100,13 +130,19 @@ _global_script_class_icons={
 "DialogManager": "",
 "DialogNode": "",
 "Event": "res://addons/event_system_plugin/assets/icons/timeline_icon.png",
+"EventCall": "",
 "EventChangeTimeline": "",
+"EventCharacterChangeExpression": "",
+"EventCharacterJoin": "",
+"EventCharacterLeave": "",
 "EventComment": "",
 "EventCondition": "",
 "EventEmitSignal": "",
+"EventHide": "",
 "EventJumpToEvent": "",
 "EventManager": "",
 "EventSet": "",
+"EventShow": "",
 "EventWait": "",
 "OptionsManager": "",
 "Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
@@ -136,7 +172,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/textalog/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/event_system_plugin/plugin.cfg" )
 
 [importer_defaults]
 
