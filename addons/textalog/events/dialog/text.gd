@@ -230,7 +230,8 @@ func _get_property_list() -> Array:
 	
 	var audio_buses:String = ""
 	for bus_idx in AudioServer.bus_count:
-		audio_buses += AudioServer.get_bus_name(bus_idx)
+		audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
+	audio_buses = audio_buses.trim_suffix(",")
 	
 	p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
 	
