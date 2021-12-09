@@ -126,6 +126,7 @@ func _configure_display_name() -> void:
 	if not is_instance_valid(name_node):
 		return
 	
+	name_node.hide()
 	if display_name != "":
 		name_node.show()
 
