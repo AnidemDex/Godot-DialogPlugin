@@ -237,7 +237,7 @@ func _get_property_list() -> Array:
 	
 	p.append({"type":TYPE_STRING, "name":"translation_key", "usage":default_usage, "hint":PROPERTY_HINT_PLACEHOLDER_TEXT, "hint_string":"Same as text"})
 	
-	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Character"})
+	p.append({"type":TYPE_OBJECT, "name":"character", "usage":default_usage, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Resource"})
 	return p
 
 
