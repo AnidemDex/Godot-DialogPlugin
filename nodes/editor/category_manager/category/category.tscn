@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/category_manager/category/category.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="EventCategory" type="PanelContainer"]
+margin_right = 117.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+CategoryNamePath = NodePath("VBoxContainer/Label")
+EventContainerPath = NodePath("VBoxContainer/HBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 117.0
+margin_bottom = 18.0
+custom_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 117.0
+margin_bottom = 14.0
+text = "{CategoryName}"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 14.0
+margin_right = 117.0
+margin_bottom = 18.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 117.0
+margin_bottom = 18.0
+alignment = 1
