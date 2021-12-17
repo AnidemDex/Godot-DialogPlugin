@@ -19,4 +19,6 @@
 tests/              export-ignore
 docs/               export-ignore
 addons/WAT/         export-ignore
+# Ignore the event system subtree too, just in case
+addons/event_system_plugin/ export-ignore
 .github/            export-ignore
