@@ -200,7 +200,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	_initialize()
+	call_deferred("_initialize")
 
 
 func _exit_tree() -> void:
