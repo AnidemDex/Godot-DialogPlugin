@@ -16,7 +16,7 @@ var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_sounds:Array = [] setget set_audio_sounds
 var audio_loop:bool = false setget set_audio_loop
-var audio_force:bool = false setget force_audio
+var audio_force:bool = true setget force_audio
 var audio_bus:String = "Master" setget set_audio_bus
 
 var character:Character = null setget set_character
@@ -283,7 +283,7 @@ func property_get_revert(property:String):
 		"audio_sounds":
 			return [].duplicate()
 		"audio_loop", "audio_force":
-			return false
+			return true
 		"audio_bus":
 			return "Master"
 		"translation_key", "text", "display_name":
