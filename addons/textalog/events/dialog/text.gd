@@ -15,6 +15,7 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_blip_sounds:Array = [] setget set_audio_blip_sounds
+var audio_blip_rate:int = 1 setget set_audio_blip_rate
 var audio_force:bool = true setget force_audio
 var audio_bus:String = "Master" setget set_audio_bus
 
@@ -81,6 +82,11 @@ func set_audio_blip_sounds(value:Array) -> void:
 	audio_blip_sounds = value.duplicate()
 	emit_changed()
 	property_list_changed_notify()
+
+
+func set_audio_blip_rate(value:int) -> void:
+	audio_blip_rate = max(1, value)
+	emit_changed()
 
 
 func force_audio(value:bool) -> void:
@@ -238,6 +244,7 @@ func _get_property_list() -> Array:
 	
 		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
 		p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		p.append({"type":TYPE_INT, "name":"audio_blip_rate", "usage":default_usage, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater"})
 		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
 	
 		var audio_buses:String = ""
