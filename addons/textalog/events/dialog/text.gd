@@ -160,6 +160,10 @@ func _get_stream() -> AudioStream:
 		_sounds = character.blip_sounds
 	else:
 		_sounds = audio_sounds
+	
+	if _sounds.empty():
+		return null
+	
 	var _limit = max(_sounds.size()-1, 0)
 	_stream = _sounds[_generator.randi_range(0, _limit)] as AudioStream
 	
