@@ -15,6 +15,8 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_blip_sounds:Array = [] setget set_audio_blip_sounds
+var audio_use_space_blips:bool = false setget use_space_blips
+var audio_space_blip_sounds:Array = [] setget set_space_blip_sounds
 var audio_blip_rate:int = 1 setget set_audio_blip_rate
 var audio_force:bool = true setget force_audio
 var audio_bus:String = "Master" setget set_audio_bus
@@ -72,6 +74,12 @@ func use_character_sounds(value:bool) -> void:
 	property_list_changed_notify()
 
 
+func use_space_blips(value:bool) -> void:
+	audio_use_space_blips = value
+	emit_changed()
+	property_list_changed_notify()
+
+
 func set_blip_strategy(value:int) -> void:
 	audio_blip_strategy = clamp(value, 0, BlipStrategy.size()-1)
 	emit_changed()
@@ -80,6 +88,12 @@ func set_blip_strategy(value:int) -> void:
 
 func set_audio_blip_sounds(value:Array) -> void:
 	audio_blip_sounds = value.duplicate()
+	emit_changed()
+	property_list_changed_notify()
+
+
+func set_space_blip_sounds(value:Array) -> void:
+	audio_space_blip_sounds = value.duplicate()
 	emit_changed()
 	property_list_changed_notify()
 
@@ -243,7 +257,13 @@ func _get_property_list() -> Array:
 	if audio_blip_strategy > 0:
 	
 		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
-		p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		if not audio_same_as_character:
+			p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		
+		p.append({"type":TYPE_BOOL, "name":"audio_use_space_blips", "usage":default_usage})
+		if audio_use_space_blips:
+			p.append({"type":TYPE_ARRAY, "name":"audio_space_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		
 		p.append({"type":TYPE_INT, "name":"audio_blip_rate", "usage":default_usage, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater"})
 		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
 	
@@ -278,12 +298,14 @@ func property_get_revert(property:String):
 	match property:
 		"audio_same_as_character","audio_force":
 			return true
-		"audio_blip_sounds":
+		"audio_blip_sounds", "audio_space_blip_sounds":
 			return [].duplicate()
 		"audio_bus":
 			return "Master"
 		"translation_key", "text", "display_name":
 			return ""
+		"audio_use_space_blips":
+			return false
 
 
 func _init() -> void:
