@@ -316,7 +316,7 @@ func parse_begin(object: Object) -> void:
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
 
 	if object is TextClass:
-		if type == TYPE_ARRAY and path == "audio_sounds":
+		if type == TYPE_ARRAY and path == "audio_blip_sounds":
 			if object.get("audio_same_as_character"):
 				return true
 		

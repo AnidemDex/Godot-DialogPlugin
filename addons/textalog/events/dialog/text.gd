@@ -14,7 +14,7 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 # Audio
 var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
-var audio_sounds:Array = [] setget set_audio_sounds
+var audio_blip_sounds:Array = [] setget set_audio_blip_sounds
 var audio_force:bool = true setget force_audio
 var audio_bus:String = "Master" setget set_audio_bus
 
@@ -77,8 +77,8 @@ func set_blip_strategy(value:int) -> void:
 	property_list_changed_notify()
 
 
-func set_audio_sounds(value:Array) -> void:
-	audio_sounds = value.duplicate()
+func set_audio_blip_sounds(value:Array) -> void:
+	audio_blip_sounds = value.duplicate()
 	emit_changed()
 	property_list_changed_notify()
 
@@ -138,7 +138,7 @@ func _configure_display_name() -> void:
 
 
 func _configure_sound_generator() -> void:
-	if audio_sounds.empty():
+	if audio_blip_sounds.empty():
 		# No sounds to play, no need to do anything
 		return
 	
@@ -160,7 +160,7 @@ func _get_stream() -> AudioStream:
 	if audio_same_as_character and character:
 		_sounds = character.blip_sounds
 	else:
-		_sounds = audio_sounds
+		_sounds = audio_blip_sounds
 	
 	if _sounds.empty():
 		return null
@@ -237,7 +237,7 @@ func _get_property_list() -> Array:
 	if audio_blip_strategy > 0:
 	
 		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
-		p.append({"type":TYPE_ARRAY, "name":"audio_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
 		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
 	
 		var audio_buses:String = ""
@@ -271,7 +271,7 @@ func property_get_revert(property:String):
 	match property:
 		"audio_same_as_character","audio_force":
 			return true
-		"audio_sounds":
+		"audio_blip_sounds":
 			return [].duplicate()
 		"audio_bus":
 			return "Master"
@@ -285,4 +285,4 @@ func _init() -> void:
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/text_bubble.png") as Texture
 	event_preview_string = "{display_name}: {text}"
 
-	audio_sounds = []
+	audio_blip_sounds = []
