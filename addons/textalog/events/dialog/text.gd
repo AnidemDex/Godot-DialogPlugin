@@ -19,6 +19,7 @@ var audio_use_space_blips:bool = false setget use_space_blips
 var audio_space_blip_sounds:Array = [] setget set_space_blip_sounds
 var audio_blip_rate:int = 1 setget set_audio_blip_rate
 var audio_force:bool = true setget force_audio
+var audio_map_blip_to_letter:bool = false setget set_map_to_letter
 var audio_bus:String = "Master" setget set_audio_bus
 
 var character:Character = null setget set_character
@@ -101,6 +102,12 @@ func set_space_blip_sounds(value:Array) -> void:
 func set_audio_blip_rate(value:int) -> void:
 	audio_blip_rate = max(1, value)
 	emit_changed()
+
+
+func set_map_to_letter(value:bool) -> void:
+	audio_map_blip_to_letter = value
+	emit_changed()
+	property_list_changed_notify()
 
 
 func force_audio(value:bool) -> void:
@@ -254,25 +261,31 @@ func _get_property_list() -> Array:
 	
 	p.append({"type":TYPE_INT, "name":"audio_blip_strategy", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":blip_strategy_hint})
 	
-	if audio_blip_strategy > 0:
+	match audio_blip_strategy:
+		BlipStrategy.NO_BLIP:
+			pass
+		
+		BlipStrategy.BLIP_ONCE, BlipStrategy.BLIP_LOOP:
+			var audio_buses:String = ""
+			for bus_idx in AudioServer.bus_count:
+				audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
+			audio_buses = audio_buses.trim_suffix(",")
+			
+			p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
 	
-		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
-		if not audio_same_as_character:
-			p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+			p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
+			if not audio_same_as_character:
+				p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+			continue
 		
-		p.append({"type":TYPE_BOOL, "name":"audio_use_space_blips", "usage":default_usage})
-		if audio_use_space_blips:
-			p.append({"type":TYPE_ARRAY, "name":"audio_space_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
-		
-		p.append({"type":TYPE_INT, "name":"audio_blip_rate", "usage":default_usage, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater"})
-		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
-	
-		var audio_buses:String = ""
-		for bus_idx in AudioServer.bus_count:
-			audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
-		audio_buses = audio_buses.trim_suffix(",")
-		
-		p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
+		BlipStrategy.BLIP_LOOP:
+			p.append({"type":TYPE_BOOL, "name":"audio_use_space_blips", "usage":default_usage})
+			if audio_use_space_blips:
+				p.append({"type":TYPE_ARRAY, "name":"audio_space_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+			
+			p.append({"type":TYPE_INT, "name":"audio_blip_rate", "usage":default_usage, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater"})
+			p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
+			p.append({"type":TYPE_BOOL, "name":"audio_map_blip_to_letter", "usage":default_usage})
 	
 	
 	p.append({"type":TYPE_STRING, "name":"translation_key", "usage":default_usage, "hint":PROPERTY_HINT_PLACEHOLDER_TEXT, "hint_string":"Same as text"})
@@ -304,7 +317,7 @@ func property_get_revert(property:String):
 			return "Master"
 		"translation_key", "text", "display_name":
 			return ""
-		"audio_use_space_blips":
+		"audio_use_space_blips", "audio_map_blip_to_letter":
 			return false
 
 
