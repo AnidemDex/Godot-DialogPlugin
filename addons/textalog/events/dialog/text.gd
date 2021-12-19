@@ -1,6 +1,7 @@
 tool
 extends Event
 
+enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
 
 # Dialog
 var display_name:String = "" setget set_display_name
@@ -11,6 +12,7 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 
 
 # Audio
+var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_sounds:Array = [] setget set_audio_sounds
 var audio_loop:bool = false setget set_audio_loop
@@ -66,6 +68,12 @@ func set_character(value:Character) -> void:
 
 func use_character_sounds(value:bool) -> void:
 	audio_same_as_character = value
+	emit_changed()
+	property_list_changed_notify()
+
+
+func set_blip_strategy(value:int) -> void:
+	audio_blip_strategy = clamp(value, 0, BlipStrategy.size()-1)
 	emit_changed()
 	property_list_changed_notify()
 
@@ -227,17 +235,26 @@ func _get_property_list() -> Array:
 	# Audio
 	p.append({"type":TYPE_NIL, "name":"Audio", "usage":PROPERTY_USAGE_GROUP, "hint_string":"audio_"})
 	
-	p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
-	p.append({"type":TYPE_ARRAY, "name":"audio_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
-	p.append({"type":TYPE_BOOL, "name":"audio_loop", "usage":default_usage})
-	p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
+	var blip_strategy_hint:String = ""
+	for strategy in BlipStrategy.keys():
+		blip_strategy_hint += "%s:%s,"%[strategy.capitalize(),BlipStrategy[strategy]]
+	blip_strategy_hint = blip_strategy_hint.trim_suffix(",")
 	
-	var audio_buses:String = ""
-	for bus_idx in AudioServer.bus_count:
-		audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
-	audio_buses = audio_buses.trim_suffix(",")
+	p.append({"type":TYPE_INT, "name":"audio_blip_strategy", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":blip_strategy_hint})
 	
-	p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
+	if audio_blip_strategy > 0:
+	
+		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
+		p.append({"type":TYPE_ARRAY, "name":"audio_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
+		p.append({"type":TYPE_BOOL, "name":"audio_loop", "usage":default_usage})
+		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
+	
+		var audio_buses:String = ""
+		for bus_idx in AudioServer.bus_count:
+			audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
+		audio_buses = audio_buses.trim_suffix(",")
+		
+		p.append({"type":TYPE_STRING, "name":"audio_bus", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":audio_buses})
 	
 	
 	p.append({"type":TYPE_STRING, "name":"translation_key", "usage":default_usage, "hint":PROPERTY_HINT_PLACEHOLDER_TEXT, "hint_string":"Same as text"})
