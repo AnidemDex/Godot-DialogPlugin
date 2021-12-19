@@ -15,7 +15,6 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_sounds:Array = [] setget set_audio_sounds
-var audio_loop:bool = false setget set_audio_loop
 var audio_force:bool = true setget force_audio
 var audio_bus:String = "Master" setget set_audio_bus
 
@@ -80,12 +79,6 @@ func set_blip_strategy(value:int) -> void:
 
 func set_audio_sounds(value:Array) -> void:
 	audio_sounds = value.duplicate()
-	emit_changed()
-	property_list_changed_notify()
-
-
-func set_audio_loop(value:bool) -> void:
-	audio_loop = value
 	emit_changed()
 	property_list_changed_notify()
 
@@ -188,7 +181,6 @@ func _blip() -> void:
 func _on_character_displayed(character:String) -> void:
 	if not _already_played:
 		_blip()
-		_already_played = !audio_loop
 
 
 func _on_text_displayed() -> void:
@@ -246,7 +238,6 @@ func _get_property_list() -> Array:
 	
 		p.append({"type":TYPE_BOOL, "name":"audio_same_as_character", "usage":default_usage})
 		p.append({"type":TYPE_ARRAY, "name":"audio_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
-		p.append({"type":TYPE_BOOL, "name":"audio_loop", "usage":default_usage})
 		p.append({"type":TYPE_BOOL, "name":"audio_force", "usage":default_usage})
 	
 		var audio_buses:String = ""
@@ -278,12 +269,10 @@ func property_get_revert(property:String):
 	# var default_value = (get_script() as Script).get_property_default_value(property)
 	
 	match property:
-		"audio_same_as_character":
+		"audio_same_as_character","audio_force":
 			return true
 		"audio_sounds":
 			return [].duplicate()
-		"audio_loop", "audio_force":
-			return true
 		"audio_bus":
 			return "Master"
 		"translation_key", "text", "display_name":
