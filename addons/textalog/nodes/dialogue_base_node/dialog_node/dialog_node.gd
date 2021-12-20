@@ -13,6 +13,7 @@ class_name DialogManager
 
 ## Anchor points that the bubble can take as reference
 enum BubblePosition {CENTER_LEFT,CENTER_RIGHT,CENTER_TOP,CENTER_DOWN}
+enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
 
 ## Emmited when the text is fully displayed
 signal text_displayed
@@ -37,6 +38,7 @@ export(Vector2) var bubble_offset:Vector2 = Vector2() setget _set_bubble_offset
 ## The node that actually displays the text
 var text_node:RichTextLabel setget ,get_text_node
 var _text_timer:Timer
+
 
 ## Calling this method will make to all text to be visible inmediatly
 func display_all_text() -> void:
@@ -78,6 +80,60 @@ func get_text_node() -> RichTextLabel:
 		return text_node
 	return null
 
+
+func set_blip_strategy(strategy:int) -> void:
+	_blip_strategy = clamp(strategy, 0, BlipStrategy.size()-1)
+
+
+## Set the blip samples that'll be used on blip
+func set_blip_samples(samples:Array) -> void:
+	_blip_samples = samples.duplicate()
+
+
+func set_blip_space_samples(samples:Array) -> void:
+	_blip_space_samples = samples.duplicate()
+
+
+func set_audio_bus(bus:String) -> void:
+	_blip_bus = bus
+
+
+func set_blip_rate(value:int) -> void:
+	_blip_rate = max(1, value)
+
+
+func force_blip(value:bool) -> void:
+	_blip_force = value
+
+
+func map_blip_to_letter(value:bool) -> void:
+	_blip_map = value
+
+
+func get_blip_sample(for_char:String="") -> AudioStream:
+	var blip_sample:AudioStream
+	if _blip_samples.empty():
+		return null
+	
+	if _blip_map:
+		
+		pass
+	var _limit = max(_blip_samples.size()-1, 0)
+	blip_sample = _blip_samples[_generator.randi_range(0, _limit)] as AudioStream
+	return blip_sample
+
+
+func get_space_blip_sample() -> AudioStream:
+	var blip_sample:AudioStream
+	
+	if _blip_space_samples.empty():
+		return null
+	
+	var _limit = max(_blip_samples.size()-1, 0)
+	blip_sample = _blip_space_samples[_generator.randi_range(0, _limit)] as AudioStream
+	
+	return blip_sample
+
 ##########
 # Private things
 ##########
@@ -94,9 +150,25 @@ var _last_line_count := 0
 
 var _original_size := Vector2()
 
+# Audio
+var _blip_generator:AudioStreamPlayer
+var _blip_samples:Array = [] setget set_blip_samples
+var _blip_space_samples:Array = [] setget set_blip_space_samples
+var _blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
+var _blip_rate:int = 1 setget set_blip_rate
+var _blip_force:bool = true setget force_blip
+var _blip_map:bool = false setget map_blip_to_letter
+var _blip_bus:String = "Master" setget set_audio_bus
+
+var _blip_counter:int = 0
+var _already_played:bool = false
+
+var _generator = RandomNumberGenerator.new()
+
 
 func _update_displayed_text() -> void:
 	var _character = _get_current_character()
+	_on_character_displayed(_character)
 	emit_signal("character_displayed", _character)
 	text_node.visible_characters += 1
 	
@@ -107,6 +179,8 @@ func _update_displayed_text() -> void:
 		_text_timer.start(text_speed)
 	else:
 		_text_timer.stop()
+		_blip_counter = 0
+		_already_played = false
 		emit_signal("text_displayed")
 		
 		if text_show_scroll_at_end:
@@ -277,6 +351,56 @@ func _draw_bubble_style():
 	draw_texture_rect(bubble_icon, Rect2(offset, size), false, bubble_style.modulate_color)
 
 
+func _blip(with_sound:AudioStream) -> void:
+	if not is_instance_valid(_blip_generator):
+		_blip_generator = AudioStreamPlayer.new()
+		add_child(_blip_generator)
+	
+	var _stream:AudioStream = with_sound
+	
+	if _stream == null:
+		return
+	
+	_blip_generator.bus = _blip_bus
+	_blip_generator.stream = _stream
+	_blip_generator.play()
+
+
+func _on_character_displayed(character:String) -> void:
+	var _blip_sample:AudioStream
+	var current_text = text_node.text.left(text_node.visible_characters)
+
+	match _blip_strategy:
+		BlipStrategy.BLIP_LOOP:
+	
+			if character in " " or character.strip_escapes().empty():
+				_blip_sample = get_space_blip_sample()
+				_blip(_blip_sample)
+				_blip_counter = 0
+				return
+			
+			if _blip_counter % _blip_rate == 0:
+				_blip_sample = get_blip_sample(character)
+				
+				# First, verify if the node exists
+				if is_instance_valid(_blip_generator):
+					if not _blip_generator.is_playing() or _blip_force:
+						_blip(_blip_sample)
+				else:
+					# If it doesn't, blip inmediatly
+					_blip(_blip_sample)
+			
+			_blip_counter += 1
+				
+			
+		BlipStrategy.BLIP_ONCE:
+			if _already_played:
+				return
+			_blip_sample = get_blip_sample()
+			_blip(_blip_sample)
+			_already_played = true
+
+
 func _notification(what:int) -> void:
 	match what:
 		NOTIFICATION_READY:
@@ -326,3 +450,6 @@ func _init() -> void:
 	if Engine.editor_hint:
 		connect("draw", text_node, "set", ["bbcode_text", _DEFATULT_STRING])
 	add_child(text_node)
+	
+	_blip_samples = []
+	_blip_space_samples = []

@@ -1,8 +1,6 @@
 tool
 extends Event
 
-enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
-
 # Dialog
 var display_name:String = "" setget set_display_name
 var translation_key:String = "" setget set_translation_key
@@ -12,7 +10,7 @@ export(float, 0.01, 1.0, 0.01) var text_speed:float = 0.04 setget set_text_speed
 
 
 # Audio
-var audio_blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
+var audio_blip_strategy:int = DialogManager.BlipStrategy.NO_BLIP setget set_blip_strategy
 var audio_same_as_character:bool = true setget use_character_sounds
 var audio_blip_sounds:Array = [] setget set_audio_blip_sounds
 var audio_use_space_blips:bool = false setget use_space_blips
@@ -82,7 +80,7 @@ func use_space_blips(value:bool) -> void:
 
 
 func set_blip_strategy(value:int) -> void:
-	audio_blip_strategy = clamp(value, 0, BlipStrategy.size()-1)
+	audio_blip_strategy = clamp(value, 0, DialogManager.BlipStrategy.size()-1)
 	emit_changed()
 	property_list_changed_notify()
 
@@ -165,59 +163,19 @@ func _configure_display_name() -> void:
 
 
 func _configure_sound_generator() -> void:
-	if audio_blip_sounds.empty():
-		# No sounds to play, no need to do anything
-		return
+	_dialog_manager.set_blip_strategy(audio_blip_strategy)
 	
-	_dialog_manager.connect("character_displayed", self, "_on_character_displayed", [], CONNECT_DEFERRED)
-
-	if not is_instance_valid(sound_generator):
-		sound_generator = AudioStreamPlayer.new()
+	_dialog_manager.set_blip_samples(audio_blip_sounds)
+	_dialog_manager.set_blip_space_samples(audio_space_blip_sounds)
 	
-	if not sound_generator.is_inside_tree():
-		event_node.get_tree().root.call_deferred("add_child",sound_generator)
+	_dialog_manager.force_blip(audio_force)
+	_dialog_manager.map_blip_to_letter(audio_map_blip_to_letter)
 	
-	sound_generator.bus = audio_bus
-
-
-func _get_stream() -> AudioStream:
-	var _sounds:Array
-	var _stream:AudioStream
-	
-	if audio_same_as_character and character:
-		_sounds = character.blip_sounds
-	else:
-		_sounds = audio_blip_sounds
-	
-	if _sounds.empty():
-		return null
-	
-	var _limit = max(_sounds.size()-1, 0)
-	_stream = _sounds[_generator.randi_range(0, _limit)] as AudioStream
-	
-	return _stream
-
-
-func _blip() -> void:
-	if not sound_generator.is_playing() or audio_force:
-		sound_generator.stop()
-		sound_generator.stream = _get_stream()
-		sound_generator.play()
-
-
-func _on_character_displayed(character:String) -> void:
-	if not _already_played:
-		_blip()
+	_dialog_manager.set_blip_rate(audio_blip_rate)
+	_dialog_manager.set_audio_bus(audio_bus)
 
 
 func _on_text_displayed() -> void:
-
-	if is_instance_valid(sound_generator):
-		sound_generator.queue_free()
-	
-	if _dialog_manager.is_connected("character_displayed", self, "_on_character_displayed"):
-		_dialog_manager.disconnect("character_displayed", self, "_on_character_displayed")
-	
 	finish()
 
 
@@ -255,17 +213,17 @@ func _get_property_list() -> Array:
 	p.append({"type":TYPE_NIL, "name":"Audio", "usage":PROPERTY_USAGE_GROUP, "hint_string":"audio_"})
 	
 	var blip_strategy_hint:String = ""
-	for strategy in BlipStrategy.keys():
-		blip_strategy_hint += "%s:%s,"%[strategy.capitalize(),BlipStrategy[strategy]]
+	for strategy in DialogManager.BlipStrategy.keys():
+		blip_strategy_hint += "%s:%s,"%[strategy.capitalize(),DialogManager.BlipStrategy[strategy]]
 	blip_strategy_hint = blip_strategy_hint.trim_suffix(",")
 	
 	p.append({"type":TYPE_INT, "name":"audio_blip_strategy", "usage":default_usage, "hint":PROPERTY_HINT_ENUM, "hint_string":blip_strategy_hint})
 	
 	match audio_blip_strategy:
-		BlipStrategy.NO_BLIP:
+		DialogManager.BlipStrategy.NO_BLIP:
 			pass
 		
-		BlipStrategy.BLIP_ONCE, BlipStrategy.BLIP_LOOP:
+		DialogManager.BlipStrategy.BLIP_ONCE, DialogManager.BlipStrategy.BLIP_LOOP:
 			var audio_buses:String = ""
 			for bus_idx in AudioServer.bus_count:
 				audio_buses += "%s,"%AudioServer.get_bus_name(bus_idx)
@@ -278,7 +236,7 @@ func _get_property_list() -> Array:
 				p.append({"type":TYPE_ARRAY, "name":"audio_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
 			continue
 		
-		BlipStrategy.BLIP_LOOP:
+		DialogManager.BlipStrategy.BLIP_LOOP:
 			p.append({"type":TYPE_BOOL, "name":"audio_use_space_blips", "usage":default_usage})
 			if audio_use_space_blips:
 				p.append({"type":TYPE_ARRAY, "name":"audio_space_blip_sounds", "hint":24, "usage":default_usage, "hint_string":"17/17:AudioStream"})
