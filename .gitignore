@@ -27,6 +27,10 @@ addons/*
 !/addons/textalog/
 !/addons/textalog/*
 
+# And the event_system subtree
+!/addons/event_system_plugin/
+!/addons/event_system_plugin/*
+
 # And the unit-test plugin that I will add sometime
 
 

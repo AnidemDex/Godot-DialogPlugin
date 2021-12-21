@@ -29,6 +29,96 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.gd"
 }, {
+"base": "Resource",
+"class": "Event",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/resources/event_class/event_class.gd"
+}, {
+"base": "Event",
+"class": "EventCall",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/call.gd"
+}, {
+"base": "Event",
+"class": "EventCallFrom",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/call_from.gd"
+}, {
+"base": "Event",
+"class": "EventChangeTimeline",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/change_timeline.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterChangeExpression",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/change_expression.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterJoin",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/join.gd"
+}, {
+"base": "Event",
+"class": "EventCharacterLeave",
+"language": "GDScript",
+"path": "res://addons/textalog/events/character/leave.gd"
+}, {
+"base": "Event",
+"class": "EventComment",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/comment.gd"
+}, {
+"base": "Event",
+"class": "EventCondition",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/condition.gd"
+}, {
+"base": "Event",
+"class": "EventDialogChoice",
+"language": "GDScript",
+"path": "res://addons/textalog/events/dialog/choice.gd"
+}, {
+"base": "Event",
+"class": "EventDialogText",
+"language": "GDScript",
+"path": "res://addons/textalog/events/dialog/text.gd"
+}, {
+"base": "Event",
+"class": "EventEmitSignal",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/emit_signal.gd"
+}, {
+"base": "Event",
+"class": "EventHide",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/hide.gd"
+}, {
+"base": "Event",
+"class": "EventJumpToEvent",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/jump_to.gd"
+}, {
+"base": "Node",
+"class": "EventManager",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/nodes/event_manager/event_manager.gd"
+}, {
+"base": "Event",
+"class": "EventSet",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/set.gd"
+}, {
+"base": "Event",
+"class": "EventShow",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/show.gd"
+}, {
+"base": "Event",
+"class": "EventWait",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/events/wait.gd"
+}, {
 "base": "Container",
 "class": "OptionsManager",
 "language": "GDScript",
@@ -43,31 +133,40 @@ _global_script_classes=[ {
 "class": "PortraitManager",
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd"
+}, {
+"base": "Resource",
+"class": "Timeline",
+"language": "GDScript",
+"path": "res://addons/event_system_plugin/resources/timeline_class/timeline_class.gd"
 } ]
 _global_script_class_icons={
 "Character": "res://addons/textalog/assets/icons/character_icon.png",
 "DialogBubble": "",
 "DialogManager": "",
 "DialogNode": "",
+"Event": "res://addons/event_system_plugin/assets/icons/timeline_icon.png",
+"EventCall": "",
+"EventCallFrom": "",
+"EventChangeTimeline": "",
+"EventCharacterChangeExpression": "",
+"EventCharacterJoin": "",
+"EventCharacterLeave": "",
+"EventComment": "",
+"EventCondition": "",
+"EventDialogChoice": "",
+"EventDialogText": "",
+"EventEmitSignal": "",
+"EventHide": "",
+"EventJumpToEvent": "",
+"EventManager": "",
+"EventSet": "",
+"EventShow": "",
+"EventWait": "",
 "OptionsManager": "",
 "Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
-"PortraitManager": ""
+"PortraitManager": "",
+"Timeline": "res://addons/event_system_plugin/assets/icons/timeline_icon.png"
 }
-
-[WAT]
-
-Test_Directory="res://tests"
-Results_Directory="res://tests"
-Test_Metadata_Directory="res://tests"
-Tags=PoolStringArray( "Core files", "Dialog Resources", "Dialog Database" )
-Window_Size=Vector2( 1024, 600 )
-Minimize_Window_When_Running_Tests=false
-Port=6008
-Default_Launch=0
-Run_All_Tests=Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-
-Auto_Refresh_Tests=false
-Display=8
 
 [application]
 
@@ -76,7 +175,7 @@ config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/textalog/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/event_system_plugin/plugin.cfg", "res://addons/textalog/plugin.cfg" )
 
 [importer_defaults]
 

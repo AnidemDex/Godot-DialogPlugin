@@ -169,7 +169,6 @@ func _get_minimum_size() -> Vector2:
 # Signals
 ##########
 func __on_PortraitManager_portrait_added(character, portrait) -> void:
-	print(character)
 	emit_signal("portrait_added", character, portrait)
 
 func __on_PortraitManager_portrait_changed(character, portrait) -> void:

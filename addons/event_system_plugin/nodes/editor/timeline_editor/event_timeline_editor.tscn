@@ -1,0 +1,116 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/timeline_editor/event_timeline_editor.gd" type="Script" id=1]
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/category_manager/category_manager.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/timeline_editor/timeline_displayer.gd" type="Script" id=3]
+[ext_resource path="res://addons/event_system_plugin/assets/themes/timeline_editor/timeline_editor_d.tres" type="Theme" id=4]
+
+[node name="EventTimelineEditor" type="MarginContainer"]
+margin_right = 1024.0
+margin_bottom = 154.0
+theme = ExtResource( 4 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+ResourceNamePath = NodePath("VBoxContainer/HBoxContainer/Label")
+CategoryManagerPath = NodePath("VBoxContainer/PanelContainer/VBoxContainer/CategoryManager")
+HistoryMenuPath = NodePath("VBoxContainer/HBoxContainer/HistoryMenu")
+EventContainerPath = NodePath("VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 210.0
+custom_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 20.0
+
+[node name="LoadTimelineButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 102.0
+margin_bottom = 20.0
+text = "Load Timeline"
+
+[node name="HistoryMenu" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_left = 106.0
+margin_right = 229.0
+margin_bottom = 20.0
+text = "Recent Timelines"
+items = [ "Elemento 0", null, 0, false, false, 0, 0, null, "", false ]
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 233.0
+margin_top = 3.0
+margin_right = 1024.0
+margin_bottom = 17.0
+size_flags_horizontal = 3
+text = "{TimelineName}"
+align = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 20.0
+margin_right = 1024.0
+margin_bottom = 24.0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 1024.0
+margin_bottom = 210.0
+focus_mode = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 179.0
+alignment = 1
+
+[node name="CategoryManager" parent="VBoxContainer/PanelContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 1010.0
+margin_bottom = 48.0
+size_flags_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/PanelContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 1010.0
+margin_bottom = 172.0
+rect_min_size = Vector2( 0, 120 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer"]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1009.0
+margin_bottom = 119.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1004.0
+margin_bottom = 114.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+script = ExtResource( 3 )
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_right = 1024.0
+margin_bottom = 210.0
+rect_min_size = Vector2( 150, 52.5 )
+window_title = "Guardar un Archivo"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LoadTimelineButton" to="." method="_on_LoadTimelineButton_pressed"]
+[connection signal="event_pressed" from="VBoxContainer/PanelContainer/VBoxContainer/CategoryManager" to="." method="_on_CategoryManager_event_pressed"]
+[connection signal="event_node_added" from="VBoxContainer/PanelContainer/VBoxContainer/ScrollContainer/MarginContainer/VBoxContainer" to="." method="_on_TimelineDisplayer_event_node_added"]
