@@ -136,3 +136,4 @@ func _init() -> void:
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/question_event.png") as Texture
 	event_preview_string = "User will choose between [ {q_options} ] options."
 	options = options.duplicate()
+	event_category = "Dialog"
