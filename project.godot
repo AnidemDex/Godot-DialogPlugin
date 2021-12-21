@@ -75,6 +75,16 @@ _global_script_classes=[ {
 "path": "res://addons/event_system_plugin/events/condition.gd"
 }, {
 "base": "Event",
+"class": "EventDialogChoice",
+"language": "GDScript",
+"path": "res://addons/textalog/events/dialog/choice.gd"
+}, {
+"base": "Event",
+"class": "EventDialogText",
+"language": "GDScript",
+"path": "res://addons/textalog/events/dialog/text.gd"
+}, {
+"base": "Event",
 "class": "EventEmitSignal",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/emit_signal.gd"
@@ -143,6 +153,8 @@ _global_script_class_icons={
 "EventCharacterLeave": "",
 "EventComment": "",
 "EventCondition": "",
+"EventDialogChoice": "",
+"EventDialogText": "",
 "EventEmitSignal": "",
 "EventHide": "",
 "EventJumpToEvent": "",
