@@ -372,14 +372,14 @@ func _on_character_displayed(character:String) -> void:
 
 	match _blip_strategy:
 		BlipStrategy.BLIP_LOOP:
-	
-			if character in " " or character.strip_escapes().empty():
-				_blip_sample = get_space_blip_sample()
-				_blip(_blip_sample)
-				_blip_counter = 0
-				return
 			
 			if _blip_counter % _blip_rate == 0:
+				if character in " " or character.strip_escapes().empty():
+					_blip_sample = get_space_blip_sample()
+					_blip(_blip_sample)
+					_blip_counter = 0
+					return
+				
 				_blip_sample = get_blip_sample(character)
 				
 				# First, verify if the node exists
