@@ -1,5 +1,6 @@
 tool
 extends Event
+class_name EventDialogChoice
 
 var options:Dictionary = {}
 
