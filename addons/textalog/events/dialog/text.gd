@@ -284,5 +284,6 @@ func _init() -> void:
 	event_name = "Text"
 	event_icon = load("res://addons/textalog/assets/icons/event_icons/text_bubble.png") as Texture
 	event_preview_string = "{display_name}: {text}"
+	event_category = "Dialog"
 
 	audio_blip_sounds = []
