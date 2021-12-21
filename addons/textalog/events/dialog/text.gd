@@ -1,5 +1,6 @@
 tool
 extends Event
+class_name EventDialogText
 
 # Dialog
 var display_name:String = "" setget set_display_name
