@@ -33,6 +33,18 @@ Characters are data containers to describe what expressions (portraits) are goin
 Modify the DialogNode through themes!
 
 ![Theme Customization](./docs/.gitbook/assets/theme_customization.gif)
+
+### Use it as a Dialog System!
+The plugin can help you creating sequences of dialogs and dialog branches to certain conditions, all in the editor, thanks to its integration with [EventSystem](https://github.com/AnidemDex/Godot-EventSystem).
+
+![TODO]
+
+You can create the entire dialog sequence through code too!
+
+![TODO]
+
+See more about this implementation on [the documentation](#).
+
 ## 🚩 Installation
 
 Download the lastest release and extract the ZIP file. Move the `addons` folders to the root of your project. Finally, enable the plugin in your project settings, under `plugins` tab. It's that easy!
