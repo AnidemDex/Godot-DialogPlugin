@@ -57,33 +57,35 @@ If you're downloading the repository instead, make sure to move only `textalog` 
 ## 🧵 Usage
 Quick example to try the most simple functionality: showing text on the screen.
 ```gdscript
+extends Node
+
 func _ready() -> void:
   # Creates a new DialogNode instance
   var dialog_node = DialogNode.instance()
   # Add the node as child
   add_child(dialog_node)
-  # Shows the dialog node
-  dialog_node.show()
+
   # Show an string. BBCode works too!
   dialog_node.show_text("Hello world!")
 ```
 
-## 🔎 What is new on this version? [1.0]
+> ⚠️ `Control` node and `Node2D` node types are incompatible. If you want to add the `DialogNode` as child of a Node2D type, make sure to give it a proper `rect_size`, add it as child of a `CanvasLayer` or add it in the scene, not in code.
 
-This is the first stable release _(yay 🥳)_. To manage to release this, many things were removed to add them later on 1.x versions (like, the timelines).
+
+
+## 🔎 What is new on this version? [1.1]
+
+Second release! Who would think about it?
+The most relevant about this update is its reintegration with EventSystem, to use it as a Dialog System again! 🎉
 
 * Added:
-  * **`DialogNode` node class**
-  * **`DialogBubble` node class**
-  * **`PortraitManager` node class**
-  * **`DialogManager` node class**
-  * **`OptionManager` node class**
-  * **`Portrait` resource class**
-  * **`Character` resource class**
-  * **DialogNode customization through themes**
+  * **Reference hint in PortraitManager.** Now the reference rect node that were used previously is built-in directly on the node, letting you modify it directly in PortraitManager.
+  * **Integration with EventSystem.** Use Textalog not only as a Dialog Node, but as a Dialog System too [#56](https://github.com/AnidemDex/Godot-DialogPlugin/pull/56).
+* Changed:
+  * **`DialogManager.text_autoscroll` will be false by default.**
+  * **`DialogManager.text_fit_content_height` will be false by default.**
 * Removed:
-  * **Literally everything from `dialog_plugin` folder**. Take a look on previous pre-release versions to see what exactly were removed. Those features will be reimplemented in future minor versions.
-
+  * **ReferenceRect node from PortraitManager.**
 
 Want to see the whole changelog? Take a look on the documentation, the [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section.
 
