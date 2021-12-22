@@ -24,10 +24,10 @@ signal character_displayed(character)
 ## Values between 0.02 and 0.08 are good ones to use.
 export(float) var text_speed:float = 0.02
 ## If true, DialogManager will try to scroll the text to fit new content
-export(bool) var text_autoscroll:bool = true
+export(bool) var text_autoscroll:bool = false
 ## If true and [member text_autoscroll] is false, DialogManager will scale its size
 ## to fit its content.
-export(bool) var text_fit_content_height:bool = true
+export(bool) var text_fit_content_height:bool = false
 ## If true, DialogManager will show an VScroll to scroll its content
 export(bool) var text_show_scroll_at_end:bool = true
 ## The [member BubblePosition] that the bubble will take as reference point.
