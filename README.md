@@ -37,11 +37,11 @@ Modify the DialogNode through themes!
 ### Use it as a Dialog System!
 The plugin can help you creating sequences of dialogs and dialog branches to certain conditions, all in the editor, thanks to its integration with [EventSystem](https://github.com/AnidemDex/Godot-EventSystem).
 
-![TODO]
+![](docs/.gitbook/assets/event_system_example1.png)
 
 You can create the entire dialog sequence through code too!
 
-![TODO]
+![](docs/.gitbook/assets/event_system_example2.png)
 
 See more about this implementation on [the documentation](#).
 

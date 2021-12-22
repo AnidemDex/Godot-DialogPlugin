@@ -7,6 +7,7 @@
 ## Getting started
 
 * [Installation](getting-started/installation.md)
+* [Using it as Dialog System](getting-started/using-event-system.md)
 
 ## Credits
 
