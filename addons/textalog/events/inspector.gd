@@ -262,6 +262,158 @@ class PortraitPreview extends PanelContainer:
 				_on_event_changed()
 
 
+class PortraitsDisplayer extends EditorProperty:
+	
+	class _ItemList extends ItemList:
+		var edited_object:Object
+		
+		func _make_custom_tooltip(for_text: String) -> Control:
+			var idx:int = get_item_at_position(get_local_mouse_position())
+			if idx == -1:
+				return null
+			var style_box = get_stylebox("panel", "ProjectSettingsEditor")
+
+			var panel = PanelContainer.new()
+			var texture = TextureRect.new()
+			var vb = VBoxContainer.new()
+			var name := Label.new()
+			var resolution := Label.new()
+			
+			vb.size_flags_horizontal = SIZE_EXPAND_FILL
+			vb.size_flags_vertical = SIZE_EXPAND_FILL
+			texture.texture = edited_object.portraits[idx].image as Texture
+			texture.expand = true
+			texture.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			texture.rect_min_size = Vector2(128,254)
+			panel.add_stylebox_override("panel", style_box)
+			
+			if texture.texture != null:
+				name.text = texture.texture.resource_path
+				resolution.text = str(texture.texture.get_size())
+			
+			vb.add_child(name)
+			vb.add_child(texture)
+			vb.add_child(resolution)
+			panel.add_child(vb)
+			
+			return panel
+	
+	var portrait_container:ItemList
+	var _vb:VBoxContainer
+	var add_button:Button
+	
+	func _init() -> void:
+		_vb = VBoxContainer.new()
+		
+		portrait_container = _ItemList.new()
+		portrait_container.rect_min_size = Vector2(0, 64)
+		portrait_container.fixed_icon_size = Vector2(16,16)
+		portrait_container.auto_height = true
+		portrait_container.set_drag_forwarding(self)
+		portrait_container.connect("item_selected", self, "_on_item_selected")
+		portrait_container.connect("item_activated", self, "_on_item_activated")
+		portrait_container.connect("gui_input", self, "_on_item_gui_input")
+		
+		add_button = Button.new()
+		add_button.text = "Add single portrait"
+		add_button.connect("pressed", self, "_on_add_button_pressed")
+		
+		_vb.add_child(add_button)
+		_vb.add_child(portrait_container)
+		add_child(_vb)
+		set_bottom_editor(_vb)
+	
+	
+	func _ready() -> void:
+		var portraits:Array = get_edited_object()[get_edited_property()]
+		portrait_container.edited_object = get_edited_object()
+		
+		for portrait in portraits:
+			portrait = portrait as Portrait
+			if portrait == null:
+				continue
+			
+			portrait_container.add_item(portrait.name, portrait.icon)
+	
+	
+	func can_drop_data_fw(position: Vector2, data, _c) -> bool:
+		if typeof(data) == TYPE_DICTIONARY:
+			if data.has("type") and data["type"] == "files":
+				return true
+		return false
+	
+	
+	func drop_data_fw(position: Vector2, data, _c) -> void:
+		if not typeof(data) == TYPE_DICTIONARY:
+			return
+		var files:Array = data["files"]
+		var new_portraits:Array = []
+		var portraits:Array = get_edited_object()[get_edited_property()].duplicate()
+		
+		for file in files:
+			file = file as String
+			
+			var image := load(file) as Texture
+			var skip := false
+			
+			if image == null:
+				continue
+			
+			for portrait in portraits:
+				portrait = portrait as Portrait
+				if portrait == null:
+					continue
+				
+				if image == portrait.image:
+					push_warning("The given texture '%s' is already added as '%s' portrait"%[file.get_file(), portrait.name])
+					skip = true
+					break
+			
+			if skip:
+				continue
+			
+			var portrait := Portrait.new()
+			portrait.image = image
+			portrait.name = file.get_file()
+			
+			new_portraits.append(portrait)
+		
+		portraits.append_array(new_portraits)
+		emit_changed(get_edited_property(), portraits.duplicate())
+	
+	
+	func _on_item_gui_input(event: InputEvent) -> void:
+		if event is InputEventKey:
+			if event.scancode == KEY_DELETE:
+				if portrait_container.is_anything_selected():
+					var _idxs:Array = portrait_container.get_selected_items()
+					var _portraits:Array = get_edited_object()[get_edited_property()].duplicate()
+					for idx in _idxs:
+						_portraits.remove(idx)
+						portrait_container.remove_item(idx)
+					
+					emit_changed(get_edited_property(), _portraits)
+					portrait_container.accept_event()
+	
+	
+	func _on_item_selected(item_idx:int) -> void:
+		pass
+	
+	
+	func _on_item_activated(item_idx:int) -> void:
+		var portrait = get_edited_object()[get_edited_property()][item_idx]
+		emit_signal("resource_selected", "", portrait)
+	
+	
+	func _on_add_button_pressed() -> void:
+		var character:Character = get_edited_object()
+		var portrait:Portrait = Portrait.new()
+		var portraits:Array = get_edited_object()[get_edited_property()]
+		portrait.name = "New portrait "+str(portraits.size())
+		portraits.append(portrait)
+		emit_changed(get_edited_property(), portraits.duplicate())
+
+
 const InspectorTools = preload("res://addons/textalog/core/inspector_tools.gd")
 
 var plugin_script:EditorPlugin
@@ -271,6 +423,7 @@ var editor_gui:Control
 var TextClass = load("res://addons/textalog/events/dialog/text.gd")
 var ChoiceClass = load("res://addons/textalog/events/dialog/choice.gd")
 var _JoinEvent = load("res://addons/textalog/events/character/join.gd")
+var _CharacterClass = load("res://addons/textalog/resources/character_class/character_class.gd")
 
 func can_handle(object: Object) -> bool:
 
@@ -281,6 +434,9 @@ func can_handle(object: Object) -> bool:
 		return true
 	
 	if object is _JoinEvent:
+		return true
+	
+	if object is _CharacterClass:
 		return true
 		
 	return false
@@ -299,6 +455,7 @@ func parse_begin(object: Object) -> void:
 		custom_control.undo_redo = plugin_script.get_undo_redo()
 		add_custom_control(custom_control)
 	
+	
 	if object is _JoinEvent:
 		var custom_category := InspectorTools.InspectorCategory.new()
 		custom_category.label = "Preview"
@@ -311,6 +468,15 @@ func parse_begin(object: Object) -> void:
 		custom_control.object = object
 		object.connect("changed", custom_control, "_on_event_changed")
 		add_custom_control(custom_control)
+
+
+func parse_category(object: Object, category: String) -> void:
+	if object is _CharacterClass and category == "Script Variables":
+		var custom_category := InspectorTools.InspectorCategory.new()
+		custom_category.label = "Character"
+		custom_category.icon = load("res://addons/textalog/assets/icons/character_icon.png")
+		custom_category.bg_color = editor_gui.get_color("prop_category", "Editor")
+		add_custom_control(custom_category)
 
 
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
@@ -339,6 +505,12 @@ func parse_property(object: Object, type: int, path: String, hint: int, hint_tex
 			option_property.undo_redo = plugin_script.get_undo_redo()
 			add_property_editor(path, option_property)
 		
+			return true
+	
+	if object is _CharacterClass:
+		if path == "portraits":
+			var property_node = PortraitsDisplayer.new()
+			add_property_editor(path, property_node)
 			return true
 	
 	return false

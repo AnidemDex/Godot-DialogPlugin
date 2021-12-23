@@ -12,7 +12,7 @@ export(String) var name:String = "" setget _set_name
 export(Texture) var image:Texture = null setget set_image
 
 ## Optional icon to be used in the editor
-export(Texture) var icon:Texture = null setget _set_icon
+export(Texture) var icon:Texture = load("res://addons/textalog/assets/icons/event_icons/change_expression.png") setget _set_icon
 
 
 func set_image(value:Texture) -> void:
@@ -32,3 +32,7 @@ func _set_name(value:String) -> void:
 	resource_name = value
 	emit_changed()
 	property_list_changed_notify()
+
+
+func _hide_script_from_inspector():
+	return true
