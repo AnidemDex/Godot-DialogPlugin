@@ -27,7 +27,7 @@ A node implementation for dialog box and dialog bubble, fully customizable and b
 ### 🐱‍👤 Characters and 🖼️ Portraits
 Characters are data containers to describe what expressions (portraits) are going to be used in dialogue and what properties of the dialogue will be overriden during the gameplay.
 
-<!--TODO: Add an image here-->
+![character editor](./docs/.gitbook/assets/character_example1.png)
 
 ### 🎨 Customization through Godot's Themes
 Modify the DialogNode through themes!

@@ -22,10 +22,12 @@ A node implementation for dialog box and dialog bubble, fully customizable and b
 
 Characters are data containers to describe what expressions (portraits) are going to be used in dialogue and what properties of the dialogue will be overriden during the gameplay.
 
+![character editor](.gitbook/assets/character_example1.png)
+
 ### 🎨 Customization through Godot's Themes
 Modify the DialogNode through themes!
 
-![Theme Customization](./docs/.gitbook/assets/theme_customization.gif)
+![Theme Customization](.gitbook/assets/theme_customization.gif)
 
 ### Use it as a Dialog System!
 The plugin can help you creating sequences of dialogs and dialog branches to certain conditions, all in the editor, thanks to its integration with [EventSystem](https://github.com/AnidemDex/Godot-EventSystem).
