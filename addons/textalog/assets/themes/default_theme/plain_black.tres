@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://addons/textalog/assets/fonts/Poppins/godot_fonts/Poppins-Normal.tres" type="DynamicFont" id=2]
+
+[sub_resource type="StyleBoxFlat" id=2]
+resource_name = "NameStyle"
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=1]
+resource_name = "TextStyle"
+content_margin_left = 16.0
+content_margin_right = 16.0
+content_margin_top = 16.0
+content_margin_bottom = 16.0
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[resource]
+default_font = ExtResource( 2 )
+DialogNode/styles/bubble = null
+DialogNode/styles/name = SubResource( 2 )
+DialogNode/styles/text = SubResource( 1 )
