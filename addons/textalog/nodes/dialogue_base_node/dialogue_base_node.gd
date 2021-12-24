@@ -29,8 +29,7 @@ export(NodePath) var NameNode_path:NodePath
 var dialog_manager:DialogManager
 var portrait_manager:PortraitManager
 var options_manager:OptionsManager
-
-onready var name_node:Label = get_node_or_null(NameNode_path)
+var name_node:Label
 
 var _used_scene = "res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn"
 
@@ -68,6 +67,8 @@ func _fake_ready() -> void:
 	_connect_portrait_manager_signals()
 	_connect_options_manager_signals()
 	
+	name_node.add_stylebox_override("normal", get_stylebox("name", "DialogNode"))
+	
 	if not Engine.editor_hint:
 		hide()
 
@@ -98,6 +99,7 @@ func _set_default_nodes():
 	dialog_manager =  get_node_or_null(DialogNode_Path) as DialogManager
 	portrait_manager = get_node_or_null(PortraitNode_Path) as PortraitManager
 	options_manager = get_node_or_null(OptionsNode_Path) as OptionsManager
+	name_node = get_node_or_null(NameNode_path) as Label
 
 
 func _connect_dialog_manager_signals():
