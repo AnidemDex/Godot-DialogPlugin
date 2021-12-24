@@ -75,8 +75,8 @@ func add_portrait(
 	if ignore_ref_size:
 		var _rel_size:Vector2 = rect_data.get("size", Vector2(0.3, 0.7))
 		ref_size = _get_relative_position(_rel_size)
-		ref_size.x = clamp(ref_size.x, 0, rect_size.x)
-		ref_size.y = clamp(ref_size.y, 0, rect_size.y)
+		ref_size.x = max(ref_size.x, 0)
+		ref_size.y = max(ref_size.y, 0)
 	_texture_rect.rect_size = ref_size
 	
 	# Position
