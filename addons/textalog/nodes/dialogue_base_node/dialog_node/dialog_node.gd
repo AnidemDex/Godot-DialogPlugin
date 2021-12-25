@@ -446,7 +446,6 @@ func _init() -> void:
 	text_node.mouse_filter = Control.MOUSE_FILTER_PASS
 	text_node.name = "TextNode"
 	var scroll := text_node.get_v_scroll()
-	scroll.allow_greater = true
 	if Engine.editor_hint:
 		connect("draw", text_node, "set", ["bbcode_text", _DEFATULT_STRING])
 	add_child(text_node)
