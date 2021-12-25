@@ -67,7 +67,8 @@ func _fake_ready() -> void:
 	_connect_portrait_manager_signals()
 	_connect_options_manager_signals()
 	
-	name_node.add_stylebox_override("normal", get_stylebox("name", "DialogNode"))
+	if is_instance_valid(name_node):
+		name_node.add_stylebox_override("normal", get_stylebox("name", "DialogNode"))
 	
 	if not Engine.editor_hint:
 		hide()
