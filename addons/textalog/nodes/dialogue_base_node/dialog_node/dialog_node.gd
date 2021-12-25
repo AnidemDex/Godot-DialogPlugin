@@ -62,7 +62,7 @@ func set_text(text:String) -> void:
 	if text_fit_content_height:
 		_enable_fit_content_height()
 	
-	_line_count = 0
+	_line_count = -1
 	_last_line_count = 0
 	_last_wordwrap_size = Vector2()
 	text_node.get_v_scroll().value = 0
@@ -144,7 +144,7 @@ const _DEFATULT_STRING = """This is a sample text.
 """
 const _PREVIEW_COLOR = Color("#6d0046ff")
 
-var _line_count := 0
+var _line_count := -1
 var _last_wordwrap_size := Vector2()
 var _last_line_count := 0
 
@@ -165,21 +165,33 @@ var _already_played:bool = false
 
 var _generator = RandomNumberGenerator.new()
 
+var _char_position = 0
+var _scrolling = false
 
 func _update_displayed_text() -> void:
+	if _scrolling:
+		return
+	
 	var _character = _get_current_character()
 	_on_character_displayed(_character)
-	emit_signal("character_displayed", _character)
-	text_node.visible_characters += 1
 	
 	if text_autoscroll:
 		_scroll_to_new_line()
 	
-	if text_node.visible_characters < text_node.get_total_character_count():
-		_text_timer.start(text_speed)
-	else:
+	emit_signal("character_displayed", _character)
+	_char_position += 1
+	
+	if _character in "\t\n\r":
+		_update_displayed_text()
+		return
+	
+	text_node.set_deferred("visible_characters", text_node.visible_characters+1)
+	_text_timer.start(text_speed)
+	
+	if text_node.visible_characters >= text_node.get_total_character_count():
 		_text_timer.stop()
 		_blip_counter = 0
+		_char_position = 0
 		_already_played = false
 		emit_signal("text_displayed")
 		
@@ -212,10 +224,10 @@ func _hide_scroll() -> void:
 func _scroll_to_new_line() -> void:
 	var height := text_node.get_content_height()
 	var font := text_node.get_font("normal_font")
-	var font_height := font.get_height()
+	var font_height := font.get_height()+get_constant("line_separation", "RichTextLabel")
 	var scroll := text_node.get_v_scroll()
 
-	var current_text = text_node.text.left(text_node.visible_characters)
+	var current_text = text_node.text.left(_char_position)
 	var wordwrap_size:Vector2= font.get_wordwrap_string_size(current_text, text_node.rect_size.x)
 	var text_container_height = text_node.rect_size.y
 	
@@ -226,16 +238,24 @@ func _scroll_to_new_line() -> void:
 	
 	if wordwrap_size.y > _last_wordwrap_size.y:
 		_line_count += 1
-	
 		var space_left = text_container_height-wordwrap_size.y
 		
 		# Negative value? That means we've reached the end of the container
 		# Scroll that thing!
-		if space_left < font_height:
+		if space_left < 0:
 			_need_to_scroll = true
 	
 	if _need_to_scroll:
-		scroll.value += font_height*1.05 # Add a little bit more, just in case.
+		var tween = Tween.new()
+		tween.connect("tween_all_completed", tween, "queue_free")
+		tween.connect("tween_all_completed", self, "set", ["_scrolling", false])
+		tween.connect("tween_all_completed", _text_timer, "start", [text_speed])
+		get_tree().root.add_child(tween)
+		tween.interpolate_property(scroll, "value", null, scroll.value+font_height, 0.8)
+		_scrolling = true
+		tween.start()
+		
+#		scroll.set_deferred("value", scroll.value+font_height)
 		
 	_last_wordwrap_size = wordwrap_size
 	_last_line_count = _line_count
@@ -260,7 +280,7 @@ func _get_current_character() -> String:
 		_text = " "
 	
 	var _text_length = _text.length()-1
-	var _text_visible_characters = clamp(text_node.visible_characters, 0, _text_length)
+	var _text_visible_characters = clamp(_char_position, 0, _text_length)
 	var _current_character = _text[min(_text_length, _text_visible_characters)]
 	return _current_character
 
@@ -438,6 +458,7 @@ func _notification(what:int) -> void:
 func _init() -> void:
 	_text_timer = Timer.new()
 	_text_timer.connect("timeout", self, "_update_displayed_text")
+	_text_timer.one_shot = true
 	add_child(_text_timer)
 	
 	text_node = RichTextLabel.new()
@@ -445,6 +466,8 @@ func _init() -> void:
 	text_node.scroll_active = false
 	text_node.mouse_filter = Control.MOUSE_FILTER_PASS
 	text_node.name = "TextNode"
+	text_node.size_flags_horizontal = SIZE_EXPAND_FILL
+	text_node.size_flags_vertical = SIZE_EXPAND_FILL
 	var scroll := text_node.get_v_scroll()
 	if Engine.editor_hint:
 		connect("draw", text_node, "set", ["bbcode_text", _DEFATULT_STRING])
