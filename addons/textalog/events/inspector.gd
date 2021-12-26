@@ -324,7 +324,7 @@ class PortraitsDisplayer extends EditorProperty:
 		set_bottom_editor(_vb)
 	
 	
-	func update_property() -> void:
+	func _ready() -> void:
 		var portraits:Array = get_edited_object()[get_edited_property()]
 		portrait_container.edited_object = get_edited_object()
 		
