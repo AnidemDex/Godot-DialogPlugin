@@ -73,7 +73,7 @@ func set_text(text:String) -> void:
 ## Adds text to the current one at the end. No need to call
 ## [method display_text] if the node is already displaying text
 func add_text(text:String) -> void:
-	text_node.append_bbcode(text)
+	text_node.bbcode_text = text_node.bbcode_text + text
 
 
 ## Returns the used text_node
@@ -461,7 +461,6 @@ func _notification(what:int) -> void:
 func _init() -> void:
 	_text_timer = Timer.new()
 	_text_timer.connect("timeout", self, "_update_displayed_text")
-	_text_timer.one_shot = true
 	add_child(_text_timer)
 	
 	text_node = RichTextLabel.new()
