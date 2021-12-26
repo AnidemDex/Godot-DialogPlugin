@@ -414,6 +414,66 @@ class PortraitsDisplayer extends EditorProperty:
 		emit_changed(get_edited_property(), portraits.duplicate())
 
 
+class EditorPropertyPortraits extends EditorProperty:
+	var options:OptionButton
+	
+	func _option_selected(option:int) -> void:
+		pass
+	
+	
+	func _set_read_only(value:bool) -> void:
+		options.disabled = value
+		pass
+	
+	
+	func update_property() -> void:
+		var chara = get_edited_object().get("character")
+		if chara != null:
+			for portrait_idx in chara.portraits.size():
+				var portrait = chara.portraits[portrait_idx]
+				for item in options.get_item_count():
+					if portrait_idx == options.get_item_metadata(item):
+						var texture = ImageTexture.new()
+						texture.create_from_image(portrait.icon.get_data())
+						texture.set_size_override(Vector2(32,32))
+						
+						options.set_item_icon(item, texture)
+		
+		var current_selected = get_edited_object()[get_edited_property()]
+		
+		for item in options.get_item_count():
+			if current_selected == options.get_item_metadata(item):
+				options.select(item)
+	
+	
+	func setup(p_options:PoolStringArray) -> void:
+		options.clear()
+		var current_value:int = 0
+		for option_idx in p_options.size():
+			var text_split:Array = p_options[option_idx].split(":")
+			if text_split.size() != 1:
+				current_value = int(text_split[1])
+			
+			options.add_item(text_split[0])
+			options.set_item_metadata(option_idx, current_value)
+			current_value += 1
+	
+	
+	func set_option_button_clip(enable:bool) -> void:
+		pass
+	
+	
+	func _init() -> void:
+		options = OptionButton.new()
+		options.flat = true
+		options.clip_text = true
+		options.expand_icon = true
+		var _options_popup:PopupMenu = options.get_popup()
+		_options_popup.allow_search = true
+		add_child(options)
+		add_focusable(options)
+
+
 const InspectorTools = preload("res://addons/textalog/core/inspector_tools.gd")
 
 var plugin_script:EditorPlugin
@@ -424,6 +484,7 @@ var TextClass = load("res://addons/textalog/events/dialog/text.gd")
 var ChoiceClass = load("res://addons/textalog/events/dialog/choice.gd")
 var _JoinEvent = load("res://addons/textalog/events/character/join.gd")
 var _CharacterClass = load("res://addons/textalog/resources/character_class/character_class.gd")
+var _CharEventClass = load("res://addons/textalog/events/character/char_event.gd")
 
 func can_handle(object: Object) -> bool:
 
@@ -438,7 +499,10 @@ func can_handle(object: Object) -> bool:
 	
 	if object is _CharacterClass:
 		return true
-		
+	
+	if object is _CharEventClass:
+		return true
+	
 	return false
 
 
@@ -507,9 +571,19 @@ func parse_property(object: Object, type: int, path: String, hint: int, hint_tex
 		
 			return true
 	
+	
 	if object is _CharacterClass:
 		if path == "portraits":
 			var property_node = PortraitsDisplayer.new()
+			add_property_editor(path, property_node)
+			return true
+	
+	
+	if object is _CharEventClass:
+		if path == "selected_portrait":
+			var property_node = EditorPropertyPortraits.new()
+			var options = hint_text.split(",")
+			property_node.setup(options)
 			add_property_editor(path, property_node)
 			return true
 	
