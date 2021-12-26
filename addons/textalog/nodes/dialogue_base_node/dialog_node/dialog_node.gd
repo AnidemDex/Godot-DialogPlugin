@@ -45,7 +45,8 @@ func display_all_text() -> void:
 	if text_node.visible_characters >= text_node.get_total_character_count():
 		return
 	text_node.visible_characters = text_node.get_total_character_count() -1
-	_update_displayed_text()
+	_char_position = text_node.visible_characters
+	_update_displayed_text() 
 
 
 ## Starts displaying the text setted by [method set_text]
@@ -187,9 +188,8 @@ func _update_displayed_text() -> void:
 		return
 	
 	text_node.set_deferred("visible_characters", text_node.visible_characters+1)
-	_text_timer.start(text_speed)
 	
-	if text_node.visible_characters >= text_node.get_total_character_count():
+	if text_node.visible_characters >= text_node.get_total_character_count()-1:
 		_text_timer.stop()
 		_blip_counter = 0
 		_char_position = text_node.get_total_character_count()
@@ -198,6 +198,8 @@ func _update_displayed_text() -> void:
 		
 		if text_show_scroll_at_end:
 			_show_scroll()
+	else:
+		_text_timer.start(text_speed)
 
 
 func _update_original_size() -> void:
