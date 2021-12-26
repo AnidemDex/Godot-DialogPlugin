@@ -165,8 +165,10 @@ func _configure_display_name() -> void:
 
 func _configure_sound_generator() -> void:
 	_dialog_manager.set_blip_strategy(audio_blip_strategy)
-	
-	_dialog_manager.set_blip_samples(audio_blip_sounds)
+	if character and audio_same_as_character:
+		_dialog_manager.set_blip_samples(character.blip_sounds)
+	else:
+		_dialog_manager.set_blip_samples(audio_blip_sounds)
 	_dialog_manager.set_blip_space_samples(audio_space_blip_sounds)
 	
 	_dialog_manager.force_blip(audio_force)
