@@ -31,10 +31,10 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
-DialogNode_Path = NodePath("DialogManager")
+DialogNode_Path = NodePath("DialogBox/DialogManager")
 PortraitNode_Path = NodePath("PortraitManager")
 OptionsNode_Path = NodePath("Options")
-NameNode_path = NodePath("CharacterName")
+NameNode_path = NodePath("DialogBox/CharacterName")
 
 [node name="PortraitManager" type="Control" parent="."]
 anchor_right = 1.0
@@ -44,7 +44,39 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogManager" type="Container" parent="."]
+[node name="Options" parent="." instance=ExtResource( 4 )]
+margin_left = 27.0
+margin_top = 94.0
+margin_right = -25.0
+margin_bottom = -387.0
+
+[node name="DialogBox" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterName" type="Label" parent="DialogBox"]
+anchor_left = 0.023
+anchor_top = 0.643
+anchor_right = 0.181
+anchor_bottom = 0.72
+margin_left = 0.447996
+margin_top = -4.30005
+margin_right = -0.344009
+margin_bottom = 4.49994
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/normal = SubResource( 2 )
+text = "Sample Name"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogManager" type="Container" parent="DialogBox"]
 anchor_left = 0.028
 anchor_top = 0.733
 anchor_right = 0.977
@@ -58,28 +90,3 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 text_show_scroll_at_end = false
-
-[node name="Options" parent="." instance=ExtResource( 4 )]
-margin_left = 27.0
-margin_top = 94.0
-margin_right = -25.0
-margin_bottom = -387.0
-
-[node name="CharacterName" type="Label" parent="."]
-anchor_left = 0.023
-anchor_top = 0.643
-anchor_right = 0.181
-anchor_bottom = 0.72
-margin_left = 0.447996
-margin_top = 0.199951
-margin_right = -0.344009
-margin_bottom = -6.10352e-05
-grow_horizontal = 2
-grow_vertical = 2
-custom_styles/normal = SubResource( 2 )
-text = "Sample Name"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
