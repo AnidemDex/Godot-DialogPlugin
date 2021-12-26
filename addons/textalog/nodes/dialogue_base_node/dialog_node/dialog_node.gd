@@ -58,6 +58,7 @@ func display_text() -> void:
 func set_text(text:String) -> void:
 	text_node.bbcode_text = text
 	text_node.visible_characters = 0
+	_char_position = 0
 	rect_min_size = _original_size
 	if text_fit_content_height:
 		_enable_fit_content_height()
@@ -191,7 +192,7 @@ func _update_displayed_text() -> void:
 	if text_node.visible_characters >= text_node.get_total_character_count():
 		_text_timer.stop()
 		_blip_counter = 0
-		_char_position = 0
+		_char_position = text_node.get_total_character_count()
 		_already_played = false
 		emit_signal("text_displayed")
 		
