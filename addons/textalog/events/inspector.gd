@@ -418,7 +418,8 @@ class EditorPropertyPortraits extends EditorProperty:
 	var options:OptionButton
 	
 	func _option_selected(option:int) -> void:
-		pass
+		var value = options.get_item_metadata(option)
+		emit_changed(get_edited_property(), value)
 	
 	
 	func _set_read_only(value:bool) -> void:
@@ -459,15 +460,12 @@ class EditorPropertyPortraits extends EditorProperty:
 			current_value += 1
 	
 	
-	func set_option_button_clip(enable:bool) -> void:
-		pass
-	
-	
 	func _init() -> void:
 		options = OptionButton.new()
 		options.flat = true
 		options.clip_text = true
 		options.expand_icon = true
+		options.connect("item_selected", self, "_option_selected")
 		var _options_popup:PopupMenu = options.get_popup()
 		_options_popup.allow_search = true
 		add_child(options)
