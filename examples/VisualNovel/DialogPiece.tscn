@@ -1,0 +1,39 @@
+[gd_scene format=2]
+
+[node name="DialogPiece" type="PanelContainer"]
+margin_right = 1024.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 71.0
+
+[node name="Avatar" type="TextureRect" parent="HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+expand = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 68.0
+margin_right = 1010.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_right = 942.0
+margin_bottom = 14.0
+text = "Character Name"
+
+[node name="Dialog" type="RichTextLabel" parent="HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 942.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text "

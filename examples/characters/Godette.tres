@@ -1,0 +1,123 @@
+[gd_resource type="Resource" load_steps=40 format=2]
+
+[ext_resource path="res://addons/textalog/resources/portrait_class/portrait_class.gd" type="Script" id=1]
+[ext_resource path="res://addons/textalog/resources/character_class/character_class.gd" type="Script" id=2]
+[ext_resource path="res://examples/assets/Godette/Grin.png" type="Texture" id=3]
+[ext_resource path="res://examples/assets/Godette/Annoyance.png" type="Texture" id=4]
+[ext_resource path="res://examples/assets/Godette/Shocked.png" type="Texture" id=5]
+[ext_resource path="res://examples/assets/Godette/Sleepy.png" type="Texture" id=6]
+[ext_resource path="res://examples/assets/Godette/Suprised.png" type="Texture" id=7]
+[ext_resource path="res://examples/assets/Godette/icons/Grin.png" type="Texture" id=8]
+[ext_resource path="res://examples/assets/Godette/icons/Joy.png" type="Texture" id=9]
+[ext_resource path="res://examples/assets/Godette/icons/Suprised.png" type="Texture" id=10]
+[ext_resource path="res://examples/assets/Godette/icons/Laugh.png" type="Texture" id=11]
+[ext_resource path="res://examples/assets/Godette/Laugh.png" type="Texture" id=12]
+[ext_resource path="res://examples/VisualNovel/sfx-bliplaytonfemale.wav" type="AudioStream" id=13]
+[ext_resource path="res://examples/assets/Godette/icons/Neutral.png" type="Texture" id=14]
+[ext_resource path="res://examples/assets/Godette/Anger.png" type="Texture" id=15]
+[ext_resource path="res://examples/assets/Godette/icons/Anger.png" type="Texture" id=16]
+[ext_resource path="res://examples/assets/Godette/Joy.png" type="Texture" id=17]
+[ext_resource path="res://examples/assets/Godette/icons/Shocked.png" type="Texture" id=18]
+[ext_resource path="res://examples/assets/Godette/Smug.png" type="Texture" id=19]
+[ext_resource path="res://examples/assets/Godette/icons/Sad.png" type="Texture" id=20]
+[ext_resource path="res://examples/assets/Godette/Sad.png" type="Texture" id=21]
+[ext_resource path="res://examples/assets/Godette/icons/Sleepy.png" type="Texture" id=22]
+[ext_resource path="res://examples/assets/Godette/icons/Smile.png" type="Texture" id=23]
+[ext_resource path="res://examples/assets/Godette/Neutral.png" type="Texture" id=24]
+[ext_resource path="res://examples/assets/Godette/icons/Annoyance.png" type="Texture" id=25]
+[ext_resource path="res://examples/assets/Godette/icons/Smug.png" type="Texture" id=26]
+[ext_resource path="res://examples/assets/Godette/Smile.png" type="Texture" id=27]
+
+[sub_resource type="Resource" id=1]
+resource_name = "Anger"
+script = ExtResource( 1 )
+name = "Anger"
+image = ExtResource( 15 )
+icon = ExtResource( 16 )
+
+[sub_resource type="Resource" id=2]
+resource_name = "Annoyance"
+script = ExtResource( 1 )
+name = "Annoyance"
+image = ExtResource( 4 )
+icon = ExtResource( 25 )
+
+[sub_resource type="Resource" id=3]
+resource_name = "Grin"
+script = ExtResource( 1 )
+name = "Grin"
+image = ExtResource( 3 )
+icon = ExtResource( 8 )
+
+[sub_resource type="Resource" id=4]
+resource_name = "Joy"
+script = ExtResource( 1 )
+name = "Joy"
+image = ExtResource( 17 )
+icon = ExtResource( 9 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "Laugh"
+script = ExtResource( 1 )
+name = "Laugh"
+image = ExtResource( 12 )
+icon = ExtResource( 11 )
+
+[sub_resource type="Resource" id=6]
+resource_name = "Neutral"
+script = ExtResource( 1 )
+name = "Neutral"
+image = ExtResource( 24 )
+icon = ExtResource( 14 )
+
+[sub_resource type="Resource" id=7]
+resource_name = "Sad"
+script = ExtResource( 1 )
+name = "Sad"
+image = ExtResource( 21 )
+icon = ExtResource( 20 )
+
+[sub_resource type="Resource" id=8]
+resource_name = "Shocked"
+script = ExtResource( 1 )
+name = "Shocked"
+image = ExtResource( 5 )
+icon = ExtResource( 18 )
+
+[sub_resource type="Resource" id=9]
+resource_name = "Sleepy"
+script = ExtResource( 1 )
+name = "Sleepy"
+image = ExtResource( 6 )
+icon = ExtResource( 22 )
+
+[sub_resource type="Resource" id=10]
+resource_name = "Smile"
+script = ExtResource( 1 )
+name = "Smile"
+image = ExtResource( 27 )
+icon = ExtResource( 23 )
+
+[sub_resource type="Resource" id=11]
+resource_name = "Smug"
+script = ExtResource( 1 )
+name = "Smug"
+image = ExtResource( 19 )
+icon = ExtResource( 26 )
+
+[sub_resource type="Resource" id=12]
+resource_name = "Suprised"
+script = ExtResource( 1 )
+name = "Suprised"
+image = ExtResource( 7 )
+icon = ExtResource( 10 )
+
+[resource]
+resource_name = "Godette"
+script = ExtResource( 2 )
+color = Color( 0.556863, 0.678431, 1, 1 )
+icon = ExtResource( 23 )
+name = "Godette"
+_display_name = ""
+blip_sounds = [ ExtResource( 13 ) ]
+portraits = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]

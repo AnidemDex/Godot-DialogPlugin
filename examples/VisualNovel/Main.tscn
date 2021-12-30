@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/event_manager/event_manager.gd" type="Script" id=1]
+[ext_resource path="res://examples/VisualNovel/transition.gdshader" type="Shader" id=2]
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn" type="PackedScene" id=3]
+[ext_resource path="res://examples/VisualNovel/transition3.png" type="Texture" id=4]
+[ext_resource path="res://examples/VisualNovel/Main.gd" type="Script" id=5]
+[ext_resource path="res://examples/VisualNovel/Backgrounds/backgroundColorForest.png" type="Texture" id=6]
+[ext_resource path="res://examples/VisualNovel/ICLogs.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/event_system_plugin/resources/timeline_class/timeline_class.gd" type="Script" id=8]
+
+[sub_resource type="Resource" id=4]
+resource_name = "Timeline"
+script = ExtResource( 8 )
+_events = [  ]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Screencap:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Screencap:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/cutoff = 0.0
+shader_param/smooth_size = 0.5
+shader_param/mask = ExtResource( 4 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="EventManager" type="Node" parent="."]
+script = ExtResource( 1 )
+event_node_path = NodePath("../DialogNode")
+start_on_ready = true
+timeline = SubResource( 4 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundTransitions" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/transition = SubResource( 3 )
+
+[node name="DialogNode" parent="." instance=ExtResource( 3 )]
+
+[node name="Screencap" type="TextureRect" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ICLogs" parent="." instance=ExtResource( 7 )]
+
+[connection signal="event_finished" from="EventManager" to="." method="_on_EventManager_event_finished"]
+[connection signal="event_started" from="EventManager" to="." method="_on_EventManager_event_started"]
+[connection signal="portrait_added" from="DialogNode" to="." method="_on_DialogNode_portrait_added"]
+[connection signal="portrait_changed" from="DialogNode" to="." method="_on_DialogNode_portrait_changed"]
+[connection signal="portrait_removed" from="DialogNode" to="." method="_on_DialogNode_portrait_removed"]
