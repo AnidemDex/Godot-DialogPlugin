@@ -45,3 +45,10 @@ addons/*
 !/docs/*
 # No forget the gitbook configuration file
 !.gitbook.yaml
+
+##########
+# Examples
+##########
+# Do not forget the examples folder
+!/examples/
+!/examples/*
