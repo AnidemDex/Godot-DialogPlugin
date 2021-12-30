@@ -1,0 +1,63 @@
+[gd_resource type="Resource" load_steps=16 format=2]
+
+[ext_resource path="res://addons/textalog/resources/character_class/character_class.gd" type="Script" id=1]
+[ext_resource path="res://addons/textalog/resources/portrait_class/portrait_class.gd" type="Script" id=2]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_talk.png" type="Texture" id=3]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_hold.png" type="Texture" id=4]
+[ext_resource path="res://examples/assets/kenney_assets/robot/head.png" type="Texture" id=5]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_idle.png" type="Texture" id=6]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_think.png" type="Texture" id=7]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_show.png" type="Texture" id=8]
+[ext_resource path="res://examples/assets/kenney_assets/robot/character_robot_wide.png" type="Texture" id=9]
+
+[sub_resource type="Resource" id=1]
+resource_name = "character_robot_hold.png"
+script = ExtResource( 2 )
+name = "character_robot_hold.png"
+image = ExtResource( 4 )
+icon = ExtResource( 5 )
+
+[sub_resource type="Resource" id=2]
+resource_name = "character_robot_idle.png"
+script = ExtResource( 2 )
+name = "character_robot_idle.png"
+image = ExtResource( 6 )
+icon = ExtResource( 5 )
+
+[sub_resource type="Resource" id=3]
+resource_name = "character_robot_show.png"
+script = ExtResource( 2 )
+name = "character_robot_show.png"
+image = ExtResource( 8 )
+icon = ExtResource( 5 )
+
+[sub_resource type="Resource" id=4]
+resource_name = "character_robot_talk.png"
+script = ExtResource( 2 )
+name = "character_robot_talk.png"
+image = ExtResource( 3 )
+icon = ExtResource( 5 )
+
+[sub_resource type="Resource" id=5]
+resource_name = "character_robot_think.png"
+script = ExtResource( 2 )
+name = "character_robot_think.png"
+image = ExtResource( 7 )
+icon = ExtResource( 5 )
+
+[sub_resource type="Resource" id=6]
+resource_name = "character_robot_wide.png"
+script = ExtResource( 2 )
+name = "character_robot_wide.png"
+image = ExtResource( 9 )
+icon = ExtResource( 5 )
+
+[resource]
+resource_name = "Robot"
+script = ExtResource( 1 )
+color = Color( 1, 1, 1, 1 )
+icon = ExtResource( 5 )
+name = "Robot"
+_display_name = ""
+blip_sounds = [  ]
+portraits = [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
