@@ -13,7 +13,7 @@ signal timeline_finished(timeline_resource)
 export(NodePath) var event_node_path:NodePath = "."
 export(bool) var start_on_ready:bool = false
 
-export(Resource) var timeline
+var timeline
 
 func _ready() -> void:
 	if Engine.editor_hint:
@@ -90,3 +90,21 @@ func _notify_timeline_end() -> void:
 
 func _hide_script_from_inspector():
 	return true
+
+
+func _get_property_list() -> Array:
+	var p := []
+	p.append({"type":TYPE_OBJECT, "name":"timeline", "usage":PROPERTY_USAGE_DEFAULT|PROPERTY_USAGE_SCRIPT_VARIABLE, "hint":PROPERTY_HINT_RESOURCE_TYPE, "hint_string":"Resource"})
+	return p
+
+
+func property_can_revert(property:String) -> bool:
+	if property == "timeline":
+		return true
+	return false
+
+
+func property_get_revert(property:String):
+	if property == "timeline":
+		var tmln := Timeline.new()
+		return tmln

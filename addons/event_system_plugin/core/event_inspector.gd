@@ -28,6 +28,8 @@ func parse_category(object: Object, category: String) -> void:
 
 
 func parse_property(object: Object, type: int, path: String, hint: int, hint_text: String, usage: int) -> bool:
+	if object == null:
+		return false
 	var path_ignore = path+"_ignore"
 	if (path_ignore in object):
 		return true

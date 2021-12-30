@@ -2,7 +2,7 @@ tool
 extends Event
 class_name EventWait
 
-export(float, 0, 60, 1) var wait_time = 0.0 setget set_wait_time
+export(float) var wait_time = 0.0 setget set_wait_time
 
 func _init():
 	event_name = "Wait"

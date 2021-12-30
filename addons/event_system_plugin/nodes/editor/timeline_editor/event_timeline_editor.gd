@@ -108,6 +108,8 @@ func _update_history() -> void:
 	
 	_history_popup_menu.clear()
 	for res in refs:
+		if res == null:
+			continue
 		_path =  "%s | [%s]"%[res.resource_name,res.resource_path]
 		_history_popup_menu.add_item(_path)
 	

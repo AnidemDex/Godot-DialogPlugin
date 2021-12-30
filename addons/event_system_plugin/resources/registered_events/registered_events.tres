@@ -10,9 +10,8 @@
 [ext_resource path="res://addons/event_system_plugin/events/condition.gd" type="Script" id=8]
 [ext_resource path="res://addons/event_system_plugin/events/show.gd" type="Script" id=9]
 [ext_resource path="res://addons/event_system_plugin/events/hide.gd" type="Script" id=10]
-[ext_resource path="res://addons/event_system_plugin/events/call.gd" type="Script" id=11]
 [ext_resource path="res://addons/event_system_plugin/events/call_from.gd" type="Script" id=12]
 
 [resource]
 script = ExtResource( 1 )
-events = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ) ]
+events = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ) ]
