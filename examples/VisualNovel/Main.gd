@@ -1,9 +1,12 @@
 extends Control
 
+var transition_shader = preload("res://examples/VisualNovel/transition.gdshader")
+
 onready var background = $Background
 onready var background_transitions = $BackgroundTransitions
 onready var screencap = $Screencap
 onready var dialog_manager = $DialogNode.dialog_manager
+onready var portrait_manager = $DialogNode.portrait_manager
 onready var event_manager = $EventManager
 onready var ic_logs = $ICLogs
 
@@ -70,11 +73,23 @@ func _on_EventManager_event_finished(event: Event):
 		ic_logs.add_piece(texture, event.display_name, event.text)
 
 
-func _on_DialogNode_portrait_added(_character, portrait):
+func _on_DialogNode_portrait_added(character, portrait):
 	current_portrait = portrait
+	
+	# TODO: move this to its own function for easy access + more customizability
+	var shader_material = ShaderMaterial.new()
+	shader_material.shader = transition_shader
+	shader_material.set_shader_param("mask", load("res://examples/VisualNovel/transition3.png"))
+	shader_material.set_shader_param("cutoff", 1.0)
+	shader_material.set_shader_param("smooth_size", 0.5)
+	var texture_rect = portrait_manager.portraits[character]
+	texture_rect.material = shader_material
+	var anim_player = $PortraitTemplate/AnimationPlayer.duplicate()
+	anim_player.root_node = texture_rect.get_path()
+	texture_rect.add_child(anim_player)
+	anim_player.play("transition")
 
-
-func _on_DialogNode_portrait_changed(_character, portrait):
+func _on_DialogNode_portrait_changed(character, portrait):
 	current_portrait = portrait
 
 
