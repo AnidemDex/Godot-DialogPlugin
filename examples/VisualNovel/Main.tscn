@@ -1,18 +1,12 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/event_system_plugin/nodes/event_manager/event_manager.gd" type="Script" id=1]
 [ext_resource path="res://examples/VisualNovel/transition.gdshader" type="Shader" id=2]
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.tscn" type="PackedScene" id=3]
 [ext_resource path="res://examples/VisualNovel/transition3.png" type="Texture" id=4]
 [ext_resource path="res://examples/VisualNovel/Main.gd" type="Script" id=5]
-[ext_resource path="res://examples/VisualNovel/Backgrounds/backgroundColorForest.png" type="Texture" id=6]
+[ext_resource path="res://examples/VisualNovel/timelines/main.tres" type="Resource" id=6]
 [ext_resource path="res://examples/VisualNovel/ICLogs.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/event_system_plugin/resources/timeline_class/timeline_class.gd" type="Script" id=8]
-
-[sub_resource type="Resource" id=4]
-resource_name = "Timeline"
-script = ExtResource( 8 )
-_events = [  ]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -63,12 +57,11 @@ __meta__ = {
 script = ExtResource( 1 )
 event_node_path = NodePath("../DialogNode")
 start_on_ready = true
-timeline = SubResource( 4 )
+timeline = ExtResource( 6 )
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 6 )
 expand = true
 stretch_mode = 7
 __meta__ = {
