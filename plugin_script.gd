@@ -143,7 +143,7 @@ func _on_TimelineEditor_event_selected(event:_Event) -> void:
 		return
 
 	_last_selected_node = _focus_owner
-	get_editor_interface().inspect_object(event, "", true)
+	get_editor_interface().edit_resource(event)
 	_focus_owner.grab_focus()
 
 
