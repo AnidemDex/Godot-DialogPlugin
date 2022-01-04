@@ -39,6 +39,8 @@ func _init() -> void:
 ## Adds a [DialogPortraitResource] in [member portraits]
 func add_portrait(portrait) -> void:
 	if not portrait in portraits:
+		if not portrait.is_connected("changed", self, "emit_changed"):
+			portrait.connect("changed", self, "emit_changed")
 		portraits.append(portrait)
 		emit_changed()
 
@@ -53,6 +55,8 @@ func add_blip_sound(blip_sound:AudioStream) -> void:
 ## Removes a [DialogPortraitResource] from [member portraits]
 func remove_portrait(portrait) -> void:
 	if portrait in portraits:
+		if portrait.is_connected("changed", self, "emit_changed"):
+			portrait.disconnect("changed", self, "emit_changed")
 		portraits.erase(portrait)
 		emit_changed()
 
@@ -113,7 +117,22 @@ func _get_property_list() -> Array:
 
 
 func _set_portraits(value:Array) -> void:
+	for item in portraits:
+		item = item as Resource
+		if item == null:
+			continue
+		if item.is_connected("changed", self, "emit_changed"):
+			item.disconnect("changed", self, "emit_changed")
+	
 	portraits = value.duplicate()
+
+	for item in portraits:
+		item = item as Resource
+		if item == null:
+			continue
+		if not item.is_connected("changed", self, "emit_changed"):
+			item.connect("changed", self, "emit_changed")
+	
 	emit_changed()
 	property_list_changed_notify()
 
