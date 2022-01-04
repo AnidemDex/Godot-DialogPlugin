@@ -10,7 +10,7 @@ var last_event = null
 var next_event = null
 var _curr_evnt_idx:int = -1
 
-var _events:Array = []
+var _events:Array = [] setget set_events
 var _event_queue:Array = []
 var _can_loop:bool = false setget ,can_loop
 
@@ -19,16 +19,36 @@ func initialize() -> void:
 	_event_queue = get_events()
 
 
+func set_events(events:Array) -> void:
+	for item in _events:
+		item = item as Resource
+		if item == null:
+			continue
+		if item.is_connected("changed", self, "emit_changed"):
+			item.disconnect("changed", self, "emit_changed")
+	for item in events:
+		item = item as Resource
+		if not item.is_connected("changed", self, "emit_changed"):
+			item.connect("changed", self, "emit_changed")
+	_events = events.duplicate()
+	emit_changed()
+	property_list_changed_notify()
+
+
 func add_event(event, at_position=-1) -> void:
 	if at_position >= 0:
 		_events.insert(at_position, event)
 	else:
 		_events.append(event)
+	if not event.is_connected("changed", self, "emit_changed"):
+		event.connect("changed", self, "emit_changed")
 	emit_changed()
 
 
 func erase_event(event) -> void:
 	_events.erase(event)
+	if event.is_connected("changed", self, "emit_changed"):
+		event.disconnect("changed", self, "emit_changed")
 	emit_changed()
 
 
