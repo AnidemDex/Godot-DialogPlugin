@@ -1,0 +1,337 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://examples/VisualNovel/Character.gd" type="Script" id=1]
+[ext_resource path="res://examples/assets/Godette/layers/Shocked.png" type="Texture" id=2]
+[ext_resource path="res://examples/assets/Godette/layers/Neutral.png" type="Texture" id=3]
+[ext_resource path="res://examples/assets/Godette/layers/body.png" type="Texture" id=4]
+[ext_resource path="res://examples/assets/Godette/layers/Sleepy.png" type="Texture" id=5]
+[ext_resource path="res://examples/assets/Godette/layers/Smug.png" type="Texture" id=6]
+[ext_resource path="res://examples/assets/Godette/layers/smile.png" type="Texture" id=7]
+[ext_resource path="res://examples/assets/Godette/layers/Grin.png" type="Texture" id=8]
+[ext_resource path="res://examples/assets/Godette/layers/Surprised.png" type="Texture" id=9]
+[ext_resource path="res://examples/assets/Godette/layers/Anger.png" type="Texture" id=10]
+[ext_resource path="res://examples/assets/Godette/layers/Sad.png" type="Texture" id=11]
+[ext_resource path="res://examples/assets/Godette/layers/Annoyance.png" type="Texture" id=12]
+[ext_resource path="res://examples/assets/Godette/layers/Joy.png" type="Texture" id=13]
+[ext_resource path="res://examples/assets/Godette/layers/Laugh.png" type="Texture" id=14]
+[ext_resource path="res://examples/assets/speech_bubble.png" type="Texture" id=15]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Anger"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Annoyance"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 12 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Grin"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Joy"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 13 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Laugh"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 14 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Neutral"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 3 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Sad"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 11 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Shocked"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 2 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Sleepy"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "Smile"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Smug"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 6 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "Surprised"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/Face:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 9 ) ]
+}
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/SpeechBubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/SpeechBubble:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 939, 478 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/SpeechBubble:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.691048, 0.691048 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "talk"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body/SpeechBubble:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body/SpeechBubble:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 939, 478 ), Vector2( 917, 488 ), Vector2( 939, 478 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body/SpeechBubble:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.691048, 0.691048 ), Vector2( 0.622817, 0.622817 ), Vector2( 0.691048, 0.691048 ) ]
+}
+
+[node name="Godette" type="ReferenceRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 740.0
+margin_bottom = 3305.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+main_node = NodePath("Body")
+expression_player = NodePath("ExpressionPlayer")
+talk_player = NodePath("TalkPlayer")
+
+[node name="Body" type="Sprite" parent="."]
+use_parent_material = true
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Face" type="Sprite" parent="Body"]
+use_parent_material = true
+position = Vector2( 216, 386 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="SpeechBubble" type="Sprite" parent="Body"]
+visible = false
+use_parent_material = true
+position = Vector2( 939, 478 )
+scale = Vector2( 0.691048, 0.691048 )
+texture = ExtResource( 15 )
+
+[node name="ExpressionPlayer" type="AnimationPlayer" parent="."]
+anims/Anger = SubResource( 1 )
+anims/Annoyance = SubResource( 2 )
+anims/Grin = SubResource( 3 )
+anims/Joy = SubResource( 4 )
+anims/Laugh = SubResource( 5 )
+anims/Neutral = SubResource( 6 )
+anims/Sad = SubResource( 7 )
+anims/Shocked = SubResource( 8 )
+anims/Sleepy = SubResource( 9 )
+anims/Smile = SubResource( 10 )
+anims/Smug = SubResource( 11 )
+anims/Surprised = SubResource( 12 )
+
+[node name="TalkPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/talk = SubResource( 14 )

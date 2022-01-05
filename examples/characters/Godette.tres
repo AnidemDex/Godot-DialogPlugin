@@ -108,7 +108,7 @@ icon = ExtResource( 26 )
 [sub_resource type="Resource" id=12]
 resource_name = "Suprised"
 script = ExtResource( 1 )
-name = "Suprised"
+name = "Surprised"
 image = ExtResource( 7 )
 icon = ExtResource( 10 )
 

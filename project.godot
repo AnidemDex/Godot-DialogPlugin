@@ -37,11 +37,6 @@ _global_script_classes=[ {
 "base": "Event",
 "class": "EventCall",
 "language": "GDScript",
-"path": "res://addons/event_system_plugin/events/call.gd"
-}, {
-"base": "Event",
-"class": "EventCallFrom",
-"language": "GDScript",
 "path": "res://addons/event_system_plugin/events/call_from.gd"
 }, {
 "base": "Event",
@@ -146,7 +141,6 @@ _global_script_class_icons={
 "DialogNode": "",
 "Event": "res://addons/event_system_plugin/assets/icons/timeline_icon.png",
 "EventCall": "",
-"EventCallFrom": "",
 "EventChangeTimeline": "",
 "EventCharacterChangeExpression": "",
 "EventCharacterJoin": "",

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/textalog/assets/fonts/Poppins/godot_fonts/Poppins-Normal.tres" type="DynamicFont" id=2]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=7]
 resource_name = "NameStyle"
 content_margin_left = 16.0
 content_margin_right = 16.0
@@ -39,5 +39,5 @@ corner_radius_bottom_left = 12
 [resource]
 default_font = ExtResource( 2 )
 DialogNode/styles/bubble = null
-DialogNode/styles/name = SubResource( 2 )
+DialogNode/styles/name = SubResource( 7 )
 DialogNode/styles/text = SubResource( 1 )

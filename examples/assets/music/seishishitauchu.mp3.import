@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/seishishitauchu.mp3-631d669433f861e4fd7373d021952485.mp3str"
+
+[deps]
+
+source_file="res://examples/assets/music/seishishitauchu.mp3"
+dest_files=[ "res://.import/seishishitauchu.mp3-631d669433f861e4fd7373d021952485.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
