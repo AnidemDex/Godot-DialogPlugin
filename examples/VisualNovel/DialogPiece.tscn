@@ -36,4 +36,6 @@ margin_right = 942.0
 margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text Text text text "
+bbcode_enabled = true
+bbcode_text = "Text"
+text = "Text"
