@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=17 format=2]
+[gd_resource type="Resource" load_steps=20 format=2]
 
 [ext_resource path="res://addons/event_system_plugin/resources/registered_events/_.gd" type="Script" id=1]
 [ext_resource path="res://addons/event_system_plugin/events/comment.gd" type="Script" id=2]
@@ -16,7 +16,10 @@
 [ext_resource path="res://addons/textalog/events/character/change_expression.gd" type="Script" id=14]
 [ext_resource path="res://addons/textalog/events/character/join.gd" type="Script" id=15]
 [ext_resource path="res://addons/textalog/events/character/leave.gd" type="Script" id=16]
+[ext_resource path="res://examples/VisualNovel/events/change_background.gd" type="Script" id=17]
+[ext_resource path="res://examples/VisualNovel/events/play_music.gd" type="Script" id=18]
+[ext_resource path="res://examples/VisualNovel/events/shake_screen.gd" type="Script" id=19]
 
 [resource]
 script = ExtResource( 1 )
-events = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ]
+events = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]

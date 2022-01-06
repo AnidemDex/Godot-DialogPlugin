@@ -313,7 +313,6 @@ centered = false
 
 [node name="SpeechBubble" type="Sprite" parent="Body"]
 visible = false
-use_parent_material = true
 position = Vector2( 939, 478 )
 scale = Vector2( 0.691048, 0.691048 )
 texture = ExtResource( 15 )

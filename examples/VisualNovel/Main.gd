@@ -4,11 +4,12 @@ var transition_shader = preload("res://examples/VisualNovel/transition.gdshader"
 
 onready var background = $Background
 onready var background_transitions = $BackgroundTransitions
-onready var screencap = $Screencap
-onready var dialog_node = $DialogNode
+onready var screencap = $HUD/Screencap
+onready var dialog_node = $HUD/DialogNode
 onready var event_manager = $EventManager
-onready var ic_logs = $ICLogs
+onready var ic_logs = $HUD/ICLogs
 onready var music_player = $MusicPlayer
+onready var camera = $ShakeCamera2D
 
 var bgs = [
 	"res://examples/VisualNovel/Backgrounds/backgroundColorForest.png",
@@ -42,12 +43,11 @@ func _process(delta):
 		set_background(bgs[bg_index], 0, 0)
 
 
-func set_music(mus_path: String, speed: float = 1.0):
-	music_player.play_music(load(mus_path), speed)
+func play_music(audio: AudioStream, speed: float = 1.0):
+	music_player.play_music(audio, speed)
 
 
-func set_background(bg_path: String, smooth: float = 0.5, speed: float = 1.0):
-	var img = load(bg_path)
+func set_background(img: Texture, smooth: float = 0.5, speed: float = 1.0):
 	if speed > 0:
 		screencap.material.set_shader_param("smooth_size", smooth)
 		var screen_img = get_tree().get_root().get_texture().get_data()
@@ -58,6 +58,13 @@ func set_background(bg_path: String, smooth: float = 0.5, speed: float = 1.0):
 		yield(get_tree(), "idle_frame")
 		background_transitions.play("transition", -1, speed)
 	background.set_texture(img)
+
+
+func shake_screen(trauma: float, decay: float, max_offset: Vector2, max_roll: float):
+	camera.decay = decay
+	camera.max_offset = max_offset
+	camera.max_roll = max_roll
+	camera.add_trauma(trauma)
 
 
 func _on_EventManager_event_started(event: Event):

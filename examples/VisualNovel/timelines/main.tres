@@ -1,8 +1,8 @@
-[gd_resource type="Resource" load_steps=33 format=2]
+[gd_resource type="Resource" load_steps=42 format=2]
 
 [ext_resource path="res://addons/event_system_plugin/resources/timeline_class/timeline_class.gd" type="Script" id=1]
 [ext_resource path="res://addons/textalog/events/dialog/text.gd" type="Script" id=2]
-[ext_resource path="res://addons/event_system_plugin/events/call_from.gd" type="Script" id=3]
+[ext_resource path="res://examples/VisualNovel/events/change_background.gd" type="Script" id=3]
 [ext_resource path="res://addons/event_system_plugin/events/wait.gd" type="Script" id=4]
 [ext_resource path="res://examples/VisualNovel/letter.wav" type="AudioStream" id=5]
 [ext_resource path="res://addons/textalog/events/character/change_expression.gd" type="Script" id=6]
@@ -10,20 +10,28 @@
 [ext_resource path="res://addons/textalog/events/character/leave.gd" type="Script" id=8]
 [ext_resource path="res://examples/characters/Godette.tres" type="Resource" id=9]
 [ext_resource path="res://addons/event_system_plugin/events/jump_to.gd" type="Script" id=10]
+[ext_resource path="res://examples/VisualNovel/events/shake_screen.gd" type="Script" id=11]
+[ext_resource path="res://examples/VisualNovel/transition1.png" type="Texture" id=12]
+[ext_resource path="res://examples/VisualNovel/Backgrounds/backgroundColorForest.png" type="Texture" id=13]
+[ext_resource path="res://examples/VisualNovel/Backgrounds/backgroundColorGrass.png" type="Texture" id=14]
+[ext_resource path="res://examples/VisualNovel/transition2.jpg" type="Texture" id=15]
+[ext_resource path="res://examples/VisualNovel/events/play_music.gd" type="Script" id=16]
+[ext_resource path="res://examples/assets/music/seishishitauchu.ogg" type="AudioStream" id=17]
+[ext_resource path="res://examples/assets/music/yume.ogg" type="AudioStream" id=18]
 
-[sub_resource type="Resource" id=1]
+[sub_resource type="Resource" id=24]
 script = ExtResource( 3 )
 continue_at_end = true
-node_path = NodePath(".")
-method = "set_background"
-args = [ "res://examples/VisualNovel/Backgrounds/backgroundColorForest.png", 0.5, 1.0 ]
+background = ExtResource( 13 )
+transition = ExtResource( 12 )
+smooth = 0.5
+transition_speed = 1.0
 
-[sub_resource type="Resource" id=13]
-script = ExtResource( 3 )
+[sub_resource type="Resource" id=26]
+script = ExtResource( 16 )
 continue_at_end = true
-node_path = NodePath(".")
-method = "set_music"
-args = [ "res://examples/assets/music/yume.ogg" ]
+song = ExtResource( 18 )
+crossfade_speed = 1.0
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 4 )
@@ -103,19 +111,19 @@ audio_map_blip_to_letter = false
 translation_key = ""
 character = ExtResource( 9 )
 
-[sub_resource type="Resource" id=8]
+[sub_resource type="Resource" id=25]
 script = ExtResource( 3 )
 continue_at_end = true
-node_path = NodePath(".")
-method = "set_background"
-args = [ "res://examples/VisualNovel/Backgrounds/backgroundColorGrass.png", 0.5, 1.0 ]
+background = ExtResource( 14 )
+transition = ExtResource( 15 )
+smooth = 0.5
+transition_speed = 1.0
 
-[sub_resource type="Resource" id=14]
-script = ExtResource( 3 )
+[sub_resource type="Resource" id=28]
+script = ExtResource( 16 )
 continue_at_end = true
-node_path = NodePath(".")
-method = "set_music"
-args = [ "res://examples/assets/music/seishishitauchu.ogg", 0.3 ]
+song = ExtResource( 17 )
+crossfade_speed = 0.3
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 8 )
@@ -211,6 +219,14 @@ continue_at_end = true
 character = ExtResource( 9 )
 selected_portrait = 7
 
+[sub_resource type="Resource" id=29]
+script = ExtResource( 11 )
+continue_at_end = true
+trauma = 1.0
+decay = 0.8
+max_offset = Vector2( 100, 50 )
+max_roll = 0.1
+
 [sub_resource type="Resource" id=21]
 script = ExtResource( 2 )
 continue_at_end = true
@@ -241,4 +257,4 @@ event_index = 0
 [resource]
 resource_name = "Timeline"
 script = ExtResource( 1 )
-_events = [ SubResource( 1 ), SubResource( 13 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 14 ), SubResource( 9 ), SubResource( 12 ), SubResource( 10 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 23 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 11 ) ]
+_events = [ SubResource( 24 ), SubResource( 26 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 25 ), SubResource( 28 ), SubResource( 9 ), SubResource( 12 ), SubResource( 10 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 23 ), SubResource( 19 ), SubResource( 20 ), SubResource( 29 ), SubResource( 21 ), SubResource( 22 ), SubResource( 11 ) ]
