@@ -5,22 +5,7 @@
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd" type="Script" id=3]
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/options_node/options_node.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black.tres" type="Theme" id=5]
-
-[sub_resource type="StyleBoxFlat" id=2]
-resource_name = "NameStyle"
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0, 0, 0, 0.537255 )
-border_blend = true
-corner_radius_top_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 1
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black_name_style.tres" type="StyleBox" id=6]
 
 [node name="DialogNode" type="Control"]
 anchor_right = 1.0
@@ -53,6 +38,7 @@ margin_bottom = -387.0
 [node name="DialogBox" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -68,7 +54,7 @@ margin_right = -0.344009
 margin_bottom = 4.49994
 grow_horizontal = 2
 grow_vertical = 2
-custom_styles/normal = SubResource( 2 )
+custom_styles/normal = ExtResource( 6 )
 text = "Sample Name"
 align = 1
 valign = 1
