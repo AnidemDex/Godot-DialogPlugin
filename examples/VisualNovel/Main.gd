@@ -42,9 +42,8 @@ func _process(delta):
 		set_background(bgs[bg_index], 0, 0)
 
 
-func set_music(mus_path: String):
-	music_player.stream = load(mus_path)
-	music_player.play()
+func set_music(mus_path: String, speed: float = 1.0):
+	music_player.play_music(load(mus_path), speed)
 
 
 func set_background(bg_path: String, smooth: float = 0.5, speed: float = 1.0):

@@ -23,7 +23,7 @@ script = ExtResource( 3 )
 continue_at_end = true
 node_path = NodePath(".")
 method = "set_music"
-args = [ "res://examples/assets/music/yume.mp3" ]
+args = [ "res://examples/assets/music/yume.ogg" ]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 4 )
@@ -115,7 +115,7 @@ script = ExtResource( 3 )
 continue_at_end = true
 node_path = NodePath(".")
 method = "set_music"
-args = [ "res://examples/assets/music/seishishitauchu.mp3" ]
+args = [ "res://examples/assets/music/seishishitauchu.ogg", 0.3 ]
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 8 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://addons/event_system_plugin/nodes/event_manager/event_manager.gd" type="Script" id=1]
 [ext_resource path="res://examples/VisualNovel/transition.gdshader" type="Shader" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://addons/textalog/nodes/dialogue_base_node/options_node/options_node.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black.tres" type="Theme" id=12]
 [ext_resource path="res://examples/VisualNovel/portrait_manager_ex.gd" type="Script" id=13]
+[ext_resource path="res://examples/VisualNovel/MusicPlayer.gd" type="Script" id=14]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -100,6 +101,60 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CrossfadePlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -80.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "crossfade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1.8, 0.2 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CrossfadePlayer:volume_db")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.2, 1.8 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
 }
 
 [node name="Main" type="Control"]
@@ -231,6 +286,14 @@ anims/RESET = SubResource( 8 )
 anims/transition = SubResource( 6 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 14 )
+
+[node name="EffectsPlayer" type="AnimationPlayer" parent="MusicPlayer"]
+anims/RESET = SubResource( 9 )
+anims/crossfade = SubResource( 10 )
+
+[node name="CrossfadePlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
+volume_db = -80.0
 
 [connection signal="event_finished" from="EventManager" to="." method="_on_EventManager_event_finished"]
 [connection signal="event_started" from="EventManager" to="." method="_on_EventManager_event_started"]
