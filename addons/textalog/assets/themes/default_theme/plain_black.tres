@@ -86,10 +86,5 @@ Button/styles/hover = SubResource( 3 )
 Button/styles/normal = SubResource( 4 )
 Button/styles/pressed = SubResource( 5 )
 DialogNode/styles/bubble = null
-<<<<<<< HEAD
-DialogNode/styles/name = SubResource( 7 )
-DialogNode/styles/text = SubResource( 1 )
-=======
 DialogNode/styles/name = ExtResource( 1 )
 DialogNode/styles/text = ExtResource( 3 )
->>>>>>> a68796d11aa80b4f882618ae430c37e7f6a04b21
