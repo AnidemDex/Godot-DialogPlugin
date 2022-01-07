@@ -76,8 +76,3 @@ func _ready() -> void:
 Now we have an official documentation! All the information about the plugin you will find it organized in the [documentation page](https://godotplugins.gitbook.io/textalog/). Tutorials, class information, FAQ and more will be added there, eventually.
 
 Want to see the whole changelog? Take a look on the documentation, the [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section.
-
-## 📝Credits and license
-Made by [AnidemDex](https://github.com/anidemDex)
-
-This plugin uses [MIT license](./LICENSE)
