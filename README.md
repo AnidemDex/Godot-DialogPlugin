@@ -71,27 +71,11 @@ func _ready() -> void:
 
 > ⚠️ `Control` node and `Node2D` node types are incompatible. If you want to add the `DialogNode` as child of a Node2D type, make sure to give it a proper `rect_size`, add it as child of a `CanvasLayer` or add it in the scene, not in code.
 
-
-
-## 🔎 What is new on this version? [1.1]
-
-Second release! Who would think about it?
-The most relevant about this update is its reintegration with EventSystem, to use it as a Dialog System again! 🎉
-
-* Added:
-  * **Reference hint in PortraitManager.** Now the reference rect node that were used previously is built-in directly on the node, letting you modify it directly in PortraitManager.
-  * **Integration with EventSystem.** Use Textalog not only as a Dialog Node, but as a Dialog System too [#56](https://github.com/AnidemDex/Godot-DialogPlugin/pull/56).
-* Changed:
-  * **`DialogManager.text_autoscroll` will be false by default.**
-  * **`DialogManager.text_fit_content_height` will be false by default.**
-* Removed:
-  * **ReferenceRect node from PortraitManager.**
-
-Want to see the whole changelog? Take a look on the documentation, the [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section.
-
 ## 📚 Documentation
 
 Now we have an official documentation! All the information about the plugin you will find it organized in the [documentation page](https://godotplugins.gitbook.io/textalog/). Tutorials, class information, FAQ and more will be added there, eventually.
+
+Want to see the whole changelog? Take a look on the documentation, the [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section.
 
 ## 📝Credits and license
 Made by [AnidemDex](https://github.com/anidemDex)
