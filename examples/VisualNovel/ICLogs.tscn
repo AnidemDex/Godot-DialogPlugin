@@ -1,0 +1,79 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://examples/VisualNovel/ICLogs.gd" type="Script" id=2]
+
+[node name="ICLogs" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="LogLayout" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fade" type="ColorRect" parent="LogLayout"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.294118 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LogLayout"]
+anchor_left = 0.207031
+anchor_top = 0.0716667
+anchor_right = 0.792969
+anchor_bottom = 1.0
+follow_focus = true
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="PieceContainer" type="VBoxContainer" parent="LogLayout/ScrollContainer"]
+margin_right = 600.0
+margin_bottom = 557.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="SearchString" type="LineEdit" parent="LogLayout"]
+anchor_left = 0.207
+anchor_right = 0.793
+margin_left = 0.0319824
+margin_right = -0.0320435
+margin_bottom = 27.0
+focus_mode = 1
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -95.0
+margin_top = 10.0
+margin_right = -14.0
+margin_bottom = 43.0
+focus_mode = 0
+text = "Logs"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_changed" from="LogLayout/SearchString" to="." method="_on_SearchString_text_changed"]
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

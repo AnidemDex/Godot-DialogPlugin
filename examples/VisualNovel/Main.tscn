@@ -1,0 +1,299 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/event_manager/event_manager.gd" type="Script" id=1]
+[ext_resource path="res://examples/VisualNovel/transition.gdshader" type="Shader" id=2]
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialog_node/dialog_node.gd" type="Script" id=3]
+[ext_resource path="res://examples/VisualNovel/transition3.png" type="Texture" id=4]
+[ext_resource path="res://examples/VisualNovel/Main.gd" type="Script" id=5]
+[ext_resource path="res://examples/VisualNovel/timelines/main.tres" type="Resource" id=6]
+[ext_resource path="res://examples/VisualNovel/ICLogs.tscn" type="PackedScene" id=7]
+[ext_resource path="res://icon.png" type="Texture" id=8]
+[ext_resource path="res://examples/VisualNovel/transition1.png" type="Texture" id=9]
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.gd" type="Script" id=10]
+[ext_resource path="res://addons/textalog/nodes/dialogue_base_node/options_node/options_node.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black.tres" type="Theme" id=12]
+[ext_resource path="res://examples/VisualNovel/portrait_manager_ex.gd" type="Script" id=13]
+[ext_resource path="res://examples/VisualNovel/MusicPlayer.gd" type="Script" id=14]
+[ext_resource path="res://examples/VisualNovel/ShakeCamera/ShakeCamera2D.tscn" type="PackedScene" id=15]
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black_name_style.tres" type="StyleBox" id=16]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/cutoff = 0.0
+shader_param/smooth_size = 0.5
+shader_param/mask = ExtResource( 4 )
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD/Screencap:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/path = NodePath("HUD/Screencap:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 2 )
+shader_param/cutoff = 0.0
+shader_param/smooth_size = null
+shader_param/mask = ExtResource( 9 )
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.001 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "transition"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:material:shader_param/cutoff")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CrossfadePlayer:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -80.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "crossfade"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1.8, 0.2 ),
+"update": 0,
+"values": [ 0.0, -80.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CrossfadePlayer:volume_db")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 0.2, 1.8 ),
+"update": 0,
+"values": [ -80.0, 0.0 ]
+}
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="EventManager" type="Node" parent="."]
+script = ExtResource( 1 )
+event_node_path = NodePath("../HUD/DialogNode")
+start_on_ready = true
+timeline = ExtResource( 6 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="DialogNode" type="Control" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 12 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+DialogNode_Path = NodePath("DialogBox/DialogManager")
+PortraitNode_Path = NodePath("../../PortraitManager")
+OptionsNode_Path = NodePath("Options")
+NameNode_path = NodePath("DialogBox/CharacterName")
+
+[node name="Options" parent="HUD/DialogNode" instance=ExtResource( 11 )]
+margin_left = 27.0
+margin_top = 94.0
+margin_right = -25.0
+margin_bottom = -387.0
+
+[node name="DialogBox" type="Control" parent="HUD/DialogNode"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharacterName" type="Label" parent="HUD/DialogNode/DialogBox"]
+anchor_left = 0.023
+anchor_top = 0.643
+anchor_right = 0.181
+anchor_bottom = 0.72
+margin_left = 0.447996
+margin_top = -4.30005
+margin_right = -0.344009
+margin_bottom = 4.49994
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/normal = ExtResource( 16 )
+text = "Sample Name"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogManager" type="Container" parent="HUD/DialogNode/DialogBox"]
+anchor_left = 0.028
+anchor_top = 0.733
+anchor_right = 0.977
+anchor_bottom = 0.963
+margin_left = 0.327999
+margin_top = 0.199982
+margin_right = -0.448059
+margin_bottom = 0.199951
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+text_show_scroll_at_end = false
+
+[node name="Screencap" type="TextureRect" parent="HUD"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+expand = true
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ICLogs" parent="HUD" instance=ExtResource( 7 )]
+mouse_filter = 1
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PortraitManager" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+character_folder = "res://examples/VisualNovel/characters/"
+
+[node name="BackgroundTransitions" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/transition = SubResource( 3 )
+
+[node name="PortraitTemplate" type="TextureRect" parent="."]
+visible = false
+material = SubResource( 5 )
+margin_left = 358.0
+margin_top = 120.0
+margin_right = 665.0
+margin_bottom = 540.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PortraitTemplate"]
+anims/RESET = SubResource( 8 )
+anims/transition = SubResource( 6 )
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource( 14 )
+
+[node name="EffectsPlayer" type="AnimationPlayer" parent="MusicPlayer"]
+anims/RESET = SubResource( 9 )
+anims/crossfade = SubResource( 10 )
+
+[node name="CrossfadePlayer" type="AudioStreamPlayer" parent="MusicPlayer"]
+volume_db = -80.0
+
+[node name="ShakeCamera2D" parent="." instance=ExtResource( 15 )]
+position = Vector2( 512, 300 )
+current = true
+
+[connection signal="event_finished" from="EventManager" to="." method="_on_EventManager_event_finished"]
+[connection signal="event_started" from="EventManager" to="." method="_on_EventManager_event_started"]
+[connection signal="timeline_finished" from="EventManager" to="." method="_on_EventManager_timeline_finished"]
+[connection signal="timeline_started" from="EventManager" to="." method="_on_EventManager_timeline_started"]
+[connection signal="portrait_added" from="HUD/DialogNode" to="." method="_on_DialogNode_portrait_added"]
+[connection signal="portrait_changed" from="HUD/DialogNode" to="." method="_on_DialogNode_portrait_changed"]
+[connection signal="portrait_removed" from="HUD/DialogNode" to="." method="_on_DialogNode_portrait_removed"]
+[connection signal="text_displayed" from="HUD/DialogNode" to="." method="_on_DialogNode_text_displayed"]

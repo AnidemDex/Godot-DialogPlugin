@@ -12,6 +12,10 @@ var event_scripts := PoolStringArray([
 	"res://addons/textalog/events/character/change_expression.gd",
 	"res://addons/textalog/events/character/join.gd",
 	"res://addons/textalog/events/character/leave.gd",
+	# hard-coding example-specific events is a nightmare but I guess I gotta do it
+	"res://examples/VisualNovel/events/change_background.gd",
+	"res://examples/VisualNovel/events/play_music.gd",
+	"res://examples/VisualNovel/events/shake_screen.gd",
 ])
 
 var _welcome_scene:PackedScene = load("res://addons/textalog/nodes/editor/welcome/hi.tscn")
