@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://addons/event_system_plugin/events/call_from.gd"
 }, {
 "base": "Event",
+"class": "EventChangeBackground",
+"language": "GDScript",
+"path": "res://examples/VisualNovel/events/change_background.gd"
+}, {
+"base": "Event",
 "class": "EventChangeTimeline",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/change_timeline.gd"
@@ -100,9 +105,19 @@ _global_script_classes=[ {
 "path": "res://addons/event_system_plugin/nodes/event_manager/event_manager.gd"
 }, {
 "base": "Event",
+"class": "EventPlayMusic",
+"language": "GDScript",
+"path": "res://examples/VisualNovel/events/play_music.gd"
+}, {
+"base": "Event",
 "class": "EventSet",
 "language": "GDScript",
 "path": "res://addons/event_system_plugin/events/set.gd"
+}, {
+"base": "Event",
+"class": "EventShakeScreen",
+"language": "GDScript",
+"path": "res://examples/VisualNovel/events/shake_screen.gd"
 }, {
 "base": "Event",
 "class": "EventShow",
@@ -129,6 +144,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd"
 }, {
+"base": "Camera2D",
+"class": "ShakeCamera2D",
+"language": "GDScript",
+"path": "res://examples/VisualNovel/ShakeCamera/ShakeCamera2D.gd"
+}, {
 "base": "Resource",
 "class": "Timeline",
 "language": "GDScript",
@@ -141,6 +161,7 @@ _global_script_class_icons={
 "DialogNode": "",
 "Event": "res://addons/event_system_plugin/assets/icons/timeline_icon.png",
 "EventCall": "",
+"EventChangeBackground": "",
 "EventChangeTimeline": "",
 "EventCharacterChangeExpression": "",
 "EventCharacterJoin": "",
@@ -153,12 +174,15 @@ _global_script_class_icons={
 "EventHide": "",
 "EventJumpToEvent": "",
 "EventManager": "",
+"EventPlayMusic": "",
 "EventSet": "",
+"EventShakeScreen": "",
 "EventShow": "",
 "EventWait": "",
 "OptionsManager": "",
 "Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
 "PortraitManager": "",
+"ShakeCamera2D": "",
 "Timeline": "res://addons/event_system_plugin/assets/icons/timeline_icon.png"
 }
 
@@ -202,4 +226,5 @@ translations=PoolStringArray(  )
 
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_clear_color=Color( 0, 0, 0, 1 )
 environment/default_environment="res://default_env.tres"

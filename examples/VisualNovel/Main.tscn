@@ -15,22 +15,7 @@
 [ext_resource path="res://examples/VisualNovel/portrait_manager_ex.gd" type="Script" id=13]
 [ext_resource path="res://examples/VisualNovel/MusicPlayer.gd" type="Script" id=14]
 [ext_resource path="res://examples/VisualNovel/ShakeCamera/ShakeCamera2D.tscn" type="PackedScene" id=15]
-
-[sub_resource type="StyleBoxFlat" id=7]
-resource_name = "NameStyle"
-content_margin_left = 16.0
-content_margin_right = 16.0
-content_margin_top = 16.0
-content_margin_bottom = 16.0
-bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color( 0, 0, 0, 0.537255 )
-border_blend = true
-corner_radius_top_right = 20
-corner_radius_bottom_left = 20
-corner_detail = 1
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black_name_style.tres" type="StyleBox" id=16]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -213,7 +198,7 @@ margin_right = -0.344009
 margin_bottom = 4.49994
 grow_horizontal = 2
 grow_vertical = 2
-custom_styles/normal = SubResource( 7 )
+custom_styles/normal = ExtResource( 16 )
 text = "Sample Name"
 align = 1
 valign = 1
@@ -236,17 +221,19 @@ __meta__ = {
 }
 text_show_scroll_at_end = false
 
-[node name="ICLogs" parent="HUD" instance=ExtResource( 7 )]
-
 [node name="Screencap" type="TextureRect" parent="HUD"]
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 expand = true
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="ICLogs" parent="HUD" instance=ExtResource( 7 )]
+mouse_filter = 1
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
