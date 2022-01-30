@@ -49,7 +49,7 @@ func add_portrait(
 		_texture_rect = portraits.get(character, null)
 		changed = true
 	# Create a new node as no previous node exists
-	else:
+	if not is_instance_valid(_texture_rect):
 		_texture_rect = TextureRect.new()
 		portraits[character] = _texture_rect
 
