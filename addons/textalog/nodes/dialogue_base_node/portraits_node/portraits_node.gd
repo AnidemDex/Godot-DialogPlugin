@@ -42,12 +42,12 @@ func add_portrait(
 	
 	
 	var _texture_rect:TextureRect
-	
+	var changed: bool = false
+
 	# Use previous node as reference
 	if character in portraits:
 		_texture_rect = portraits.get(character, null)
-		remove_portrait(character)
-		emit_signal("portrait_changed", character, portrait)
+		changed = true
 	# Create a new node as no previous node exists
 	else:
 		_texture_rect = TextureRect.new()
@@ -111,7 +111,11 @@ func add_portrait(
 	
 	grab_portrait_focus(_texture_rect)
 	
-	emit_signal("portrait_added", character, portrait)
+	if changed:
+		emit_signal("portrait_changed", character, portrait)
+	else:
+		emit_signal("portrait_added", character, portrait)
+		
 
 
 func remove_portrait(character:Character) -> void:
