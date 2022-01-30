@@ -62,7 +62,7 @@ func _execute() -> void:
 	]
 	
 	if remove_other_portraits:
-		portrait_manager.remove_all_portraits()
+		portrait_manager.remove_all_other_portraits(character)
 	
 	portrait_manager.call_deferred("callv", "add_portrait", args)
 

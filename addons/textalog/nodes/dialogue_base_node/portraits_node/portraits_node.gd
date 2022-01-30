@@ -40,23 +40,29 @@ func add_portrait(
 		emit_signal("portrait_added", character, portrait)
 		return
 	
-	# Remove previous node
-	if character in portraits:
-		remove_portrait(character)
-		emit_signal("portrait_changed", character, portrait)
 	
-	var _texture_rect:TextureRect = TextureRect.new()
-	connect("tree_exiting", _texture_rect, "queue_free")
+	var _texture_rect:TextureRect
+
+	# Use previous node as reference
+	if character in portraits:
+		_texture_rect = portraits.get(character, null)
+	# Create a new node as no previous node exists
+	if not is_instance_valid(_texture_rect):
+		_texture_rect = TextureRect.new()
+		portraits[character] = _texture_rect
+
+	if not is_connected("tree_exiting", _texture_rect, "queue_free"):
+		connect("tree_exiting", _texture_rect, "queue_free")
 	
 	if character.display_name:
 		_texture_rect.name = character.display_name
-	
-	portraits[character] = _texture_rect
 	
 	# Focus and _input
 	_texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
 	_texture_rect.focus_mode = Control.FOCUS_NONE
 	
+	if _texture_rect.get_parent():
+		_texture_rect.get_parent().remove_child(_texture_rect)
 	add_child(_texture_rect)
 	
 	# I know that I can iterate over property list to copy property values
@@ -106,6 +112,7 @@ func add_portrait(
 	grab_portrait_focus(_texture_rect)
 	
 	emit_signal("portrait_added", character, portrait)
+		
 
 
 func remove_portrait(character:Character) -> void:
@@ -121,6 +128,13 @@ func remove_portrait(character:Character) -> void:
 func remove_all_portraits() -> void:
 	for character in portraits.keys():
 		remove_portrait(character)
+
+
+func remove_all_other_portraits(character:Character) -> void:
+	for _character in portraits.keys():
+		if _character == character:
+			continue
+		remove_portrait(_character)
 
 
 func change_portrait(character:Character, portrait:Portrait) -> void:
