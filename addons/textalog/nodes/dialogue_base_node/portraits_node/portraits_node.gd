@@ -42,12 +42,10 @@ func add_portrait(
 	
 	
 	var _texture_rect:TextureRect
-	var changed: bool = false
 
 	# Use previous node as reference
 	if character in portraits:
 		_texture_rect = portraits.get(character, null)
-		changed = true
 	# Create a new node as no previous node exists
 	if not is_instance_valid(_texture_rect):
 		_texture_rect = TextureRect.new()
@@ -63,6 +61,8 @@ func add_portrait(
 	_texture_rect.mouse_filter = MOUSE_FILTER_IGNORE
 	_texture_rect.focus_mode = Control.FOCUS_NONE
 	
+	if _texture_rect.get_parent():
+		_texture_rect.get_parent().remove_child(_texture_rect)
 	add_child(_texture_rect)
 	
 	# I know that I can iterate over property list to copy property values
@@ -111,10 +111,7 @@ func add_portrait(
 	
 	grab_portrait_focus(_texture_rect)
 	
-	if changed:
-		emit_signal("portrait_changed", character, portrait)
-	else:
-		emit_signal("portrait_added", character, portrait)
+	emit_signal("portrait_added", character, portrait)
 		
 
 
