@@ -2,7 +2,6 @@ tool
 extends Event
 class_name EventCall
 
-export(NodePath) var node_path:NodePath setget set_node_path
 export(String) var method:String = "" setget set_method
 export(Array) var args:Array = []
 
@@ -17,20 +16,14 @@ func _init() -> void:
 
 
 func _execute() -> void:
-	if node_path == NodePath():
-		if event_node.has_method(method):
-			event_node.callv(method, args)
-	else:
-		var node = event_node.get_tree().current_scene.get_node_or_null(node_path)
-		if node != null:
-			node.callv(method, args)
+	var node:Node = get_event_node()
+	
+	if node.has_method(method):
+		node.callv(method, args)
+	
 	finish()
 
-func set_node_path(value:NodePath) -> void:
-	node_path = value
-	emit_changed()
-	property_list_changed_notify()
-	
+
 func set_method(value:String) -> void:
 	method = value
 	emit_changed()
@@ -41,3 +34,12 @@ func set_args(value:Array) -> void:
 	args = value.duplicate()
 	emit_changed()
 	property_list_changed_notify()
+
+
+func _set(property: String, value) -> bool:
+	if property == "node_path":
+		# This exists because node_path property was removed
+		event_node_path = value
+		emit_changed()
+		return true
+	return false
