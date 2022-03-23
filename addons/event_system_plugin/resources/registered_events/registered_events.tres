@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/resources/registered_events/_.gd" type="Script" id=1]
+[ext_resource path="res://addons/event_system_plugin/events/comment.gd" type="Script" id=2]
+[ext_resource path="res://addons/event_system_plugin/events/set.gd" type="Script" id=3]
+[ext_resource path="res://addons/event_system_plugin/events/jump_to.gd" type="Script" id=4]
+[ext_resource path="res://addons/event_system_plugin/events/wait.gd" type="Script" id=5]
+[ext_resource path="res://addons/event_system_plugin/events/change_timeline.gd" type="Script" id=6]
+[ext_resource path="res://addons/event_system_plugin/events/emit_signal.gd" type="Script" id=7]
+[ext_resource path="res://addons/event_system_plugin/events/condition.gd" type="Script" id=8]
+[ext_resource path="res://addons/event_system_plugin/events/show.gd" type="Script" id=9]
+[ext_resource path="res://addons/event_system_plugin/events/hide.gd" type="Script" id=10]
+[ext_resource path="res://addons/event_system_plugin/events/end_timeline.gd" type="Script" id=11]
+[ext_resource path="res://addons/event_system_plugin/events/call_from.gd" type="Script" id=12]
+
+[resource]
+script = ExtResource( 1 )
+events = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 11 ) ]
