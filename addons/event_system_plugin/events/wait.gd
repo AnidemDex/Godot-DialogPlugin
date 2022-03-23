@@ -13,7 +13,7 @@ func _init():
 
 
 func _execute() -> void:
-	var _timer = event_node.get_tree().create_timer(wait_time)
+	var _timer = get_event_node().get_tree().create_timer(wait_time)
 	_timer.connect("timeout", self, "finish")
 
 
