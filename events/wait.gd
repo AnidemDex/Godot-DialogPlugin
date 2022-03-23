@@ -2,7 +2,7 @@ tool
 extends Event
 class_name EventWait
 
-export(float, 0, 60, 1) var wait_time = 0.0 setget set_wait_time
+export(float) var wait_time = 0.0 setget set_wait_time
 
 func _init():
 	event_name = "Wait"
@@ -13,7 +13,7 @@ func _init():
 
 
 func _execute() -> void:
-	var _timer = event_node.get_tree().create_timer(wait_time)
+	var _timer = get_event_node().get_tree().create_timer(wait_time)
 	_timer.connect("timeout", self, "finish")
 
 
