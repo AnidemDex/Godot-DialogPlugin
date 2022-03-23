@@ -1,0 +1,116 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/welcome/main_panel.gd" type="Script" id=2]
+
+[node name="PanelContainer" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+VersionNodePath = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/Version")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 32.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 985.0
+margin_bottom = 562.0
+size_flags_vertical = 3
+custom_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 128.0
+margin_bottom = 562.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 128.0
+margin_bottom = 336.0
+rect_min_size = Vector2( 128, 128 )
+icon = ExtResource( 1 )
+clip_text = true
+expand_icon = true
+
+[node name="Version" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_top = 340.0
+margin_right = 128.0
+margin_bottom = 354.0
+text = "{VERSION_NUMBER}"
+align = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 144.0
+margin_right = 985.0
+margin_bottom = 562.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 207.0
+margin_right = 841.0
+margin_bottom = 255.0
+text = "Many thanks for using EventSystem! 
+
+This plugin was made for the comunnity."
+autowrap = true
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 259.0
+margin_right = 841.0
+margin_bottom = 263.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 267.0
+margin_right = 841.0
+margin_bottom = 281.0
+text = "Take a look in the documentation page:"
+
+[node name="Docs" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 285.0
+margin_right = 841.0
+margin_bottom = 305.0
+text = "Documentation Page"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 309.0
+margin_right = 841.0
+margin_bottom = 313.0
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 317.0
+margin_right = 841.0
+margin_bottom = 331.0
+text = "Github Repository:"
+
+[node name="Repository" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
+margin_top = 335.0
+margin_right = 841.0
+margin_bottom = 355.0
+hint_tooltip = "You can report bugs, request features or help with the plugin here"
+text = "AnidemDex/Godot-EventSystem"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 566.0
+margin_right = 985.0
+margin_bottom = 586.0
+
+[node name="License" type="Button" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 91.0
+margin_bottom = 20.0
+text = "MIT LICENSE"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Docs" to="." method="_on_Docs_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer2/Repository" to="." method="_on_Repository_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer2/License" to="." method="_on_License_pressed"]

@@ -1,0 +1,54 @@
+[gd_resource type="Theme" load_steps=6 format=2]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 8.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+corner_radius_top_left = 32
+corner_radius_bottom_left = 32
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 12.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+shadow_offset = Vector2( 2, 0 )
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.0980392, 0.113725, 0.156863, 1 )
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[resource]
+Button/styles/disabled = SubResource( 5 )
+Button/styles/focus = SubResource( 5 )
+Button/styles/hover = SubResource( 5 )
+Button/styles/normal = SubResource( 5 )
+Button/styles/pressed = SubResource( 5 )
+EventNode/colors/default = Color( 0.6, 0.6, 0.6, 1 )
+EventNode/colors/event = Color( 0.984314, 0.694118, 0.235294, 1 )
+EventNode/colors/hover = Color( 0.156863, 0.572549, 0.843137, 1 )
+EventNode/colors/outline = Color( 0.0980392, 0.113725, 0.156863, 1 )
+EventNode/styles/bg = SubResource( 2 )
+EventNode/styles/bg_left = SubResource( 3 )
+EventNode/styles/bg_right = SubResource( 4 )
+EventNode/styles/outline = SubResource( 1 )
+HBoxContainer/constants/separation = 0
