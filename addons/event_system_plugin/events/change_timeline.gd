@@ -1,6 +1,6 @@
 tool
 extends Event
-class_name EventChangeTimeline
+#class_name EventChangeTimeline
 
 export(String, FILE, "*.tres, *.res") var timeline_path:String = "" setget set_timeline_path
 export(int) var start_from_event = 0 setget set_start_event_idx
@@ -14,9 +14,11 @@ func _init() -> void:
 	event_preview_string = "Jump to: [ {timeline_path} ] and start in event #[ {start_from_event} ]"
 	event_category = "Logic"
 	continue_at_end = true
+	push_warning("Event [%s] is deprecated and will be removed in future versions. Use EventGoto instead."%event_name)
 
 
 func _execute() -> void:
+	push_warning("Event [%s] is deprecated and will be removed in future versions. Use EventGoto instead."%event_name)
 	
 	if not timeline and timeline_path:
 		timeline = load(timeline_path) as Timeline
@@ -31,7 +33,7 @@ func _execute() -> void:
 		var _discard = _event_queue.pop_front()
 	
 	timeline._event_queue = _event_queue
-	event_manager.start_timeline(timeline)
+	get_event_manager_node().start_timeline(timeline)
 
 
 func set_timeline_path(value:String) -> void:

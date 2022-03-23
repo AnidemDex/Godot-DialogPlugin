@@ -13,7 +13,7 @@ func _init() -> void:
 	event_category = "Node"
 
 func _execute() -> void:
-	event_manager.emit_signal("custom_signal", data)
+	get_event_manager_node().emit_signal("custom_signal", data)
 	finish()
 
 

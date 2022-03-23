@@ -7,7 +7,6 @@ func _init() -> void:
 	event_category = "Node"
 	event_icon = load("res://addons/event_system_plugin/assets/icons/event_icons/call.png") as Texture
 	event_preview_string = "{method} ( {args} ) "
-	node_path = NodePath()
 
 	args = []
 	push_warning("Call event is deprecated. Will be removed in future versions. Consider using EventCallFrom")
