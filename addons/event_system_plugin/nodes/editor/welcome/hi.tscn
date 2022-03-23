@@ -1,0 +1,105 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/welcome/hi.gd" type="Script" id=1]
+
+[node name="hi" type="AcceptDialog"]
+margin_right = 599.0
+margin_bottom = 293.0
+popup_exclusive = true
+window_title = "EventSystem enabled!"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 592.0
+margin_bottom = 248.0
+custom_constants/separation = 7
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_right = 585.0
+margin_bottom = 14.0
+text = "Thank you for using the EventSystem!"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 21.0
+margin_right = 585.0
+margin_bottom = 25.0
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 585.0
+margin_bottom = 46.0
+text = "Take a look in the documentation page:"
+
+[node name="Documentation" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 53.0
+margin_right = 585.0
+margin_bottom = 73.0
+text = "https://anidemdex.gitbook.io/eventsystem-godot-plugin/"
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 585.0
+margin_bottom = 84.0
+
+[node name="Label3" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 91.0
+margin_right = 585.0
+margin_bottom = 105.0
+text = "Github repository:"
+
+[node name="Repository" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 585.0
+margin_bottom = 132.0
+text = "https://github.com/AnidemDex/Godot-EventSystem"
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 139.0
+margin_right = 585.0
+margin_bottom = 143.0
+
+[node name="Footer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 205.0
+margin_right = 585.0
+margin_bottom = 241.0
+size_flags_vertical = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Footer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 578.0
+margin_bottom = 29.0
+
+[node name="License" type="ToolButton" parent="PanelContainer/VBoxContainer/Footer/HBoxContainer"]
+margin_right = 89.0
+margin_bottom = 22.0
+text = "MIT License"
+
+[node name="Credits" type="ToolButton" parent="PanelContainer/VBoxContainer/Footer/HBoxContainer"]
+margin_left = 412.0
+margin_right = 571.0
+margin_bottom = 22.0
+size_flags_horizontal = 10
+text = "Created by AnidemDex"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Documentation" to="." method="_on_Documentation_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Repository" to="." method="_on_Repository_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Footer/HBoxContainer/License" to="." method="_on_License_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Footer/HBoxContainer/Credits" to="." method="_on_Credits_pressed"]
