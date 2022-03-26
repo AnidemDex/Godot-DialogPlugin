@@ -57,8 +57,9 @@ func _execute_event(event:Event) -> void:
 		return
 	
 	var node:Node = self if event_node_fallback_path == @"." else get_node(event_node_fallback_path)
-	event.set("event_manager", self)
-	event.set("event_node_fallback", node)
+	# This is a crime, needs to be modified in future versions
+	event.set("_event_manager", self)
+	event.set("_event_node_fallback", node)
 	
 	_connect_event_signals(event)
 	
