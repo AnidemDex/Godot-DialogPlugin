@@ -126,7 +126,7 @@ func set_audio_bus(value:String) -> void:
 ##########
 
 func _show_text() -> void:
-	event_node.show()
+	get_event_node().show()
 	_dialog_manager.display_text()
 
 
@@ -149,7 +149,7 @@ func _prepare_text_to_show() -> void:
 
 
 func _configure_display_name() -> void:
-	var name_node:Label = event_node.name_node
+	var name_node:Label = get_event_node().name_node
 	if not is_instance_valid(name_node):
 		return
 	
@@ -183,12 +183,12 @@ func _on_text_displayed() -> void:
 
 
 func _execute() -> void:
-	event_node = event_node as DialogNode
-	if not is_instance_valid(event_node):
+	var node = get_event_node() as DialogNode
+	if not is_instance_valid(node):
 		finish()
 		return
 	
-	_dialog_manager = event_node.dialog_manager as DialogManager
+	_dialog_manager = node.dialog_manager as DialogManager
 	if not is_instance_valid(_dialog_manager):
 		finish()
 		return

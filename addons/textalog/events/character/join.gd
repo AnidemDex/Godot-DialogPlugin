@@ -22,18 +22,18 @@ func _init() -> void:
 
 
 func _execute() -> void:
-	event_node = event_node as DialogNode
-	if not is_instance_valid(event_node):
+	var node = get_event_node() as DialogNode
+	if not is_instance_valid(node):
 		finish()
 		return
 	
-	var portrait_manager:PortraitManager = event_node.portrait_manager
+	var portrait_manager:PortraitManager = node.portrait_manager
 	
 	if not is_instance_valid(portrait_manager):
 		finish()
 		return
 	
-	event_node.visible = true
+	node.visible = true
 	portrait_manager.visible = true
 	
 	portrait_manager.connect("portrait_added", self, "_on_portrait_added", [], CONNECT_ONESHOT)
