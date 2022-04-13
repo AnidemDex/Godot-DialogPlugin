@@ -30,6 +30,7 @@ func _enable_plugin() -> void:
 	show_welcome_node()
 
 var registered_events:Resource
+var events_inspector:EditorInspectorPlugin
 func event_system_integration() -> void:
 	var path := "res://addons/textalog/events/"
 	var file := ".gdignore"
@@ -66,6 +67,12 @@ func event_system_integration() -> void:
 			
 			current_events.append_array(events)
 			registered_events.call("set_events", current_events)
+			
+			events_inspector = load("res://addons/textalog/events/inspector.gd").new()
+			events_inspector.set("plugin_script", self)
+			events_inspector.set("editor_gui", get_editor_interface().get_base_control())
+			add_inspector_plugin(events_inspector)
+			connect("tree_exiting", self, "remove_inspector_plugin", [events_inspector])
 			
 	
 	# Force re-scan
