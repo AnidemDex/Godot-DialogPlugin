@@ -57,6 +57,7 @@ func _on_Status_pressed() -> void:
 			if Directory.new().dir_exists("res://addons/event_system_plugin"):
 				if is_instance_valid(plugin):
 					plugin.get_editor_interface().set_plugin_enabled("event_system_plugin", true)
+					plugin.call_deferred("event_system_integration")
 				get_tree().root.call_deferred("propagate_call","update")
 				
 		"Not Installed":

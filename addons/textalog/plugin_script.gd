@@ -16,6 +16,7 @@ var event_scripts := PoolStringArray([
 
 func _enter_tree() -> void:
 	show_plugin_version_button()
+	event_system_integration()
 
 
 func _enable_plugin() -> void:
@@ -27,3 +28,48 @@ func _enable_plugin() -> void:
 	get_plugin_welcome_node().get_tab_by_idx(0).add_child(main_panel)
 	
 	show_welcome_node()
+
+var registered_events:Resource
+func event_system_integration() -> void:
+	var path := "res://addons/textalog/events/"
+	var file := ".gdignore"
+	
+	if not get_editor_interface().is_plugin_enabled("event_system_plugin"):
+		var _file := File.new()
+		_file.open(path+file,File.WRITE)
+		_file.close()
+	else:
+		var dir := Directory.new()
+		if dir.file_exists(path+file):
+			dir.remove(path+file)
+		
+		var r_e_path := "res://addons/event_system_plugin/resources/registered_events/registered_events.tres"
+		registered_events = load(r_e_path)
+		if registered_events:
+			var events = []
+			var current_events:Array = registered_events.call("get_events")
+			var curr_evs_paths:PoolStringArray = PoolStringArray()
+			
+			for event in current_events:
+				event = event as Resource
+				if not event:
+					continue
+				
+				curr_evs_paths.append(event.get_script().resource_path)
+				
+			for ev_path in event_scripts:
+				if ev_path in curr_evs_paths:
+					continue
+				
+				var ev = load(ev_path).new()
+				events.append(ev)
+			
+			current_events.append_array(events)
+			registered_events.call("set_events", current_events)
+			
+	
+	# Force re-scan
+	var editor_interface:EditorInterface = get_editor_interface()
+	editor_interface.get_resource_filesystem().call_deferred("scan")
+	editor_interface.get_resource_filesystem().call_deferred("scan_sources")
+	editor_interface.get_resource_filesystem().call_deferred("update_script_classes")

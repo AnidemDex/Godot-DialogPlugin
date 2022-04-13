@@ -131,10 +131,6 @@ _global_script_class_icons={
 config/name="Godot-DialogPlugin"
 config/icon="res://icon.png"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/event_system_plugin/plugin.cfg", "res://addons/textalog/plugin.cfg" )
-
 [importer_defaults]
 
 texture={
