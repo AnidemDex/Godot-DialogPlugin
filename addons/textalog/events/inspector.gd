@@ -518,7 +518,7 @@ func parse_begin(object: Object) -> void:
 		add_custom_control(custom_control)
 	
 	
-	if object is _JoinEvent:
+	if object is _CharEventClass:
 		var custom_category := InspectorTools.InspectorCategory.new()
 		custom_category.label = "Preview"
 		custom_category.icon = editor_gui.get_icon("GuiVisibilityXray", "EditorIcons")
