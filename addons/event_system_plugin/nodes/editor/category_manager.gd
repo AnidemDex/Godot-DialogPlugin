@@ -71,6 +71,7 @@ var categories:Dictionary = {}
 func reload() -> void:
 	for child in get_children():
 		child.queue_free()
+		categories.clear()
 	create_categories()
 
 
