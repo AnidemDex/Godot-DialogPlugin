@@ -1,6 +1,9 @@
 tool
-extends "res://addons/textalog/events/character/char_event.gd"
-class_name EventCharacterJoin
+#extends "res://addons/textalog/events/character/char_event.gd"
+extends Event
+
+var character
+
 export(bool) var remove_other_portraits = false
 var rect_ignore_reference_size := false setget ignore_reference_size
 var rect_ignore_reference_position := false setget ignore_reference_position
@@ -56,7 +59,7 @@ func _execute() -> void:
 	
 	var args := [
 		character,
-		get_selected_portrait(),
+		null,
 		rect_data,
 		texture_data
 	]
