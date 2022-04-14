@@ -185,7 +185,7 @@ func _join() -> void:
 	
 	var args := [
 		character,
-		null,
+		get_selected_portrait(),
 		rect_data,
 		texture_data
 	]
@@ -197,6 +197,10 @@ func _leave() -> void:
 	portrait_manager.connect("portrait_removed", self, "_on_portrait_removed", [], CONNECT_ONESHOT)
 	
 	portrait_manager.remove_portrait(character)
+
+
+func _on_portrait_added(_c, _p) -> void:
+	finish()
 
 
 func _on_portrait_removed(_c) -> void:
