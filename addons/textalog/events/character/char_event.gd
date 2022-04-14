@@ -14,6 +14,7 @@ var character:Character = null setget set_character
 ## The portrait index selected for this event.
 var selected_portrait:int = -1 setget set_selected_portrait
 
+export(bool) var remove_all_portraits = false
 export(bool) var remove_other_portraits = false
 
 var rect_ignore_reference_size := false setget ignore_reference_size
@@ -31,6 +32,8 @@ var texture_flip_v:bool = false setget set_flip_v
 func _init() -> void:
 	event_color = Color("4CB963")
 	event_category = "Character"
+	event_name = "Character"
+
 
 var portrait_manager:PortraitManager
 func _execute() -> void:
@@ -48,16 +51,22 @@ func _execute() -> void:
 	node.visible = true
 	portrait_manager.visible = true
 	
-	if remove_other_portraits:
-		portrait_manager.remove_all_other_portraits(character)
 	
 	match mode:
 		Mode.NONE:
+			if remove_all_portraits:
+				portrait_manager.remove_all_portraits()
 			finish()
-		Mode.JOIN:
-			_join()
-		Mode.LEAVE:
-			_leave()
+		Mode.JOIN, Mode.LEAVE:
+			
+			if remove_other_portraits:
+				portrait_manager.remove_all_other_portraits(character)
+			
+			if mode == Mode.JOIN:
+				_join()
+			
+			if mode == Mode.LEAVE:
+				_leave()
 
 
 func set_mode(value:int) -> void:
@@ -212,12 +221,16 @@ func _get(property: String):
 		Mode.NONE:
 			if property == "character_ignore":
 				return true
+			if property == "remove_other_portraits_ignore":
+				return true
 			continue
 		Mode.NONE, Mode.LEAVE:
 			if property == "selected_portrait_ignore":
 				return true
-		Mode.JOIN:
-			pass
+			continue
+		Mode.JOIN, Mode.LEAVE:
+			if property == "remove_all_portraits_ignore":
+				return true
 	
 	if property == "event_node_path_ignore":
 		return true
