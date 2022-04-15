@@ -1,6 +1,5 @@
 tool
 extends "res://addons/textalog/events/character/char_event.gd"
-class_name EventCharacterChangeExpression
 
 func _init() -> void:
 	event_name = "Change expression"
