@@ -4,7 +4,7 @@ extends Event
 ##
 ## Character event class
 ##
-enum Mode {NONE=-1, JOIN, LEAVE}
+enum Mode {NONE=-1, JOIN, LEAVE, CHANGE_EXPRESSION}
 ## Event mode
 export(Mode) var mode:int = Mode.NONE setget set_mode
 
@@ -67,6 +67,9 @@ func _execute() -> void:
 			
 			if mode == Mode.LEAVE:
 				_leave()
+		
+		Mode.CHANGE_EXPRESSION:
+			_change_expression()
 
 
 func set_mode(value:int) -> void:
@@ -88,6 +91,12 @@ func set_mode(value:int) -> void:
 			event_name = "Character"
 			event_hint = "An event related to character instructions. It makes the character joins or leaves the scene."
 			event_preview_string = ""
+		
+		Mode.CHANGE_EXPRESSION:
+			event_name = "Change expression"
+			event_hint = "Changes the portrait of the character"
+			event_preview_string = "[{character_name}] expression will be [{expression_name}]"
+			event_icon = load("res://addons/textalog/assets/icons/event_icons/change_expression.png") as Texture
 	
 	emit_changed()
 	property_list_changed_notify()
@@ -199,11 +208,21 @@ func _leave() -> void:
 	portrait_manager.remove_portrait(character)
 
 
+func _change_expression() -> void:
+	portrait_manager.connect("portrait_changed", self, "_on_portrait_changed", [], CONNECT_ONESHOT)
+	
+	portrait_manager.change_portrait(character, get_selected_portrait())
+
+
 func _on_portrait_added(_c, _p) -> void:
 	finish()
 
 
 func _on_portrait_removed(_c) -> void:
+	finish()
+
+
+func _on_portrait_changed(_c, _p) -> void:
 	finish()
 
 
@@ -228,12 +247,19 @@ func _get(property: String):
 			if property == "remove_other_portraits_ignore":
 				return true
 			continue
+		
 		Mode.NONE, Mode.LEAVE:
 			if property == "selected_portrait_ignore":
 				return true
 			continue
-		Mode.JOIN, Mode.LEAVE:
+		
+		Mode.JOIN, Mode.LEAVE, Mode.CHANGE_EXPRESSION:
 			if property == "remove_all_portraits_ignore":
+				return true
+			continue
+		
+		Mode.CHANGE_EXPRESSION:
+			if property == "remove_other_portraits_ignore":
 				return true
 	
 	if property == "event_node_path_ignore":
