@@ -34,4 +34,9 @@ func parse_property(object: Object, type: int, path: String, hint: int, hint_tex
 	if (path_ignore in object):
 		return true
 	
+	if path == "next_event":
+		var node = InspectorTools.InspectorEventSelector.new()
+		add_property_editor(path, node)
+		return true
+	
 	return false

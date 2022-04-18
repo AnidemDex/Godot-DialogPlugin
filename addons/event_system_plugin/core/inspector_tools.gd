@@ -1,5 +1,4 @@
 tool
-extends EditorInspector
 
 class InspectorCategory extends Control:
 	var icon:Texture
@@ -52,5 +51,77 @@ class InspectorCategory extends Control:
 			bg_color = get_color("prop_category", "Editor")
 			update()
 
-func get_category_instance() -> InspectorCategory:
-	return InspectorCategory.new()
+
+class InspectorEventSelector extends EditorProperty:
+	var event_selector:Button
+	var popup:ConfirmationDialog
+	var reset_button:Button
+	var updating:bool = false
+	func _init() -> void:
+		event_selector = Button.new()
+		event_selector.text = "Select event"
+		event_selector.connect("pressed",self,"_on_button_pressed")
+		event_selector.size_flags_horizontal = SIZE_EXPAND_FILL
+		
+		reset_button = Button.new()
+		reset_button.connect("pressed", self, "_on_reset_pressed")
+		
+		var hb = HBoxContainer.new()
+		add_child(hb)
+		hb.add_child(event_selector)
+		hb.add_child(reset_button)
+		
+		popup = load("res://addons/event_system_plugin/nodes/editor/event_selector/event_selector.tscn").instance()
+		popup.connect("event_selected", self, "_on_event_selected")
+		add_child(popup)
+	
+	func _ready():
+		reset_button.icon = get_icon("Remove", "EditorIcons")
+		update_property()
+	
+	
+	func update_property():
+		var data:Array = str(get_edited_object()[get_edited_property()]).split(";", false)
+		if data.empty():
+			return
+		
+		var event_idx = data[0]
+		var timeline_path = ""
+		if data.size() >= 2:
+			timeline_path = data[1]
+		
+		var timeline = null
+		if timeline_path != "":
+			timeline = load(timeline_path)
+		
+		if not timeline:
+			timeline = Engine.get_meta("EventSystem").timeline_editor._edited_sequence
+		
+		if not timeline:
+			return
+		
+		var event = timeline.get("event/"+event_idx)
+		updating = true
+		if event:
+			event_selector.text = event.get("event_name")
+		updating = false
+		
+	
+	func _on_button_pressed() -> void:
+		var timeline = Engine.get_meta("EventSystem").timeline_editor._edited_sequence
+		if timeline:
+			popup.build_timeline(timeline)
+			popup.call_deferred("popup_centered_ratio", 0.45)
+	
+	
+	func _on_event_selected(event_idx, path) -> void:
+		if updating:
+			return
+		var value = "{idx};{path}".format({"idx":event_idx, "path":path})
+		emit_changed(get_edited_property(), value)
+	
+	func _on_reset_pressed() -> void:
+		if updating:
+			return
+		
+		emit_changed(get_edited_property(), null)
