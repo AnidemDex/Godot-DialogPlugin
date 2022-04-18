@@ -15,6 +15,7 @@ export(bool) var start_on_ready:bool = false
 
 var timeline
 var current_event
+var current_idx:int = -1
 
 func _ready() -> void:
 	if Engine.editor_hint:
@@ -37,23 +38,38 @@ func start_timeline(timeline_resource:Timeline=timeline) -> void:
 
 func go_to_next_event() -> void:
 	var event
-	if not current_event:
-		if not timeline:
-			_notify_timeline_end()
-			return
-		event = timeline.get("event/0")
-	else:
-		event = current_event.get("next_event")
-		if not event:
-			_notify_timeline_end()
 	
+	if current_event:
+		if "next_event" in current_event and current_event["next_event"] != "":
+			var data = current_event.get("next_event").split(";")
+			current_idx = int(data[0])
+			var new_timeline = ""
+			if data.size() > 1:
+				new_timeline = data[1]
+			
+			if new_timeline != "":
+				new_timeline = load(new_timeline) as Timeline
+				if new_timeline:
+					timeline = new_timeline
+		else:
+			current_idx += 1
+	
+	if current_idx < 0:
+		current_idx = 0
+	
+	event = timeline.get("event/{idx}".format({"idx":current_idx}))
 	current_event = event
+	
+	if current_event == null:
+		_notify_timeline_end()
+		return
 	
 	_execute_event(event)
 
 
 func _execute_event(event:Event) -> void:
 	if event == null:
+		assert(false)
 		return
 	
 	var node:Node = self if event_node_fallback_path == @"." else get_node(event_node_fallback_path)

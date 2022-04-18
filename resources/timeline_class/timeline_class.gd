@@ -99,15 +99,6 @@ func _set(property:String, value) -> bool:
 		else:
 			_events.insert(event_idx, value)
 		
-		var prev_idx:int = event_idx-1
-		
-		if prev_idx > -1:
-			var prev_ev:Resource = _events[prev_idx]
-			var ev_next_pointer:Resource = null
-			if prev_ev:
-				ev_next_pointer = prev_ev.get("next_event")
-				if not ev_next_pointer:
-					prev_ev.set("next_event", value)
 		has_property = true
 		emit_changed()
 	
