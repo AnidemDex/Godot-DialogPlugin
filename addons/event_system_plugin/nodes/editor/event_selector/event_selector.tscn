@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/event_system_plugin/nodes/editor/event_selector/event_selector.gd" type="Script" id=1]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 150, 52.5 )
+popup_exclusive = true
+window_title = "Event Selector"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1008.0
+margin_bottom = 20.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 152.0
+margin_bottom = 17.0
+text = "Please, select an event:"
+
+[node name="External" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 844.0
+margin_right = 1008.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+text = "Use a different timeline"
+
+[node name="Tree" type="Tree" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 1008.0
+margin_bottom = 556.0
+size_flags_vertical = 3
+allow_reselect = true
+
+[connection signal="confirmed" from="." to="." method="_on_ConfirmationDialog_confirmed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/External" to="." method="_on_External_pressed"]
+[connection signal="item_double_clicked" from="VBoxContainer/Tree" to="." method="_on_Tree_item_double_clicked"]
+[connection signal="item_selected" from="VBoxContainer/Tree" to="." method="_on_Tree_item_selected"]
