@@ -121,6 +121,7 @@ func display_text() -> void:
 ## Set the text that this node will display. Call [method display_text]
 ## after using this method to display the text.
 func set_text(text:String) -> void:
+	_text_timer.stop()
 	_text_left = text.split("\n")
 	_text_left.invert()
 	_cursor_position = 0
@@ -225,7 +226,7 @@ func get_space_blip_sample() -> AudioStream:
 	if blip_space_samples.empty():
 		return null
 	
-	var _limit = max(blip_samples.size()-1, 0)
+	var _limit = max(blip_space_samples.size()-1, 0)
 	blip_sample = blip_space_samples[_generator.randi_range(0, _limit)] as AudioStream
 	
 	return blip_sample
@@ -369,6 +370,8 @@ func _get_minimum_size() -> Vector2:
 	var ms:Vector2 = Vector2()
 	var font:Font = get_font("normal_font")
 	
+	ms.x = 128
+	
 	if style:
 		ms += style.get_minimum_size()
 	
@@ -439,7 +442,8 @@ func _get(property: String):
 	return
 
 func property_can_revert(property:String):
-	return true
+	var p = PoolStringArray(["text_update", "text_speed", "text_autoscroll", "scroll_method", "show_scrollbar", "scroll_speed", "uses_bubble"])
+	return property in p or property.begins_with("blip")
 
 func property_get_revert(property:String):
 	match property:
