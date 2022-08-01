@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/typewrite_bell.wav-07e2a3c284b4cafafaee962d57f9c9c0.sample"
+
+[deps]
+
+source_file="res://addons/textalog/assets/sounds/typewrite_bell.wav"
+dest_files=[ "res://.import/typewrite_bell.wav-07e2a3c284b4cafafaee962d57f9c9c0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/key.wav-b5f517761db41301e528bc63df4c2c2c.sample"
+
+[deps]
+
+source_file="res://addons/textalog/assets/sounds/key.wav"
+dest_files=[ "res://.import/key.wav-b5f517761db41301e528bc63df4c2c2c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

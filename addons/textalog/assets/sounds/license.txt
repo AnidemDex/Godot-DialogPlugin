@@ -1,0 +1,9 @@
+The following files has different licenses and are written in one line under the following format: [file_name LICENSE author source]
+Know more about those licenses on https://creativecommons.org/licenses/
+
+letter.wav CC0
+space.wav CC0
+typewriter_bell.wav CC0 ramsamba https://freesound.org/people/ramsamba/sounds/318687/
+key.wav CC0 cabled-mess https://freesound.org/people/cabled_mess/sounds/360602/
+space_variation.wav CC0 adcbicycle https://freesound.org/people/adcbicycle/sounds/13926/
+key_variation [CC BY 3.0] ddohler https://freesound.org/people/ddohler/sounds/9098/
