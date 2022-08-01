@@ -5,6 +5,6 @@
 
 [resource]
 default_font = ExtResource( 2 )
+DialogNode/styles/background = ExtResource( 1 )
 DialogNode/styles/bubble = null
 DialogNode/styles/name = ExtResource( 1 )
-DialogNode/styles/text = ExtResource( 1 )

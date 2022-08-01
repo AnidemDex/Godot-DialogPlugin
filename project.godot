@@ -29,61 +29,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.gd"
 }, {
-"base": "Resource",
-"class": "Event",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/resources/event_class/event_class.gd"
-}, {
-"base": "Event",
-"class": "EventCall",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/call_from.gd"
-}, {
-"base": "Event",
-"class": "EventComment",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/comment.gd"
-}, {
-"base": "Event",
-"class": "EventCondition",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/new_condition.gd"
-}, {
-"base": "Event",
-"class": "EventEmitSignal",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/emit_signal.gd"
-}, {
-"base": "Event",
-"class": "EventGoTo",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/goto.gd"
-}, {
-"base": "Event",
-"class": "EventHide",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/hide.gd"
-}, {
-"base": "Node",
-"class": "EventManager",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/nodes/event_manager/event_manager.gd"
-}, {
-"base": "Event",
-"class": "EventSet",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/set.gd"
-}, {
-"base": "Event",
-"class": "EventShow",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/show.gd"
-}, {
-"base": "Event",
-"class": "EventWait",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/events/wait.gd"
-}, {
 "base": "Container",
 "class": "OptionsManager",
 "language": "GDScript",
@@ -98,37 +43,21 @@ _global_script_classes=[ {
 "class": "PortraitManager",
 "language": "GDScript",
 "path": "res://addons/textalog/nodes/dialogue_base_node/portraits_node/portraits_node.gd"
-}, {
-"base": "Resource",
-"class": "Timeline",
-"language": "GDScript",
-"path": "res://addons/event_system_plugin/resources/timeline_class/timeline_class.gd"
 } ]
 _global_script_class_icons={
 "Character": "res://addons/textalog/assets/icons/character_icon.png",
 "DialogBubble": "",
 "DialogManager": "",
 "DialogNode": "",
-"Event": "res://addons/event_system_plugin/assets/icons/timeline_icon.png",
-"EventCall": "",
-"EventComment": "",
-"EventCondition": "",
-"EventEmitSignal": "",
-"EventGoTo": "",
-"EventHide": "",
-"EventManager": "",
-"EventSet": "",
-"EventShow": "",
-"EventWait": "",
 "OptionsManager": "",
 "Portrait": "res://addons/textalog/assets/icons/portrait_icon.png",
-"PortraitManager": "",
-"Timeline": "res://addons/event_system_plugin/assets/icons/timeline_icon.png"
+"PortraitManager": ""
 }
 
 [application]
 
 config/name="Godot-DialogPlugin"
+run/low_processor_mode=true
 config/icon="res://icon.png"
 
 [importer_defaults]
