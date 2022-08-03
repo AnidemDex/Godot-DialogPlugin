@@ -489,15 +489,27 @@ func _get_property_list() -> Array:
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_ENTER_TREE:
-			_text_timer.connect("timeout", self, "_update_displayed_text")
-			get_text_node().get_v_scroll().connect("changed", self, "_scroll_to_new_line")
+			if not _text_timer.is_connected("timeout", self, "_update_displayed_text"):
+				_text_timer.connect("timeout", self, "_update_displayed_text")
+			
+			var scroll = text_node.get_v_scroll()
+			if not scroll.is_connected("changed", self, "_scroll_to_new_line"):
+				scroll.connect("changed", self, "_scroll_to_new_line")
 			
 			_text_container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 			continue
 		
 		NOTIFICATION_READY:
 			if Engine.editor_hint:
-				return
+				update()
+		
+		NOTIFICATION_RESIZED:
+			if Engine.editor_hint:
+				update()
+			
+		NOTIFICATION_DRAW:
+			if Engine.editor_hint:
+				draw_rect(text_node.get_rect(), Color.red, false)
 		
 		NOTIFICATION_ENTER_TREE, NOTIFICATION_THEME_CHANGED:
 			_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
