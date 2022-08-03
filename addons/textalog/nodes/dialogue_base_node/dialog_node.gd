@@ -21,9 +21,8 @@ signal word_displayed(word)
 signal text_displayed(text)
 
 const _DEFATULT_STRING = """This is a sample text.
-[center] This'll not be displayed in game.[/center]
-"""
-## Anchor points that the bubble can take as reference
+This'll not be displayed in game"""
+const _BlipData = preload("res://addons/textalog/resources/blip_data.gd")
 
 enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
 enum TextUpdate {EVERY_CHARACTER, EVERY_WORD, ALL_AT_ONCE, MANUALLY}
@@ -39,6 +38,7 @@ var text_autoscroll:bool = false setget set_text_autoscroll
 var show_scrollbar:int = TextScroll.WHEN_POSSIBLE setget set_show_scrollbar
 var scroll_method:int = ScrollMethod.INMEDIATE setget set_scroll_method
 var scroll_speed:float = 0.8
+var uses_bubble:bool = false
 
 ## The node that actually displays the text
 var text_node:RichTextLabel setget ,get_text_node
@@ -56,8 +56,7 @@ var _last_wordwrap_size := Vector2()
 var _last_line_count := 0
 
 # Audio
-var blip_samples:Array = [] setget set_blip_samples
-var blip_space_samples:Array = [] setget set_blip_space_samples
+var blip_data:_BlipData = null
 var blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
 var blip_rate:int = 1 setget set_blip_rate
 var blip_force:bool = true setget force_blip
@@ -67,8 +66,6 @@ var blip_bus:String = "Master" setget set_audio_bus
 var _blip_generator:AudioStreamPlayer
 var _blip_counter:int = 0
 var _already_played:bool = false
-
-var _generator = RandomNumberGenerator.new()
 
 ## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
@@ -102,6 +99,8 @@ func display_all_text() -> void:
 	
 	if show_scrollbar:
 		text_node.scroll_active = true
+	
+	_scroll_to_new_line()
 	emit_signal("text_displayed", text_node.text)
 
 
@@ -130,6 +129,8 @@ func set_text(text:String) -> void:
 	_line_count = 0
 	_last_line_count = 0
 	_last_wordwrap_size = Vector2()
+	_last_max = 0
+	_scrolling = false
 	text_node.get_v_scroll().value = 0
 
 
@@ -177,18 +178,10 @@ func set_scroll_method(value:int) -> void:
 		_:
 			text_node.scroll_following = false
 
+
 func set_blip_strategy(strategy:int) -> void:
 	blip_strategy = clamp(strategy, 0, BlipStrategy.size()-1)
 	property_list_changed_notify()
-
-
-## Set the blip samples that'll be used on blip
-func set_blip_samples(samples:Array) -> void:
-	blip_samples = samples.duplicate()
-
-
-func set_blip_space_samples(samples:Array) -> void:
-	blip_space_samples = samples.duplicate()
 
 
 func set_audio_bus(bus:String) -> void:
@@ -208,38 +201,14 @@ func map_blip_to_letter(value:bool) -> void:
 
 
 func get_blip_sample(for_char:String="") -> AudioStream:
-	var blip_sample:AudioStream
-	if blip_samples.empty():
-		return null
-	
-	if blip_map:
-		
-		pass
-	var _limit = max(blip_samples.size()-1, 0)
-	blip_sample = blip_samples[_generator.randi_range(0, _limit)] as AudioStream
-	return blip_sample
-
-
-func get_space_blip_sample() -> AudioStream:
-	var blip_sample:AudioStream
-	
-	if blip_space_samples.empty():
-		return null
-	
-	var _limit = max(blip_space_samples.size()-1, 0)
-	blip_sample = blip_space_samples[_generator.randi_range(0, _limit)] as AudioStream
-	
-	return blip_sample
+	if blip_data:
+		return blip_data.get_sample(for_char)
+	return null
 
 
 func _update_displayed_text() -> void:
-	if _scrolling and scroll_method == ScrollMethod.PAUSE_AND_THEN_SCROLL:
-		_text_timer.start(text_speed)
-		return
-	
 	if _current_line_left.empty():
 		if _text_left.empty():
-			## TODO
 			# No more lines? Job done
 			_text_timer.stop()
 			_blip_counter = 0
@@ -271,7 +240,6 @@ func _update_displayed_text() -> void:
 		
 		if _current_line > 0:
 			text_node.newline()
-			_scroll_to_new_line()
 		
 		_text_timer.start(text_speed)
 		return
@@ -280,7 +248,6 @@ func _update_displayed_text() -> void:
 		TextUpdate.EVERY_CHARACTER:
 			var _character = _current_line_left.pop_back()
 			if _character in "\t\n\r":
-#				_update_displayed_text()
 				return
 			
 			_blip_for(_character)
@@ -298,20 +265,6 @@ func _update_displayed_text() -> void:
 			emit_signal("word_displayed", word)
 	
 	_cursor_position += 1
-#	_text_timer.start(text_speed)
-	if text_autoscroll and scroll_method != ScrollMethod.INMEDIATE:
-		_scroll_to_new_line()
-	else:
-		_text_timer.start(text_speed)
-
-
-func _enable_fit_content_height():
-	if !text_autoscroll:
-		text_node.fit_content_height = true
-
-
-func _disable_fit_content_height():
-	text_node.fit_content_height = false
 
 
 func _show_scrollbar() -> void:
@@ -321,48 +274,51 @@ func _show_scrollbar() -> void:
 func _hide_scrollbar() -> void:
 	text_node.scroll_active = false
 
+var _last_max:float = 0.0
 
-# This doesn't works too well with text_speed < 0.1 and q_max_lines <= 3
 func _scroll_to_new_line() -> void:
-	# No need since is height of the current line
-#	var height := text_node.get_content_height()
+	if _scrolling:
+		return
 	
 	var font := text_node.get_font("normal_font")
-	var font_height := font.get_height()+get_constant("line_separation", "RichTextLabel")
 	var scroll := text_node.get_v_scroll()
-
-	var current_text = text_node.text
-	var wordwrap_size:Vector2 = font.get_wordwrap_string_size(current_text, text_node.rect_size.x)
 	var text_container_height = text_node.rect_size.y
+	var q_max_lines = floor(text_container_height/(font.get_height()))
+	var can_scroll = false
 	
-	var q_max_lines = ceil(text_container_height/font_height)
-	var visible_line_count = text_node.get_visible_line_count()
-	
-	var _need_to_scroll = false
-	
-	if wordwrap_size.y > _last_wordwrap_size.y:
-		var space_left = text_container_height-wordwrap_size.y
-		
-		# Negative value? That means we've reached the end of the container
-		# Scroll that thing!
-		if space_left < 0:
-			_need_to_scroll = true
-#	prints(current_text, wordwrap_size, text_node.rect_size, visible_line_count, q_max_lines, text_node.get_line_count())
-	if _need_to_scroll:
-		_scrolling = true
-		var tween = Tween.new()
-		tween.connect("tween_all_completed", tween, "queue_free")
-		tween.connect("tween_all_completed", self, "set", ["_scrolling", false])
-		tween.connect("tween_all_completed", _text_timer, "start", [text_speed])
-		add_child(tween)
-		tween.interpolate_property(scroll, "value", null, scroll.value+font_height, 0.8)
-		tween.start()
+	if (
+		scroll.max_value > (font.get_height() * q_max_lines) and
+		scroll.max_value > _last_max and
+		_current_line >= q_max_lines
+		):
+		can_scroll = true
+		_last_max = scroll.max_value
 	else:
 		_scrolling = false
-		_text_timer.start(text_speed)
-
-	_last_wordwrap_size = wordwrap_size
-	_last_line_count = _line_count
+		can_scroll = false
+	
+	match scroll_method:
+		ScrollMethod.PAUSE_AND_THEN_SCROLL:
+			if can_scroll:
+				_text_timer.stop()
+		
+		ScrollMethod.SCROLL_WHILE_SHOW_TEXT:
+			can_scroll = true
+		
+		ScrollMethod.INMEDIATE:
+			if not text_node.scroll_following:
+				text_node.scroll_following = true
+			return
+	
+	if can_scroll:
+		var tween = Tween.new()
+		_scrolling = true
+		tween.connect("tween_all_completed", tween, "queue_free")
+		tween.connect("tween_all_completed", self, "set", ["_scrolling", false])
+		tween.connect("tween_all_completed", _text_timer, "start", [text_speed], CONNECT_DEFERRED)
+		add_child(tween)
+		tween.interpolate_property(scroll, "value", null, scroll.max_value, scroll_speed)
+		tween.start()
 
 
 func _get_minimum_size() -> Vector2:
@@ -404,7 +360,7 @@ func _blip_for(string:String) -> void:
 			
 			if _blip_counter % blip_rate == 0:
 				if string in " " or string.strip_escapes().empty():
-					_blip_sample = get_space_blip_sample()
+					_blip_sample = get_blip_sample(" ")
 					_blip(_blip_sample)
 					_blip_counter = 0
 					return
@@ -498,12 +454,13 @@ func _get_property_list() -> Array:
 		p.append({"name":"scroll_method", "type":TYPE_INT, "hint":PROPERTY_HINT_ENUM, "hint_string":hint_string, "usage":PROPERTY_USAGE_DEFAULT})
 	hint_string = str(TextScroll.keys()).trim_prefix("[").trim_suffix("]").capitalize()
 	p.append({"name":"show_scrollbar", "type":TYPE_INT, "hint":PROPERTY_HINT_ENUM, "hint_string":hint_string, "usage":PROPERTY_USAGE_DEFAULT})
-	p.append({"name":"scroll_speed", "type":TYPE_REAL, "usage":PROPERTY_USAGE_DEFAULT})
+	p.append({"name":"scroll_speed", "type":TYPE_REAL, "hint":PROPERTY_HINT_RANGE, "hint_string":"0,1,0.01,or_greater", "usage":PROPERTY_USAGE_DEFAULT})
 	
 	p.append({"name":"uses_bubble", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 	
 	# Audio
 	p.append({"name":"Audio", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
+	p.append({"name":"blip_data", "type":TYPE_OBJECT, "usage":PROPERTY_USAGE_DEFAULT})
 	hint_string = str(BlipStrategy.keys()).trim_prefix("[").trim_suffix("]").capitalize()
 	p.append({"name":"blip_strategy", "type":TYPE_INT, "hint":PROPERTY_HINT_ENUM, "hint_string":hint_string, "usage":PROPERTY_USAGE_DEFAULT})
 	match blip_strategy:
@@ -523,10 +480,6 @@ func _get_property_list() -> Array:
 			p.append({"name":"blip_force", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_map", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 	
-	p.append({"name":"Blip", "type":TYPE_NIL, "usage":PROPERTY_USAGE_GROUP})
-	p.append({"name":"blip_samples", "type":TYPE_ARRAY, "hint":24, "hint_string":"17/17:AudioStream", "usage":PROPERTY_USAGE_DEFAULT})
-	p.append({"name":"blip_space_samples", "type":TYPE_ARRAY, "hint":24, "hint_string":"17/17:AudioStream", "usage":PROPERTY_USAGE_DEFAULT})
-	
 	# Characters
 	p.append({"name":"Dialog Node", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
 	p.append({"name":"know_characters", "type":TYPE_STRING, "usage":PROPERTY_USAGE_DEFAULT})
@@ -537,6 +490,7 @@ func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_ENTER_TREE:
 			_text_timer.connect("timeout", self, "_update_displayed_text")
+			get_text_node().get_v_scroll().connect("changed", self, "_scroll_to_new_line")
 			
 			_text_container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
 			continue
@@ -544,7 +498,6 @@ func _notification(what: int) -> void:
 		NOTIFICATION_READY:
 			if Engine.editor_hint:
 				return
-		
 		
 		NOTIFICATION_ENTER_TREE, NOTIFICATION_THEME_CHANGED:
 			_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
@@ -558,14 +511,11 @@ func _init() -> void:
 	theme = load("res://addons/textalog/assets/themes/default_theme/default.tres")
 	name = "DialogNode"
 	
-	blip_samples = []
-	blip_space_samples = []
-	
 	_text_timer = Timer.new()
-	_text_timer.one_shot = true
 	add_child(_text_timer)
 	
 	_text_container = PanelContainer.new()
+	_text_container.show_behind_parent = true
 	add_child(_text_container)
 	
 	text_node = RichTextLabel.new()
