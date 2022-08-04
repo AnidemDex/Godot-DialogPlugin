@@ -14,12 +14,9 @@ var event_scripts := PoolStringArray([
 	"res://addons/textalog/events/character/leave.gd",
 ])
 
+var inspector = load("res://addons/textalog/core/inspector_plugin.gd").new()
+
 func _enter_tree() -> void:
-	show_plugin_version_button()
-	event_system_integration()
-
-
-func _enable_plugin() -> void:
 	var main_panel:Container = load("res://addons/textalog/nodes/editor/welcome/main_panel.tscn").instance()
 	var dialog_system_info = load("res://addons/textalog/nodes/editor/welcome/dialog_system_info.tscn").instance()
 	var popup:WelcomeNode = get_plugin_welcome_node()
@@ -27,7 +24,19 @@ func _enable_plugin() -> void:
 	popup.get_tab_container().move_child(dialog_system_info, 1)
 	get_plugin_welcome_node().get_tab_by_idx(0).add_child(main_panel)
 	
+	add_inspector_plugin(inspector)
+	
+	show_plugin_version_button()
+	event_system_integration()
+
+
+func _enable_plugin() -> void:
 	show_welcome_node()
+
+
+func _exit_tree() -> void:
+	remove_inspector_plugin(inspector)
+
 
 var registered_events:Resource
 var events_inspector:EditorInspectorPlugin

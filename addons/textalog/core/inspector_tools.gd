@@ -1,5 +1,4 @@
 tool
-extends EditorInspector
 
 class InspectorCategory extends Control:
 	var icon:Texture
@@ -51,6 +50,3 @@ class InspectorCategory extends Control:
 		if bg_color == null:
 			bg_color = get_color("prop_category", "Editor")
 			update()
-
-func get_category_instance() -> InspectorCategory:
-	return InspectorCategory.new()
