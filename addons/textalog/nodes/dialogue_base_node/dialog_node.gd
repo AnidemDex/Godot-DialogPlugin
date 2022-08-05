@@ -67,6 +67,11 @@ var _blip_generator:AudioStreamPlayer
 var _blip_counter:int = 0
 var _already_played:bool = false
 
+# Options
+var option_button_scene:PackedScene
+var _option_data := {}
+var _default_option_container:Container
+
 ## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
 	show()
@@ -77,9 +82,31 @@ func show_text(text:String, with_text_speed:float=0):
 ## Adds a selectable option on screen
 func add_option(option:String) -> void:
 	## TODO
-	#options_manager.add_option(option)
-	pass
+	var button:BaseButton
+	if option_button_scene:
+		button = option_button_scene.instance() as BaseButton
+	
+	if not is_instance_valid(button):
+		button = _get_default_option_button()
+	
+	button.connect("ready", self, "emit_signal", ["option_added", button])
+	button.connect("pressed", self, "_option_button_pressed", [option])
+	_option_data[option] = button
+	
+	button.set("name", option)
+	button.set("text", option)
+	
+	_get_option_container().add_child(button)
 
+func remove_option(option:String) -> void:
+	if option in _option_data and is_instance_valid(_option_data[option]):
+		_option_data[option].queue_free()
+
+
+func remove_all_options() -> void:
+	for child in _get_option_container().get_children():
+		child.queue_free()
+	_option_data.clear()
 
 
 ##########
@@ -385,6 +412,29 @@ func _blip_for(string:String) -> void:
 			_blip(_blip_sample)
 			_already_played = true
 
+func _option_button_pressed(option_string:String) -> void:
+	remove_all_options()
+	emit_signal("option_selected", option_string)
+
+
+func _global_tree_changed() -> void:
+	if not Engine.editor_hint:
+		return
+	update()
+
+
+func _get_option_container() -> Container:
+	if is_instance_valid(get_node_or_null("Options")):
+		return get_node("Options")as Container
+	return _default_option_container
+
+func _get_default_option_button() -> Button:
+	var button = Button.new()
+	var _n = ["hover", "pressed", "focus", "disabled", "normal"]
+	for theme_name in _n:
+		button.add_stylebox_override(theme_name, get_stylebox(theme_name, "DialogButton"))
+	
+	return button
 
 func _hide_script_from_inspector():
 	return true
@@ -497,6 +547,9 @@ func _notification(what: int) -> void:
 				scroll.connect("changed", self, "_scroll_to_new_line")
 			
 			_text_container.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+			
+			if Engine.editor_hint:
+				get_tree().connect("tree_changed", self, "_global_tree_changed")
 			continue
 		
 		NOTIFICATION_READY:
@@ -510,6 +563,8 @@ func _notification(what: int) -> void:
 		NOTIFICATION_DRAW:
 			if Engine.editor_hint:
 				draw_rect(text_node.get_rect(), Color.red, false)
+				draw_rect(_get_option_container().get_rect(), Color.red, false)
+				draw_string(get_font("main","EditorFonts"), _get_option_container().rect_position, "Options will be added here")
 		
 		NOTIFICATION_ENTER_TREE, NOTIFICATION_THEME_CHANGED:
 			_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
@@ -539,3 +594,11 @@ func _init() -> void:
 	text_node.size_flags_vertical = SIZE_EXPAND_FILL
 	text_node.append_bbcode(_DEFATULT_STRING)
 	_text_container.add_child(text_node)
+	
+	_default_option_container = HBoxContainer.new()
+	_default_option_container.alignment = BoxContainer.ALIGN_CENTER
+	_default_option_container.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	_default_option_container.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_default_option_container.rect_min_size = Vector2(0, 24)
+	_default_option_container.set_anchors_and_margins_preset(Control.PRESET_TOP_WIDE)
+	add_child(_default_option_container)
