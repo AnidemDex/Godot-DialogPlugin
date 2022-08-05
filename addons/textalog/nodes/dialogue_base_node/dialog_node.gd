@@ -101,12 +101,19 @@ func add_option(option:String) -> void:
 func remove_option(option:String) -> void:
 	if option in _option_data and is_instance_valid(_option_data[option]):
 		_option_data[option].queue_free()
+		_option_data.erase(option)
 
 
 func remove_all_options() -> void:
 	for child in _get_option_container().get_children():
 		child.queue_free()
 	_option_data.clear()
+
+
+func set_dialog_name(string:String) -> void:
+	if is_instance_valid(_get_name_label()):
+		_get_name_label().show()
+		_get_name_label().set("text", string)
 
 
 ##########
@@ -418,15 +425,15 @@ func _option_button_pressed(option_string:String) -> void:
 
 
 func _global_tree_changed() -> void:
-	if not Engine.editor_hint:
-		return
-	update()
+	if Engine.editor_hint:
+		update()
 
 
 func _get_option_container() -> Container:
 	if is_instance_valid(get_node_or_null("Options")):
 		return get_node("Options")as Container
 	return _default_option_container
+
 
 func _get_default_option_button() -> Button:
 	var button = Button.new()
@@ -435,6 +442,10 @@ func _get_default_option_button() -> Button:
 		button.add_stylebox_override(theme_name, get_stylebox(theme_name, "DialogButton"))
 	
 	return button
+
+
+func _get_name_label() -> Control:
+	return get_node_or_null("Name") as Control
 
 func _hide_script_from_inspector():
 	return true
@@ -447,9 +458,11 @@ func _set(property: String, value) -> bool:
 func _get(property: String):
 	return
 
+
 func property_can_revert(property:String):
 	var p = PoolStringArray(["text_update", "text_speed", "text_autoscroll", "scroll_method", "show_scrollbar", "scroll_speed", "uses_bubble"])
 	return property in p or property.begins_with("blip")
+
 
 func property_get_revert(property:String):
 	match property:
@@ -564,11 +577,19 @@ func _notification(what: int) -> void:
 			if Engine.editor_hint:
 				draw_rect(text_node.get_rect(), Color.red, false)
 				draw_rect(_get_option_container().get_rect(), Color.red, false)
-				draw_string(get_font("main","EditorFonts"), _get_option_container().rect_position, "Options will be added here")
+				draw_string(get_font("source","EditorFonts"), _get_option_container().rect_position, "Options will be added here")
+				
+				if _get_name_label():
+					draw_rect(_get_name_label().get_rect(), Color.red, false)
+					draw_string(get_font("source","EditorFonts"), _get_name_label().rect_position, "Speaker's name will appear here")
 		
 		NOTIFICATION_ENTER_TREE, NOTIFICATION_THEME_CHANGED:
 			_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
 			minimum_size_changed()
+			
+			var name_label = _get_name_label()
+			if is_instance_valid(_get_name_label()):
+				_get_name_label().add_stylebox_override("normal", get_stylebox("name", "DialogNode"))
 		
 		NOTIFICATION_EXIT_TREE:
 			_text_timer.stop()
