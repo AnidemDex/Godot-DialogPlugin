@@ -14,11 +14,11 @@ signal option_added(option_button)
 signal option_selected(option_string)
 
 ## Emmited eveytime that a character is displayed
-signal character_displayed(character)
+signal text_character_displayed(character)
 ## Emmited eveytime that a word is displayed
-signal word_displayed(word)
+signal text_word_displayed(word)
 ## Emmited when the text was fully displayed
-signal text_displayed(text)
+signal text_all_displayed(text)
 
 const _DEFATULT_STRING = """This is a sample text.
 This'll not be displayed in game"""
@@ -72,6 +72,9 @@ var option_button_scene:PackedScene
 var _option_data := {}
 var _default_option_container:Container
 
+# Characters
+var current_speaker
+
 ## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
 	show()
@@ -81,7 +84,6 @@ func show_text(text:String, with_text_speed:float=0):
 
 ## Adds a selectable option on screen
 func add_option(option:String) -> void:
-	## TODO
 	var button:BaseButton
 	if option_button_scene:
 		button = option_button_scene.instance() as BaseButton
@@ -115,6 +117,14 @@ func set_dialog_name(string:String) -> void:
 		_get_name_label().show()
 		_get_name_label().set("text", string)
 
+
+func set_current_speaker(character:Node) -> void:
+	if not is_instance_valid(character):
+		return
+	
+	var _name:String = str(character.get("name"))
+	
+	set_dialog_name(_name)
 
 ##########
 ## DialogFunctions
@@ -447,6 +457,11 @@ func _get_default_option_button() -> Button:
 func _get_name_label() -> Control:
 	return get_node_or_null("Name") as Control
 
+
+func _get_portrait_reference() -> Control:
+	return get_node_or_null("Reference") as Control
+
+
 func _hide_script_from_inspector():
 	return true
 
@@ -542,10 +557,7 @@ func _get_property_list() -> Array:
 			p.append({"name":"blip_rate", "type":TYPE_INT, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater", "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_force", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_map", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
-	
-	# Characters
-	p.append({"name":"Dialog Node", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
-	p.append({"name":"know_characters", "type":TYPE_STRING, "usage":PROPERTY_USAGE_DEFAULT})
+
 	return p
 
 
@@ -575,6 +587,10 @@ func _notification(what: int) -> void:
 			
 		NOTIFICATION_DRAW:
 			if Engine.editor_hint:
+				if _get_portrait_reference():
+					draw_rect(_get_portrait_reference().get_rect(), Color.red, false)
+					draw_string(get_font("source","EditorFonts"), _get_portrait_reference().rect_position, "Characters will use this rect as reference for their portraits by default")
+				
 				draw_rect(text_node.get_rect(), Color.red, false)
 				draw_rect(_get_option_container().get_rect(), Color.red, false)
 				draw_string(get_font("source","EditorFonts"), _get_option_container().rect_position, "Options will be added here")
