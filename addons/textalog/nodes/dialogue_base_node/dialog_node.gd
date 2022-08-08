@@ -1,12 +1,13 @@
 tool
 extends Control
+class_name DialogNode
 
 ## Emmited when a portrait was added
-signal portrait_added(character, portrait)
+signal character_joined(character)
 ## Emmited when a portrait that is already in the scene, changes
-signal portrait_changed(character, portrait)
+signal character_portrait_changed(character, portrait)
 ## Emmited when a portrait is removed from scene
-signal portrait_removed(character)
+signal character_leaved(character)
 
 ## Emmited when an option is added
 signal option_added(option_button)
@@ -23,6 +24,8 @@ signal text_all_displayed(text)
 const _DEFATULT_STRING = """This is a sample text.
 This'll not be displayed in game"""
 const _BlipData = preload("res://addons/textalog/resources/blip_data.gd")
+const _Character = preload("res://addons/textalog/resources/character_class/character_class.gd")
+const _CharacterRect = preload("res://addons/textalog/nodes/character_rect.gd")
 
 enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
 enum TextUpdate {EVERY_CHARACTER, EVERY_WORD, ALL_AT_ONCE, MANUALLY}
@@ -74,6 +77,13 @@ var _default_option_container:Container
 
 # Characters
 var current_speaker
+# {character: CharacterData}
+var _know_characters := {}
+
+class CharacterData:
+	var node:Node = null
+	var joined:bool = false
+	var portrait:String = ""
 
 ## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
@@ -114,15 +124,29 @@ func remove_all_options() -> void:
 
 func set_dialog_name(string:String) -> void:
 	if is_instance_valid(_get_name_label()):
+		if string == "":
+			_get_name_label().hide()
+			return
+		
 		_get_name_label().show()
 		_get_name_label().set("text", string)
 
 
-func set_current_speaker(character:Node) -> void:
-	if not is_instance_valid(character):
+func set_current_speaker(node:Node) -> void:
+	if not is_instance_valid(node):
+		set_dialog_name("")
 		return
 	
-	var _name:String = str(character.get("name"))
+	var _char:_Character = node.get("character") as _Character
+	if not _char:
+		set_dialog_name("")
+		return
+	
+	if not _char in _know_characters:
+		register_node_for_character(node)
+		character_join(_char)
+	
+	var _name:String = str(_char.get("name"))
 	
 	set_dialog_name(_name)
 
@@ -145,7 +169,7 @@ func display_all_text() -> void:
 		text_node.scroll_active = true
 	
 	_scroll_to_new_line()
-	emit_signal("text_displayed", text_node.text)
+	emit_signal("text_all_displayed", text_node.text)
 
 
 ## Starts displaying the text setted by [method set_text]
@@ -249,6 +273,68 @@ func get_blip_sample(for_char:String="") -> AudioStream:
 		return blip_data.get_sample(for_char)
 	return null
 
+func add_character(character:_Character) -> void:
+	if character in _know_characters:
+		return
+	
+	_know_characters[character] = CharacterData.new()
+
+func get_character_node(character:_Character) -> Node:
+	if character in _know_characters:
+		return _know_characters[character]["node"]
+	return null
+
+
+func character_join(character:_Character) -> void:
+	if not character in _know_characters:
+		add_character(character)
+	
+	var node = get_character_node(character)
+	var joined:bool = _know_characters[character].joined
+	
+	if joined:
+		return
+	
+	if not is_instance_valid(node):
+		if is_instance_valid(_get_portrait_reference()):
+			node = _CharacterRect.new()
+			node.character = character
+			_know_characters[character].node = node
+			_get_portrait_reference().add_child(node)
+			node.set_anchors_and_margins_preset(Control.PRESET_WIDE)
+
+	
+	if is_instance_valid(node):
+		if node.has_method("join"):
+			node.call("join")
+		if node.has_method("set_portrait"):
+			node.call("set_portrait", "default")
+	
+	_know_characters[character].joined = true
+	emit_signal("character_joined")
+
+
+func character_leave(character:_Character) -> void:
+	pass
+
+func character_change_portrait(character:_Character, portrait:String) -> void:
+	pass
+
+
+func register_node_for_character(node:Node) -> void:
+	var character:_Character = node.get("character") as _Character
+	if not character:
+		return
+	
+	var data = CharacterData.new()
+	
+	if character in _know_characters:
+		data = _know_characters[character]
+	
+	data["node"] = node
+	_know_characters[character] = data
+	update()
+
 
 func _update_displayed_text() -> void:
 	if _current_line_left.empty():
@@ -262,7 +348,7 @@ func _update_displayed_text() -> void:
 			if show_scrollbar == TextScroll.AT_END:
 				_show_scrollbar()
 			
-			emit_signal("text_displayed", text_node.text)
+			emit_signal("text_all_displayed", text_node.text)
 			return
 		
 		var current_text:String = _text_left.pop_back()
@@ -296,7 +382,7 @@ func _update_displayed_text() -> void:
 			
 			_blip_for(_character)
 			text_node.add_text(_character)
-			emit_signal("character_displayed", _character)
+			emit_signal("text_character_displayed", _character)
 		
 		TextUpdate.EVERY_WORD:
 			if _cursor_position > 0:
@@ -306,7 +392,7 @@ func _update_displayed_text() -> void:
 			var word = _current_line_left.pop_back()
 			_blip_for(word)
 			text_node.add_text(word)
-			emit_signal("word_displayed", word)
+			emit_signal("text_word_displayed", word)
 	
 	_cursor_position += 1
 
@@ -557,6 +643,10 @@ func _get_property_list() -> Array:
 			p.append({"name":"blip_rate", "type":TYPE_INT, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater", "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_force", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_map", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
+		
+	p.append({"name":"Characters", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
+	for character in _know_characters:
+		p.append({"name":"characters/"+character.name, "type":TYPE_NIL, "usage":PROPERTY_USAGE_EDITOR})
 
 	return p
 
@@ -598,17 +688,27 @@ func _notification(what: int) -> void:
 				if _get_name_label():
 					draw_rect(_get_name_label().get_rect(), Color.red, false)
 					draw_string(get_font("source","EditorFonts"), _get_name_label().rect_position, "Speaker's name will appear here")
+				
+				for data in _know_characters.values():
+					var node = data.get("node")
+					if node:
+						draw_string(get_font("source","EditorFonts"), node.get_position()-rect_position, "Recognized")
 		
 		NOTIFICATION_ENTER_TREE, NOTIFICATION_THEME_CHANGED:
-			_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
-			minimum_size_changed()
 			
-			var name_label = _get_name_label()
+			if is_instance_valid(_text_container):
+				_text_container.add_stylebox_override("panel", get_stylebox("background", "DialogNode"))
+			
 			if is_instance_valid(_get_name_label()):
 				_get_name_label().add_stylebox_override("normal", get_stylebox("name", "DialogNode"))
+			
+			minimum_size_changed()
 		
 		NOTIFICATION_EXIT_TREE:
 			_text_timer.stop()
+			
+			if get_tree().is_connected("tree_changed", self, "_global_tree_changed"):
+				get_tree().disconnect("tree_changed", self, "_global_tree_changed")
 
 
 func _init() -> void:

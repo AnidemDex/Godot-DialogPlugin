@@ -1,6 +1,6 @@
 tool
 extends Control
-class_name DialogNode
+#class_name DialogNode
 
 ## Emmited when the text was fully displayed
 signal text_displayed

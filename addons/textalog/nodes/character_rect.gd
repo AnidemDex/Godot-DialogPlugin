@@ -1,5 +1,5 @@
 tool
-extends Sprite
+extends TextureRect
 
 var character:Resource setget set_character
 var portrait:String
