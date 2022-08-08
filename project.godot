@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/textalog/resources/character_class/character_class.gd"
 }, {
-"base": "DialogNode",
-"class": "DialogBubble",
-"language": "GDScript",
-"path": "res://addons/textalog/nodes/dialogue_bubble_node/dialog_bubble.gd"
-}, {
 "base": "Container",
 "class": "DialogManager",
 "language": "GDScript",
@@ -27,7 +22,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "DialogNode",
 "language": "GDScript",
-"path": "res://addons/textalog/nodes/dialogue_base_node/dialogue_base_node.gd"
+"path": "res://addons/textalog/nodes/dialogue_base_node/dialog_node.gd"
 }, {
 "base": "Container",
 "class": "OptionsManager",
@@ -46,7 +41,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Character": "res://addons/textalog/assets/icons/character_icon.png",
-"DialogBubble": "",
 "DialogManager": "",
 "DialogNode": "",
 "OptionsManager": "",
@@ -59,6 +53,10 @@ _global_script_class_icons={
 config/name="Godot-DialogPlugin"
 run/low_processor_mode=true
 config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/textalog/plugin.cfg" )
 
 [importer_defaults]
 
