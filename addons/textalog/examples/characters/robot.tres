@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/textalog/resources/character_class/character_class.gd" type="Script" id=1]
+[ext_resource path="res://addons/textalog/examples/assets/kenney_assets/robot/head.png" type="Texture" id=5]
+
+[resource]
+resource_name = "Robot"
+script = ExtResource( 1 )
+color = Color( 1, 1, 1, 1 )
+icon = ExtResource( 5 )
+name = "Robot"
+_display_name = ""
