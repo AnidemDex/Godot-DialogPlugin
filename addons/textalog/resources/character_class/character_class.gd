@@ -12,6 +12,8 @@ class_name Character, "res://addons/textalog/assets/icons/character_icon.png"
 ## @tutorial(Online Documentation): https://anidemdex.gitbook.io/godot-dialog-plugin/documentation/resource-class/class_dialog-character-resource
 ##
 
+const _Portrait = preload("res://addons/textalog/resources/portrait_class/portrait_class.gd")
+
 ## Name of the character.
 var name:String = "" setget set_name
 
@@ -28,7 +30,7 @@ export(Texture) var icon:Texture setget set_icon
 ## Character sounds when talking.
 var blip_sounds = null setget _set_blip_sounds
 
-var _portrait_data:Dictionary = {}
+var _portrait_data:Dictionary = {"default":_Portrait.new()}
 
 
 ## Adds a [DialogPortraitResource] in [member portraits]
@@ -90,8 +92,8 @@ func _get_property_list() -> Array:
 
 
 func _get(property: String):
-	if property == "portraits_number":
-		return 0
+	if property == "portraits":
+		return PoolStringArray(_portrait_data.keys())
 	
 	if property.begins_with("portrait/"):
 		var p:String = property.trim_prefix("portrait/")
@@ -112,3 +114,6 @@ func property_get_revert(property:String):
 	match property:
 		"display_name":
 			return ""
+
+func _init() -> void:
+	_portrait_data = {"default":_Portrait.new()}

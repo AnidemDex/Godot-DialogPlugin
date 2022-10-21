@@ -54,10 +54,6 @@ config/name="Godot-DialogPlugin"
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/textalog/plugin.cfg" )
-
 [importer_defaults]
 
 texture={
