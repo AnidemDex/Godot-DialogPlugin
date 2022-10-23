@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/textalog/examples/simple_dialog_2.gd" type="Script" id=1]
+[ext_resource path="res://addons/textalog/nodes/dialog_node.gd" type="Script" id=2]
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/default.tres" type="Theme" id=3]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DialogNode" type="Control" parent="."]
+margin_left = 352.0
+margin_top = 290.0
+margin_right = 637.0
+margin_bottom = 356.0
+theme = ExtResource( 3 )
+script = ExtResource( 2 )
+text = null
+text_update = 0
+text_speed = 0.02
+text_autoscroll = false
+show_scrollbar = 1
+scroll_speed = 0.8
+uses_bubble = false
+blip_data = null
+blip_strategy = 0

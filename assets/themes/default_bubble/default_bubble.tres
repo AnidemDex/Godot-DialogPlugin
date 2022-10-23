@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=4 format=2]
+
+[ext_resource path="res://addons/textalog/assets/themes/default_bubble/blue_n_black_stylebox.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/textalog/assets/fonts/Silver/godot_fonts/silver_normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/textalog/assets/themes/default_bubble/blue_bubble.tres" type="StyleBox" id=3]
+
+[resource]
+default_font = ExtResource( 2 )
+DialogNode/styles/bubble = ExtResource( 3 )
+DialogNode/styles/name = null
+DialogNode/styles/text = ExtResource( 1 )

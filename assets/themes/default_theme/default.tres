@@ -1,0 +1,102 @@
+[gd_resource type="Theme" load_steps=9 format=2]
+
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black_textbox_style.tres" type="StyleBox" id=1]
+[ext_resource path="res://addons/textalog/assets/fonts/Poppins/godot_fonts/Poppins-Normal.tres" type="DynamicFont" id=2]
+[ext_resource path="res://addons/textalog/assets/themes/default_theme/plain_black_name_style.tres" type="StyleBox" id=3]
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.388235, 0.376471, 0.376471, 0.933333 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.933333 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.235294, 0.235294, 0.235294, 0.933333 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 0.537255 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 9.0
+content_margin_right = 9.0
+content_margin_top = 9.0
+content_margin_bottom = 9.0
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.745098 )
+draw_center = false
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.415686, 0.615686, 0.921569, 1 )
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[resource]
+default_font = ExtResource( 2 )
+DialogButton/styles/disabled = SubResource( 4 )
+DialogButton/styles/focus = SubResource( 5 )
+DialogButton/styles/hover = SubResource( 6 )
+DialogButton/styles/normal = SubResource( 3 )
+DialogButton/styles/pressed = SubResource( 2 )
+DialogNode/styles/background = ExtResource( 1 )
+DialogNode/styles/bubble = null
+DialogNode/styles/name = ExtResource( 3 )

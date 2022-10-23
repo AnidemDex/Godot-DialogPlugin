@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/space.wav-bc19e994b1f8061bafd60e1a3ec52d32.sample"
+
+[deps]
+
+source_file="res://addons/textalog/assets/sounds/space.wav"
+dest_files=[ "res://.import/space.wav-bc19e994b1f8061bafd60e1a3ec52d32.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

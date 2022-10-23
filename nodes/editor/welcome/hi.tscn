@@ -1,0 +1,127 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/textalog/nodes/editor/welcome/hi.gd" type="Script" id=1]
+
+[node name="hi" type="AcceptDialog"]
+margin_right = 753.0
+margin_bottom = 418.0
+popup_exclusive = true
+window_title = "Textalog enabled!"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+EveSysStatus = NodePath("PanelContainer/VBoxContainer/Body/HBoxContainer/EveSysStatus")
+Retry_button = NodePath("PanelContainer/VBoxContainer/Body/HBoxContainer/Retry")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 730.0
+margin_bottom = 367.0
+
+[node name="Header" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+margin_right = 723.0
+margin_bottom = 28.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Header"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 716.0
+margin_bottom = 21.0
+text = "Thank you for using Textalog"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 723.0
+margin_bottom = 36.0
+
+[node name="Body" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 723.0
+margin_bottom = 312.0
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer/Body"]
+margin_right = 723.0
+margin_bottom = 230.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/Body/ScrollContainer"]
+margin_right = 723.0
+margin_bottom = 230.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/Body/ScrollContainer/VBoxContainer"]
+margin_right = 723.0
+margin_bottom = 230.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/Body"]
+margin_top = 234.0
+margin_right = 723.0
+margin_bottom = 248.0
+text = "Hint: Usually is a good idea to restart the editor if it's the first time running this plugin"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Body"]
+margin_left = 592.0
+margin_top = 252.0
+margin_right = 723.0
+margin_bottom = 272.0
+size_flags_horizontal = 8
+
+[node name="EveSysStatus" type="Label" parent="PanelContainer/VBoxContainer/Body/HBoxContainer"]
+margin_top = 3.0
+margin_right = 57.0
+margin_bottom = 17.0
+text = "{STATUS}"
+
+[node name="Retry" type="Button" parent="PanelContainer/VBoxContainer/Body/HBoxContainer"]
+margin_left = 61.0
+margin_right = 131.0
+margin_bottom = 20.0
+text = "Try Again"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 316.0
+margin_right = 723.0
+margin_bottom = 320.0
+
+[node name="Footer" type="PanelContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 324.0
+margin_right = 723.0
+margin_bottom = 360.0
+
+[node name="License" type="ToolButton" parent="PanelContainer/VBoxContainer/Footer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 96.0
+margin_bottom = 29.0
+size_flags_horizontal = 0
+text = "MIT License"
+
+[node name="Credits" type="ToolButton" parent="PanelContainer/VBoxContainer/Footer"]
+margin_left = 557.0
+margin_top = 7.0
+margin_right = 716.0
+margin_bottom = 29.0
+size_flags_horizontal = 10
+text = "Created by AnidemDex"
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Body/HBoxContainer/Retry" to="." method="_on_Retry_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Footer/License" to="." method="_on_License_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Footer/Credits" to="." method="_on_Credits_pressed"]
