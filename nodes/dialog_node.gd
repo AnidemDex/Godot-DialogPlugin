@@ -58,6 +58,8 @@ var _line_count := -1
 var _last_wordwrap_size := Vector2()
 var _last_line_count := 0
 
+var _text_behavior_node_override:Node
+
 # Audio
 var blip_data:_BlipData = null
 var blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
@@ -70,15 +72,21 @@ var _blip_generator:AudioStreamPlayer
 var _blip_counter:int = 0
 var _already_played:bool = false
 
+var _blip_behavior_node_override:Node
+
 # Options
 var option_button_scene:PackedScene
 var _option_data := {}
 var _default_option_container:Container
 
+var _option_behavior_node_override:Node
+
 # Characters
 var current_speaker
 # {character: CharacterData}
 var _know_characters := {}
+
+var _character_behavior_node_override:Node
 
 class CharacterData:
 	var node:Node = null
@@ -602,6 +610,15 @@ func _get_property_list() -> Array:
 	var hint_string:String = ""
 	# DialogNode
 	p.append({"name":"Dialog Node", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
+	p.append({"name":"configuration/hide_tooltip", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
+	p.append({"name":"configuration/autodetect_nodes", "type":TYPE_BOOL})
+	if !get("configuration/autodetect_nodes"):
+		p.append({"name":"node_reference/showname", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+		p.append({"name":"node_reference/option_container", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+		p.append({"name":"node_reference/portrait", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+	
+	# Text
+	p.append({"name":"Text", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
 	p.append({"name":"text", "type":TYPE_STRING, "usage":PROPERTY_USAGE_DEFAULT_INTL})
 	
 	hint_string = str(TextUpdate.keys()).trim_prefix("[").trim_suffix("]").capitalize()
@@ -643,7 +660,15 @@ func _get_property_list() -> Array:
 			p.append({"name":"blip_rate", "type":TYPE_INT, "hint":PROPERTY_HINT_RANGE, "hint_string":"1,10,1,or_greater", "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_force", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 			p.append({"name":"blip_map", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
-		
+	
+	# Behavior override
+	p.append({"name":"Behavior Override", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
+	p.append({"name":"text_behavior", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+	p.append({"name":"options_behavior", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+	p.append({"name":"blip_behavior", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+	p.append({"name":"character_behavior", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
+	
+	# Characters
 	p.append({"name":"Characters", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
 	for character in _know_characters:
 		p.append({"name":"characters/"+character.name, "type":TYPE_NIL, "usage":PROPERTY_USAGE_EDITOR})
