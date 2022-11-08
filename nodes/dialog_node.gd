@@ -58,8 +58,6 @@ var _line_count := -1
 var _last_wordwrap_size := Vector2()
 var _last_line_count := 0
 
-var _text_behavior_node_override:Node
-
 # Audio
 var blip_data:_BlipData = null
 var blip_strategy:int = BlipStrategy.NO_BLIP setget set_blip_strategy
@@ -72,26 +70,30 @@ var _blip_generator:AudioStreamPlayer
 var _blip_counter:int = 0
 var _already_played:bool = false
 
-var _blip_behavior_node_override:Node
-
 # Options
 var option_button_scene:PackedScene
 var _option_data := {}
 var _default_option_container:Container
-
-var _option_behavior_node_override:Node
 
 # Characters
 var current_speaker
 # {character: CharacterData}
 var _know_characters := {}
 
-var _character_behavior_node_override:Node
-
 class CharacterData:
 	var node:Node = null
 	var joined:bool = false
 	var portrait:String = ""
+
+# Behavior override
+var text_behavior:NodePath
+var options_behavior:NodePath
+var blip_behavior:NodePath
+var character_behavior:NodePath
+onready var _character_behavior_node_override:Node = get_node_or_null(character_behavior)
+onready var _option_behavior_node_override:Node = get_node_or_null(options_behavior)
+onready var _blip_behavior_node_override:Node = get_node_or_null(blip_behavior)
+onready var _text_behavior_node_override:Node = get_node_or_null(text_behavior)
 
 ## Shows a text inmediatly in screen
 func show_text(text:String, with_text_speed:float=0):
@@ -102,6 +104,12 @@ func show_text(text:String, with_text_speed:float=0):
 
 ## Adds a selectable option on screen
 func add_option(option:String) -> void:
+	# Option behavior override
+	if is_instance_valid(_option_behavior_node_override) \
+	and _option_behavior_node_override.has_method("add_option"):
+		_option_behavior_node_override.call("add_option", option)
+		return
+	
 	var button:BaseButton
 	if option_button_scene:
 		button = option_button_scene.instance() as BaseButton
@@ -119,12 +127,23 @@ func add_option(option:String) -> void:
 	_get_option_container().add_child(button)
 
 func remove_option(option:String) -> void:
+	# Option behavior override
+	if is_instance_valid(_option_behavior_node_override) \
+	and _option_behavior_node_override.has_method("remove_option"):
+		_option_behavior_node_override.call("remove_option")
+		return
+	
 	if option in _option_data and is_instance_valid(_option_data[option]):
 		_option_data[option].queue_free()
 		_option_data.erase(option)
 
 
 func remove_all_options() -> void:
+	if is_instance_valid(_option_behavior_node_override) \
+	and _option_behavior_node_override.has_method("remove_all_options"):
+		_option_behavior_node_override.call("remove_all_options")
+		return
+	
 	for child in _get_option_container().get_children():
 		child.queue_free()
 	_option_data.clear()
@@ -612,6 +631,7 @@ func _get_property_list() -> Array:
 	p.append({"name":"Dialog Node", "type":TYPE_NIL, "usage":PROPERTY_USAGE_CATEGORY})
 	p.append({"name":"configuration/hide_tooltip", "type":TYPE_BOOL, "usage":PROPERTY_USAGE_DEFAULT})
 	p.append({"name":"configuration/autodetect_nodes", "type":TYPE_BOOL})
+	
 	if !get("configuration/autodetect_nodes"):
 		p.append({"name":"node_reference/showname", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
 		p.append({"name":"node_reference/option_container", "type":TYPE_NODE_PATH, "usage":PROPERTY_USAGE_DEFAULT})
@@ -695,6 +715,7 @@ func _notification(what: int) -> void:
 		NOTIFICATION_READY:
 			if Engine.editor_hint:
 				update()
+				return
 		
 		NOTIFICATION_RESIZED:
 			if Engine.editor_hint:
