@@ -313,6 +313,11 @@ func get_character_node(character:_Character) -> Node:
 
 
 func character_join(character:_Character) -> void:
+	if is_instance_valid(_character_behavior_node_override) \
+	and _character_behavior_node_override.has_method("character_join"):
+		_character_behavior_node_override.call("character_join")
+		return
+	
 	if not character in _know_characters:
 		add_character(character)
 	
@@ -342,10 +347,17 @@ func character_join(character:_Character) -> void:
 
 
 func character_leave(character:_Character) -> void:
-	pass
+	if is_instance_valid(_character_behavior_node_override) \
+	and _character_behavior_node_override.has_method("character_join"):
+		_character_behavior_node_override.call("character_join")
+		return
+
 
 func character_change_portrait(character:_Character, portrait:String) -> void:
-	pass
+	if is_instance_valid(_character_behavior_node_override) \
+	and _character_behavior_node_override.has_method("character_join"):
+		_character_behavior_node_override.call("character_join")
+		return
 
 
 func register_node_for_character(node:Node) -> void:
