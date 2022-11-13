@@ -25,7 +25,7 @@ const _DEFATULT_STRING = """This is a sample text.
 This'll not be displayed in game"""
 const _BlipData = preload("res://addons/textalog/resources/blip_data.gd")
 const _Character = preload("res://addons/textalog/resources/character_class/character_class.gd")
-const _CharacterRect = preload("res://addons/textalog/nodes/character_rect.gd")
+const _CharacterNode = preload("res://addons/textalog/nodes/character_node.gd")
 
 enum BlipStrategy {NO_BLIP, BLIP_ONCE, BLIP_LOOP}
 enum TextUpdate {EVERY_CHARACTER, EVERY_WORD, ALL_AT_ONCE, MANUALLY}
@@ -329,7 +329,8 @@ func character_join(character:_Character) -> void:
 	
 	if not is_instance_valid(node):
 		if is_instance_valid(_get_portrait_reference()):
-			node = _CharacterRect.new()
+			node = TextureRect.new()
+			node.set_script(_CharacterNode)
 			node.character = character
 			_know_characters[character].node = node
 			_get_portrait_reference().add_child(node)

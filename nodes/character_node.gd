@@ -1,5 +1,5 @@
 tool
-extends TextureRect
+extends Node
 
 var character:Resource setget set_character
 var portrait:String
@@ -26,10 +26,9 @@ func ask(what:String, options:PoolStringArray) -> void:
 	if not dialog_node.is_connected("option_selected", self, "_option_selected"):
 		dialog_node.connect("option_selected", self, "_option_selected", [], CONNECT_ONESHOT)
 	
+	dialog_node.connect("text_all_displayed", self, "_add_options", [dialog_node, options], CONNECT_ONESHOT|CONNECT_DEFERRED)
 	say(what)
-	
-	for option in options:
-		dialog_node.call("add_option", option)
+
 
 func join() -> void:
 	pass
@@ -55,13 +54,15 @@ func set_character(value:Resource) -> void:
 		name = character.get("name")
 	else:
 		name = "Character2D"
-	 
-	_configure()
 
 
 func set_node_path(path:NodePath) -> void:
 	dialog_node_path = path
-	_configure()
+
+
+func _add_options(shown_text:String, dialog_node:Node, options:PoolStringArray) -> void:
+	for option in options:
+		dialog_node.call("add_option", option)
 
 
 func _option_selected(option:String) -> void:
@@ -84,9 +85,9 @@ func _notification(what: int) -> void:
 		
 		NOTIFICATION_READY:
 			if not Engine.editor_hint:
-				visible = false
 				if not character:
 					push_error("{name} doesn't have any character".format({"name":name}))
+					return
 
 
 func _get_property_list() -> Array:
@@ -94,3 +95,4 @@ func _get_property_list() -> Array:
 	p.append({"name":"dialog_node_path", "type":TYPE_NODE_PATH})
 	p.append({"name":"character", "type":TYPE_OBJECT, "hint":PROPERTY_HINT_RESOURCE_TYPE})
 	return p
+
