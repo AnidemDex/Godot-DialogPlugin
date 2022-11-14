@@ -8,33 +8,36 @@
   Twitter: <a href="https://twitter.com/anidemdex" target="_blank">@AnidemDex</a>
 </p>
 
-An user-friendly dialog node for Godot Engine, aiming to be a node that fits the majority of use cases where a dialog node is needed for any kind of game. 
+A dialog `Node` implementation for Godot Engine, aiming to be a node that fits the majority of use cases where a dialog node is needed for any kind of game.
 
 > **We're working hardly on 2.0 version.** This means that the latest commit from repository is probably not production ready to use. Make sure to download the plugin from the releases section.
 
 ## Features
 ### 🪧 DialogNode
-A node implementation for make dialogs, fully customizable and build with common dialog commands to improve your game development in the dialogue interaction. Create dialog bubbles, dialog boxes and anything that has _dialog_ on its name!
+A node implementation for make dialogs, fully customizable and built with common dialog commands to improve your game development in the dialogue interaction. Create dialog bubbles, dialog boxes and anything that has _dialog_ on its name!
 
-- DialogNode
-![DialogNode](./docs/.gitbook/assets/dialog_box_example_1.png)
-
-- DialogBubble
-<p align="center">
-  <img src="./docs/.gitbook/assets/dialog_bubble_example_1.png">
-</p>
+[!TODO: Add dialog box with options example](#)
+[!TODO: Add dialog bubble example](#)
 
 ### 🐱‍👤 Characters and 🖼️ Portraits
 Characters are data containers to describe what expressions (portraits) are going to be used in dialogue and what properties of the dialogue will be overriden during the gameplay.
 
-![character editor](./docs/.gitbook/assets/character_example1.png)
+![TODO: Update character editor image](#)
+
+### Easy \*blip* sounds.
+The plugin has tools that will help you to integrate audio in your dialogs, either single blip sounds or complex and large voice acted lines.
+
+![TODO: Add a video with a blip example](#)
 
 ### 🎨 Customization through Godot's Themes
-Modify the DialogNode through themes!
+Because every game is unique as their creators, we let the possibility to modify the DialogNode through themes, to make it unique as you.
 
-![Theme Customization](./docs/.gitbook/assets/theme_customization.gif)
+![TODO: Update customization gif](#)
 
-### Use it as a Dialog System!
+### Easy to integrate in your Dialog System
+Textalog was made as a single node, agnostic to whatever your text is on. Give the node the data, it will create the dialog in screen for you.
+
+### You don't have a dialog system? Use Textalog as a Dialog System!
 The plugin can help you creating sequences of dialogs and dialog branches to certain conditions, all in the editor, thanks to its integration with [EventSystem](https://github.com/AnidemDex/Godot-EventSystem).
 
 ![](docs/.gitbook/assets/event_system_example1.png)
@@ -47,12 +50,16 @@ See more about this implementation on [the documentation](#).
 
 ## 🚩 Installation
 
-Download the lastest release and extract the ZIP file. Move the `addons` folders to the root of your project. Finally, enable the plugin in your project settings, under `plugins` tab. It's that easy!
+### Manually
+Download the lastest release and extract the ZIP file. Move the resulting folder to your `addons` folder (create one at the root of your project if it doesn't exist). Finally, enable the plugin in your project settings, under `plugins` tab. It's that easy!
 
 > You can take a look in a more detailed tutorial in the [plugin's documentation](https://godotplugins.gitbook.io/textalog/getting-started/installation).
 If you want more information about installing plugins in Godot, please refer to [official documentation page](https://docs.godotengine.org/en/stable/tutorials/plugins/editor/installing_plugins.html).
 
-If you're downloading the repository instead, make sure to move only `textalog` to your `addons` folder. Extra files and folders are for debug purposes.
+### As `submodule`
+```bash
+git submodule add https://github.com/AnidemDex/Godot-DialogPlugin.git addons/dialog_plugin
+```
 
 ## 🧵 Usage
 Quick example to try the most simple functionality: showing text on the screen.
@@ -61,7 +68,7 @@ extends Node
 
 func _ready() -> void:
   # Creates a new DialogNode instance
-  var dialog_node = DialogNode.instance()
+  var dialog_node = DialogNode.new()
   # Add the node as child
   add_child(dialog_node)
 
@@ -75,4 +82,9 @@ func _ready() -> void:
 
 Now we have an official documentation! All the information about the plugin you will find it organized in the [documentation page](https://godotplugins.gitbook.io/textalog/). Tutorials, class information, FAQ and more will be added there, eventually.
 
-Want to see the whole changelog? Take a look on the documentation, the [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section.
+## ⏱️Changelog
+Changelog lives on [Changelog](https://anidemdex.gitbook.io/godot-dialog-plugin/changelog) section from [Documentation](#📚-documentation).
+
+## Contributing
+Contributions are welcome and very appreciated. You can open issues to request something or report bugs or create pull request to integrate something new or solve an issue.
+Take a look at [Contributing](https://github.com/AnidemDex/Godot-DialogPlugin/blob/main/CONTRIBUTING.md) file.
