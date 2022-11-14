@@ -1,8 +1,6 @@
 # Table of contents
 
 * [🧐 What is Textalog?](README.md)
-* [Changelog](changelog/README.md)
-  * [\[1.x\] Stable](changelog/1.x.md)
 
 ## Getting started
 
@@ -12,4 +10,6 @@
 ## Credits
 
 * [Contributors](credits/contributors.md)
+* [Changelog](changelog/README.md)
+  * [\[1.x\] Stable](changelog/1.x.md)
 * [License](https://github.com/AnidemDex/Godot-DialogPlugin/blob/main/LICENSE)
