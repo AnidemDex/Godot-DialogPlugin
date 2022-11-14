@@ -26,5 +26,6 @@
 
 * [Contributors](credits/contributors.md)
 * [Changelog](changelog/README.md)
-  * [\[1.x\] Stable](changelog/1.x.md)
+  * [\[2.x\]](changelog/2.x.md)
+  * [\[1.x\]](changelog/1.x.md)
 * [License](https://github.com/AnidemDex/Godot-DialogPlugin/blob/main/LICENSE)
